@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3C3BB318-F0ED-4DBD-B997-316F34C315BC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mebs_Envanter</RootNamespace>
+    <AssemblyName>Mebs_Envanter</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Controls, Version=2.0.8211.13450, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Xceed.Wpf.Controls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Command\CommandMap.cs" />
+    <Compile Include="Command\DelegateCommand.cs" />
+    <Compile Include="Command\ModelCommand.cs" />
+    <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Converters\BirlikComboIndexConverter.cs" />
+    <Compile Include="Converters\TempestComboIndexConverter.cs" />
+    <Compile Include="Converters\NullValueToBoolConverter.cs" />
+    <Compile Include="Converters\KisimComboIndexConverter.cs" />
+    <Compile Include="Converters\RutbeComboIndexConverter.cs" />
+    <Compile Include="DeviceEntryControl.xaml.cs">
+      <DependentUpon>DeviceEntryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EnvanterDataViewModel.cs" />
+    <Compile Include="GeneralObjects\SenetInfo.cs" />
+    <Compile Include="GeneralObjects\Tempest.cs" />
+    <Compile Include="GeneralObjects\TempestRepository.cs" />
+    <Compile Include="GUIHelpers\VisualHelperWPF.cs" />
+    <Compile Include="HardwareUserControls\GeneralInfoUserControl.xaml.cs">
+      <DependentUpon>GeneralInfoUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HardwareUserControls\MonitorInfoUserControl.xaml.cs">
+      <DependentUpon>MonitorInfoUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HardwareUserControls\NetworkInfoUserControl.xaml.cs">
+      <DependentUpon>NetworkInfoUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HardwareUserControls\OemDevicesUserControl.xaml.cs">
+      <DependentUpon>OemDevicesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HardwareUserControls\SenetInfoUserControl.xaml.cs">
+      <DependentUpon>SenetInfoUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OemDevicesViewModel.cs" />
+    <Compile Include="OemDeviceViewModel.cs" />
+    <Compile Include="SerializationTool.cs" />
+    <Compile Include="StaticFields.cs" />
+    <Page Include="DeviceEntryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HardwareUserControls\GeneralInfoUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HardwareUserControls\MonitorInfoUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HardwareUserControls\NetworkInfoUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HardwareUserControls\OemDevicesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HardwareUserControls\SenetInfoUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Base\MebsBaseObject.cs" />
+    <Compile Include="Converters\BagliAgComboIndexConverter.cs" />
+    <Compile Include="Converters\MarkaComboIndexConverter.cs" />
+    <Compile Include="DB\DBFunctions.cs" />
+    <Compile Include="DB\GlobalDataAccess.cs" />
+    <Compile Include="EmptyClass.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="GeneralObjects\BagliAg.cs" />
+    <Compile Include="GeneralObjects\BagliAgRepository.cs" />
+    <Compile Include="GeneralObjects\Birlik.cs" />
+    <Compile Include="GeneralObjects\BirlikRepository.cs" />
+    <Compile Include="GeneralObjects\Kisim.cs" />
+    <Compile Include="GeneralObjects\KisimRepository.cs" />
+    <Compile Include="GeneralObjects\Marka.cs" />
+    <Compile Include="GeneralObjects\MarkaRepository.cs" />
+    <Compile Include="GUIHelpers\GridUtils.cs" />
+    <Compile Include="GUIHelpers\MacMaskedTextBox.cs" />
+    <Compile Include="GUIHelpers\SelectionPersistance.cs" />
+    <Compile Include="GUIHelpers\TextBoxMaskBehavior.cs" />
+    <Compile Include="Hardware\ComputerInfo.cs" />
+    <Compile Include="Hardware\ComputerInfoRepository.cs" />
+    <Compile Include="Hardware\DeviceTypeNameHelper.cs" />
+    <Compile Include="Hardware\Monitor.cs" />
+    <Compile Include="Hardware\NetworkInfo.cs" />
+    <Compile Include="Hardware\OEMDevice.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Resources\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\ListBoxDataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DatabaseConnection\DatabaseConnection.csproj">
+      <Project>{E893FEE9-6281-42B7-B611-768E6C3CA3D6}</Project>
+      <Name>DatabaseConnection</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

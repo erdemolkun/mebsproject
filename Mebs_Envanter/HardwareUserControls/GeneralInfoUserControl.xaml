@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="Mebs_Envanter.HardwareUserControls.GeneralInfoUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid TextBlock.FontWeight="Bold" >
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="12"></Setter>
+                <Setter Property="Foreground" Value="black"></Setter>
+                <Setter Property="MaxHeight" Value="20"></Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="PC ADI"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Marka"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Model"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="PC Stok No"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Parça No"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Seri No"></TextBlock>
+        <TextBlock Text="Notlar" Grid.Row="6" Grid.Column="0" ></TextBlock>
+
+
+        <!--Burayı değiştir-->
+        <TextBox 
+                            x:Name="pcAdiTextBox" VerticalAlignment="Center"
+                            Text="{Binding Pc_adi,Mode=OneWay}"
+                            Margin="2,2" Grid.Column="1" Grid.Row="0" ></TextBox>
+
+        <ComboBox x:Name="genelBilgilerMarkalarCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,4"                                  
+                                  SelectedIndex="{Binding Marka,
+                                  Converter={StaticResource MarkaComboIndexConverter},Mode=OneWay}" 
+                                  ItemsSource="{Binding Markalar}" Grid.Row="1"
+                                  HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
+
+        <TextBox x:Name="pcModelTextBox" VerticalAlignment="Center" Text="{Binding Model}"  Margin="2,2" Grid.Column="1" Grid.Row="2" ></TextBox>
+        <TextBox x:Name="pcStokNoTextBox" VerticalAlignment="Center" Text="{Binding PcStokNo}"  Margin="2,2" Grid.Column="1" Grid.Row="3" ></TextBox>
+        <TextBox x:Name="pcParcaNoTextBox" VerticalAlignment="Center" Text="{Binding DeviceNo}"  Margin="2,2" Grid.Column="1" Grid.Row="4" ></TextBox>
+        <TextBox x:Name="pcSerialNumberTextBox" VerticalAlignment="Center" Text="{Binding SerialNumber}"  Margin="2,2" Grid.Column="1" Grid.Row="5" ></TextBox>
+
+
+        <RichTextBox Grid.Row="6" Grid.Column="1" Height="80" Margin="2,4"></RichTextBox>
+
+    </Grid>
+</UserControl>
