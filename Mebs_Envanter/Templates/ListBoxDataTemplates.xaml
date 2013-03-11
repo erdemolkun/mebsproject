@@ -8,34 +8,22 @@
                 <DropShadowBitmapEffect Color="Gray"/>
             </Border.BitmapEffect>
             <Grid  HorizontalAlignment="Stretch" Margin="0,6,0,6"
-                            TextElement.FontSize="15" TextElement.Foreground="MintCream" >                                
-                    <Label  Margin="0,0,2,0"
+                            TextElement.FontSize="15" TextElement.Foreground="MintCream" >
+                <Label  Margin="0,0,2,0"
                                     Content="{Binding Pc_adi}" />
-                                                      
+
             </Grid>
         </Border>
     </DataTemplate>
 
-    <Style x:Key="kurulumListItemStyle" TargetType="{x:Type ListBoxItem}">
-        <Setter Property="Background" Value="#ffD4A4A4" />
-        <Setter Property="Template" Value="{DynamicResource kurulumListItemStyleSelected}" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Cursor" Value="Arrow" />
-        <Setter Property="Padding" Value="0,0,0,0" />
-        <Setter Property="ClipToBounds" Value="True" />
-        <Style.Triggers>
-            <Trigger Property="Selector.IsSelected" Value="True">
-                <Setter Property="Template" Value="{DynamicResource kurulumListItemStyleSelected}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <ControlTemplate TargetType="ListBoxItem" x:Key="kurulumListItemStyleSelected">
-        <Border Name="ItemBorder" CornerRadius="3" Margin="6,0"
-                BorderBrush="Gray" BorderThickness="1" Background="MintCream">
-            <ContentPresenter Margin="2" HorizontalAlignment="Center" />
-        </Border>
+        <Grid Background="Transparent" Margin="0">
+            <Border Name="ItemBorder" CornerRadius="3" Margin="6,3"
+                BorderBrush="Gray" BorderThickness="1" Background="LightSkyBlue">
+                <ContentPresenter         
+                    Margin="3" HorizontalAlignment="Center" />
+            </Border>
+        </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsSelected" Value="True">
                 <Setter TargetName="ItemBorder" Property="Background" Value="gray" />
@@ -43,6 +31,23 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+    
+    <Style x:Key="kurulumListItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Background" Value="#ffD4A4A4" />
+        <Setter Property="Template" Value="{StaticResource kurulumListItemStyleSelected}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Arrow" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="Selector.IsSelected" Value="True">
+                <Setter Property="Template" Value="{StaticResource kurulumListItemStyleSelected}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    
 
 
     <DataTemplate x:Key="kurulumListboxDataTemplate">
