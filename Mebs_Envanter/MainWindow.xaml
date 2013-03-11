@@ -67,7 +67,7 @@
 
         </TabControl>
         
-        <Grid Margin="3"  Background="#FF6CCECE">
+        <Grid Margin="3"  Background="LightGoldenrodYellow">
             <ListBox x:Name="pcList" 
                  SelectionChanged="pcList_SelectionChanged"                 
                  ItemsSource="{Binding Computers}"
