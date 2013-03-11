@@ -67,6 +67,8 @@ namespace MEBS_Envanter
 
         private void RefreshComputerList()
         {
+            DenemeSearch(null);
+            return;
             Stopwatch w = Stopwatch.StartNew();
 
             ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
@@ -139,6 +141,19 @@ namespace MEBS_Envanter
 
         }
 
+        private void SetContextForSearchFields() {
+
+            // Birlikler arayüze atanıyor
+            BirlikRepository Birlik_Repository = new BirlikRepository();
+            Birlik_Repository.FillBirlikler();
+            searchGridBirliklerCombo.ItemsSource = Birlik_Repository.Birlikler;
+
+            BagliAgRepository rep_bagli_ag = new BagliAgRepository();
+            rep_bagli_ag.Fill_Aglar();
+            searchGridAglarCombo.ItemsSource = rep_bagli_ag.BagliAglar ;
+                        
+        }
+
         private bool AddOrEditPCFunction(bool isEdit)
         {
             try
@@ -200,6 +215,8 @@ namespace MEBS_Envanter
             generalInfoUserControl1.Init();
             senetInfoUserControl1.Init();
             networkUserControl1.Init();
+
+            SetContextForSearchFields();
         }
 
         public ComputerInfo Current_Computer_Info
@@ -251,5 +268,98 @@ namespace MEBS_Envanter
         }
 
         #endregion
+
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            DenemeSearch(GetParameterList());
+        }
+
+        private SortedList<String,object> GetParameterList(){
+
+            SortedList<String, object> list = new SortedList<string, object>();
+
+            if (searchGridBirliklerCombo.SelectedItem != null) {
+                if ((searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id > 0) {
+
+                    list.Add("@birlik_id", (searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id);
+                }
+            }
+
+            if (searchGridAglarCombo.SelectedItem != null)
+            {
+                if ((searchGridAglarCombo.SelectedItem as BagliAg).Ag_id > 0)
+                {
+
+                    list.Add("@bagli_ag_id", (searchGridAglarCombo.SelectedItem as BagliAg).Ag_id);
+                }
+            }
+
+            //list.Add("@marka_ismi", markaNameTxtBox.Text.Trim());
+            list.Add("@alan_kisi_isim", alanKisiIsimTxtBox.Text.Trim());
+
+            return list;
+        }
+
+        private void DenemeSearch(SortedList<String,object> parameterList) {
+        
+
+            Stopwatch w = Stopwatch.StartNew();
+
+            ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
+            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+
+            //String commandText = "Select TOP 1 * From tbl_bilgisayar pc order by bilgisayar_id Desc";
+            String commandText = "pc_genel_arama";
+            SqlCommand cmd = new SqlCommand(commandText, cnn);
+            cmd.CommandType= CommandType.StoredProcedure;
+
+            if (parameterList != null)
+            {
+                foreach (var item in parameterList)
+                {
+                    cmd.Parameters.AddWithValue(item.Key, item.Value);
+                }
+                
+            }
+
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            try
+            {
+                adp.Fill(dt);
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                cnn.Close();
+                cnn.Dispose();
+            }
+            foreach (DataRow rowPC in dt.Rows)
+            {
+                ComputerInfo tempComputer = new ComputerInfo();
+                try
+                {
+                    tempComputer.SetGeneralFields(rowPC);
+                    tempComputer.Get_HardwareInfos();
+                    tempComputer.Get_SenetInfos();
+                }
+                catch (Exception)
+                {
+                }
+                repositoryNew.Computers.Add(tempComputer);
+
+            }
+            pcList.DataContext = repositoryNew;
+            pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
+
+            long x = w.ElapsedMilliseconds;
+        
+        
+        }
     }
 }
