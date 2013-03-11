@@ -48,6 +48,7 @@ namespace MEBS_Envanter.DB
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@marka_id", SqlDbType.Int));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@pc_adi", SqlDbType.NVarChar, 100));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@bagli_ag_id", SqlDbType.Int));
+            cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@tempest_id", SqlDbType.Int));            
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@mac", SqlDbType.NVarChar, 30));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar, 50));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@pc_stok_no", SqlDbType.NVarChar, 50));
@@ -243,6 +244,12 @@ namespace MEBS_Envanter.DB
                     {
                         cmBilgisayarEkleSilDuz.Parameters["@bagli_ag_id"].Value = infoComputer.NetworkInfo.BagliAg.Ag_id;
                     }
+
+                    if (infoComputer.Tempest != null && infoComputer.Tempest.Id > 0) {
+
+                        cmBilgisayarEkleSilDuz.Parameters["@tempest_id"].Value = infoComputer.Tempest.Id;
+                    }
+
 
                     cmBilgisayarEkleSilDuz.Parameters["@mac"].Value = infoComputer.NetworkInfo.MacAddressString;
                     cmBilgisayarEkleSilDuz.Parameters["@model"].Value = infoComputer.Model;

@@ -30,6 +30,10 @@ namespace MEBS_Envanter
             try { bagli_ag_id = (int)rowPC["bagli_ag_id"]; if (bagli_ag_id < 0)bagli_ag_id = -1; }
             catch (Exception) { }
 
+            int tempest_id = -1;
+            try { tempest_id = (int)rowPC["tempest_id"]; if (tempest_id < 0)tempest_id = -1; }
+            catch (Exception) { }
+
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
             NetworkInfo.BagliAg = new BagliAg("", bagli_ag_id);
 
@@ -38,6 +42,7 @@ namespace MEBS_Envanter
             Model = rowPC["model"].ToString();
             SerialNumber = rowPC["seri_no"].ToString();
             DeviceNo = rowPC["parca_no"].ToString();
+            Tempest = new Tempest(tempest_id, "");
         }
 
         private void Get_MonitorInfo(OEMDevice devOem)
@@ -198,7 +203,6 @@ namespace MEBS_Envanter
             EklenmeTarihi = new DateTime(2010, 9, 12);
         }
 
-
         internal OEMDevice Get_OemDevice(DeviceTypes devType) {
 
             foreach (var item in OemDevicesVModel.OemDevices)
@@ -306,6 +310,15 @@ namespace MEBS_Envanter
         {
             get { return marka; }
             set { marka = value; OnPropertyChanged("Marka"); }
+        }
+
+
+        private Tempest tempest = new Tempest();
+
+        public Tempest Tempest
+        {
+            get { return tempest; }
+            set { tempest = value; OnPropertyChanged("Tempest"); }
         }
 
 

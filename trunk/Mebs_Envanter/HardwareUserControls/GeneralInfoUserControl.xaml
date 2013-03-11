@@ -18,6 +18,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -31,7 +32,8 @@
         <TextBlock Grid.Column="0" Grid.Row="3" Text="PC Stok No"></TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="4" Text="Parça No"></TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="5" Text="Seri No"></TextBlock>
-        <TextBlock Text="Notlar" Grid.Row="6" Grid.Column="0" ></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="6" Text="Tempest Seviyesi"></TextBlock>
+        <TextBlock Text="Notlar" Grid.Row="7" Grid.Column="0" ></TextBlock>
 
 
         <!--Burayı değiştir-->
@@ -52,7 +54,12 @@
         <TextBox x:Name="pcSerialNumberTextBox" VerticalAlignment="Center" Text="{Binding SerialNumber}"  Margin="2,2" Grid.Column="1" Grid.Row="5" ></TextBox>
 
 
-        <RichTextBox Grid.Row="6" Grid.Column="1" Height="80" Margin="2,4"></RichTextBox>
+        <ComboBox x:Name="genelBilgilerTempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,4"                                  
+                                  SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},Mode=OneWay}"
+                                  ItemsSource="{Binding TempestSeviyeler}" Grid.Row="6"
+                                  HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
+        
+        <RichTextBox Grid.Row="7" Grid.Column="1" Height="80" Margin="2,4"></RichTextBox>
 
     </Grid>
 </UserControl>
