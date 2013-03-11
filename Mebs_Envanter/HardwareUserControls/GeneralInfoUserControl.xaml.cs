@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MEBS_Envanter;
+using Mebs_Envanter.GeneralObjects;
 
 namespace Mebs_Envanter.HardwareUserControls
 {
@@ -27,6 +28,11 @@ namespace Mebs_Envanter.HardwareUserControls
         public void Init() {
 
             genelBilgilerMarkalarCombo.ItemsSource = MarkaRepository.INSTANCE.Markalar;
+
+            TempestRepository Rep_Tempest = new TempestRepository();
+            Rep_Tempest.FillSeviyeler();
+            genelBilgilerTempestCombo.ItemsSource = Rep_Tempest.TempestSeviyeler;
+            TempestRepository.INSTANCE = Rep_Tempest;
         
         }
         public void SetGeneralInfo(ComputerInfo inf) {
@@ -37,7 +43,7 @@ namespace Mebs_Envanter.HardwareUserControls
             inf.DeviceNo = pcParcaNoTextBox.Text.Trim().ToString();
             inf.SerialNumber = pcSerialNumberTextBox.Text.Trim().ToString();
             inf.Marka = genelBilgilerMarkalarCombo.SelectedItem as Marka;
-        
+            inf.Tempest = genelBilgilerTempestCombo.SelectedItem as Tempest;
         }
     }
 }
