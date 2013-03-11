@@ -1,0 +1,90 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate x:Key="datatemplateListBoxCh">
+        <Border 
+                Margin="3,1,3,1" HorizontalAlignment="Stretch" Background="MintCream"                        
+                        CornerRadius="12,0,12,0" BorderBrush="Orange" BorderThickness="1">
+            <Border.BitmapEffect>
+                <DropShadowBitmapEffect Color="Gray"/>
+            </Border.BitmapEffect>
+            <Grid  HorizontalAlignment="Stretch" Margin="0,6,0,6"
+                            TextElement.FontSize="15" TextElement.Foreground="MintCream" >                                
+                    <Label  Margin="0,0,2,0"
+                                    Content="{Binding Pc_adi}" />
+                                                      
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <Style x:Key="kurulumListItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Background" Value="#ffD4A4A4" />
+        <Setter Property="Template" Value="{DynamicResource kurulumListItemStyleSelected}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Arrow" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="Selector.IsSelected" Value="True">
+                <Setter Property="Template" Value="{DynamicResource kurulumListItemStyleSelected}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <ControlTemplate TargetType="ListBoxItem" x:Key="kurulumListItemStyleSelected">
+        <Border Name="ItemBorder" CornerRadius="3" Margin="6,0"
+                BorderBrush="Gray" BorderThickness="1" Background="MintCream">
+            <ContentPresenter Margin="2" HorizontalAlignment="Center" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="ItemBorder" Property="Background" Value="gray" />
+                <Setter TargetName="ItemBorder" Property="Margin" Value="0" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <DataTemplate x:Key="kurulumListboxDataTemplate">
+        <Grid Margin="2" >
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--<Grid Grid.Row="2">
+                    <Button>Edit</Button>
+                    <Grid.Style>
+                        <Style>                            
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource=
+                                {RelativeSource Mode=FindAncestor, AncestorType=
+                                {x:Type ListBoxItem}},Path=IsSelected}" Value="False">
+                                    <Setter  Property="Grid.Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>-->
+            <Grid Grid.Row="0">
+                <TextBlock Name="textBlock1"
+                    Text="{Binding Pc_adi}" FontFamily="Tahoma" FontSize="12">
+
+                </TextBlock>
+                <!--<RadioButton   IsHitTestVisible="False"                               
+                                GroupName="os" Name="radioButton"
+                                Style="{StaticResource styleRadio}" 
+                                Content="{Binding ComponentName}">
+                </RadioButton>-->
+            </Grid>
+
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource=
+                                {RelativeSource Mode=FindAncestor, AncestorType=
+                                {x:Type ListBoxItem}},Path=IsSelected,Mode=OneWay}" Value="True">
+                <Setter TargetName="textBlock1" Property="FontSize" Value="16"/>
+                <!--<Setter TargetName="radioButton" Property="IsChecked" Value="True"/>-->
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Mebs_Envanter.HardwareUserControls.SenetInfoUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:x1="clr-namespace:MEBS_Envanter" >
+    <Grid  TextBlock.FontWeight="Bold">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="12"></Setter>
+                <Setter Property="Foreground" Value="black"></Setter>
+                <Setter Property="MaxHeight" Value="20"></Setter>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Style>
+        </Grid.Resources>
+        <!--<Grid Grid.Column="0" Background="Gray" Grid.RowSpan="100"></Grid>-->
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Alan Kişi Rütbesi"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Alan Kişi İsim"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Alan Kişi Birlik"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Alan Kişi Kısım"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Veren Kişi İsim"></TextBlock>
+
+        <ComboBox Grid.Column="1" MinWidth="60" 
+                                x:Name="senetRutbelerCombo"
+                                VerticalAlignment="Center"
+                                SelectedIndex="{Binding Alan_kisi_rutbe,Converter={StaticResource RutbeComboIndexConverter},Mode=OneWay}"
+                                HorizontalAlignment="Center" 
+                                ItemsSource="{Binding Source={x:Static x1:StaticFields.rutbeler}}">
+
+        </ComboBox>
+
+        <TextBox x:Name="senetAlamIsimTextBox"
+                            VerticalAlignment="Center"
+                            Text="{Binding Alan_kisi_isim}"  Grid.Column="1" Grid.Row="1"  Margin="2"></TextBox>
+
+
+        <ComboBox SelectionChanged="senetBirlikCombo_SelectionChanged"
+                                  VerticalAlignment="Center" 
+                                  SelectedIndex="{Binding Alan_kisi_birlik,Converter={StaticResource BirlikComboIndexConverter},Mode=OneWay}" 
+                                  x:Name="senetBirlikCombo" ItemsSource="{Binding Birlikler}"
+                                  MinWidth="60" Margin="2"  Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2"></ComboBox>
+
+        <ComboBox VerticalAlignment="Center" 
+                            ItemsSource="{Binding Kisimlar}" x:Name="senetKisimCombo"
+                            SelectedIndex="{Binding Alan_kisi_kisim,Converter={StaticResource KisimComboIndexConverter},Mode=OneWay}" 
+                            MinWidth="60" Margin="2" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3"></ComboBox>
+        
+        <TextBox Text="{Binding Veren_kisi_isim}" Grid.Column="1" Grid.Row="4" Margin="2"
+                                 VerticalAlignment="Center" x:Name="senetVerenKisiTextBox"></TextBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="MEBS_Envanter.DeviceEntryControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
+             MinWidth="120" MinHeight="20"
+             >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12*"/>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="246*"/>
+            <ColumnDefinition Width="246*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="12"></Setter>
+                <Setter Property="Foreground" Value="black"></Setter>
+                <Setter Property="MaxHeight" Value="20"></Setter>
+            </Style>
+        </Grid.Resources>
+        <TextBlock Margin="2,2" Text="{Binding ParcaTipiIsmi}" Grid.Column="1"></TextBlock>
+        <TextBox x:Name="deviceInfoTextBox" Margin="4,2" Text="{Binding DevOem.DeviceInfo}" Grid.Column="2"></TextBox>
+        <TextBox x:Name="serialNumberTextBox" Margin="4,2"  Text="{Binding DevOem.SerialNumber}" Grid.Column="3"></TextBox>
+    </Grid>
+</UserControl>

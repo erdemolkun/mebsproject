@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Mebs_Envanter.HardwareUserControls.OemDevicesUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:x1="clr-namespace:MEBS_Envanter"
+             >
+    <Grid TextBlock.FontWeight="Bold" >
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Body-->
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,2,0,0" x1:GridUtils.RowDefinitions="20,Auto,Auto">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="120*" />
+                <ColumnDefinition Width="246*"/>
+                <ColumnDefinition Width="246*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Parça Tanımı" Grid.Column="2"  Grid.Row="0" />
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Seri No" Grid.Column="3"  Grid.Row="0" />
+
+            <ItemsControl Grid.Row="1" Grid.ColumnSpan="4"
+                                 x:Name="hardwareItemsControl"         
+                                 Width="Auto" Height="Auto" ItemsSource="{Binding OemDevices}" 
+                                 ItemTemplate="{StaticResource deviceDataTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <Expander TabIndex="9" Header="Diğer Parçalar" Foreground="DarkBlue" IsExpanded="True"
+                                    Margin="2,0,0,0" Grid.Row="2" Grid.ColumnSpan="4">
+
+                <ItemsControl  x:Name="hardwareExtraItemsControl"
+                                               Width="Auto" Height="Auto"
+                                               ItemsSource="{Binding OemDevicesExtra}"
+                                               ItemTemplate="{StaticResource deviceDataTemplate}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Expander>
+
+        </Grid>
+        <!--End Body-->
+    </Grid>
+</UserControl>
