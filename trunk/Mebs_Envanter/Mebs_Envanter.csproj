@@ -86,8 +86,8 @@
     <Compile Include="HardwareUserControls\SenetInfoUserControl.xaml.cs">
       <DependentUpon>SenetInfoUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OemDevicesViewModel.cs" />
-    <Compile Include="OemDeviceViewModel.cs" />
+    <Compile Include="ViewModels\OemDevicesViewModel.cs" />
+    <Compile Include="ViewModels\OemDeviceViewModel.cs" />
     <Compile Include="SerializationTool.cs" />
     <Compile Include="StaticFields.cs" />
     <Page Include="DeviceEntryControl.xaml">
