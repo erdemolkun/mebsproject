@@ -149,10 +149,10 @@ namespace MEBS_Envanter
 
         private void changeCurrentPCContext(ComputerInfo infComp)
         {            
-            Current_Computer_Info = infComp;            
-            pcEnvanterTabControl.DataContext = Current_Computer_Info;            
-            generalInfoTab.DataContextChanged += new DependencyPropertyChangedEventHandler(generalInfoTab_DataContextChanged);
-            monitorTab.DataContextChanged += new DependencyPropertyChangedEventHandler(monitorTab_DataContextChanged);
+            //Current_Computer_Info = infComp;            
+            //pcEnvanterTabControl.DataContext = Current_Computer_Info;            
+            //generalInfoTab.DataContextChanged += new DependencyPropertyChangedEventHandler(generalInfoTab_DataContextChanged);
+            //monitorTab.DataContextChanged += new DependencyPropertyChangedEventHandler(monitorTab_DataContextChanged);
         }
 
         void generalInfoTab_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -200,7 +200,10 @@ namespace MEBS_Envanter
             {
                 infComp = new ComputerInfo();
             }
-            changeCurrentPCContext(infComp);
+            list.ScrollIntoView(infComp);
+            Current_Computer_Info = infComp;
+            pcEnvanterTabControl.DataContext = Current_Computer_Info;
+            //changeCurrentPCContext(list.SelectedItem as ComputerInfo );
         }
 
         private void pcAddBtn_Click(object sender, RoutedEventArgs e)
@@ -229,10 +232,10 @@ namespace MEBS_Envanter
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            RefreshComputerList(GetParameterList());
+            RefreshComputerList(GetParameterListForSearch());
         }
 
-        private SortedList<String,object> GetParameterList(){
+        private SortedList<String,object> GetParameterListForSearch(){
 
             SortedList<String, object> list = new SortedList<string, object>();
 
@@ -260,7 +263,6 @@ namespace MEBS_Envanter
 
         private void RefreshComputerList(SortedList<String,object> parameterList) {
         
-
             Stopwatch w = Stopwatch.StartNew();
 
             ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
@@ -276,8 +278,7 @@ namespace MEBS_Envanter
                 foreach (var item in parameterList)
                 {
                     cmd.Parameters.AddWithValue(item.Key, item.Value);
-                }
-                
+                }                
             }
 
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
@@ -302,14 +303,11 @@ namespace MEBS_Envanter
                 try
                 {
                     tempComputer.SetGeneralFields(rowPC);
-                    tempComputer.Get_HardwareInfos();
-                    tempComputer.Get_SenetInfos();
+                    tempComputer.Set_HardwareInfos();
+                    tempComputer.Set_SenetInfos();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception){}
                 repositoryNew.Computers.Add(tempComputer);
-
             }
             pcList.DataContext = repositoryNew;
             pcList.SelectedIndex = repositoryNew.Computers.Count - 1;

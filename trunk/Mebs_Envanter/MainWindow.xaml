@@ -29,8 +29,10 @@
 
         <Grid Grid.Column="0" Grid.RowSpan="2"></Grid>
 
-        <TabControl Grid.Column="2" x:Name="pcEnvanterTabControl">
-
+        <!--<TabControl Grid.Column="2" x:Name="pcEnvanterTabControl"
+                    DataContext="{Binding ElementName=pcList,Path=SelectedItem}"
+                    >-->
+            <TabControl Grid.Column="2" x:Name="pcEnvanterTabControl">
             <TabItem Header="Genel Bilgiler" x:Name="generalInfoTab" >
                 <Border Background="LightGray" BorderThickness="2" CornerRadius="12" Margin="2" BorderBrush="LightBlue">
                     <hardwareusercontrols:GeneralInfoUserControl x:Name="generalInfoUserControl1">
@@ -43,6 +45,9 @@
                     <hardwareusercontrols:OemDevicesUserControl DataContext="{Binding OemDevicesVModel}"
                     x:Name="oemDeviceUserControl1" >
                     </hardwareusercontrols:OemDevicesUserControl>
+                    <!--<hardwareusercontrols:OemDevicesUserControl
+                    x:Name="oemDeviceUserControl1" >
+                    </hardwareusercontrols:OemDevicesUserControl>-->
                 </Border>
             </TabItem>
 

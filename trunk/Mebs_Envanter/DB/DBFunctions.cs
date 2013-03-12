@@ -240,7 +240,8 @@ namespace MEBS_Envanter.DB
                         cmBilgisayarEkleSilDuz.Parameters["@marka_id"].Value = infoComputer.Marka.MarkaID;
                     }
                     cmBilgisayarEkleSilDuz.Parameters["@pc_adi"].Value = infoComputer.Pc_adi;
-                    if (infoComputer.NetworkInfo.BagliAg.Ag_id > 0)
+                    if (infoComputer.NetworkInfo.BagliAg!=null &&
+                        infoComputer.NetworkInfo.BagliAg.Ag_id > 0)
                     {
                         cmBilgisayarEkleSilDuz.Parameters["@bagli_ag_id"].Value = infoComputer.NetworkInfo.BagliAg.Ag_id;
                     }

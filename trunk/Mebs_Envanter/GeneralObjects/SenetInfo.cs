@@ -28,7 +28,7 @@ namespace MEBS_Envanter
             set { id = value; }
         }
 
-        private String alan_kisi_rutbe=StaticFields.rutbeler[1];
+        private String alan_kisi_rutbe="";
 
         public String Alan_kisi_rutbe
         {

@@ -47,7 +47,7 @@ namespace MEBS_Envanter
             Tempest = new Tempest(tempest_id, "");
         }
 
-        private void Get_MonitorInfo(OEMDevice devOem)
+        private void Set_MonitorInfo(OEMDevice devOem)
         {
 
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
@@ -82,7 +82,7 @@ namespace MEBS_Envanter
             }
         }
 
-        internal void Get_SenetInfos()
+        internal void Set_SenetInfos()
         {
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             String conString = "Select * From tbl_senet where bilgisayar_id=@bilgisayar_id";
@@ -128,7 +128,7 @@ namespace MEBS_Envanter
             }
         }
 
-        internal void Get_HardwareInfos()
+        internal void Set_HardwareInfos()
         {
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             String conString = "Select * From tbl_parca where bilgisayar_id=@bilgisayar_id";
@@ -181,7 +181,7 @@ namespace MEBS_Envanter
                     mon.Marka = new Marka(markaid, "");
                     MonitorInfo = mon;
                     mon.Tempest = new Tempest(tempestid,"");
-                    Get_MonitorInfo(mon);
+                    Set_MonitorInfo(mon);
                 }
                 else
                 {

@@ -35,7 +35,6 @@
         <TextBlock Grid.Column="0" Grid.Row="6" Text="Tempest Seviyesi"></TextBlock>
         <TextBlock Text="Notlar" Grid.Row="7" Grid.Column="0" ></TextBlock>
 
-
         <!--Burayı değiştir-->
         <TextBox   x:Name="pcAdiTextBox" VerticalAlignment="Center"
                             Text="{Binding Pc_adi,Mode=OneWay}"
