@@ -40,7 +40,7 @@
             <TabItem Header="Donanım" x:Name="hardwareTab" >
                 <Border Background="LightGray" BorderThickness="2" CornerRadius="12" BorderBrush="LightBlue">
                     <hardwareusercontrols:OemDevicesUserControl 
-                    x:Name="oemDeviceUserControl1" Background="Beige">
+                    x:Name="oemDeviceUserControl1" >
                     </hardwareusercontrols:OemDevicesUserControl>
                 </Border>
             </TabItem>
@@ -101,7 +101,7 @@
                      Name="refreshListBtn"  Click="refreshListBtn_Click" />
         </Grid>
 
-        <Grid Grid.RowSpan="2" Grid.Column="0" Background="#FF2DA4CE" TextBlock.FontWeight="Bold">
+        <Grid Grid.RowSpan="2" Grid.Column="0" Background="#FF9DD3F5" TextBlock.FontWeight="Bold">
 
             <Grid Margin="4,0" >
 
@@ -118,14 +118,14 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
+
+
                 <TextBlock Text="Birlikler" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 
                 <ComboBox Grid.Column="1"
                       x:Name="searchGridBirliklerCombo"
                       VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60">
-
                 </ComboBox>
-
                 <TextBlock Text="Marka İsmi" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 
                 <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -143,8 +143,8 @@
                       VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60">
 
                 </ComboBox>
-                
-                
+
+
                 <Button 
                     Click="searchBtn_Click"
                     x:Name="searchBtn" Margin="2,12" VerticalAlignment="Bottom" Grid.Row="5" Content="Ara"

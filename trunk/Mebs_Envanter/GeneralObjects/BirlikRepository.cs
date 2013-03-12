@@ -8,7 +8,7 @@ using MEBS_Envanter.DB;
 
 namespace MEBS_Envanter.GeneralObjects
 {
-    public class BirlikRepository:MebsBaseObject
+    public class BirlikRepository : MebsBaseObject
     {
 
         public static BirlikRepository INSTANCE = null;
@@ -19,7 +19,14 @@ namespace MEBS_Envanter.GeneralObjects
             get { return birlikler; }
         }
 
-        public void FillBirlikler() {
+
+        private void ClearBirlikler() { 
+            Birlikler.Clear();
+            Birlikler.Add(new Birlik(-1,""));
+        }
+
+        public void FillBirlikler()
+        {
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             string sqlText = "SELECT * FROM tbl_birlik";
             SqlCommand cmd = new SqlCommand(sqlText, cnn);
@@ -28,7 +35,7 @@ namespace MEBS_Envanter.GeneralObjects
 
             if (res)
             {
-                //ClearMarkalar();
+                ClearBirlikler();
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_birlik = null;
                 int current_birlik_id = -1;

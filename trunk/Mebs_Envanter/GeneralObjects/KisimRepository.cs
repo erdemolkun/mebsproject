@@ -19,6 +19,12 @@ namespace MEBS_Envanter.GeneralObjects
             get { return kisimlar; }
         }
 
+        private void ClearKisimlar() {
+
+            Kisimlar.Clear();
+            Kisimlar.Add(new Kisim(-1, ""));
+        }
+
         public void FillKisimlar(Birlik birlik)
         {
             if (birlik == null) return;
@@ -30,7 +36,7 @@ namespace MEBS_Envanter.GeneralObjects
 
             if (res)
             {
-
+                ClearKisimlar();
                 cmd.Parameters.AddWithValue("@birlik_id", birlik.Birlik_id);
 
                 //ClearMarkalar();
