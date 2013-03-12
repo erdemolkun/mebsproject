@@ -1,6 +1,9 @@
 ﻿<UserControl x:Class="Mebs_Envanter.HardwareUserControls.GeneralInfoUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:x1="clr-namespace:Mebs_Envanter"
+             xmlns:x2="clr-namespace:MEBS_Envanter"
+             >
     <Grid TextBlock.FontWeight="Bold" >
         <Grid.Resources>
             <Style TargetType="{x:Type TextBlock}">
@@ -56,8 +59,13 @@
                                   SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},Mode=OneWay}"
                                   ItemsSource="{Binding TempestSeviyeler}" Grid.Row="6"
                                   HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
-        
-        <RichTextBox Grid.Row="7" Grid.Column="1" Height="80" Margin="2,4"></RichTextBox>
+
+        <x1:BindableRichTextBox Grid.Row="7"
+                     x:Name="notlarRichTxtBox" 
+                     Document="{Binding Notlar,Converter={StaticResource StringToFlowDocumentConverter}}"
+                     Grid.Column="1" Height="80" Margin="2,4" MinWidth="120">
+
+        </x1:BindableRichTextBox>
 
     </Grid>
 </UserControl>

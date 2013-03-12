@@ -19,5 +19,9 @@
     </converters:NullValueToBoolConverter>
 
     <converters:TempestComboIndexConverter x:Key="TempestComboIndexConverter"></converters:TempestComboIndexConverter>
+
+    <converters:StringToFlowDocumentConverter x:Key="StringToFlowDocumentConverter">
+        
+    </converters:StringToFlowDocumentConverter>
     
 </ResourceDictionary>

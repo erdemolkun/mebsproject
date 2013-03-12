@@ -13,6 +13,7 @@ namespace MEBS_Envanter
             {
                 if (monType == MonitorTypes.CRT) { return "LCD"; }
                 if (monType == MonitorTypes.LCD) { return "CRT"; }
+                if (monType == MonitorTypes.LED) { return "LED"; }
             }
             catch (Exception) { }
             return "";

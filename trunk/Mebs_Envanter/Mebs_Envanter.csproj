@@ -54,11 +54,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BindableRichTextBox.cs" />
     <Compile Include="Command\CommandMap.cs" />
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Command\ModelCommand.cs" />
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="Converters\BirlikComboIndexConverter.cs" />
+    <Compile Include="Converters\StringToFlowDocumentConverter.cs" />
     <Compile Include="Converters\TempestComboIndexConverter.cs" />
     <Compile Include="Converters\NullValueToBoolConverter.cs" />
     <Compile Include="Converters\KisimComboIndexConverter.cs" />

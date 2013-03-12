@@ -44,6 +44,7 @@ namespace MEBS_Envanter
             Model = rowPC["model"].ToString();
             SerialNumber = rowPC["seri_no"].ToString();
             DeviceNo = rowPC["parca_no"].ToString();
+            Notlar = rowPC["notlar"].ToString();
             Tempest = new Tempest(tempest_id, "");
         }
 
