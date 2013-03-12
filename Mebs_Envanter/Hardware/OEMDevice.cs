@@ -20,7 +20,7 @@ namespace MEBS_Envanter
         public int Id
         {
             get { return id; }
-            set { id = value; }
+            set { id = value; OnPropertyChanged("Id"); }
         }
 
         private Marka marka;
@@ -28,7 +28,7 @@ namespace MEBS_Envanter
         public Marka Marka
         {
             get { return marka; }
-            set { marka = value; }
+            set { marka = value; OnPropertyChanged("Marka"); }
         }
 
 
@@ -36,7 +36,7 @@ namespace MEBS_Envanter
         public Tempest Tempest
         {
             get { return tempest; }
-            set { tempest = value; }
+            set { tempest = value; OnPropertyChanged("Tempest"); }
         }
 
         private String deviceInfo;

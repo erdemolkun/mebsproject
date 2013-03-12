@@ -22,7 +22,7 @@ namespace MEBS_Envanter
         public int Mon_id
         {
             get { return mon_id; }
-            set { mon_id = value; }
+            set { mon_id = value; OnPropertyChanged("Mon_id"); }
         }
 
         private String stokNo;
@@ -32,7 +32,7 @@ namespace MEBS_Envanter
         public String StokNo
         {
             get { return stokNo; }
-            set { stokNo = value; }
+            set { stokNo = value; OnPropertyChanged("StokNo"); }
         }
 
 

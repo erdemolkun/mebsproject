@@ -7,8 +7,23 @@ using System.ComponentModel;
 namespace MEBS_Envanter
 {
 
-    public class MebsBaseObject : INotifyPropertyChanged
-    {        
+    public class MebsBaseObject :INotifyPropertyChanged
+    {
+
+        /// <summary>
+        /// Handles PropertyChangedCallback
+        /// </summary>
+        /// <param name="target">Target Object</param>
+        /// <param name="e">DependencyPropertyChangedEventArgs</param>
+        protected static void ValueInvalidated(DependencyObject target, DependencyPropertyChangedEventArgs e)
+        {
+            //MebsBaseObject bs = target as MebsBaseObject;
+            //if (bs != null)
+            //{
+            //    bs.OnPropertyChanged(e.Property.Name);
+            //}
+        }
+
         #region INotifyPropertyChanged Members
         /// <summary>
         /// Property Changed Event

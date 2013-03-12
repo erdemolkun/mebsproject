@@ -33,7 +33,7 @@ namespace MEBS_Envanter
         public int MarkaID
         {
             get { return _markaID; }
-            set { _markaID = value; }
+            set { _markaID = value; OnPropertyChanged("MarkaID"); }
         }
 
     }

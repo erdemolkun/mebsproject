@@ -6,7 +6,7 @@ using MEBS_Envanter;
 
 namespace Mebs_Envanter
 {
-    internal class OemDeviceViewModel : MebsBaseObject
+    public class OemDeviceViewModel : MebsBaseObject
     {
 
         public OemDeviceViewModel(OEMDevice _devOem) {

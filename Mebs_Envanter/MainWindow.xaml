@@ -19,7 +19,7 @@
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"></ColumnDefinition>
-            <ColumnDefinition Width="160"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -37,15 +37,16 @@
                     </hardwareusercontrols:GeneralInfoUserControl>
                 </Border>
             </TabItem>
+
             <TabItem Header="Donanım" x:Name="hardwareTab" >
                 <Border Background="LightGray" BorderThickness="2" CornerRadius="12" BorderBrush="LightBlue">
-                    <hardwareusercontrols:OemDevicesUserControl 
+                    <hardwareusercontrols:OemDevicesUserControl DataContext="{Binding OemDevicesVModel}"
                     x:Name="oemDeviceUserControl1" >
                     </hardwareusercontrols:OemDevicesUserControl>
                 </Border>
             </TabItem>
 
-            <TabItem Header="Monitor" x:Name="monitorTab">
+            <TabItem Header="Monitor" x:Name="monitorTab" DataContext="{Binding MonitorInfo}">
                 <Border Background="LightGray" BorderThickness="2" CornerRadius="24" BorderBrush="LightBlue">
                     <hardwareusercontrols:MonitorInfoUserControl x:Name="monitorUserControl1">
 
@@ -53,14 +54,16 @@
 
                 </Border>
             </TabItem>
-            <TabItem Header="Senet" x:Name="senetTab" >
+
+            <TabItem Header="Senet" x:Name="senetTab" DataContext="{Binding Senet}">
                 <Border Background="LightGray" BorderThickness="2" CornerRadius="24" BorderBrush="LightBlue">
                     <hardwareusercontrols:SenetInfoUserControl x:Name="senetInfoUserControl1">
 
                     </hardwareusercontrols:SenetInfoUserControl>
                 </Border>
             </TabItem>
-            <TabItem Header="Ağ Bilgileri" x:Name="networkTab">
+            
+            <TabItem Header="Ağ Bilgileri" x:Name="networkTab" DataContext="{Binding NetworkInfo}">
                 <Border Background="LightGray" BorderThickness="2" CornerRadius="12" BorderBrush="LightBlue">
                     <hardwareusercontrols:NetworkInfoUserControl x:Name="networkUserControl1">
 
@@ -101,23 +104,22 @@
                      Name="refreshListBtn"  Click="refreshListBtn_Click" />
         </Grid>
 
-        <Grid Grid.RowSpan="2" Grid.Column="0" Background="#FF9DD3F5" TextBlock.FontWeight="Bold">
+        <Border CornerRadius="12" Margin="6,4" Grid.RowSpan="2" Grid.Column="0" Background="#FF9DD3F5" TextBlock.FontWeight="Bold">
 
-            <Grid Margin="4,0" >
+            <Grid Margin="0,0" >
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition  ></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="32"></RowDefinition>
+                    <RowDefinition Height="32"></RowDefinition>
+                    <RowDefinition Height="32"></RowDefinition>
+                    <RowDefinition Height="32"></RowDefinition>
+                    <RowDefinition Height="32"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-
 
 
                 <TextBlock Text="Birlikler" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
@@ -151,6 +153,6 @@
                     HorizontalAlignment="Center" Width="120" Grid.ColumnSpan="2"></Button>
 
             </Grid>
-        </Grid>
+        </Border>
     </Grid>
 </Window>

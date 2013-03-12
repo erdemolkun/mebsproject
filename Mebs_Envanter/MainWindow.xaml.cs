@@ -78,12 +78,12 @@ namespace MEBS_Envanter
 
             if (isEdit)
             {
-
-                computerInfo.Id = Current_Computer_Info.Id;
-                computerInfo.MonitorInfo.Id = Current_Computer_Info.MonitorInfo.Id;
-                computerInfo.MonitorInfo.Mon_id = Current_Computer_Info.MonitorInfo.Mon_id;
-                computerInfo.Senet.Id = Current_Computer_Info.Senet.Id;
-                foreach (OEMDevice item in Current_Computer_Info.GetOemDevices())
+                ComputerInfo tempC = Current_Computer_Info;
+                computerInfo.Id = tempC.Id;
+                computerInfo.MonitorInfo.Id = tempC.MonitorInfo.Id;
+                computerInfo.MonitorInfo.Mon_id = tempC.MonitorInfo.Mon_id;
+                computerInfo.Senet.Id = tempC.Senet.Id;
+                foreach (OEMDevice item in tempC.GetOemDevices())
                 {
                     computerInfo.Get_OemDevice(item.DeviceType).Id = item.Id;
                 }
@@ -148,15 +148,22 @@ namespace MEBS_Envanter
         }
 
         private void changeCurrentPCContext(ComputerInfo infComp)
+        {            
+            Current_Computer_Info = infComp;            
+            pcEnvanterTabControl.DataContext = Current_Computer_Info;            
+            generalInfoTab.DataContextChanged += new DependencyPropertyChangedEventHandler(generalInfoTab_DataContextChanged);
+            monitorTab.DataContextChanged += new DependencyPropertyChangedEventHandler(monitorTab_DataContextChanged);
+        }
+
+        void generalInfoTab_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            Current_Computer_Info = infComp;
-            pcEnvanterTabControl.DataContext = Current_Computer_Info;
-            generalInfoTab.DataContext = Current_Computer_Info;
-            networkTab.DataContext = Current_Computer_Info.NetworkInfo;
-            monitorTab.DataContext = Current_Computer_Info.MonitorInfo;
-            senetTab.DataContext = Current_Computer_Info.Senet;
-            hardwareTab.DataContext = Current_Computer_Info;
-            oemDeviceUserControl1.DataContext = Current_Computer_Info.OemDevicesVModel;
+            TabItem x = sender as TabItem;
+            object xxx = x.DataContext;
+        }
+
+        void monitorTab_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
         }
 
         private void setGUIDataContextForInitialization()
