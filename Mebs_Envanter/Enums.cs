@@ -22,7 +22,10 @@ namespace MEBS_Envanter
     public enum MonitorTypes : int { 
     
         CRT = 1,
-        LCD=2
+        
+        LCD=2, 
+
+        LED = 3
     }
 
 }

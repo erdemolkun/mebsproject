@@ -43,7 +43,9 @@ namespace Mebs_Envanter.HardwareUserControls
             inf.DeviceNo = pcParcaNoTextBox.Text.Trim().ToString();
             inf.SerialNumber = pcSerialNumberTextBox.Text.Trim().ToString();
             inf.Marka = genelBilgilerMarkalarCombo.SelectedItem as Marka;
-            inf.Tempest = genelBilgilerTempestCombo.SelectedItem as Tempest;
+            inf.Tempest = genelBilgilerTempestCombo.SelectedItem as Tempest;            
+            String not = new TextRange(notlarRichTxtBox.Document.ContentStart, notlarRichTxtBox.Document.ContentEnd).Text;
+            inf.Notlar = not;            
         }
     }
 }
