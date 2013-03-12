@@ -5,10 +5,11 @@ using System.Text;
 
 namespace MEBS_Envanter
 {
-    public class Monitor:OEMDevice
+    public class Monitor : OEMDevice
     {
 
-        public Monitor() {
+        public Monitor()
+        {
 
             //Marka = new Marka(-1, "Dell");
             //StokNo = "55";
@@ -17,7 +18,7 @@ namespace MEBS_Envanter
             DeviceType = DeviceTypes.MONITOR;
         }
 
-        private int mon_id=-1;
+        private int mon_id = -1;
 
         public int Mon_id
         {
@@ -36,9 +37,15 @@ namespace MEBS_Envanter
         }
 
 
-        
+        private MonitorTypes monType;
 
-        
+        public MonitorTypes MonType
+        {
+            get { return monType; }
+            set { monType = value; OnPropertyChanged("MonType"); }
+        }
+
+
 
 
 

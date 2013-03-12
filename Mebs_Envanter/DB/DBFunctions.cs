@@ -144,7 +144,7 @@ namespace MEBS_Envanter.DB
                         cmMonitorEkleSilDuz.Parameters["@monitor_id"].Value = infoMonitor.Mon_id;
                     }
                     cmMonitorEkleSilDuz.Parameters["@parca_id"].Value = infoMonitor.Id;
-                    //cmMonitorEkleSilDuz.Parameters["monitor_tipi"].Value = infoMonitor.
+                    cmMonitorEkleSilDuz.Parameters["@monitor_tipi"].Value = infoMonitor.MonType;
                     cmMonitorEkleSilDuz.Parameters["@stok_no"].Value = infoMonitor.StokNo;
                     cmMonitorEkleSilDuz.ExecuteNonQuery();
                     if (!isEdit)
@@ -157,8 +157,6 @@ namespace MEBS_Envanter.DB
             }
             catch (Exception)
             {
-
-
             }
             return false;
 

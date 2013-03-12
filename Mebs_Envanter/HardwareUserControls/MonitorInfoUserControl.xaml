@@ -1,6 +1,8 @@
 ﻿<UserControl x:Class="Mebs_Envanter.HardwareUserControls.MonitorInfoUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:x1="clr-namespace:MEBS_Envanter"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <Grid  TextBlock.FontWeight="Bold">
         <Grid.Resources>
@@ -12,8 +14,15 @@
                 <Setter Property="MaxHeight" Value="20"></Setter>
                 <Setter Property="Margin" Value="5"></Setter>
             </Style>
+            <ObjectDataProvider x:Key="dataMonEnum"
+       MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="x1:MonitorTypes"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
         </Grid.Resources>
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -27,28 +36,36 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Marka"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="Stok No"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Seri No"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="Parça No"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="4" Text="Tempest Seviyesi"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Tipi"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Stok No"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Seri No"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Parça No"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Tempest Seviyesi"></TextBlock>
 
         <ComboBox x:Name="monitorMarkalarCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
-                                   SelectedIndex="{Binding Marka,Converter={StaticResource MarkaComboIndexConverter},Mode=OneWay}"
+                                   SelectedIndex="{Binding Marka,
+                                Converter={StaticResource MarkaComboIndexConverter},Mode=OneWay}"
                                   ItemsSource="{Binding Markalar}" 
                                   HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
 
+        <ComboBox x:Name="monitorTiplerCombo" Grid.Row="1" MinWidth="80" 
+                                VerticalAlignment="Center"  Margin="2,2"
+                                SelectedItem="{Binding MonType}"                                
+                                ItemsSource="{Binding Source={StaticResource dataMonEnum}}"
+                                HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
+
         <ComboBox x:Name="monitorTempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
                                   SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},Mode=OneWay}"
-                                  ItemsSource="{Binding TempestSeviyeler}" Grid.Row="4"
+                                  ItemsSource="{Binding TempestSeviyeler}" Grid.Row="5"
                                   HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
 
         <TextBox VerticalAlignment="Center" Text="{Binding StokNo}" 
                                  x:Name="monitorStokNoTextBox"
-                                 Margin="4,2" Grid.Column="1" Grid.Row="1" ></TextBox>
+                                 Margin="4,2" Grid.Column="1" Grid.Row="2" ></TextBox>
 
         <TextBox VerticalAlignment="Center" x:Name="monitorSerialTextBox"
-                                 Text="{Binding SerialNumber}"  Margin="4,2" Grid.Column="1" Grid.Row="2" ></TextBox>
+                                 Text="{Binding SerialNumber}"  Margin="4,2" Grid.Column="1" Grid.Row="3" ></TextBox>
         <TextBox VerticalAlignment="Center" x:Name="monitorParcaNoTextBox"
-                                 Text="{Binding Parca_no}"  Margin="4,2" Grid.Column="1" Grid.Row="3" ></TextBox>
+                                 Text="{Binding Parca_no}"  Margin="4,2" Grid.Column="1" Grid.Row="4" ></TextBox>
     </Grid>
 </UserControl>
