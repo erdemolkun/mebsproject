@@ -53,7 +53,7 @@ namespace MEBS_Envanter
                     GlobalDataAccess.Set_Current_SQL_Connection(conSql);
                     Current_Computer_Info = new ComputerInfo();
                     setGUIDataContextForInitialization();
-                    RefreshComputerList();
+                    RefreshComputerList(null);
                     pcList_SelectionChanged(pcList, null);
                     IsEnabled = true;
                 }
@@ -64,57 +64,7 @@ namespace MEBS_Envanter
                 }
             }));
         }
-
-        private void RefreshComputerList()
-        {
-            DenemeSearch(null);
-            return;
-            Stopwatch w = Stopwatch.StartNew();
-
-            ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
-
-            //String commandText = "Select TOP 1 * From tbl_bilgisayar pc order by bilgisayar_id Desc";
-            String commandText = "Select * From tbl_bilgisayar pc order by bilgisayar_id Asc";
-            SqlCommand cmd = new SqlCommand(commandText, cnn);
-
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
-            try
-            {
-                adp.Fill(dt);
-            }
-            catch (Exception)
-            {
-            }
-            finally
-            {
-                cnn.Close();
-                cnn.Dispose();
-            }
-            foreach (DataRow rowPC in dt.Rows)
-            {
-                ComputerInfo tempComputer = new ComputerInfo();
-                try
-                {
-                    tempComputer.SetGeneralFields(rowPC);
-                    tempComputer.Get_HardwareInfos();
-                    tempComputer.Get_SenetInfos();
-                }
-                catch (Exception)
-                {
-                }
-                repositoryNew.Computers.Add(tempComputer);
-
-            }
-            pcList.DataContext = repositoryNew;
-            pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
-
-            long x = w.ElapsedMilliseconds;
-        }
-
+        
         private void Assign_ComputerInfo_By_GUI(ComputerInfo computerInfo, bool isEdit)
         {
             generalInfoUserControl1.SetGeneralInfo(computerInfo);
@@ -183,7 +133,7 @@ namespace MEBS_Envanter
             this.IsEnabled = true;
             if ((bool)e.Result)
             {
-                RefreshComputerList();
+                RefreshComputerList(null);
             }
             else {
                 MessageBox.Show("Hata");
@@ -259,11 +209,11 @@ namespace MEBS_Envanter
         private void pcDeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             DBFunctions.DeletePC(Current_Computer_Info);
-            RefreshComputerList();
+            RefreshComputerList(null);
         }
         private void refreshListBtn_Click(object sender, RoutedEventArgs e)
         {
-            RefreshComputerList();
+            RefreshComputerList(null);
             //changeCurrentPCContext((pcList.DataContext as ComputerInfoRepository).Computers[0]);
         }
 
@@ -272,7 +222,7 @@ namespace MEBS_Envanter
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            DenemeSearch(GetParameterList());
+            RefreshComputerList(GetParameterList());
         }
 
         private SortedList<String,object> GetParameterList(){
@@ -301,7 +251,7 @@ namespace MEBS_Envanter
             return list;
         }
 
-        private void DenemeSearch(SortedList<String,object> parameterList) {
+        private void RefreshComputerList(SortedList<String,object> parameterList) {
         
 
             Stopwatch w = Stopwatch.StartNew();
@@ -357,9 +307,7 @@ namespace MEBS_Envanter
             pcList.DataContext = repositoryNew;
             pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
 
-            long x = w.ElapsedMilliseconds;
-        
-        
+            long x = w.ElapsedMilliseconds;        
         }
     }
 }
