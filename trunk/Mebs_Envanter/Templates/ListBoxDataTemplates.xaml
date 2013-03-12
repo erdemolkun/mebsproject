@@ -8,10 +8,12 @@
                 <DropShadowBitmapEffect Color="Gray"/>
             </Border.BitmapEffect>
             <Grid  HorizontalAlignment="Stretch" Margin="0,6,0,6"
-                            TextElement.FontSize="15" TextElement.Foreground="MintCream" >
-                <Label  Margin="0,0,2,0"
-                                    Content="{Binding Pc_adi}" />
+                            TextElement.FontSize="15" TextElement.Foreground="Red" >
 
+                <StackPanel>
+                    <TextBlock Text="PC ADI : "></TextBlock>
+                    <TextBlock  Margin="0,0,2,0" Text="{Binding Pc_adi}" />
+                </StackPanel>
             </Grid>
         </Border>
     </DataTemplate>
@@ -31,7 +33,7 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
+
     <Style x:Key="kurulumListItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Background" Value="#ffD4A4A4" />
         <Setter Property="Template" Value="{StaticResource kurulumListItemStyleSelected}" />
@@ -47,12 +49,13 @@
         </Style.Triggers>
     </Style>
 
-    
+
 
 
     <DataTemplate x:Key="kurulumListboxDataTemplate">
         <Grid Margin="2" >
             <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <!--<Grid Grid.Row="2">
@@ -70,16 +73,33 @@
                         </Style>
                     </Grid.Style>
                 </Grid>-->
-            <Grid Grid.Row="0">
-                <TextBlock Name="textBlock1"
+            <Grid Grid.Row="0" Name="mGrid" TextBlock.FontFamily="Tahoma">
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="PC ADI : " Foreground="Brown"></TextBlock>
+                    <TextBlock Name="textBlock1" Margin="0,0,2,0" Text="{Binding Pc_adi}" />
+                </StackPanel>
+
+                <!--<TextBlock Name="textBlock1"
                     Text="{Binding Pc_adi}" FontFamily="Tahoma" FontSize="12">
 
-                </TextBlock>
+                </TextBlock>-->
                 <!--<RadioButton   IsHitTestVisible="False"                               
                                 GroupName="os" Name="radioButton"
                                 Style="{StaticResource styleRadio}" 
                                 Content="{Binding ComponentName}">
                 </RadioButton>-->
+            </Grid>
+            
+            <Grid Grid.Row="1" Name="gridAlanKisi" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Alan Kişi : " Foreground="Brown"></TextBlock>
+                    
+                    <TextBlock Name="textBlock3" TextWrapping="Wrap" Margin="0,0,2,0" 
+                               Text="{Binding Senet.Alan_kisi_rutbe}" />
+                    <TextBlock Name="textBlock4" TextWrapping="WrapWithOverflow" Margin="0,0,2,0" 
+                               Text="{Binding Senet.Alan_kisi_isim}" />
+                </StackPanel>
             </Grid>
 
         </Grid>
@@ -87,7 +107,12 @@
             <DataTrigger Binding="{Binding RelativeSource=
                                 {RelativeSource Mode=FindAncestor, AncestorType=
                                 {x:Type ListBoxItem}},Path=IsSelected,Mode=OneWay}" Value="True">
-                <Setter TargetName="textBlock1" Property="FontSize" Value="16"/>
+                <Setter TargetName="textBlock1" Property="FontSize" Value="14"/>
+                <Setter TargetName="textBlock1" Property="FontWeight" Value="Bold"/>
+                <Setter TargetName="gridAlanKisi" 
+                        
+                        Property="Visibility" Value="Visible"/>
+                <!--<Setter TargetName="mGrid" Property="TextBlock.FontSize" Value="16"/>-->
                 <!--<Setter TargetName="radioButton" Property="IsChecked" Value="True"/>-->
             </DataTrigger>
         </DataTemplate.Triggers>

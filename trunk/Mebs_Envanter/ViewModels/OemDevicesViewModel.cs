@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace Mebs_Envanter
 {
-    internal class OemDevicesViewModel : MebsBaseObject
+    public class OemDevicesViewModel : MebsBaseObject
     {
         private ObservableCollection<OemDeviceViewModel> oemDevices = new ObservableCollection<OemDeviceViewModel>();
         public ObservableCollection<OemDeviceViewModel> OemDevices

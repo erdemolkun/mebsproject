@@ -37,8 +37,7 @@
 
 
         <!--Burayı değiştir-->
-        <TextBox 
-                            x:Name="pcAdiTextBox" VerticalAlignment="Center"
+        <TextBox   x:Name="pcAdiTextBox" VerticalAlignment="Center"
                             Text="{Binding Pc_adi,Mode=OneWay}"
                             Margin="2,2" Grid.Column="1" Grid.Row="0" ></TextBox>
 

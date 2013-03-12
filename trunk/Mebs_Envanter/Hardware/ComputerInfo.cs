@@ -29,13 +29,15 @@ namespace MEBS_Envanter
             int bagli_ag_id = -1;
             try { bagli_ag_id = (int)rowPC["bagli_ag_id"]; if (bagli_ag_id < 0)bagli_ag_id = -1; }
             catch (Exception) { }
+            NetworkInfo.BagliAg = new BagliAg("", bagli_ag_id);
+
 
             int tempest_id = -1;
             try { tempest_id = (int)rowPC["tempest_id"]; if (tempest_id < 0)tempest_id = -1; }
             catch (Exception) { }
 
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
-            NetworkInfo.BagliAg = new BagliAg("", bagli_ag_id);
+            
 
             Pc_adi = rowPC["pc_adi"].ToString(); ;
             PcStokNo = rowPC["pc_stok_no"].ToString();
@@ -237,7 +239,7 @@ namespace MEBS_Envanter
 
 
         private OemDevicesViewModel oemDevicesVModel=new OemDevicesViewModel();
-        internal OemDevicesViewModel OemDevicesVModel
+        public OemDevicesViewModel OemDevicesVModel
         {
             get { return oemDevicesVModel; }
             set { oemDevicesVModel = value; 
