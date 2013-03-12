@@ -45,8 +45,12 @@ namespace Mebs_Envanter.HardwareUserControls
         }
 
         public void SetSenetInfo(SenetInfo inf) {
+            
             // Senet Bilgileri
-            inf.Alan_kisi_rutbe = senetRutbelerCombo.SelectedItem.ToString();
+            if (senetRutbelerCombo.SelectedItem != null)
+            {
+                inf.Alan_kisi_rutbe = senetRutbelerCombo.SelectedItem.ToString();
+            }
             inf.Alan_kisi_isim = senetAlamIsimTextBox.Text.Trim().ToString();
             inf.Veren_kisi_isim = senetVerenKisiTextBox.Text.Trim().ToString();
             if (senetBirlikCombo.SelectedItem != null)

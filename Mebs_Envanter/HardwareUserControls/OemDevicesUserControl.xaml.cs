@@ -24,13 +24,14 @@ namespace Mebs_Envanter.HardwareUserControls
         public OemDevicesUserControl()
         {
             InitializeComponent();
+            //OemDevicesViewModel oemDevicesViewModel = new OemDevicesViewModel();
+            //this.DataContext = oemDevicesViewModel;
         }
-        public void SetOemDevicesInfo(ComputerInfo inf) {
 
+        public void SetOemDevicesInfo(ComputerInfo inf) {
             // OEM Parçaların Bilgileri
             AssignOemDeviceInfoByGui(hardwareItemsControl, inf);
-            AssignOemDeviceInfoByGui(hardwareExtraItemsControl, inf);
-        
+            AssignOemDeviceInfoByGui(hardwareExtraItemsControl, inf);        
         }
         private void AssignOemDeviceInfoByGui(ItemsControl control, ComputerInfo freshComputerInfo)
         {
