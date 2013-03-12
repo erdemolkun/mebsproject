@@ -18,7 +18,7 @@ namespace Mebs_Envanter
         {
             get
             {
-                return DeviceTypeNameHelper.GET_NAME(DevOem.DeviceType);
+                return DeviceTypeNameHelper.GET_DEV_NAME(DevOem.DeviceType);
             }
         }
 

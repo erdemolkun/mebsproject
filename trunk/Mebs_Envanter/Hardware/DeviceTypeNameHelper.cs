@@ -7,7 +7,18 @@ namespace MEBS_Envanter
 {
     class DeviceTypeNameHelper
     {
-        public static String GET_NAME(DeviceTypes devType)
+        public static String GET_MON_NAME(MonitorTypes monType)
+        {
+            try
+            {
+                if (monType == MonitorTypes.CRT) { return "LCD"; }
+                if (monType == MonitorTypes.LCD) { return "CRT"; }
+            }
+            catch (Exception) { }
+            return "";
+        }
+
+        public static String GET_DEV_NAME(DeviceTypes devType)
         {
             try
             {
@@ -23,7 +34,6 @@ namespace MEBS_Envanter
             }
             catch (Exception) { }
             return "N/A";
-
         }
     }
 }

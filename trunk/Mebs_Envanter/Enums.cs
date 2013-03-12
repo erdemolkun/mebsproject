@@ -19,4 +19,10 @@ namespace MEBS_Envanter
         MONITOR = 9,
     }
 
+    public enum MonitorTypes : int { 
+    
+        CRT = 1,
+        LCD=2
+    }
+
 }

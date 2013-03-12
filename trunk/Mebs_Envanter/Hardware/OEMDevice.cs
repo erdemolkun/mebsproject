@@ -75,8 +75,7 @@ namespace MEBS_Envanter
             get { return deviceType; }
             set
             {
-                deviceType = value;
-                OnPropertyChanged("ParcaTipiIsmi");
+                deviceType = value;               
             }
         }
     }

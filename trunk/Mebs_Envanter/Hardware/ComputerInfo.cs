@@ -76,6 +76,17 @@ namespace MEBS_Envanter
                 // int monitorTipi = Convert.ToInt32( rowMonitor["monitor_tipi"]);
                 String stok_no = rowMonitor["stok_no"].ToString();
                 int mon_id = (int)rowMonitor["monitor_id"];
+                try
+                {
+                    int mon_type = Convert.ToInt32(rowMonitor["monitor_tipi"]);
+                    if (mon_type > 0)
+                    {
+                        (devOem as Monitor).MonType = (MonitorTypes)mon_type;
+                    }
+                }
+                catch (Exception) { 
+                
+                }
                 (devOem as Monitor).StokNo = stok_no;
                 (devOem as Monitor).Mon_id = mon_id;
                 //(devOem as Monitor).DeviceNo = 
@@ -178,10 +189,10 @@ namespace MEBS_Envanter
                     mon.Id = parca_id;
                     mon.SerialNumber = seri_no;
                     mon.Parca_no = parca_no;
-                    mon.Marka = new Marka(markaid, "");
-                    MonitorInfo = mon;
+                    mon.Marka = new Marka(markaid, "");                    
                     mon.Tempest = new Tempest(tempestid,"");
                     Set_MonitorInfo(mon);
+                    MonitorInfo = mon;
                 }
                 else
                 {
