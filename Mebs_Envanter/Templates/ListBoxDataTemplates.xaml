@@ -19,7 +19,10 @@
     </DataTemplate>
 
     <ControlTemplate TargetType="ListBoxItem" x:Key="kurulumListItemStyleSelected">
-        <Grid Background="Transparent" Margin="0">
+        <Grid Background="Transparent" Margin="0" Name="mainGrid">
+            <Grid.BitmapEffect>
+                <OuterGlowBitmapEffect GlowSize="3" GlowColor="Black" />
+            </Grid.BitmapEffect>
             <Border Name="ItemBorder" CornerRadius="3" Margin="6,3"
                 BorderBrush="Gray" BorderThickness="1" Background="LightSkyBlue">
                 <ContentPresenter         
@@ -29,7 +32,12 @@
         <ControlTemplate.Triggers>
             <Trigger Property="IsSelected" Value="True">
                 <Setter TargetName="ItemBorder" Property="Background" Value="gray" />
-                <Setter TargetName="ItemBorder" Property="Margin" Value="0" />
+                <Setter TargetName="ItemBorder" Property="Margin" Value="3,3" />
+                <Setter TargetName="mainGrid" Property="Grid.BitmapEffect">
+                    <Setter.Value>
+                        <OuterGlowBitmapEffect GlowSize="3" GlowColor="Red" />
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -52,8 +60,9 @@
 
 
 
-    <DataTemplate x:Key="kurulumListboxDataTemplate">
+    <DataTemplate x:Key="computerInfoListboxDataTemplate">
         <Grid Margin="2" >
+             
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -74,7 +83,7 @@
                     </Grid.Style>
                 </Grid>-->
             <Grid Grid.Row="0" Name="mGrid" TextBlock.FontFamily="Tahoma">
-
+                
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="PC ADI : " Foreground="Brown"></TextBlock>
                     <TextBlock Name="textBlock1" Margin="0,0,2,0" Text="{Binding Pc_adi}" />
