@@ -23,7 +23,7 @@ namespace MEBS_Envanter.GeneralObjects
         public String Birlik_ismi
         {
             get { return _birlik_ismi; }
-            set { _birlik_ismi = value; }
+            set { _birlik_ismi = value; OnPropertyChanged("Birlik_ismi"); }
         }
 
         private int _birlik_id=-1;
@@ -31,7 +31,7 @@ namespace MEBS_Envanter.GeneralObjects
         public int Birlik_id
         {
             get { return _birlik_id; }
-            set { _birlik_id = value; }
+            set { _birlik_id = value; OnPropertyChanged("Birlik_id"); }
         }
     }
 }
