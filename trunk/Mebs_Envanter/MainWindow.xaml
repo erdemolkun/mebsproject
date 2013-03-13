@@ -82,7 +82,7 @@
             <ListBox x:Name="pcList" 
                  SelectionChanged="pcList_SelectionChanged"                 
                  ItemsSource="{Binding Computers}"
-                 ItemContainerStyle="{StaticResource kurulumListItemStyle}"
+                 ItemContainerStyle="{StaticResource computerInfoListBoxItemStyle}"
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
                  Grid.Row="1" MinHeight="120"  Background="Transparent"/>
         </Grid>
