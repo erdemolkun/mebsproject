@@ -25,6 +25,7 @@ using Mebs_Envanter.GUIHelpers;
 using Mebs_Envanter;
 using System.Diagnostics;
 using System.ComponentModel;
+using Mebs_Envanter.GeneralObjects;
 
 namespace MEBS_Envanter
 {
@@ -56,6 +57,7 @@ namespace MEBS_Envanter
                     RefreshComputerList(null);
                     pcList_SelectionChanged(pcList, null);
                     IsEnabled = true;
+                    pcList.Focus();
                 }
                 else
                 {
@@ -101,7 +103,15 @@ namespace MEBS_Envanter
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
             rep_bagli_ag.Fill_Aglar();
             searchGridAglarCombo.ItemsSource = rep_bagli_ag.BagliAglar ;
-                        
+
+
+            TempestRepository tempest_rep = new TempestRepository();
+            tempest_rep.FillSeviyeler();
+            searchGridTempestCombo.ItemsSource = tempest_rep.TempestSeviyeler;
+
+            MarkaRepository marka_rep = new MarkaRepository();
+            marka_rep.FillMarkalar();
+            searchGridMarkalarCombo.ItemsSource = marka_rep.Markalar;
         }
 
         private bool AddOrEditPCFunction(bool isEdit)
@@ -238,25 +248,37 @@ namespace MEBS_Envanter
         private SortedList<String,object> GetParameterListForSearch(){
 
             SortedList<String, object> list = new SortedList<string, object>();
-
             if (searchGridBirliklerCombo.SelectedItem != null) {
                 if ((searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id > 0) {
 
                     list.Add("@birlik_id", (searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id);
                 }
             }
-
             if (searchGridAglarCombo.SelectedItem != null)
             {
                 if ((searchGridAglarCombo.SelectedItem as BagliAg).Ag_id > 0)
                 {
-
                     list.Add("@bagli_ag_id", (searchGridAglarCombo.SelectedItem as BagliAg).Ag_id);
                 }
             }
-
-            //list.Add("@marka_ismi", markaNameTxtBox.Text.Trim());
-            list.Add("@alan_kisi_isim", alanKisiIsimTxtBox.Text.Trim());
+            if (searchGridTempestCombo.SelectedItem != null)
+            {
+                if ((searchGridTempestCombo.SelectedItem as Tempest).Id > 0)
+                {
+                    list.Add("@tempest_id", (searchGridTempestCombo.SelectedItem as Tempest).Id);
+                }
+            }
+            if (searchGridMarkalarCombo.SelectedItem != null)
+            {
+                if ((searchGridMarkalarCombo.SelectedItem as Marka).MarkaID > 0)
+                {
+                    list.Add("@marka_id", (searchGridMarkalarCombo.SelectedItem as Marka).MarkaID);
+                }
+            }
+                        
+            list.Add("@alan_kisi_isim", searchGridalanKisiIsimTxtBox.Text.Trim());
+            list.Add("@pc_adi", searchGridPcNameTxtBox.Text.Trim());
+            list.Add("@model", searchGridModelTxtBox.Text.Trim());
 
             return list;
         }
