@@ -3,24 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:x1="clr-namespace:MEBS_Envanter" 
         xmlns:guihelpers="clr-namespace:MEBS_Envanter.GUIHelpers"
-        x:Name="mainwin" MaxHeight="640" MinHeight="480" Width="900"
+        x:Name="mainwin" MaxHeight="640" MinHeight="480" 
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:xceedcontrols="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
         xmlns:converters="clr-namespace:MEBS_Envanter.Converters"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         Title="Bilgisayar Envanter Kaydı" SizeToContent="Height"  ResizeMode="NoResize">
-    <Grid >
-        <Grid.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-
-        </Grid.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
+                <GradientStop Color="#FFC7CBCB" Offset="0" />
+                <GradientStop Color="#20646363" Offset="0.99" />
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"></ColumnDefinition>
-            <ColumnDefinition Width="220"></ColumnDefinition>
-            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition MinWidth="220" MaxWidth="275" Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="240"></ColumnDefinition>
+            <ColumnDefinition MinWidth="480" Width="*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -29,19 +28,34 @@
 
         <Grid Grid.Column="0" Grid.RowSpan="2"></Grid>
 
-        <!--<TabControl Grid.Column="2" x:Name="pcEnvanterTabControl"
-                    DataContext="{Binding ElementName=pcList,Path=SelectedItem}"
-                    >-->
-        <TabControl Grid.Column="2" x:Name="pcEnvanterTabControl">
+
+        <TabControl  Grid.Column="2" x:Name="pcEnvanterTabControl">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="1,0" ColorInterpolationMode="SRgbLinearInterpolation">
+                                <GradientStop Color="#FF838AA0" Offset="0" />
+                                <GradientStop Color="#FF213E3C" Offset="1" />
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderThickness" Value="4"></Setter>
+                    <Setter Property="Margin" Value="2"></Setter>
+                    <Setter Property="CornerRadius" Value="12"></Setter>
+                    <Setter Property="BorderBrush" Value="LightBlue"></Setter>
+                </Style>
+            </TabControl.Resources>
+
             <TabItem Header="Genel Bilgiler" x:Name="generalInfoTab" >
-                <Border Background="LightGray" BorderThickness="4" CornerRadius="12" Margin="2" BorderBrush="LightBlue">
+                <Border >
                     <hardwareusercontrols:GeneralInfoUserControl x:Name="generalInfoUserControl1">
                     </hardwareusercontrols:GeneralInfoUserControl>
                 </Border>
             </TabItem>
 
             <TabItem Header="Donanım" x:Name="hardwareTab" >
-                <Border Background="LightGray" BorderThickness="2" CornerRadius="12" BorderBrush="LightBlue">
+                <Border >
                     <hardwareusercontrols:OemDevicesUserControl DataContext="{Binding OemDevicesVModel}"
                     x:Name="oemDeviceUserControl1" >
                     </hardwareusercontrols:OemDevicesUserControl>
@@ -52,7 +66,7 @@
             </TabItem>
 
             <TabItem Header="Monitor" x:Name="monitorTab" DataContext="{Binding MonitorInfo}">
-                <Border Background="LightGray" BorderThickness="2" CornerRadius="24" BorderBrush="LightBlue">
+                <Border >
                     <hardwareusercontrols:MonitorInfoUserControl x:Name="monitorUserControl1">
 
                     </hardwareusercontrols:MonitorInfoUserControl>
@@ -61,7 +75,7 @@
             </TabItem>
 
             <TabItem Header="Senet" x:Name="senetTab" DataContext="{Binding Senet}">
-                <Border Background="LightGray" BorderThickness="2" CornerRadius="24" BorderBrush="LightBlue">
+                <Border >
                     <hardwareusercontrols:SenetInfoUserControl x:Name="senetInfoUserControl1">
 
                     </hardwareusercontrols:SenetInfoUserControl>
@@ -69,7 +83,7 @@
             </TabItem>
 
             <TabItem Header="Ağ Bilgileri" x:Name="networkTab" DataContext="{Binding NetworkInfo}">
-                <Border Background="LightGray" BorderThickness="2" CornerRadius="12" BorderBrush="LightBlue">
+                <Border >
                     <hardwareusercontrols:NetworkInfoUserControl x:Name="networkUserControl1">
 
                     </hardwareusercontrols:NetworkInfoUserControl>
@@ -88,7 +102,7 @@
         </Grid>
 
 
-        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Background="LightGoldenrodYellow">
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -112,7 +126,8 @@
         <!--<Border CornerRadius="12" Margin="6,4" Grid.RowSpan="2" Grid.Column="0" Background="#FF9DD3F5" TextBlock.FontWeight="Bold">-->
         <GroupBox  Grid.RowSpan="2"
                    TextBlock.FontWeight="Bold"
-                   Grid.Column="0" Margin="2,0" Background="#FF9DD3F5" Header="PC Arama Seçenekleri" FontSize="13" Foreground="Brown">
+                   Grid.Column="0" Margin="2,0" Background="SteelBlue" 
+                   Header="PC Arama Seçenekleri" FontSize="13" Foreground="Brown">
             <Grid Margin="0,0" TextBlock.FontFamily="Tahoma" TextBlock.FontSize="11" TextBlock.Foreground="Black">
 
                 <Grid.ColumnDefinitions>
@@ -127,6 +142,7 @@
                     <RowDefinition Height="32"></RowDefinition>
                     <RowDefinition Height="32"></RowDefinition>
                     <RowDefinition Height="32"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
@@ -173,8 +189,6 @@
                 <TextBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Width="60" x:Name="searchGridPcNameTxtBox"></TextBox>
 
-
-
                 <TextBlock Text="Model" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center">
 
                 </TextBlock>
@@ -182,16 +196,47 @@
                 <TextBox Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Width="60" x:Name="searchGridModelTxtBox"></TextBox>
 
+
+                <Expander TabIndex="9" Header="Monitor Arama Seçenekleri" Foreground="Beige" IsExpanded="True" 
+                                    Margin="2,0,0,0"  Grid.ColumnSpan="4" Grid.Row="7" >
+
+                    <Grid TextBlock.Foreground="Black">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="32"></RowDefinition>
+                            <RowDefinition Height="32"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock Text="Monitor Tipi" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        </TextBlock>
+                        <ComboBox Grid.Column="1" Grid.Row="0"
+                                x:Name="searchGridMonitorTipler"
+                                ItemsSource="{Binding Source={StaticResource dataMonEnum}}"
+                                VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60">
+
+                        </ComboBox>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Marka" Grid.Row="1"></TextBlock>
+                        <ComboBox Grid.Column="1" Grid.Row="1"
+                                x:Name="searchGridMonitorMarkalar"                                
+                                VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"></ComboBox>
+                    </Grid>
+                </Expander>
+
+
                 <Button MinHeight="26"
-                    Click="searchBtn_Click" VerticalAlignment="Bottom" Grid.RowSpan="8"
+                    Click="searchBtn_Click" VerticalAlignment="Bottom" Grid.RowSpan="12"
                     x:Name="searchBtn" Margin="2,12"  Content="Ara"
                     HorizontalAlignment="Center" Width="120" Grid.ColumnSpan="2"></Button>
-
+                
 
 
 
             </Grid>
         </GroupBox>
         <!--</Border>-->
+       
     </Grid>
 </Window>
