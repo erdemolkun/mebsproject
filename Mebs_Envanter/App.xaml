@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:x1="clr-namespace:MEBS_Envanter"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -12,6 +13,12 @@
             <DataTemplate x:Key="deviceDataTemplate">
                 <x1:DeviceEntryControl ></x1:DeviceEntryControl>
             </DataTemplate>
+            <ObjectDataProvider x:Key="dataMonEnum"
+       MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="x1:MonitorTypes"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -41,7 +41,7 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
 
-            <Expander TabIndex="9" Header="Diğer Parçalar" Foreground="DarkBlue" IsExpanded="True"
+            <Expander TabIndex="9" Header="Diğer Parçalar" Foreground="#FF3B0F0F" IsExpanded="True" 
                                     Margin="2,0,0,0" Grid.Row="2" Grid.ColumnSpan="4">
 
                 <ItemsControl  x:Name="hardwareExtraItemsControl"

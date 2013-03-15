@@ -54,7 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BindableRichTextBox.cs" />
+    <Compile Include="GUIHelpers\BindableRichTextBox.cs" />
     <Compile Include="Command\CommandMap.cs" />
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Command\ModelCommand.cs" />
@@ -160,6 +160,10 @@
     <Page Include="Templates\ListBoxDataTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Templates\WindowTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

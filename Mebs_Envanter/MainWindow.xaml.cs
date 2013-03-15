@@ -112,6 +112,13 @@ namespace MEBS_Envanter
             MarkaRepository marka_rep = new MarkaRepository();
             marka_rep.FillMarkalar();
             searchGridMarkalarCombo.ItemsSource = marka_rep.Markalar;
+
+            MarkaRepository marka_rep2 = new MarkaRepository();
+            marka_rep2.FillMarkalar();
+            searchGridMonitorMarkalar.ItemsSource = marka_rep2.Markalar;
+            
+            
+            
         }
 
         private bool AddOrEditPCFunction(bool isEdit)
@@ -275,7 +282,23 @@ namespace MEBS_Envanter
                     list.Add("@marka_id", (searchGridMarkalarCombo.SelectedItem as Marka).MarkaID);
                 }
             }
-                        
+            if (searchGridMonitorTipler.SelectedItem != null) {
+
+                MonitorTypes monTipi = (MonitorTypes)searchGridMonitorTipler.SelectedItem;
+
+                list.Add("@monitor_tipi", (int)monTipi);
+
+            }
+            if (searchGridMonitorMarkalar.SelectedItem != null)
+            {
+                if ((searchGridMonitorMarkalar.SelectedItem as Marka).MarkaID > 0)
+                {
+                    //list.Add("@mon_marka_id", (searchGridMonitorMarkalar.SelectedItem as Marka).MarkaID);
+                }
+            }
+            
+        
+
             list.Add("@alan_kisi_isim", searchGridalanKisiIsimTxtBox.Text.Trim());
             list.Add("@pc_adi", searchGridPcNameTxtBox.Text.Trim());
             list.Add("@model", searchGridModelTxtBox.Text.Trim());
