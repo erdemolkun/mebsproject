@@ -153,7 +153,7 @@ namespace MEBS_Envanter
                 RefreshComputerList(null);
             }
             else {
-                MessageBox.Show("Hata");
+                MessageBox.Show("Hata Oluştu");
             }
         }
 
@@ -225,12 +225,24 @@ namespace MEBS_Envanter
 
         private void pcAddBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddOrEditPCFunction(false);            
+            PCAddCallerFunction(false);            
         }
 
         private void pcEditBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddOrEditPCFunction(true);           
+            PCAddCallerFunction(true);                       
+        }
+
+        private void PCAddCallerFunction(bool isEdit) {
+
+            if (AddOrEditPCFunction(isEdit))
+            {
+
+            }
+            else {
+                MessageBox.Show("Hata Oluştu");
+            }
+            
         }
 
         private void pcDeleteBtn_Click(object sender, RoutedEventArgs e)
@@ -293,7 +305,7 @@ namespace MEBS_Envanter
             {
                 if ((searchGridMonitorMarkalar.SelectedItem as Marka).MarkaID > 0)
                 {
-                    //list.Add("@mon_marka_id", (searchGridMonitorMarkalar.SelectedItem as Marka).MarkaID);
+                    list.Add("@mon_marka_id", (searchGridMonitorMarkalar.SelectedItem as Marka).MarkaID);
                 }
             }
             

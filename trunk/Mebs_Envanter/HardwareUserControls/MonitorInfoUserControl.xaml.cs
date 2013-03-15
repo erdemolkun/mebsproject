@@ -33,7 +33,10 @@ namespace Mebs_Envanter.HardwareUserControls
             inf.SerialNumber = monitorSerialTextBox.Text.Trim().ToString();
             inf.StokNo = monitorStokNoTextBox.Text.Trim().ToString();
             inf.Parca_no = monitorParcaNoTextBox.Text.Trim().ToString();
-            inf.MonType = (MonitorTypes)monitorTiplerCombo.SelectedItem;
+            if (monitorTiplerCombo.SelectedItem != null)
+            {
+                inf.MonType = (MonitorTypes)monitorTiplerCombo.SelectedItem;
+            }
         }
         public void Init() {
 
