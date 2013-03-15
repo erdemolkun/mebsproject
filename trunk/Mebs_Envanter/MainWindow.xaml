@@ -11,9 +11,9 @@
         Title="Bilgisayar Envanter Kaydı" SizeToContent="Height"  ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
-                <GradientStop Color="#FFC7CBCB" Offset="0" />
-                <GradientStop Color="#20646363" Offset="0.99" />
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox">
+                <GradientStop Color="#FF7094BE" Offset="0" />
+                <GradientStop Color="#FFCAF2E8" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -93,12 +93,117 @@
         </TabControl>
 
         <Grid Margin="3"  Background="Transparent" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Margin="0,4" Background="SkyBlue" CornerRadius="6">
+                <TextBlock Text="Bilgisayarlar" Foreground="MintCream"
+                       VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
+                       HorizontalAlignment="Center"></TextBlock>
+            </Border>
+           
             <ListBox x:Name="pcList" 
                  SelectionChanged="pcList_SelectionChanged"                 
                  ItemsSource="{Binding Computers}"
                  ItemContainerStyle="{StaticResource computerInfoListBoxItemStyle}"
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
-                 Grid.Row="1" MinHeight="120"  Background="Transparent"/>
+                 Grid.Row="1" MinHeight="120"  Background="Transparent">
+                <ListBox.Resources>
+                    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF" />
+
+                    
+
+                    <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
+
+                    
+
+                    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
+
+                    
+
+                    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
+                </ListBox.Resources>
+                <ListBox.Style>
+                    <Style  TargetType="ListBox">
+                        <Setter Property="SnapsToDevicePixels" Value="true"/>
+                        <Setter Property="OverridesDefaultStyle" Value="true"/>
+                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                        <Setter Property="MinWidth" Value="120"/>
+                        <Setter Property="MinHeight" Value="95"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border 
+          Name="Border" 
+          Background="{StaticResource WindowBackgroundBrush}"
+          BorderBrush="{StaticResource SolidBorderBrush}"
+          BorderThickness="1"
+          CornerRadius="2">
+                                        <ScrollViewer 
+            Margin="0"
+            Focusable="false">
+                                            <StackPanel Margin="2" IsItemsHost="True" />
+                                        </ScrollViewer>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter TargetName="Border" Property="Background"
+                    Value="{StaticResource DisabledBackgroundBrush}" />
+                                            <Setter TargetName="Border" Property="BorderBrush"
+                    Value="{StaticResource DisabledBorderBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsGrouping" Value="true">
+                                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Style>
+                <!--<ListBox.Style>
+                    <Style  TargetType="ListBox">
+                        <Setter Property="SnapsToDevicePixels" Value="true"/>
+                        <Setter Property="OverridesDefaultStyle" Value="true"/>
+                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                        <Setter Property="MinWidth" Value="120"/>
+                        <Setter Property="MinHeight" Value="95"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border 
+          Name="Border" 
+          Background="Transparent"
+          BorderBrush="Transparent"
+          BorderThickness="1"
+          CornerRadius="2">
+                                        <ScrollViewer 
+            Margin="0"
+            Focusable="false">
+                                            <StackPanel Margin="2" IsItemsHost="True" />
+                                        </ScrollViewer>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                                            <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
+                                        </Trigger>
+                                        <Trigger Property="IsGrouping" Value="true">
+                                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Style>-->
+            </ListBox>
+
         </Grid>
 
 
@@ -124,15 +229,16 @@
         </Grid>
 
         <!--<Border CornerRadius="12" Margin="6,4" Grid.RowSpan="2" Grid.Column="0" Background="#FF9DD3F5" TextBlock.FontWeight="Bold">-->
-        <GroupBox  Grid.RowSpan="2"
-                   TextBlock.FontWeight="Bold"
+        <GroupBox  Grid.RowSpan="2" 
+                   Foreground="FloralWhite" FontWeight="Bold"
                    Grid.Column="0" Margin="2,0" Background="SteelBlue" 
-                   Header="PC Arama Seçenekleri" FontSize="13" Foreground="Brown">
-            <Grid Margin="0,0" TextBlock.FontFamily="Tahoma" TextBlock.FontSize="11" TextBlock.Foreground="Black">
+                   Header="PC Arama Seçenekleri" FontSize="15" >
+            <Grid Margin="0,0" TextBlock.FontFamily="Tahoma" TextBlock.FontWeight="Normal"
+                  TextBlock.FontSize="13" TextBlock.Foreground="Black">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition  ></ColumnDefinition>
+                    <ColumnDefinition Width="*" ></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="32"></RowDefinition>
@@ -147,7 +253,7 @@
                 </Grid.RowDefinitions>
 
 
-                <TextBlock Text="Birlikler" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock HorizontalAlignment="Center" Text="Birlikler" VerticalAlignment="Center" ></TextBlock>
 
                 <ComboBox Grid.Column="1"
                       x:Name="searchGridBirliklerCombo"
@@ -163,7 +269,7 @@
                 <TextBlock Text="Alan Kişinin İsmi" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 
                 <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"
-                     Width="60" x:Name="searchGridalanKisiIsimTxtBox"></TextBox>
+                     MinWidth="120" x:Name="searchGridalanKisiIsimTxtBox"></TextBox>
 
                 <TextBlock Text="Ağlar" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 
@@ -187,13 +293,13 @@
                 </TextBlock>
 
                 <TextBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"
-                     Width="60" x:Name="searchGridPcNameTxtBox"></TextBox>
+                     MinWidth="120" x:Name="searchGridPcNameTxtBox"></TextBox>
 
                 <TextBlock Text="Model" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center">
 
                 </TextBlock>
 
-                <TextBox Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center"
+                <TextBox MinWidth="120" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Width="60" x:Name="searchGridModelTxtBox"></TextBox>
 
 
@@ -209,7 +315,7 @@
                             <RowDefinition Height="32"></RowDefinition>
                             <RowDefinition Height="32"></RowDefinition>
                         </Grid.RowDefinitions>
-                        
+
                         <TextBlock Text="Monitor Tipi" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                         </TextBlock>
                         <ComboBox Grid.Column="1" Grid.Row="0"
@@ -230,13 +336,13 @@
                     Click="searchBtn_Click" VerticalAlignment="Bottom" Grid.RowSpan="12"
                     x:Name="searchBtn" Margin="2,12"  Content="Ara"
                     HorizontalAlignment="Center" Width="120" Grid.ColumnSpan="2"></Button>
-                
+
 
 
 
             </Grid>
         </GroupBox>
         <!--</Border>-->
-       
+
     </Grid>
 </Window>

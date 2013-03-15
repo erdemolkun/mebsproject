@@ -54,7 +54,7 @@ namespace MEBS_Envanter
                     GlobalDataAccess.Set_Current_SQL_Connection(conSql);
                     Current_Computer_Info = new ComputerInfo();
                     setGUIDataContextForInitialization();
-                    RefreshComputerList(null);
+                    RefreshComputerList(null,true);
                     pcList_SelectionChanged(pcList, null);
                     IsEnabled = true;
                     pcList.Focus();
@@ -150,7 +150,7 @@ namespace MEBS_Envanter
             this.IsEnabled = true;
             if ((bool)e.Result)
             {
-                RefreshComputerList(null);
+                RefreshComputerList(null,true);
             }
             else {
                 MessageBox.Show("Hata Oluştu");
@@ -164,24 +164,7 @@ namespace MEBS_Envanter
             e.Result = dbresult;
         }
 
-        private void changeCurrentPCContext(ComputerInfo infComp)
-        {            
-            //Current_Computer_Info = infComp;            
-            //pcEnvanterTabControl.DataContext = Current_Computer_Info;            
-            //generalInfoTab.DataContextChanged += new DependencyPropertyChangedEventHandler(generalInfoTab_DataContextChanged);
-            //monitorTab.DataContextChanged += new DependencyPropertyChangedEventHandler(monitorTab_DataContextChanged);
-        }
-
-        void generalInfoTab_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            TabItem x = sender as TabItem;
-            object xxx = x.DataContext;
-        }
-
-        void monitorTab_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            
-        }
+        
 
         private void setGUIDataContextForInitialization()
         {
@@ -248,11 +231,11 @@ namespace MEBS_Envanter
         private void pcDeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             DBFunctions.DeletePC(Current_Computer_Info);
-            RefreshComputerList(null);
+            RefreshComputerList(null,true);
         }
         private void refreshListBtn_Click(object sender, RoutedEventArgs e)
         {
-            RefreshComputerList(null);
+            RefreshComputerList(null,true);
             //changeCurrentPCContext((pcList.DataContext as ComputerInfoRepository).Computers[0]);
         }
 
@@ -261,7 +244,7 @@ namespace MEBS_Envanter
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            RefreshComputerList(GetParameterListForSearch());
+            RefreshComputerList(GetParameterListForSearch(),false);
         }
 
         private SortedList<String,object> GetParameterListForSearch(){
@@ -318,7 +301,7 @@ namespace MEBS_Envanter
             return list;
         }
 
-        private void RefreshComputerList(SortedList<String,object> parameterList) {
+        private void RefreshComputerList(SortedList<String,object> parameterList,bool selectLast) {
         
             Stopwatch w = Stopwatch.StartNew();
 
@@ -367,7 +350,13 @@ namespace MEBS_Envanter
                 repositoryNew.Computers.Add(tempComputer);
             }
             pcList.DataContext = repositoryNew;
-            pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
+            if (selectLast)
+            {
+                pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
+            }
+            else {
+                pcList.SelectedIndex = -1;
+            }
 
             long x = w.ElapsedMilliseconds;        
         }
