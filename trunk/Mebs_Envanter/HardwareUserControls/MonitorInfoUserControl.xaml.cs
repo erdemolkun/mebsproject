@@ -35,7 +35,13 @@ namespace Mebs_Envanter.HardwareUserControls
             inf.Parca_no = monitorParcaNoTextBox.Text.Trim().ToString();
             if (monitorTiplerCombo.SelectedItem != null)
             {
-                inf.MonType = (MonitorTypes)monitorTiplerCombo.SelectedItem;
+                try
+                {
+                    inf.MonType = (MonitorTypes)monitorTiplerCombo.SelectedItem;
+                }
+                catch (Exception) { 
+                
+                }
             }
         }
         public void Init() {

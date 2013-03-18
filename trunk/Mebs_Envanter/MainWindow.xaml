@@ -6,6 +6,7 @@
         x:Name="mainwin" MaxHeight="640" MinHeight="480" 
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:xceedcontrols="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:converters="clr-namespace:MEBS_Envanter.Converters"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         Title="Bilgisayar Envanter Kaydı" SizeToContent="Height"  ResizeMode="NoResize">
@@ -320,17 +321,26 @@
                         </TextBlock>
                         <ComboBox Grid.Column="1" Grid.Row="0"
                                 x:Name="searchGridMonitorTipler"
-                                ItemsSource="{Binding Source={StaticResource dataMonEnum}}"
+                                
                                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60">
-
+                            <ComboBox.ItemsSource>
+                                <CompositeCollection>
+                                    <sys:String>Hepsi</sys:String>
+                                    <CollectionContainer Collection="{Binding Source={StaticResource dataMonEnum}}"></CollectionContainer>
+                                </CompositeCollection>
+                            </ComboBox.ItemsSource>
                         </ComboBox>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Marka" Grid.Row="1"></TextBlock>
                         <ComboBox Grid.Column="1" Grid.Row="1"
                                 x:Name="searchGridMonitorMarkalar"                                
                                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"></ComboBox>
+
+
+                        
+
                     </Grid>
                 </Expander>
-
+               
 
                 <Button MinHeight="26"
                     Click="searchBtn_Click" VerticalAlignment="Bottom" Grid.RowSpan="12"
