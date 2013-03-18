@@ -279,9 +279,13 @@ namespace MEBS_Envanter
             }
             if (searchGridMonitorTipler.SelectedItem != null) {
 
-                MonitorTypes monTipi = (MonitorTypes)searchGridMonitorTipler.SelectedItem;
-
-                list.Add("@monitor_tipi", (int)monTipi);
+                try
+                {
+                    MonitorTypes monTipi = (MonitorTypes)searchGridMonitorTipler.SelectedItem;
+                    list.Add("@monitor_tipi", (int)monTipi);
+                }
+                catch (Exception) {                 
+                }
 
             }
             if (searchGridMonitorMarkalar.SelectedItem != null)
