@@ -184,9 +184,15 @@ namespace MEBS_Envanter.DB
                     {
                         cmParcaEkleSilDuz.Parameters["@marka_id"].Value = deviceOem.Marka.MarkaID;
                     }
+                    else{
+                        cmParcaEkleSilDuz.Parameters["@marka_id"].Value = null;
+                    }
                     if (deviceOem.Tempest != null && deviceOem.Tempest.Id > 0) {
                         cmParcaEkleSilDuz.Parameters["@tempest_id"].Value = deviceOem.Tempest.Id;
                     
+                    }
+                    else{
+                        cmParcaEkleSilDuz.Parameters["@tempest_id"].Value = null;
                     }
                     cmParcaEkleSilDuz.Parameters["@seri_no"].Value = deviceOem.SerialNumber;
                     cmParcaEkleSilDuz.Parameters["@parca_tipi"].Value = (Int16)deviceOem.DeviceType;
@@ -237,16 +243,25 @@ namespace MEBS_Envanter.DB
                     {
                         cmBilgisayarEkleSilDuz.Parameters["@marka_id"].Value = infoComputer.Marka.MarkaID;
                     }
+                    else {
+                        cmBilgisayarEkleSilDuz.Parameters["@marka_id"].Value = null;
+                    }
                     cmBilgisayarEkleSilDuz.Parameters["@pc_adi"].Value = infoComputer.Pc_adi;
-                    if (infoComputer.NetworkInfo.BagliAg!=null &&
+                    if (infoComputer.NetworkInfo.BagliAg != null &&
                         infoComputer.NetworkInfo.BagliAg.Ag_id > 0)
                     {
                         cmBilgisayarEkleSilDuz.Parameters["@bagli_ag_id"].Value = infoComputer.NetworkInfo.BagliAg.Ag_id;
                     }
-
-                    if (infoComputer.Tempest != null && infoComputer.Tempest.Id > 0) {
+                    else {
+                        cmBilgisayarEkleSilDuz.Parameters["@bagli_ag_id"].Value = null;
+                    }
+                    if (infoComputer.Tempest != null && infoComputer.Tempest.Id > 0)
+                    {
 
                         cmBilgisayarEkleSilDuz.Parameters["@tempest_id"].Value = infoComputer.Tempest.Id;
+                    }
+                    else {
+                        cmBilgisayarEkleSilDuz.Parameters["@tempest_id"].Value = null;
                     }
 
 
@@ -302,6 +317,13 @@ namespace MEBS_Envanter.DB
                         {
                             cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = infoComputer.Senet.Alan_kisi_kisim.Kisim_id;
                         }
+                        else{
+                            cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = null;
+                        }
+                    }
+                    else{
+                        cmSenetEkleDilDuz.Parameters["@alan_kisi_birilk_id"].Value = null;
+                        
                     }
                     cmSenetEkleDilDuz.ExecuteNonQuery();
                     if (!isEdit)

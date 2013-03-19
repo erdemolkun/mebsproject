@@ -45,7 +45,7 @@
 
         <ComboBox x:Name="monitorTiplerCombo" Grid.Row="1" MinWidth="80" 
                                 VerticalAlignment="Center"  Margin="2,2"
-                                SelectedItem="{Binding MonType,UpdateSourceTrigger=Explicit}"                                                                
+                                SelectedItem="{Binding MonType,UpdateSourceTrigger=Explicit,Converter={StaticResource MonitorTypesConverter}}"                                                                
                                 HorizontalAlignment="Center" Grid.Column="1">
 
             <ComboBox.ItemsSource>

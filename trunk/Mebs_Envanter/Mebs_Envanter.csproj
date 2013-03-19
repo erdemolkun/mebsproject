@@ -57,6 +57,7 @@
     <Compile Include="ComputerUserControl.xaml.cs">
       <DependentUpon>ComputerUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\MonitorTypesConverter.cs" />
     <Compile Include="GUIHelpers\BindableRichTextBox.cs" />
     <Compile Include="Command\CommandMap.cs" />
     <Compile Include="Command\DelegateCommand.cs" />

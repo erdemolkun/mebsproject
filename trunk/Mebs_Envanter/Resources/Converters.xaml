@@ -23,5 +23,7 @@
     <converters:StringToFlowDocumentConverter x:Key="StringToFlowDocumentConverter">
         
     </converters:StringToFlowDocumentConverter>
+
+    <converters:MonitorTypesConverter x:Key="MonitorTypesConverter"></converters:MonitorTypesConverter>
     
 </ResourceDictionary>
