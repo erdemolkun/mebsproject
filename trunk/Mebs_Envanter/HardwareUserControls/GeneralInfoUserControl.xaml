@@ -56,7 +56,7 @@
 
 
         <ComboBox x:Name="genelBilgilerTempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,4"                                  
-                                  SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},Mode=OneWay,UpdateSourceTrigger=Explicit}"
+                                  SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
                                   ItemsSource="{Binding TempestSeviyeler}" Grid.Row="6"
                                   HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
 
