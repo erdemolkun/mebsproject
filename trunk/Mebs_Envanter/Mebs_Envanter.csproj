@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ComputerUserControl.xaml.cs">
+      <DependentUpon>ComputerUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUIHelpers\BindableRichTextBox.cs" />
     <Compile Include="Command\CommandMap.cs" />
     <Compile Include="Command\DelegateCommand.cs" />
@@ -92,6 +95,10 @@
     <Compile Include="ViewModels\OemDeviceViewModel.cs" />
     <Compile Include="SerializationTool.cs" />
     <Compile Include="StaticFields.cs" />
+    <Page Include="ComputerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DeviceEntryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

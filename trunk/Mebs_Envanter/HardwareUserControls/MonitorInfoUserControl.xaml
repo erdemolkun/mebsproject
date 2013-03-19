@@ -39,7 +39,7 @@
 
         <ComboBox x:Name="monitorMarkalarCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
                                    SelectedIndex="{Binding Marka,
-                                Converter={StaticResource MarkaComboIndexConverter},Mode=OneWay}"
+                                 Converter ={StaticResource MarkaComboIndexConverter},Mode=OneWay}"
                                   ItemsSource="{Binding Markalar}" 
                                   HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
 
