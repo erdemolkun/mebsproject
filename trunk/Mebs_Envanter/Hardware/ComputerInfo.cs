@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using MEBS_Envanter.DB;
 using Mebs_Envanter;
 using Mebs_Envanter.GeneralObjects;
+using Mebs_Envanter.DB;
 
 namespace MEBS_Envanter
 {
@@ -20,24 +21,32 @@ namespace MEBS_Envanter
         {
             Id = (int)rowPC["bilgisayar_id"];
 
-            int markaid = -1;
-            try { markaid = (int)rowPC["marka_id"]; if (markaid < 0)markaid = -1; }
-            catch (Exception) { }
+            int markaid = DBValueHelpers.GetInt32(rowPC["marka_id"].ToString(), -1);
+            //if (!String.IsNullOrEmpty(rowPC["marka_id"].ToString())) {
+            //    markaid = (int)rowPC["marka_id"];
+            //}
+            //try {
+            //    bool x = String.IsNullOrEmpty(rowPC["marka_id"].ToString());
+            //    int deneme = -1;
+            //    Int32.TryParse(rowPC["marka_id"].ToString(), out deneme);
+            //    //markaid = (int)rowPC["marka_id"]; if (markaid < 0)markaid = -1;
+            //}
+            //catch (Exception) {
+            //}
 
             Marka = new Marka(markaid, "");
 
-            int bagli_ag_id = -1;
-            try { bagli_ag_id = (int)rowPC["bagli_ag_id"]; if (bagli_ag_id < 0)bagli_ag_id = -1; }
-            catch (Exception) { }
+            
+            int bagli_ag_id = DBValueHelpers.GetInt32(rowPC["bagli_ag_id"].ToString(), -1);
+           
+
             NetworkInfo.BagliAg = new BagliAg("", bagli_ag_id);
 
 
-            int tempest_id = -1;
-            try { tempest_id = (int)rowPC["tempest_id"]; if (tempest_id < 0)tempest_id = -1; }
-            catch (Exception) { }
-
+            int tempest_id = DBValueHelpers.GetInt32(rowPC["tempest_id"].ToString(), -1);
+           
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
-            
+
 
             Pc_adi = rowPC["pc_adi"].ToString(); ;
             PcStokNo = rowPC["pc_stok_no"].ToString();
@@ -77,17 +86,15 @@ namespace MEBS_Envanter
                 // int monitorTipi = Convert.ToInt32( rowMonitor["monitor_tipi"]);
                 String stok_no = rowMonitor["stok_no"].ToString();
                 int mon_id = (int)rowMonitor["monitor_id"];
-                try
+                //try
+                //{
+                int mon_type = DBValueHelpers.GetInt32(rowMonitor["monitor_tipi"], -1);
+               
+                if (mon_type > 0)
                 {
-                    int mon_type = Convert.ToInt32(rowMonitor["monitor_tipi"]);
-                    if (mon_type > 0)
-                    {
-                        (devOem as Monitor).MonType = (MonitorTypes)mon_type;
-                    }
+                    (devOem as Monitor).MonType = (MonitorTypes)mon_type;
                 }
-                catch (Exception) { 
                 
-                }
                 (devOem as Monitor).StokNo = stok_no;
                 (devOem as Monitor).Mon_id = mon_id;
                 //(devOem as Monitor).DeviceNo = 
@@ -126,13 +133,9 @@ namespace MEBS_Envanter
                 Senet.Alan_kisi_rutbe = alan_kisi_rutbe;
                 Senet.Veren_kisi_isim = veren_kisi_isim;
 
-                int alanKisiBirlikId = -1;
-                try { alanKisiBirlikId = Convert.ToInt32(rowParca["alan_kisi_birilk_id"]); }
-                catch (Exception) { }
-
-                int alanKisiKisimId = -1;
-                try { alanKisiKisimId = Convert.ToInt32(rowParca["alan_kisi_kisim_id"]); }
-                catch (Exception) { }
+                int alanKisiBirlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_birilk_id"], -1);              
+                int alanKisiKisimId = DBValueHelpers.GetInt32(rowParca["alan_kisi_kisim_id"], -1);
+              
 
                 Senet.Alan_kisi_birlik = new Birlik(alanKisiBirlikId, "");
                 Senet.Alan_kisi_kisim = new Kisim(alanKisiKisimId, "");
@@ -172,17 +175,11 @@ namespace MEBS_Envanter
                 String parca_tanimi = rowParca["parca_tanimi"].ToString();
                 String parca_no = rowParca["parca_no"].ToString();
 
-                int markaid = -1;
-                try { 
-                    markaid = (int)rowParca["marka_id"]; 
-                }
-                catch (Exception) { }
+                int markaid = DBValueHelpers.GetInt32(rowParca["marka_id"], -1);
+               
 
-                int tempestid = -1;
-                try { 
-                    tempestid = (int)rowParca["tempest_id"];
-                }
-                catch (Exception) { }
+                int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
+               
 
                 if (tip == DeviceTypes.MONITOR)
                 {
@@ -190,8 +187,8 @@ namespace MEBS_Envanter
                     mon.Id = parca_id;
                     mon.SerialNumber = seri_no;
                     mon.Parca_no = parca_no;
-                    mon.Marka = new Marka(markaid, "");                    
-                    mon.Tempest = new Tempest(tempestid,"");
+                    mon.Marka = new Marka(markaid, "");
+                    mon.Tempest = new Tempest(tempestid, "");
                     Set_MonitorInfo(mon);
                     MonitorInfo = mon;
                 }
@@ -199,7 +196,7 @@ namespace MEBS_Envanter
                 {
                     OEMDevice devOem = new OEMDevice(tip);
                     devOem.Id = parca_id;
-                    devOem.Marka = new Marka(markaid,"");
+                    devOem.Marka = new Marka(markaid, "");
                     devOem.SerialNumber = seri_no;
                     devOem.Parca_no = parca_no;
                     devOem.DeviceInfo = parca_tanimi;
@@ -210,19 +207,21 @@ namespace MEBS_Envanter
         }
 
         public ComputerInfo()
-        {            
+        {
             NetworkInfo = new NetworkInfo();
             MonitorInfo = new Monitor();
             Senet = new SenetInfo();
             EklenmeTarihi = new DateTime(2010, 9, 12);
         }
 
-        internal OEMDevice Get_OemDevice(DeviceTypes devType) {
+        internal OEMDevice Get_OemDevice(DeviceTypes devType)
+        {
 
             foreach (var item in OemDevicesVModel.OemDevices)
             {
-                if (item.DevOem.DeviceType == devType) {
-                    return item.DevOem as OEMDevice; 
+                if (item.DevOem.DeviceType == devType)
+                {
+                    return item.DevOem as OEMDevice;
                 }
             }
             foreach (var item in OemDevicesVModel.OemDevicesExtra)
@@ -237,7 +236,8 @@ namespace MEBS_Envanter
 
         #region All Properties
 
-        public IEnumerable<OEMDevice> GetOemDevices() {
+        public IEnumerable<OEMDevice> GetOemDevices()
+        {
 
             foreach (var item in OemDevicesVModel.OemDevices)
             {
@@ -250,12 +250,15 @@ namespace MEBS_Envanter
         }
 
 
-        private OemDevicesViewModel oemDevicesVModel=new OemDevicesViewModel();
+        private OemDevicesViewModel oemDevicesVModel = new OemDevicesViewModel();
         public OemDevicesViewModel OemDevicesVModel
         {
             get { return oemDevicesVModel; }
-            set { oemDevicesVModel = value; 
-                OnPropertyChanged("OemDevicesVModel"); }
+            set
+            {
+                oemDevicesVModel = value;
+                OnPropertyChanged("OemDevicesVModel");
+            }
         }
 
         private NetworkInfo networkInfo;
