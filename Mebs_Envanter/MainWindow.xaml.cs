@@ -262,10 +262,7 @@ namespace MEBS_Envanter
                 {
                     list.Add("@mon_marka_id", (searchGridMonitorMarkalar.SelectedItem as Marka).MarkaID);
                 }
-            }
-            
-        
-
+            }                    
             list.Add("@alan_kisi_isim", searchGridalanKisiIsimTxtBox.Text.Trim());
             list.Add("@pc_adi", searchGridPcNameTxtBox.Text.Trim());
             list.Add("@model", searchGridModelTxtBox.Text.Trim());
@@ -330,7 +327,8 @@ namespace MEBS_Envanter
                 pcList.SelectedIndex = -1;
             }
 
-            long x = w.ElapsedMilliseconds;        
+            long x = w.ElapsedMilliseconds;
+            Console.WriteLine("Bilgisayar listesi " + x + " milisaniye içinde yenilendi");
         }
     }
 }
