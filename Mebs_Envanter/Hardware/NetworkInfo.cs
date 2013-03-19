@@ -21,19 +21,19 @@ namespace MEBS_Envanter
 
         }
 
-        private String connectedNetworkName;
-        /// <summary>
-        /// Bağlı Bulunduğu Ağ
-        /// </summary>
-        public String ConnectedNetworkName
-        {
-            get { return connectedNetworkName; }
-            set
-            {
-                connectedNetworkName = value;
-                OnPropertyChanged("ConnectedNetworkName");
-            }
-        }
+        //private String connectedNetworkName;
+        ///// <summary>
+        ///// Bağlı Bulunduğu Ağ
+        ///// </summary>
+        //public String ConnectedNetworkName
+        //{
+        //    get { return connectedNetworkName; }
+        //    set
+        //    {
+        //        connectedNetworkName = value;
+        //        OnPropertyChanged("ConnectedNetworkName");
+        //    }
+        //}
 
 
         private BagliAg bagliAg = new BagliAg("", -1);

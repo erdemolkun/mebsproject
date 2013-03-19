@@ -27,8 +27,7 @@ namespace MEBS_Envanter.Converters
             else
             {
                 return -1;
-            }
-            
+            }            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

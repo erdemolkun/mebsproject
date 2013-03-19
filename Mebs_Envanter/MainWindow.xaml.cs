@@ -211,7 +211,8 @@ namespace MEBS_Envanter
             list.ScrollIntoView(infComp);
             Current_Computer_Info = infComp;
             //pcEnvanterTabControl.DataContext = Current_Computer_Info;
-            pcEnvanterControl.DataContext = Current_Computer_Info;
+            //pcEnvanterControl.DataContext = Current_Computer_Info;
+            pcEnvanterControl.SetDataContext(Current_Computer_Info);
             //changeCurrentPCContext(list.SelectedItem as ComputerInfo );
         }
 
