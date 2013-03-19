@@ -54,7 +54,7 @@
             <TabItem Header="Senet" x:Name="senetTab" >
                 <Border >
                     <hardwareusercontrols:SenetInfoUserControl x:Name="senetInfoUserControl1" 
-                                                               DataContext="{Binding Path=Senet,Mode=Default,UpdateSourceTrigger=Explicit}">
+                                                               DataContext="{Binding Path=Senet}">
 
                     </hardwareusercontrols:SenetInfoUserControl>
                 </Border>
