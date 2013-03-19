@@ -2,8 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:guihelpers="clr-namespace:MEBS_Envanter.GUIHelpers"             >
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xceed ="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
+             xmlns:guihelpers="clr-namespace:MEBS_Envanter.GUIHelpers">
     <Grid TextBlock.FontWeight="Bold" Margin="2,0">
         
         <Grid.Resources>
@@ -18,10 +19,12 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+           
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            
         </Grid.ColumnDefinitions>
 
 
@@ -38,8 +41,11 @@
         <guihelpers:MacMaskedTextBox VerticalAlignment="Center"
                             Mask="aa:aa:aa:aa:aa:aa" x:Name="pcMacAddressTextBox"
                             Text="{Binding MacAddressString,UpdateSourceTrigger=Explicit}"  
-                             Margin="2,2" Grid.Column="1" Grid.Row="1" 
-                            ></guihelpers:MacMaskedTextBox>
+                            Margin="2,2" Grid.Column="1" Grid.Row="1" ></guihelpers:MacMaskedTextBox>
+
+        <!--<xceed:MaskedTextBox Grid.Column="1" 
+                             VerticalAlignment="Center"
+                             Grid.Row="2"></xceed:MaskedTextBox>-->
 
         <!--<TextBox Text="{Binding MacAddressString}"  ></TextBox>-->
 

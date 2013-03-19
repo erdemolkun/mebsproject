@@ -11,7 +11,7 @@ namespace MEBS_Envanter.GUIHelpers
     {
 
         protected override void OnPreviewTextInput(System.Windows.Input.TextCompositionEventArgs e)
-        {
+        {            
             String x = e.Text;
             Regex pattern = new Regex(@"^(\d|[a-f]|[A-F])+$");
             e.Handled = pattern.IsMatch(x) == false;
