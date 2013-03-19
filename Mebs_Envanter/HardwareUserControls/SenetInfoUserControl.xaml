@@ -36,7 +36,8 @@
         <ComboBox Grid.Column="1" MinWidth="60" 
                                 x:Name="senetRutbelerCombo"
                                 VerticalAlignment="Center"
-                                SelectedIndex="{Binding Alan_kisi_rutbe,Converter={StaticResource RutbeComboIndexConverter},Mode=OneWay}"
+                                SelectedIndex="{Binding Alan_kisi_rutbe,
+                                Converter={StaticResource RutbeComboIndexConverter},UpdateSourceTrigger=Explicit}"
                                 HorizontalAlignment="Center" 
                                 ItemsSource="{Binding Source={x:Static x1:StaticFields.rutbeler}}">
 
@@ -44,21 +45,21 @@
 
         <TextBox x:Name="senetAlamIsimTextBox"
                             VerticalAlignment="Center"
-                            Text="{Binding Alan_kisi_isim}"  Grid.Column="1" Grid.Row="1"  Margin="2"></TextBox>
+                            Text="{Binding Alan_kisi_isim,UpdateSourceTrigger=Explicit}"  Grid.Column="1" Grid.Row="1"  Margin="2"></TextBox>
 
 
         <ComboBox SelectionChanged="senetBirlikCombo_SelectionChanged"
                                   VerticalAlignment="Center" 
-                                  SelectedIndex="{Binding Alan_kisi_birlik,Converter={StaticResource BirlikComboIndexConverter},Mode=OneWay}" 
+                                  SelectedIndex="{Binding Alan_kisi_birlik,Converter={StaticResource BirlikComboIndexConverter},UpdateSourceTrigger=Explicit}" 
                                   x:Name="senetBirlikCombo" ItemsSource="{Binding Birlikler}"
                                   MinWidth="60" Margin="2"  Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2"></ComboBox>
 
         <ComboBox VerticalAlignment="Center" 
                             ItemsSource="{Binding Kisimlar}" x:Name="senetKisimCombo"
-                            SelectedIndex="{Binding Alan_kisi_kisim,Converter={StaticResource KisimComboIndexConverter},Mode=OneWay}" 
+                            SelectedIndex="{Binding Alan_kisi_kisim,Converter={StaticResource KisimComboIndexConverter},UpdateSourceTrigger=Explicit}" 
                             MinWidth="60" Margin="2" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3"></ComboBox>
-        
-        <TextBox Text="{Binding Veren_kisi_isim}" Grid.Column="1" Grid.Row="4" Margin="2"
+
+        <TextBox Text="{Binding Veren_kisi_isim,UpdateSourceTrigger=Explicit}" Grid.Column="1" Grid.Row="4" Margin="2"
                                  VerticalAlignment="Center" x:Name="senetVerenKisiTextBox"></TextBox>
     </Grid>
 </UserControl>
