@@ -39,13 +39,13 @@
 
         <ComboBox x:Name="monitorMarkalarCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
                                    SelectedIndex="{Binding Marka,
-                                   Converter ={StaticResource MarkaComboIndexConverter},Mode=OneWay,UpdateSourceTrigger=Explicit}"
+                                   Converter ={StaticResource MarkaComboIndexConverter},UpdateSourceTrigger=Explicit}"
                                    ItemsSource="{Binding Markalar}" 
                                   HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
 
         <ComboBox x:Name="monitorTiplerCombo" Grid.Row="1" MinWidth="80" 
                                 VerticalAlignment="Center"  Margin="2,2"
-                                SelectedItem="{Binding MonType,Mode=OneWay,UpdateSourceTrigger=Explicit}"                                                                
+                                SelectedItem="{Binding MonType,UpdateSourceTrigger=Explicit}"                                                                
                                 HorizontalAlignment="Center" Grid.Column="1">
 
             <ComboBox.ItemsSource>
