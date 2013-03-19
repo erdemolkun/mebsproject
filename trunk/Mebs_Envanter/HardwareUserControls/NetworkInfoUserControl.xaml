@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:guihelpers="clr-namespace:MEBS_Envanter.GUIHelpers"             >
-    <Grid  TextBlock.FontWeight="Bold">
+    <Grid TextBlock.FontWeight="Bold">
+        
         <Grid.Resources>
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="VerticalAlignment" Value="Center"></Setter>
@@ -12,10 +13,8 @@
                 <Setter Property="FontSize" Value="12"></Setter>
                 <Setter Property="Foreground" Value="black"></Setter>
                 <Setter Property="MaxHeight" Value="20"></Setter>
-
             </Style>
         </Grid.Resources>
-
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -30,16 +29,15 @@
 
         <TextBlock Grid.Column="0" Grid.Row="1" Text="MAC"></TextBlock>
 
-
         <ComboBox VerticalAlignment="Center"                            
-                            SelectedIndex="{Binding BagliAg,
-                            Converter={StaticResource BagliAgComboIndexConverter},Mode=OneWay}"                             
+                            SelectedIndex="{Binding Path=BagliAg,
+                            Converter={StaticResource BagliAgComboIndexConverter},UpdateSourceTrigger=Explicit}"                             
                             ItemsSource="{Binding BagliAglar}" x:Name="bagliAgCombo" 
                             MinWidth="60" Margin="2" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"></ComboBox>
 
         <guihelpers:MacMaskedTextBox VerticalAlignment="Center"
                             Mask="aa:aa:aa:aa:aa:aa" x:Name="pcMacAddressTextBox"
-                            Text="{Binding MacAddressString}"  
+                            Text="{Binding MacAddressString,UpdateSourceTrigger=Explicit}"  
                              Margin="2,2" Grid.Column="1" Grid.Row="1" 
                             ></guihelpers:MacMaskedTextBox>
 

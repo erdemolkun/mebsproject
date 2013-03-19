@@ -27,16 +27,13 @@ namespace Mebs_Envanter.HardwareUserControls
         }
         public void SetNetworkInfo(NetworkInfo inf) {
             inf.MacAddressString = pcMacAddressTextBox.Text.Trim().ToString();
-            inf.BagliAg = bagliAgCombo.SelectedItem as BagliAg;
-            
+            inf.BagliAg = bagliAgCombo.SelectedItem as BagliAg;            
         }
         public void Init() {
 
-
             // Bağlı Olduğu Ağlar arayüze atanıyor
             BagliAgRepository repoBagliAglar = new BagliAgRepository();
-            repoBagliAglar.Fill_Aglar();
-            //bagliAgCombo.DataContext = repoBagliAglar;
+            repoBagliAglar.Fill_Aglar();            
             bagliAgCombo.ItemsSource = repoBagliAglar.BagliAglar;
             BagliAgRepository.INSTANCE = repoBagliAglar;
         }

@@ -49,13 +49,18 @@ namespace Mebs_Envanter
             }
         }
 
-
         public void Init() {
 
             monitorUserControl1.Init();
             generalInfoUserControl1.Init();
             senetInfoUserControl1.Init();
             networkUserControl1.Init();
+        }
+
+        public void SetDataContext(object context) {
+
+            pcEnvanterTabControl.DataContext = context;
+            //networkUserControl1.DataContext = (context as ComputerInfo).NetworkInfo;
         }
     }
 }

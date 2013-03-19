@@ -6,8 +6,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:MEBS_Envanter.Converters"
              xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
-             mc:Ignorable="d" 
-             
+             mc:Ignorable="d"              
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <TabControl  Grid.Column="2" x:Name="pcEnvanterTabControl">
@@ -39,34 +38,33 @@
                 <Border >
                     <hardwareusercontrols:OemDevicesUserControl DataContext="{Binding OemDevicesVModel}"
                     x:Name="oemDeviceUserControl1" >
-                    </hardwareusercontrols:OemDevicesUserControl>
-                    <!--<hardwareusercontrols:OemDevicesUserControl
-                    x:Name="oemDeviceUserControl1" >
-                    </hardwareusercontrols:OemDevicesUserControl>-->
+                    </hardwareusercontrols:OemDevicesUserControl>                    
                 </Border>
             </TabItem>
 
-            <TabItem Header="Monitor" x:Name="monitorTab" DataContext="{Binding MonitorInfo}">
+            <TabItem Header="Monitor" x:Name="monitorTab" >
                 <Border >
-                    <hardwareusercontrols:MonitorInfoUserControl x:Name="monitorUserControl1">
+                    <hardwareusercontrols:MonitorInfoUserControl x:Name="monitorUserControl1" DataContext="{Binding MonitorInfo}">
 
                     </hardwareusercontrols:MonitorInfoUserControl>
 
                 </Border>
             </TabItem>
 
-            <TabItem Header="Senet" x:Name="senetTab" DataContext="{Binding Senet}">
+            <TabItem Header="Senet" x:Name="senetTab" >
                 <Border >
-                    <hardwareusercontrols:SenetInfoUserControl x:Name="senetInfoUserControl1">
+                    <hardwareusercontrols:SenetInfoUserControl x:Name="senetInfoUserControl1" 
+                                                               DataContext="{Binding Path=Senet,Mode=Default,UpdateSourceTrigger=Explicit}">
 
                     </hardwareusercontrols:SenetInfoUserControl>
                 </Border>
             </TabItem>
 
-            <TabItem Header="Ağ Bilgileri" x:Name="networkTab" DataContext="{Binding NetworkInfo}">
-                <Border >
-                    <hardwareusercontrols:NetworkInfoUserControl x:Name="networkUserControl1">
-
+            <TabItem Header="Ağ Bilgileri" x:Name="networkTab" >
+                <Border>
+                    <hardwareusercontrols:NetworkInfoUserControl 
+                        DataContext="{Binding Path=NetworkInfo,Mode=OneWay,UpdateSourceTrigger=Explicit}" 
+                        x:Name="networkUserControl1">
                     </hardwareusercontrols:NetworkInfoUserControl>
                 </Border>
             </TabItem>
