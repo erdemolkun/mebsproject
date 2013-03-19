@@ -6,7 +6,7 @@
     <UserControl.Resources>
         <x2:OemDevicesViewModel x:Key="oemViewModel"></x2:OemDevicesViewModel>
     </UserControl.Resources>
-    <Grid TextBlock.FontWeight="Bold" Margin="2,0">
+    <Grid TextBlock.FontWeight="Bold" Margin="2,0" >
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -18,7 +18,8 @@
         </Grid.RowDefinitions>
 
         <!--Body-->
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,2,0,0" x1:GridUtils.RowDefinitions="20,Auto,Auto">
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,2,0,0" 
+              x1:GridUtils.RowDefinitions="20,Auto,Auto">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="12*"/>
