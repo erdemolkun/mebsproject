@@ -57,7 +57,7 @@
         </ComboBox>
 
         <ComboBox x:Name="monitorTempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
-                                  SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},Mode=OneWay,UpdateSourceTrigger=Explicit}"
+                                  SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
                                   ItemsSource="{Binding TempestSeviyeler}" Grid.Row="5"
                                   HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
 
