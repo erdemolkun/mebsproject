@@ -52,12 +52,7 @@
                  ItemContainerStyle="{StaticResource computerInfoListBoxItemStyle}"
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
                  Grid.Row="1" MinHeight="120"  Background="Transparent">
-                <!--<ListBox.Resources>
-                    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF" />                    
-                    <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />                    
-                    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />                    
-                    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
-                </ListBox.Resources>
+                
                 <ListBox.Style>
                     <Style  TargetType="ListBox">
                         <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -65,68 +60,22 @@
                         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
                         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
                         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-                        <Setter Property="MinWidth" Value="120"/>
-                        <Setter Property="MinHeight" Value="95"/>
+                        <Setter Property="MinWidth" Value="90"/>
+                        <Setter Property="MinHeight" Value="80"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBox">
-                                    <Border 
-          Name="Border" 
-          Background="{StaticResource WindowBackgroundBrush}"
-          BorderBrush="{StaticResource SolidBorderBrush}"
-          BorderThickness="1"
-          CornerRadius="2">
-                                        <ScrollViewer 
-            Margin="0"
-            Focusable="false">
-                                            <StackPanel Margin="2" IsItemsHost="True" />
+                                    <Border Name="Border" Background="Transparent" BorderBrush="#FF382727" 
+                                            BorderThickness="2" CornerRadius="4">
+                                        <ScrollViewer Margin="0" Focusable="false">
+                                            <StackPanel Margin="2,0" IsItemsHost="True" />
                                         </ScrollViewer>
                                     </Border>
                                     <ControlTemplate.Triggers>
-                                        <Trigger Property="IsEnabled" Value="false">
-                                            <Setter TargetName="Border" Property="Background"
-                    Value="{StaticResource DisabledBackgroundBrush}" />
-                                            <Setter TargetName="Border" Property="BorderBrush"
-                    Value="{StaticResource DisabledBorderBrush}" />
-                                        </Trigger>
-                                        <Trigger Property="IsGrouping" Value="true">
-                                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.Style>-->
-                <ListBox.Style>
-                    <Style  TargetType="ListBox">
-                        <Setter Property="SnapsToDevicePixels" Value="true"/>
-                        <Setter Property="OverridesDefaultStyle" Value="true"/>
-                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-                        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-                        <Setter Property="MinWidth" Value="120"/>
-                        <Setter Property="MinHeight" Value="95"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBox">
-                                    <Border 
-          Name="Border" 
-          Background="Transparent"
-          BorderBrush="Transparent"
-          BorderThickness="1"
-          CornerRadius="2">
-                                        <ScrollViewer 
-            Margin="0"
-            Focusable="false">
-                                            <StackPanel Margin="2" IsItemsHost="True" />
-                                        </ScrollViewer>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsEnabled" Value="false">
+                                        <!--<Trigger Property="IsEnabled" Value="false">
                                             <Setter TargetName="Border" Property="Background" Value="Transparent" />
                                             <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
-                                        </Trigger>
+                                        </Trigger>-->
                                         <Trigger Property="IsGrouping" Value="true">
                                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
                                         </Trigger>
@@ -268,24 +217,17 @@
                                 x:Name="searchGridMonitorMarkalar"                                
                                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"></ComboBox>
 
-
-                        
-
                     </Grid>
                 </Expander>
                
-
                 <Button MinHeight="26"
                     Click="searchBtn_Click" VerticalAlignment="Bottom" Grid.RowSpan="12"
                     x:Name="searchBtn" Margin="2,12"  Content="Ara"
                     HorizontalAlignment="Center" Width="120" Grid.ColumnSpan="2"></Button>
 
 
-
-
             </Grid>
-        </GroupBox>
-        <!--</Border>-->
+        </GroupBox>        
 
     </Grid>
 </Window>
