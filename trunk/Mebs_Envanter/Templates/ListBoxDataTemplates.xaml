@@ -3,8 +3,7 @@
     
 
     <ControlTemplate TargetType="ListBoxItem" x:Key="computerInfoListBoxItemTemplate">
-        <Grid Background="Transparent" Margin="0" Name="mainGrid">
-            
+        <Grid Background="Transparent" Margin="0" Name="mainGrid">            
             <Border Name="ItemBorder" CornerRadius="3" Margin="6,3" Background="Transparent"
                 BorderBrush="Wheat" BorderThickness="1" >
                 <ContentPresenter         
@@ -20,7 +19,7 @@
                         </SolidColorBrush>
                     </Setter.Value>
                 </Setter>
-                <Setter TargetName="ItemBorder" Property="Margin" Value="3,3" />
+                <Setter TargetName="ItemBorder" Property="Margin" Value="0,3" />
                 <Setter TargetName="ItemBorder" Property="BorderBrush" Value="transparent" />
                 <Setter TargetName="mainGrid" Property="Grid.BitmapEffect">
                     <Setter.Value>
@@ -58,7 +57,7 @@
     </Style>
 
     <DataTemplate x:Key="computerInfoListboxDataTemplate">
-        <Grid Margin="2" >             
+        <Grid Margin="2" Name="mainGrid">             
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -100,6 +99,7 @@
                 <Setter TargetName="pcAdiTxtBlock" Property="FontWeight" Value="Bold"/>
                 <Setter TargetName="alanKisiGrid" Property="Visibility" Value="Visible"/>
                 <Setter TargetName="birlikGrid" Property="Visibility" Value="Visible"/>
+                
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>

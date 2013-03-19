@@ -66,33 +66,7 @@ namespace MEBS_Envanter
                 }
             }));
         }
-        
-        //private void Assign_ComputerInfo_By_GUI(ComputerInfo computerInfo, bool isEdit)
-        //{
-        //    generalInfoUserControl1.SetGeneralInfo(computerInfo);
-        //    networkUserControl1.SetNetworkInfo(computerInfo.NetworkInfo);
-
-        //    monitorUserControl1.SetMonitorInfo(computerInfo.MonitorInfo);
-        //    senetInfoUserControl1.SetSenetInfo(computerInfo.Senet);
-
-        //    // OEM Parçaların Bilgileri            
-        //    oemDeviceUserControl1.SetOemDevicesInfo(computerInfo);
-
-        //    if (isEdit)
-        //    {
-        //        ComputerInfo tempC = Current_Computer_Info;
-        //        computerInfo.Id = tempC.Id;
-        //        computerInfo.MonitorInfo.Id = tempC.MonitorInfo.Id;
-        //        computerInfo.MonitorInfo.Mon_id = tempC.MonitorInfo.Mon_id;
-        //        computerInfo.Senet.Id = tempC.Senet.Id;
-        //        foreach (OEMDevice item in tempC.GetOemDevices())
-        //        {
-        //            computerInfo.Get_OemDevice(item.DeviceType).Id = item.Id;
-        //        }
-        //    }
-
-        //}
-
+       
         private void SetContextForSearchFields() {
 
             // Birlikler arayüze atanıyor
@@ -123,16 +97,8 @@ namespace MEBS_Envanter
         {
             try
             {
-                ComputerInfo freshComputerInfo = new ComputerInfo();
-                //Assign_ComputerInfo_By_GUI(freshComputerInfo, isEdit);
-
-
-
-
+                ComputerInfo freshComputerInfo = new ComputerInfo();                
                 pcEnvanterControl.Assign_ComputerInfo_By_GUI(Current_Computer_Info, freshComputerInfo, isEdit);
-
-
-
                 freshComputerInfo.IsEdit = isEdit;
 
                 BackgroundWorker worker = new BackgroundWorker();
@@ -169,18 +135,10 @@ namespace MEBS_Envanter
             bool dbresult = DBFunctions.InsertOrUpdateComputerInfo(freshComputerInfo, freshComputerInfo.IsEdit);
             e.Result = dbresult;
         }
-
         
-
         private void setGUIDataContextForInitialization()
-        {
-            /*monitorUserControl1.Init();
-            generalInfoUserControl1.Init();
-            senetInfoUserControl1.Init();
-            networkUserControl1.Init();*/
-
+        {           
             pcEnvanterControl.Init();
-
             SetContextForSearchFields();
         }
 
