@@ -111,12 +111,14 @@
                      Name="refreshListBtn"  Click="refreshListBtn_Click" />
         </Grid>
 
-        <!--<Border CornerRadius="12" Margin="6,4" Grid.RowSpan="2" Grid.Column="0" Background="#FF9DD3F5" TextBlock.FontWeight="Bold">-->
+        <!--<Border CornerRadius="12" Margin="6,4" Grid.RowSpan="2" 
+                Grid.Column="0" Background="#FF9DD3F5" TextBlock.FontWeight="Bold">-->
         <GroupBox  Grid.RowSpan="2" TextBlock.Foreground="FloralWhite"
                    Foreground="FloralWhite" FontWeight="Bold"
-                   Grid.Column="0" Margin="2,0" Background="SteelBlue" 
+                   Grid.Column="0" Margin="2,0" 
                    Header="PC Arama Seçenekleri" FontSize="15" >
-            <Grid Margin="0,0" TextBlock.FontFamily="Tahoma" TextBlock.FontWeight="Normal"
+            <Border CornerRadius="4" Background="SteelBlue">
+            <Grid Margin="0,0"  TextBlock.FontFamily="Tahoma" TextBlock.FontWeight="Normal"
                   TextBlock.FontSize="13" TextBlock.Foreground="Black">
 
                 <Grid.ColumnDefinitions>
@@ -227,6 +229,7 @@
 
 
             </Grid>
+            </Border>
         </GroupBox>        
 
     </Grid>
