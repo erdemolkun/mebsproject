@@ -67,31 +67,31 @@ namespace MEBS_Envanter
             }));
         }
         
-        private void Assign_ComputerInfo_By_GUI(ComputerInfo computerInfo, bool isEdit)
-        {
-            generalInfoUserControl1.SetGeneralInfo(computerInfo);
-            networkUserControl1.SetNetworkInfo(computerInfo.NetworkInfo);
+        //private void Assign_ComputerInfo_By_GUI(ComputerInfo computerInfo, bool isEdit)
+        //{
+        //    generalInfoUserControl1.SetGeneralInfo(computerInfo);
+        //    networkUserControl1.SetNetworkInfo(computerInfo.NetworkInfo);
 
-            monitorUserControl1.SetMonitorInfo(computerInfo.MonitorInfo);
-            senetInfoUserControl1.SetSenetInfo(computerInfo.Senet);
+        //    monitorUserControl1.SetMonitorInfo(computerInfo.MonitorInfo);
+        //    senetInfoUserControl1.SetSenetInfo(computerInfo.Senet);
 
-            // OEM Parçaların Bilgileri            
-            oemDeviceUserControl1.SetOemDevicesInfo(computerInfo);
+        //    // OEM Parçaların Bilgileri            
+        //    oemDeviceUserControl1.SetOemDevicesInfo(computerInfo);
 
-            if (isEdit)
-            {
-                ComputerInfo tempC = Current_Computer_Info;
-                computerInfo.Id = tempC.Id;
-                computerInfo.MonitorInfo.Id = tempC.MonitorInfo.Id;
-                computerInfo.MonitorInfo.Mon_id = tempC.MonitorInfo.Mon_id;
-                computerInfo.Senet.Id = tempC.Senet.Id;
-                foreach (OEMDevice item in tempC.GetOemDevices())
-                {
-                    computerInfo.Get_OemDevice(item.DeviceType).Id = item.Id;
-                }
-            }
+        //    if (isEdit)
+        //    {
+        //        ComputerInfo tempC = Current_Computer_Info;
+        //        computerInfo.Id = tempC.Id;
+        //        computerInfo.MonitorInfo.Id = tempC.MonitorInfo.Id;
+        //        computerInfo.MonitorInfo.Mon_id = tempC.MonitorInfo.Mon_id;
+        //        computerInfo.Senet.Id = tempC.Senet.Id;
+        //        foreach (OEMDevice item in tempC.GetOemDevices())
+        //        {
+        //            computerInfo.Get_OemDevice(item.DeviceType).Id = item.Id;
+        //        }
+        //    }
 
-        }
+        //}
 
         private void SetContextForSearchFields() {
 
@@ -115,9 +115,7 @@ namespace MEBS_Envanter
 
             MarkaRepository marka_rep2 = new MarkaRepository();
             marka_rep2.FillMarkalar();
-            searchGridMonitorMarkalar.ItemsSource = marka_rep2.Markalar;
-            
-            
+            searchGridMonitorMarkalar.ItemsSource = marka_rep2.Markalar;            
             
         }
 
@@ -126,7 +124,15 @@ namespace MEBS_Envanter
             try
             {
                 ComputerInfo freshComputerInfo = new ComputerInfo();
-                Assign_ComputerInfo_By_GUI(freshComputerInfo, isEdit);
+                //Assign_ComputerInfo_By_GUI(freshComputerInfo, isEdit);
+
+
+
+
+                pcEnvanterControl.Assign_ComputerInfo_By_GUI(Current_Computer_Info, freshComputerInfo, isEdit);
+
+
+
                 freshComputerInfo.IsEdit = isEdit;
 
                 BackgroundWorker worker = new BackgroundWorker();
@@ -168,10 +174,12 @@ namespace MEBS_Envanter
 
         private void setGUIDataContextForInitialization()
         {
-            monitorUserControl1.Init();
+            /*monitorUserControl1.Init();
             generalInfoUserControl1.Init();
             senetInfoUserControl1.Init();
-            networkUserControl1.Init();
+            networkUserControl1.Init();*/
+
+            pcEnvanterControl.Init();
 
             SetContextForSearchFields();
         }
@@ -202,7 +210,8 @@ namespace MEBS_Envanter
             }
             list.ScrollIntoView(infComp);
             Current_Computer_Info = infComp;
-            pcEnvanterTabControl.DataContext = Current_Computer_Info;
+            //pcEnvanterTabControl.DataContext = Current_Computer_Info;
+            pcEnvanterControl.DataContext = Current_Computer_Info;
             //changeCurrentPCContext(list.SelectedItem as ComputerInfo );
         }
 
