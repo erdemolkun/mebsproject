@@ -41,12 +41,12 @@
                                    SelectedIndex="{Binding Marka,
                                    Converter ={StaticResource MarkaComboIndexConverter},UpdateSourceTrigger=Explicit}"
                                    ItemsSource="{Binding Markalar}" 
-                                  HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
+                                  HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
         <ComboBox x:Name="monitorTiplerCombo" Grid.Row="1" MinWidth="80" 
                                 VerticalAlignment="Center"  Margin="2,2"
                                 SelectedItem="{Binding MonType,UpdateSourceTrigger=Explicit,Converter={StaticResource MonitorTypesConverter}}"                                                                
-                                HorizontalAlignment="Center" Grid.Column="1">
+                                HorizontalAlignment="Left" Grid.Column="1">
 
             <ComboBox.ItemsSource>
                 <CompositeCollection>                    
@@ -59,15 +59,17 @@
         <ComboBox x:Name="monitorTempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
                                   SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
                                   ItemsSource="{Binding TempestSeviyeler}" Grid.Row="5"
-                                  HorizontalAlignment="Center" Grid.Column="1"></ComboBox>
+                                  HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
         <TextBox VerticalAlignment="Center" Text="{Binding StokNo,UpdateSourceTrigger=Explicit}" 
-                                 x:Name="monitorStokNoTextBox"
+                                 x:Name="monitorStokNoTextBox" 
+                                 
                                  Margin="4,2" Grid.Column="1" Grid.Row="2" ></TextBox>
 
         <TextBox VerticalAlignment="Center" x:Name="monitorSerialTextBox"
-                                 Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}"  Margin="4,2" Grid.Column="1" Grid.Row="3" ></TextBox>
-        <TextBox VerticalAlignment="Center" x:Name="monitorParcaNoTextBox"
+                                 Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}"  
+                        Margin="4,2" Grid.Column="1" Grid.Row="3" ></TextBox>
+        <TextBox VerticalAlignment="Center" x:Name="monitorParcaNoTextBox" 
                                  Text="{Binding Parca_no,UpdateSourceTrigger=Explicit}"  Margin="4,2" Grid.Column="1" Grid.Row="4" ></TextBox>
     </Grid>
 </UserControl>
