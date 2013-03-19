@@ -233,11 +233,18 @@
 
                         </Grid>
                     </Expander>
-
-                    <Button MinHeight="26"
+                    <StackPanel Grid.ColumnSpan="2" VerticalAlignment="Bottom" Grid.RowSpan="12" Orientation="Vertical">
+                        <Button MinHeight="22" Margin="2,12" x:Name="btnClearSearch"
+                                Width="120" Content="Aramayı Temizle" Click="btnClearSearch_Click"></Button>
+                        
+                        <Button MinHeight="26" HorizontalAlignment="Stretch"
                     Click="searchBtn_Click" VerticalAlignment="Bottom" Grid.RowSpan="12"
                     x:Name="searchBtn" Margin="2,12"  Content="Ara"
-                    HorizontalAlignment="Center" Width="120" Grid.ColumnSpan="2"></Button>
+                      Grid.ColumnSpan="2"></Button>
+                        
+                        
+                    </StackPanel>
+                    
 
 
                 </Grid>

@@ -266,14 +266,13 @@ namespace MEBS_Envanter
             list.Add("@alan_kisi_isim", searchGridalanKisiIsimTxtBox.Text.Trim());
             list.Add("@pc_adi", searchGridPcNameTxtBox.Text.Trim());
             list.Add("@model", searchGridModelTxtBox.Text.Trim());
-
+            
             return list;
         }
 
-        private void RefreshComputerList(SortedList<String,object> parameterList,bool selectLast) {
-        
+        private void RefreshComputerList(SortedList<String,object> parameterList,bool selectLast) {        
+            
             Stopwatch w = Stopwatch.StartNew();
-
             ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
 
@@ -329,6 +328,19 @@ namespace MEBS_Envanter
 
             long x = w.ElapsedMilliseconds;
             Console.WriteLine("Bilgisayar listesi " + x + " milisaniye içinde yenilendi");
+        }
+
+        private void btnClearSearch_Click(object sender, RoutedEventArgs e)
+        {
+            searchGridAglarCombo.SelectedIndex = -1;
+            searchGridalanKisiIsimTxtBox.Text = "";
+            searchGridBirliklerCombo.SelectedIndex =- 1;
+            searchGridMarkalarCombo.SelectedIndex = -1;
+            searchGridModelTxtBox.Text = "";
+            searchGridMonitorTipler.SelectedIndex = -1;
+            searchGridPcNameTxtBox.Text = "";
+            searchGridTempestCombo.SelectedIndex = -1;
+            searchGridMonitorMarkalar.SelectedIndex = -1;
         }
     }
 }
