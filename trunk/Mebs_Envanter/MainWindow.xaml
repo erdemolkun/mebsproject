@@ -7,6 +7,7 @@
         x:Name="mainwin"
         MaxHeight="800" MinHeight="480" 
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
         xmlns:xceedcontrols="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:converters="clr-namespace:MEBS_Envanter.Converters"
@@ -29,7 +30,7 @@
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="480" Height="*"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="140"></RowDefinition>
+            <RowDefinition Height="250"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0" Grid.RowSpan="2" Background="#FF284169"></Grid>
@@ -95,7 +96,7 @@
         <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <!--<ColumnDefinition></ColumnDefinition>-->
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel TextBlock.FontSize="16" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button Margin="4,0" VerticalAlignment="Center"                        
@@ -106,10 +107,12 @@
                 <Button 
                     IsEnabled="{Binding ElementName=pcList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}"
                     Margin="4,0" VerticalAlignment="Center" Content="Sil" Click="pcDeleteBtn_Click"></Button>
+
+               
             </StackPanel>
-            <!--<Button Grid.Column="1" Content="Yenile"  Height="32" HorizontalAlignment="Center" 
+            <Button Grid.Column="1" Content="Yenile"  Height="32" HorizontalAlignment="Center" 
                     Width="200" VerticalAlignment="Center"
-                     Name="refreshListBtn"  Click="refreshListBtn_Click" />-->
+                     Name="refreshListBtn"  Click="refreshListBtn_Click" />
         </Grid>
 
         <GroupBox  Grid.RowSpan="2" TextBlock.Foreground="FloralWhite"
@@ -245,7 +248,7 @@
         </GroupBox>
         
         <Grid Background="#FFC4BFBF" Grid.ColumnSpan="4" Grid.Row="2">
-            
+            <dg:DataGrid x:Name="dataGridSample"></dg:DataGrid>
             
         </Grid>
     </Grid>
