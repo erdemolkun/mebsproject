@@ -44,6 +44,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WPFToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Xceed.Wpf.Controls, Version=2.0.8211.13450, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Xceed.Wpf.Controls.dll</HintPath>
@@ -204,6 +208,11 @@
       <Project>{E893FEE9-6281-42B7-B611-768E6C3CA3D6}</Project>
       <Name>DatabaseConnection</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Debug\DBSettings.xml" />
+    <Content Include="bin\Debug\WPFToolkit.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.Controls.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
