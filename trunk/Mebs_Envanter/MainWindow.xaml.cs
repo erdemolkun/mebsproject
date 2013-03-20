@@ -296,6 +296,27 @@ namespace MEBS_Envanter
             try
             {
                 adp.Fill(dt);
+                foreach (DataRow rowPC in dt.Rows)
+                {
+                    ComputerInfo tempComputer = new ComputerInfo();
+                    try
+                    {
+                        tempComputer.SetGeneralFields(rowPC);
+                        tempComputer.Set_HardwareInfos(cnn);
+                        tempComputer.Set_SenetInfos();
+                    }
+                    catch (Exception) { }
+                    repositoryNew.Computers.Add(tempComputer);
+                }
+                pcList.DataContext = repositoryNew;
+                if (selectLast)
+                {
+                    pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
+                }
+                else
+                {
+                    pcList.SelectedIndex = -1;
+                }
             }
             catch (Exception)
             {
@@ -305,27 +326,7 @@ namespace MEBS_Envanter
                 cnn.Close();
                 cnn.Dispose();
             }
-            foreach (DataRow rowPC in dt.Rows)
-            {
-                ComputerInfo tempComputer = new ComputerInfo();
-                try
-                {
-                    tempComputer.SetGeneralFields(rowPC);
-                    tempComputer.Set_HardwareInfos();
-                    tempComputer.Set_SenetInfos();
-                }
-                catch (Exception){}
-                repositoryNew.Computers.Add(tempComputer);
-            }
-            pcList.DataContext = repositoryNew;
-            if (selectLast)
-            {
-                pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
-            }
-            else {
-                pcList.SelectedIndex = -1;
-            }
-
+            
             long x = w.ElapsedMilliseconds;
             Console.WriteLine("Bilgisayar listesi " + x + " milisaniye içinde yenilendi");
         }

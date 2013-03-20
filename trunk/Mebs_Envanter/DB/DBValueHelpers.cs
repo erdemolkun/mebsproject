@@ -14,8 +14,7 @@ namespace Mebs_Envanter.DB
             }
             else {
                 return Convert.ToInt32(s);
-            }
-            return defaultValue;
+            }           
         }
     }
 }
