@@ -106,6 +106,7 @@
     <Compile Include="InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PrintOperations\RoundedRectangle.cs" />
     <Compile Include="PrintOperations\SystemPrint.cs" />
     <Compile Include="ViewModels\OemDevicesViewModel.cs" />
     <Compile Include="ViewModels\OemDeviceViewModel.cs" />

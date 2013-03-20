@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using Mebs_Envanter.PrintOperations;
 
 namespace Mebs_Envanter
 {
@@ -26,5 +28,14 @@ namespace Mebs_Envanter
             float y = getYByPercantage(yPerc);
             return new RectangleF(x, y, w, h);
         }
+
+
+        ////hasta  bilğilerinin etrafını çiz
+        //    GraphicsPath path1 = RoundedRectangle.Create(15, 113, 770, (int)yPozisyonTemp - 97);
+        //    e.Graphics.DrawPath(Pens.Black, path1);
+
+        //    //hastane bilğilerinin etrafını çiz
+        //    GraphicsPath path = RoundedRectangle.Create(15, 15, 770, 80);
+        //    e.Graphics.DrawPath(Pens.Black, path);
     }
 }
