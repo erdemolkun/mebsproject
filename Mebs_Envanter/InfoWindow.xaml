@@ -21,7 +21,7 @@
                        TextBlock.Foreground="White" TextBlock.FontSize="18" TextBlock.FontWeight="Bold">
                 
             </TextBlock>
-            <Button  Style="{StaticResource MetroButton}" x:Name="closeBtn" Click="closeBtn_Click" Width="32" Height="32" 
+            <Button   x:Name="closeBtn" Click="closeBtn_Click" Width="32" Height="32" 
                     Grid.Column="1" Content="X" HorizontalAlignment="Center">
                 
             </Button>
