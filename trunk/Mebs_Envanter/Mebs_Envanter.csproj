@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Converters\MonitorTypesConverter.cs" />
     <Compile Include="DB\DBValueHelpers.cs" />
+    <Compile Include="GokhanaKod.cs" />
     <Compile Include="GUIHelpers\BindableRichTextBox.cs" />
     <Compile Include="Command\CommandMap.cs" />
     <Compile Include="Command\DelegateCommand.cs" />
