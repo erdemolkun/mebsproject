@@ -38,10 +38,15 @@ namespace MEBS_Envanter
         {
             InitializeComponent();
 
+
+
+
             Thread thSqlInit = new Thread(StartSqlInit);
             thSqlInit.IsBackground = true;
             thSqlInit.Start();
             IsEnabled = false;
+            
+            
         }
 
         private void StartSqlInit()
@@ -125,7 +130,27 @@ namespace MEBS_Envanter
             ComputerInfoRepository computerRep = (pcList.DataContext as ComputerInfoRepository);
             if (addInfo.computer.IsEdit)
             {
+                int index = 0;
+                foreach (var itemx in computerRep.Computers)
+                {
+                    if (itemx.Id == Current_Computer_Info.Id) {
+                        computerRep.Computers[index] = addInfo.computer;
+                        break;
+                    }
+                    index++;
+                }
+                /*var item = computerRep.Computers.FirstOrDefault(i => i.Id == Current_Computer_Info.Id);
+                if (item != null)
+                {
+                    item = (addInfo.computer);
+                }*/
+                //computerRep.Computers.Remove(Current_Computer_Info);
+                //computerRep.Computers.Add(addInfo.computer);
                 Current_Computer_Info = addInfo.computer;
+                pcList.SelectedItem = Current_Computer_Info;                
+                pcEnvanterControl.SetDataContext(Current_Computer_Info);
+                //pcList.SelectedIndex = -1;
+                //pcList.SelectedItem = Current_Computer_Info;
             }
             else {
                 computerRep.Computers.Add(addInfo.computer);
@@ -335,7 +360,7 @@ namespace MEBS_Envanter
             try
             {
                 adp.Fill(dt);
-                dataGridSample.ItemsSource = dt.DefaultView;
+                //dataGridSample.ItemsSource = dt.DefaultView;
                 foreach (DataRow rowPC in dt.Rows)
                 {
                     ComputerInfo tempComputer = new ComputerInfo();
