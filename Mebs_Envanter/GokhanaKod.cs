@@ -20,7 +20,7 @@ namespace Mebs_Envanter
             return (pageSize.Y * y) / 100f;
         }
 
-        public  RectangleF getPrintingRect(float xPerc, float yPerc, float widthPerc, float heightPerc)
+        public  RectangleF getPrintingRect (float xPerc, float yPerc, float widthPerc, float heightPerc)
         {
             float h = Math.Abs(getYByPercantage(heightPerc) - getYByPercantage(0));
             float w = Math.Abs(getXByPercantage(widthPerc) - getXByPercantage(0));
