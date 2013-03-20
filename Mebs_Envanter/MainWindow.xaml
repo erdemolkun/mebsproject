@@ -35,12 +35,12 @@
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0" Grid.ColumnSpan="5">
-
             <Menu IsMainMenu="True" TextBlock.FontSize="16" HorizontalAlignment="Left">
-                <MenuItem Header="Exit"></MenuItem>
-                <MenuItem Header="Print Options">
+                <MenuItem Header="Çıkış"></MenuItem>
+                <MenuItem Header="Yazdırma Seçenekleri">
                     <MenuItem x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
                 </MenuItem>
+                <MenuItem Header="InfoWindow" Click="MenuItem_Click"></MenuItem>
             </Menu>
         </Grid>
         
@@ -122,7 +122,7 @@
                
             </StackPanel>
             <Button Grid.Column="1" Content="Yenile"  Height="32" HorizontalAlignment="Center" 
-                    Width="200" VerticalAlignment="Center"
+                    Width="200" VerticalAlignment="Center"  
                      Name="refreshListBtn"  Click="refreshListBtn_Click" />
         </Grid>
 

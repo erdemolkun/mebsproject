@@ -439,5 +439,11 @@ namespace MEBS_Envanter
             }
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            InfoWindow w = new InfoWindow();
+            w.Owner = this;
+            w.Show();
+        }
     }
 }
