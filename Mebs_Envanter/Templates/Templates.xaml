@@ -99,21 +99,17 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style TargetType="TextBox"
-             >
+    
+    
+    <!--TextBox Style-->
+    <Style TargetType="TextBox">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource Self}}"
-                       Value="false">
+            <DataTrigger Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource Self}}" Value="false">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="TextBox">
-                            <Border BorderThickness='1'
-                          Background='#ffefefef'
-                          BorderBrush='LightBlue'>
-                                <TextBlock Text="{TemplateBinding Text}"
-                               TextTrimming="CharacterEllipsis"
-                               Margin='4,1' />
+                            <Border BorderThickness='1' Background='#ffdedede' BorderBrush='LightBlue'>
+                                <TextBlock Text="{TemplateBinding Text}" TextTrimming="CharacterEllipsis" Padding="0,1" Margin='2,1' />
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
