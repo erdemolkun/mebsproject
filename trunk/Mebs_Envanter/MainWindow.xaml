@@ -5,7 +5,7 @@
         xmlns:x2="clr-namespace:Mebs_Envanter"
         xmlns:guihelpers="clr-namespace:MEBS_Envanter.GUIHelpers"
         x:Name="mainwin"
-        MaxHeight="640" MinHeight="480" 
+        MaxHeight="800" MinHeight="480" 
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:xceedcontrols="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
@@ -26,19 +26,17 @@
             <ColumnDefinition Width="232"></ColumnDefinition>
             <ColumnDefinition Width="*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
+            <RowDefinition MinHeight="480" Height="*"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="140"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0" Grid.RowSpan="2" Background="#FF284169"></Grid>
 
-
         <Grid Grid.Column="2" HorizontalAlignment="Stretch">
             <x2:ComputerUserControl x:Name="pcEnvanterControl"></x2:ComputerUserControl>
         </Grid>
-
 
         <Grid Margin="3"  Background="Transparent" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -94,7 +92,6 @@
 
         </Grid>
 
-
         <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -115,10 +112,9 @@
                      Name="refreshListBtn"  Click="refreshListBtn_Click" />-->
         </Grid>
 
-
         <GroupBox  Grid.RowSpan="2" TextBlock.Foreground="FloralWhite"
                    Foreground="FloralWhite" FontWeight="Bold"
-                   Grid.Column="0" Margin="2,0" 
+                   Grid.Column="0" Margin="2,1" 
                    Header="PC Arama Seçenekleri" FontSize="15" >
             <Border CornerRadius="4" Background="SteelBlue">
                 <Grid Margin="2,0"  TextBlock.FontFamily="Arial Rounded MT" TextBlock.FontWeight="Normal" 
@@ -241,15 +237,16 @@
                     Click="searchBtn_Click" VerticalAlignment="Bottom" Grid.RowSpan="12"
                     x:Name="searchBtn" Margin="2,12"  Content="Ara"
                       Grid.ColumnSpan="2"></Button>
-                        
-                        
+                                                
                     </StackPanel>
                     
-
-
                 </Grid>
             </Border>
         </GroupBox>
-
+        
+        <Grid Background="#FFC4BFBF" Grid.ColumnSpan="4" Grid.Row="2">
+            
+            
+        </Grid>
     </Grid>
 </Window>
