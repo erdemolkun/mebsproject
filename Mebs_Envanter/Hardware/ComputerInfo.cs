@@ -16,6 +16,13 @@ namespace MEBS_Envanter
     public class ComputerInfo : MebsBaseObject
     {
         public bool IsEdit = false;
+        public ComputerInfo()
+        {
+            NetworkInfo = new NetworkInfo();
+            MonitorInfo = new Monitor();
+            Senet = new SenetInfo();
+            EklenmeTarihi = new DateTime(2010, 9, 12);
+        }
 
         public void SetGeneralFields(DataRow rowPC)
         {
@@ -36,15 +43,15 @@ namespace MEBS_Envanter
 
             Marka = new Marka(markaid, "");
 
-            
+
             int bagli_ag_id = DBValueHelpers.GetInt32(rowPC["bagli_ag_id"].ToString(), -1);
-           
+
 
             NetworkInfo.BagliAg = new BagliAg("", bagli_ag_id);
 
 
             int tempest_id = DBValueHelpers.GetInt32(rowPC["tempest_id"].ToString(), -1);
-           
+
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
 
 
@@ -57,9 +64,8 @@ namespace MEBS_Envanter
             Tempest = new Tempest(tempest_id, "");
         }
 
-        private void Set_MonitorInfo(OEMDevice devOem)
+        internal void Set_MonitorInfo(OEMDevice devOem)
         {
-
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             String conString = "Select * From tbl_monitor where parca_id=@parca_id";
             SqlCommand cmd = new SqlCommand(conString, cnn);
@@ -67,37 +73,34 @@ namespace MEBS_Envanter
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
-            try
+            if (res)
             {
-                adp.Fill(dt);
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                cnn.Close();
-                cnn.Dispose();
-            }
-            foreach (DataRow rowMonitor in dt.Rows)
-            {
-
-                // int monitorTipi = Convert.ToInt32( rowMonitor["monitor_tipi"]);
-                String stok_no = rowMonitor["stok_no"].ToString();
-                int mon_id = (int)rowMonitor["monitor_id"];
-                //try
-                //{
-                int mon_type = DBValueHelpers.GetInt32(rowMonitor["monitor_tipi"], -1);
-               
-                if (mon_type > 0)
+                try
                 {
-                    (devOem as Monitor).MonType = (MonitorTypes)mon_type;
+                    adp.Fill(dt);
                 }
-                
-                (devOem as Monitor).StokNo = stok_no;
-                (devOem as Monitor).Mon_id = mon_id;
-                //(devOem as Monitor).DeviceNo = 
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    cnn.Close();
+                    cnn.Dispose();
+                }
+                foreach (DataRow rowMonitor in dt.Rows)
+                {
+                    String stok_no = rowMonitor["stok_no"].ToString();
+                    int mon_id = (int)rowMonitor["monitor_id"];
+                    int mon_type = DBValueHelpers.GetInt32(rowMonitor["monitor_tipi"], -1);
+
+                    if (mon_type > 0)
+                    {
+                        (devOem as Monitor).MonType = (MonitorTypes)mon_type;
+                    }
+                    (devOem as Monitor).StokNo = stok_no;
+                    (devOem as Monitor).Mon_id = mon_id;
+                }
             }
         }
 
@@ -133,9 +136,9 @@ namespace MEBS_Envanter
                 Senet.Alan_kisi_rutbe = alan_kisi_rutbe;
                 Senet.Veren_kisi_isim = veren_kisi_isim;
 
-                int alanKisiBirlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_birilk_id"], -1);              
+                int alanKisiBirlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_birilk_id"], -1);
                 int alanKisiKisimId = DBValueHelpers.GetInt32(rowParca["alan_kisi_kisim_id"], -1);
-              
+
 
                 Senet.Alan_kisi_birlik = new Birlik(alanKisiBirlikId, "");
                 Senet.Alan_kisi_kisim = new Kisim(alanKisiKisimId, "");
@@ -143,9 +146,10 @@ namespace MEBS_Envanter
             }
         }
 
-        internal void Set_HardwareInfos()
+        internal void Set_HardwareInfos(SqlConnection sqlCon)
         {
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            SqlConnection cnn = sqlCon;//GlobalDataAccess.Get_Fresh_SQL_Connection();
+
             String conString = "Select * From tbl_parca where bilgisayar_id=@bilgisayar_id";
             SqlCommand cmd = new SqlCommand(conString, cnn);
             cmd.Parameters.AddWithValue("@bilgisayar_id", Id);
@@ -153,70 +157,65 @@ namespace MEBS_Envanter
             DataTable dt = new DataTable();
 
             bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
-            try
+            if (res)
             {
-                adp.Fill(dt);
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                cnn.Close();
-                cnn.Dispose();
-            }
-            foreach (DataRow rowParca in dt.Rows)
-            {
-                int parcaTipi = Convert.ToInt32(rowParca["parca_tipi"]);
-                DeviceTypes tip = (DeviceTypes)parcaTipi;
-                int parca_id = (int)rowParca["parca_id"];
-                String seri_no = rowParca["seri_no"].ToString();
-                String parca_tanimi = rowParca["parca_tanimi"].ToString();
-                String parca_no = rowParca["parca_no"].ToString();
-
-                int markaid = DBValueHelpers.GetInt32(rowParca["marka_id"], -1);
-               
-
-                int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
-               
-
-                if (tip == DeviceTypes.MONITOR)
+                try
                 {
-                    Monitor mon = new Monitor();
-                    mon.Id = parca_id;
-                    mon.SerialNumber = seri_no;
-                    mon.Parca_no = parca_no;
-                    mon.Marka = new Marka(markaid, "");
-                    mon.Tempest = new Tempest(tempestid, "");
-                    Set_MonitorInfo(mon);
-                    MonitorInfo = mon;
+                    adp.Fill(dt);
+                    #region Fill Hardware Properties
+
+                    foreach (DataRow rowParca in dt.Rows)
+                    {
+                        int parcaTipi = DBValueHelpers.GetInt32(rowParca["parca_tipi"], (int)DeviceTypes.NONE);
+                        DeviceTypes tip = (DeviceTypes)parcaTipi;
+                        int parca_id = (int)rowParca["parca_id"];
+                        String seri_no = rowParca["seri_no"].ToString();
+                        String parca_tanimi = rowParca["parca_tanimi"].ToString();
+                        String parca_no = rowParca["parca_no"].ToString();
+
+                        int markaid = DBValueHelpers.GetInt32(rowParca["marka_id"], -1);
+                        int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
+
+                        if (tip == DeviceTypes.MONITOR)
+                        {
+                            Monitor mon = new Monitor();
+                            mon.Id = parca_id;
+                            mon.SerialNumber = seri_no;
+                            mon.Parca_no = parca_no;
+                            mon.Marka = new Marka(markaid, "");
+                            mon.Tempest = new Tempest(tempestid, "");
+                            Set_MonitorInfo(mon);
+                            MonitorInfo = mon;
+                        }
+                        else
+                        {
+                            OEMDevice devOem = new OEMDevice(tip);
+                            devOem.Id = parca_id;
+                            devOem.Marka = new Marka(markaid, "");
+                            devOem.SerialNumber = seri_no;
+                            devOem.Parca_no = parca_no;
+                            devOem.DeviceInfo = parca_tanimi;
+                            OemDevicesVModel.AssignOemDevice(devOem);
+                        }
+                    }
+
+                    #endregion
                 }
-                else
+                catch (Exception)
                 {
-                    OEMDevice devOem = new OEMDevice(tip);
-                    devOem.Id = parca_id;
-                    devOem.Marka = new Marka(markaid, "");
-                    devOem.SerialNumber = seri_no;
-                    devOem.Parca_no = parca_no;
-                    devOem.DeviceInfo = parca_tanimi;
-                    OemDevicesVModel.SetOemDevice(devOem);
-                    // Tüm parçaları objelere ata
+
+                }
+                finally
+                {
+                    //cnn.Close();
+                    //cnn.Dispose();
                 }
             }
-        }
 
-        public ComputerInfo()
-        {
-            NetworkInfo = new NetworkInfo();
-            MonitorInfo = new Monitor();
-            Senet = new SenetInfo();
-            EklenmeTarihi = new DateTime(2010, 9, 12);
         }
 
         internal OEMDevice Get_OemDevice(DeviceTypes devType)
         {
-
             foreach (var item in OemDevicesVModel.OemDevices)
             {
                 if (item.DevOem.DeviceType == devType)
@@ -287,7 +286,9 @@ namespace MEBS_Envanter
         }
 
         private string pc_adi;
-
+        /// <summary>
+        /// Bilgisayar Adı
+        /// </summary>
         public string Pc_adi
         {
             get { return pc_adi; }
@@ -331,7 +332,9 @@ namespace MEBS_Envanter
 
 
         private Tempest tempest = new Tempest();
-
+        /// <summary>
+        /// Tempest Seviyesi
+        /// </summary>
         public Tempest Tempest
         {
             get { return tempest; }
@@ -385,7 +388,6 @@ namespace MEBS_Envanter
             get { return eklenmeTarihi; }
             set { eklenmeTarihi = value; OnPropertyChanged("EklenmeTarihi"); }
         }
-
 
         #endregion
     }

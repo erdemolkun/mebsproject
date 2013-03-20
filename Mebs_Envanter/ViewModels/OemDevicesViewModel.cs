@@ -39,7 +39,7 @@ namespace Mebs_Envanter
             OemDevicesExtra.Add(new OemDeviceViewModel(new OEMDevice(DeviceTypes.KEYBOARD_MOUSE)));
         }
 
-        public void SetOemDevice(OEMDevice dev) {
+        public void AssignOemDevice(OEMDevice dev) {
 
             foreach (var item in OemDevices)
             {

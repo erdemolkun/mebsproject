@@ -8,6 +8,7 @@ namespace MEBS_Envanter
 
     public enum DeviceTypes : int
     {
+        NONE=0,
         PROCESSOR = 1,
         MAINBOARD = 2,
         MEMORY = 3,
