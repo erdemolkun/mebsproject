@@ -30,7 +30,7 @@
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="480" Height="*"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="250"></RowDefinition>
+            <RowDefinition MaxHeight="250"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0" Grid.RowSpan="2" Background="#FF284169"></Grid>
@@ -247,7 +247,7 @@
             </Border>
         </GroupBox>
         
-        <Grid Background="#FFC4BFBF" Grid.ColumnSpan="4" Grid.Row="2">
+        <Grid Visibility="Collapsed" Background="#FFC4BFBF" Grid.ColumnSpan="4" Grid.Row="2">
             <dg:DataGrid x:Name="dataGridSample"></dg:DataGrid>
             
         </Grid>
