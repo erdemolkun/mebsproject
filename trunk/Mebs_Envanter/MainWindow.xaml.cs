@@ -45,8 +45,8 @@ namespace MEBS_Envanter
             thSqlInit.IsBackground = true;
             thSqlInit.Start();
             IsEnabled = false;
-            
-            
+
+
         }
 
         private void StartSqlInit()
@@ -155,12 +155,13 @@ namespace MEBS_Envanter
 
 
                 Current_Computer_Info = addInfo.computer;
-                pcList.SelectedItem = Current_Computer_Info;                
+                pcList.SelectedItem = Current_Computer_Info;
                 pcEnvanterControl.SetDataContext(Current_Computer_Info);
                 //pcList.SelectedIndex = -1;
                 //pcList.SelectedItem = Current_Computer_Info;
             }
-            else {
+            else
+            {
                 computerRep.Computers.Add(addInfo.computer);
                 pcList.SelectedItem = addInfo.computer;
             }
@@ -289,7 +290,6 @@ namespace MEBS_Envanter
             {
                 if ((searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id > 0)
                 {
-
                     list.Add("@birlik_id", (searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id);
                 }
             }
@@ -334,11 +334,22 @@ namespace MEBS_Envanter
                     list.Add("@mon_marka_id", (searchGridMonitorMarkalar.SelectedItem as Marka).MarkaID);
                 }
             }
-            list.Add("@alan_kisi_isim", searchGridalanKisiIsimTxtBox.Text.Trim());
-            list.Add("@pc_adi", searchGridPcNameTxtBox.Text.Trim());
-            list.Add("@model", searchGridModelTxtBox.Text.Trim());
-
-            return list;
+            String alan_kisi_isim = searchGridalanKisiIsimTxtBox.Text.Trim().ToString();
+            if (!String.IsNullOrEmpty(alan_kisi_isim))
+            {
+                list.Add("@alan_kisi_isim", alan_kisi_isim);
+            }
+            String pcName = searchGridPcNameTxtBox.Text.Trim().ToString();
+            if (!String.IsNullOrEmpty(pcName))
+            {
+                list.Add("@pc_adi", pcName);
+            }
+            String pcModel = searchGridModelTxtBox.Text.Trim().ToString();
+            if (!String.IsNullOrEmpty(pcModel))
+            {
+                list.Add("@model", pcModel);
+            }
+           return list;
         }
 
         private void RefreshComputerList(SortedList<String, object> parameterList, bool selectLast)

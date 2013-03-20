@@ -125,16 +125,14 @@ namespace MEBS_Envanter.DB
 
         public static bool InsertOrUpdateMonitor(Monitor infoMonitor, bool isEdit)
         {
-
             try
             {
-
+                bool shouldBeEdit = (infoMonitor.Mon_id>0) && isEdit;
                 cmMonitorEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_SQL_Connection();
                 bool res = GlobalDataAccess.Open_SQL_Connection(cmMonitorEkleSilDuz.Connection);
                 if (res)
                 {
-
-                    if (!isEdit)
+                    if (!shouldBeEdit)
                     {
                         cmMonitorEkleSilDuz.Parameters["@type"].Value = "E";
                     }
@@ -147,7 +145,7 @@ namespace MEBS_Envanter.DB
                     cmMonitorEkleSilDuz.Parameters["@monitor_tipi"].Value = infoMonitor.MonType;
                     cmMonitorEkleSilDuz.Parameters["@stok_no"].Value = infoMonitor.StokNo;
                     cmMonitorEkleSilDuz.ExecuteNonQuery();
-                    if (!isEdit)
+                    if (!shouldBeEdit)
                     {
                         int monID = Convert.ToInt32(cmMonitorEkleSilDuz.Parameters["@temp_monitor_id"].Value);
                         infoMonitor.Mon_id = monID;
@@ -166,19 +164,21 @@ namespace MEBS_Envanter.DB
         {
             try
             {
+                bool isInDatabase = (deviceOem.Id > 0);
+                bool shouldBeEdit = isInDatabase && isEdit;
                 cmParcaEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_SQL_Connection();
                 bool res = GlobalDataAccess.Open_SQL_Connection(cmParcaEkleSilDuz.Connection);
                 if (res)
                 {
 
-                    if (!isEdit)
-                    {
-                        cmParcaEkleSilDuz.Parameters["@type"].Value = "E";
-                    }
-                    else
+                    if (shouldBeEdit)
                     {
                         cmParcaEkleSilDuz.Parameters["@type"].Value = "D";
                         cmParcaEkleSilDuz.Parameters["@parca_id"].Value = deviceOem.Id;
+                    }
+                    else
+                    {
+                        cmParcaEkleSilDuz.Parameters["@type"].Value = "E";                        
                     }
                     if (deviceOem.Marka != null && deviceOem.Marka.MarkaID > 0)
                     {
@@ -202,7 +202,7 @@ namespace MEBS_Envanter.DB
 
                     cmParcaEkleSilDuz.ExecuteNonQuery();
                 }
-                if (!isEdit)
+                if (!shouldBeEdit)
                 {
                     int devID = Convert.ToInt32(cmParcaEkleSilDuz.Parameters["@temp_parca_id"].Value);
                     deviceOem.Id = devID;
