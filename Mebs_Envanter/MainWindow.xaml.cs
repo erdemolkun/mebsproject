@@ -130,7 +130,11 @@ namespace MEBS_Envanter
             ComputerInfoRepository computerRep = (pcList.DataContext as ComputerInfoRepository);
             if (addInfo.computer.IsEdit)
             {
-                int index = 0;
+                int index = computerRep.Computers.IndexOf(Current_Computer_Info);
+                computerRep.Computers[index] = addInfo.computer;
+
+
+                /*int index = 0;
                 foreach (var itemx in computerRep.Computers)
                 {
                     if (itemx.Id == Current_Computer_Info.Id) {
@@ -138,7 +142,9 @@ namespace MEBS_Envanter
                         break;
                     }
                     index++;
-                }
+                }*/
+
+
                 /*var item = computerRep.Computers.FirstOrDefault(i => i.Id == Current_Computer_Info.Id);
                 if (item != null)
                 {
@@ -146,6 +152,8 @@ namespace MEBS_Envanter
                 }*/
                 //computerRep.Computers.Remove(Current_Computer_Info);
                 //computerRep.Computers.Add(addInfo.computer);
+
+
                 Current_Computer_Info = addInfo.computer;
                 pcList.SelectedItem = Current_Computer_Info;                
                 pcEnvanterControl.SetDataContext(Current_Computer_Info);
