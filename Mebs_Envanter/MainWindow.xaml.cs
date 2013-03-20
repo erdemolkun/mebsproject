@@ -26,6 +26,8 @@ using Mebs_Envanter;
 using System.Diagnostics;
 using System.ComponentModel;
 using Mebs_Envanter.GeneralObjects;
+using System.Drawing.Printing;
+using Mebs_Envanter.PrintOperations;
 
 namespace MEBS_Envanter
 {
@@ -427,5 +429,15 @@ namespace MEBS_Envanter
             searchGridTempestCombo.SelectedIndex = -1;
             searchGridMonitorMarkalar.SelectedIndex = -1;
         }
+
+        private void printSenet_Click(object sender, RoutedEventArgs e)
+        {
+            if (pcList.SelectedItem != null)
+            {
+                SystemPrint printFunc = new SystemPrint(pcList.SelectedItem as ComputerInfo);
+                printFunc.Print(true);
+            }
+        }
+
     }
 }
