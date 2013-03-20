@@ -39,7 +39,7 @@ namespace MEBS_Envanter.DB
         static SqlCommand cmMonitorEkleSilDuz;
         static SqlCommand cmSenetEkleDilDuz;
         private static void prepareStoredProcedures()
-        {
+        { 
             cmBilgisayarEkleSilDuz = new SqlCommand("p_bilgisayar_ek_sil_duz");
             cmBilgisayarEkleSilDuz.CommandType = CommandType.StoredProcedure;
 
