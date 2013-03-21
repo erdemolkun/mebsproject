@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MEBS_Envanter;
 using Mebs_Envanter.GUIHelpers;
+using System.Windows.Controls.Primitives;
 
 namespace Mebs_Envanter.HardwareUserControls
 {
@@ -26,9 +27,27 @@ namespace Mebs_Envanter.HardwareUserControls
             InitializeComponent();
             //OemDevicesViewModel oemDevicesViewModel = new OemDevicesViewModel();
             //this.DataContext = oemDevicesViewModel;
+           // DataContextChanged += new DependencyPropertyChangedEventHandler(OemDevicesUserControl_DataContextChanged);
+        }
+
+        void OemDevicesUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            IItemContainerGenerator generator = hardwareItemsControl.ItemContainerGenerator;
+            GeneratorPosition position = generator.GeneratorPositionFromIndex(0);
+            using (generator.StartAt(position, GeneratorDirection.Forward, true))
+            {
+                foreach (object o in hardwareItemsControl.Items)
+                {
+                    DependencyObject dp = generator.GenerateNext();
+                    generator.PrepareItemContainer(dp);
+                }
+            }
+            
         }
 
         public void SetOemDevicesInfo(ComputerInfo inf) {
+
+            //hardwareExtraItemsControl.UpdateLayout();
             // OEM Parçaların Bilgileri
             AssignOemDeviceInfoByGui(hardwareItemsControl, inf);
             AssignOemDeviceInfoByGui(hardwareExtraItemsControl, inf);        
@@ -40,7 +59,8 @@ namespace Mebs_Envanter.HardwareUserControls
                 OemDeviceViewModel oemDevViewModelOfGui = item as OemDeviceViewModel;
                 OEMDevice devOem = freshComputerInfo.Get_OemDevice((oemDevViewModelOfGui.DevOem).DeviceType);
                 devOem.shouldUpdate = false;
-                DependencyObject dp = control.ItemContainerGenerator.ContainerFromItem(item) as DependencyObject;                
+                DependencyObject dp = control.ItemContainerGenerator.ContainerFromItem(item) as DependencyObject;         
+                
                 if (dp != null)
                 {
                     DeviceEntryControl devControl = VisualHelperWPF.FindVisualChildByType<DeviceEntryControl>(dp);                    
