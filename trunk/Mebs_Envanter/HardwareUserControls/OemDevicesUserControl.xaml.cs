@@ -59,9 +59,9 @@ namespace Mebs_Envanter.HardwareUserControls
                 }
                 else
                 {
-                    
+                    freshComputerInfo.OemDevicesVModel.AssignOemDevice(oemDevViewModelOfGui.DevOem);
                     // Arayüzde hardwareItemsControl için ContentPresenter'lar oluşmamış olabilir.
-                    // CompuerInfo'daki OemDevice Değişkenleri olduğu gibi kalsın.
+                    // ComputerInfo'daki OemDevice Değişkenleri olduğu gibi kalsın.
                 }
             }
         }

@@ -31,7 +31,7 @@
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Parça Tanımı" Grid.Column="2"  Grid.Row="0" />
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Seri No" Grid.Column="3"  Grid.Row="0" />
 
-            <ItemsControl Grid.Row="1" Grid.ColumnSpan="4"
+            <ItemsControl Grid.Row="1" Grid.ColumnSpan="4" 
                                  x:Name="hardwareItemsControl"         
                                  Width="Auto" Height="Auto" ItemsSource="{Binding OemDevices}" 
                                  ItemTemplate="{StaticResource deviceDataTemplate}">

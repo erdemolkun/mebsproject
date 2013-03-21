@@ -19,7 +19,7 @@
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox">
                 <GradientStop Color="#FF7094BE" Offset="0" />
-                <GradientStop Color="#FFCAF2E8" Offset="1" />
+                <GradientStop Color="#FFA8C4BF" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -34,8 +34,8 @@
             <RowDefinition MaxHeight="250"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="5">
-            <Menu IsMainMenu="True" TextBlock.FontSize="16" HorizontalAlignment="Left">
+        <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="#FFE5E3E3">
+            <Menu IsMainMenu="True" TextBlock.FontSize="12" HorizontalAlignment="Left">
                 <MenuItem Header="Çıkış"></MenuItem>
                 <MenuItem Header="Yazdırma Seçenekleri">
                     <MenuItem x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
@@ -44,7 +44,7 @@
             </Menu>
         </Grid>
 
-        <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Background="#FF284169"></Grid>
+        <!--<Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Background="#FF284169"></Grid>-->
 
         <Grid Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch">
             <x2:ComputerUserControl x:Name="pcEnvanterControl"></x2:ComputerUserControl>
@@ -80,7 +80,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBox">
-                                    <Border Name="Border" Background="Transparent" BorderBrush="#FF382727" 
+                                    <Border Name="Border" Background="Transparent" BorderBrush="Transparent" 
                                             BorderThickness="2" CornerRadius="4">
                                         <ScrollViewer Margin="0" Focusable="false">
                                             <StackPanel Margin="2,0" IsItemsHost="True" />
@@ -128,7 +128,7 @@
 
         <GroupBox  Grid.RowSpan="2" Grid.Row="1" TextBlock.Foreground="FloralWhite"
                    Foreground="FloralWhite" FontWeight="Bold"
-                   Grid.Column="0" Margin="2,1" 
+                   Grid.Column="0" Margin="4,2" 
                    Header="PC Arama Seçenekleri" FontSize="15" >
             <Border CornerRadius="4" Background="SteelBlue">
                 <Grid Margin="4,0,0,0"  TextBlock.FontFamily="Tahoma" TextBlock.FontWeight="Bold" 
@@ -235,11 +235,12 @@
                         </Grid>
                     </Expander>
                     <StackPanel Grid.ColumnSpan="2" VerticalAlignment="Bottom" Grid.RowSpan="13" Orientation="Vertical">
-                        <Button MinHeight="22" Margin="2,12" x:Name="btnClearSearch"
-                                Width="120" Content="Aramayı Temizle" Click="btnClearSearch_Click"></Button>
+                        <Button MinHeight="22" Margin="2,6" x:Name="btnClearSearch"
+                                HorizontalAlignment="Center" Content="Aramayı Temizle" Click="btnClearSearch_Click"></Button>
 
                         <Button x:Name="searchBtn" MinHeight="26" Click="searchBtn_Click" VerticalAlignment="Bottom"
-                                HorizontalAlignment="Stretch"  Grid.RowSpan="12"  Margin="2,12"  Content="Ara" Grid.ColumnSpan="2"></Button>
+                                HorizontalAlignment="Stretch"  Grid.RowSpan="12"  Margin="6,6" 
+                                Content="Sonuçları Getir" Grid.ColumnSpan="2"></Button>
                     </StackPanel>
 
                 </Grid>
