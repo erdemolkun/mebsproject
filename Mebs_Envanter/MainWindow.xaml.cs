@@ -427,6 +427,7 @@ namespace MEBS_Envanter
             searchGridPcNameTxtBox.Text = "";
             searchGridTempestCombo.SelectedIndex = -1;
             searchGridMonitorMarkalar.SelectedIndex = -1;
+            searchGridKomutanliklarCombo.SelectedIndex = -1;
         }
 
         private void printSenet_Click(object sender, RoutedEventArgs e)
