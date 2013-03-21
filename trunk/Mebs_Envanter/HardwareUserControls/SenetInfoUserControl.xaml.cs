@@ -27,16 +27,6 @@ namespace Mebs_Envanter.HardwareUserControls
             InitializeComponent();
         }
 
-        private void senetBirlikCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox combo_senet = sender as ComboBox;
-            KisimRepository kisim_rep = new KisimRepository();
-            //kisim_rep.FillKisimlar((combo_senet.SelectedItem as Birlik));
-            kisim_rep.FillKisimlar(null);
-            senetKisimCombo.ItemsSource = kisim_rep.Kisimlar;
-            KisimRepository.INSTANCE = kisim_rep;
-        }
-
         public void Init() {
 
             KomutanlikRepository Komutanlik_Repository = new KomutanlikRepository();
@@ -60,6 +50,11 @@ namespace Mebs_Envanter.HardwareUserControls
             }
             inf.Alan_kisi_isim = senetAlamIsimTextBox.Text.Trim().ToString();
             inf.Veren_kisi_isim = senetVerenKisiTextBox.Text.Trim().ToString();
+            if (senetKomutanlikCombo.SelectedItem != null)
+            {
+                inf.Alan_kisi_komutanlik = (senetKomutanlikCombo.SelectedItem as Komutanlik);
+            }
+
             if (senetBirlikCombo.SelectedItem != null)
             {
                 inf.Alan_kisi_birlik = (senetBirlikCombo.SelectedItem as Birlik);
@@ -77,6 +72,16 @@ namespace Mebs_Envanter.HardwareUserControls
             birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik));
             senetBirlikCombo.ItemsSource = birlik_rep.Birlikler;
             BirlikRepository.INSTANCE = birlik_rep;
+        }
+
+        private void senetBirlikCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combo_senet = sender as ComboBox;
+            KisimRepository kisim_rep = new KisimRepository();
+            //kisim_rep.FillKisimlar((combo_senet.SelectedItem as Birlik));
+            kisim_rep.FillKisimlar(null);
+            senetKisimCombo.ItemsSource = kisim_rep.Kisimlar;
+            KisimRepository.INSTANCE = kisim_rep;
         }
     }
 }

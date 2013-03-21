@@ -18,7 +18,10 @@ namespace MEBS_Envanter.Converters
                 int index = 0;
                 foreach (var item in MarkaRepository.INSTANCE.Markalar)
                 {
-                    if (marka.MarkaID == item.MarkaID) { return index; }
+                    if (marka.MarkaID == item.MarkaID) {
+                        marka.MarkaName = item.MarkaName;
+                        return index; 
+                    }
                     index++;
                 }
                 return 0;

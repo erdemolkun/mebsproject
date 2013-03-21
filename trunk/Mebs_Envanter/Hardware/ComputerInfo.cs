@@ -136,10 +136,12 @@ namespace MEBS_Envanter
                 Senet.Alan_kisi_rutbe = alan_kisi_rutbe;
                 Senet.Veren_kisi_isim = veren_kisi_isim;
 
+
+                int alanKisiKomutanlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_komutanlik_id"], -1);
                 int alanKisiBirlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_birilk_id"], -1);
                 int alanKisiKisimId = DBValueHelpers.GetInt32(rowParca["alan_kisi_kisim_id"], -1);
 
-
+                Senet.Alan_kisi_komutanlik = new Komutanlik(alanKisiKomutanlikId, "");
                 Senet.Alan_kisi_birlik = new Birlik(alanKisiBirlikId, "");
                 Senet.Alan_kisi_kisim = new Kisim(alanKisiKisimId, "");
                 Senet.Id = Convert.ToInt32(rowParca["senet_id"]);
