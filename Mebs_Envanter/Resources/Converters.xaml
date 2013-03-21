@@ -13,6 +13,8 @@
         
     </converters:BirlikComboIndexConverter>
 
+    <converters:KomutanlikComboIndexConverter x:Key="KomutanlikComboIndexConverter"></converters:KomutanlikComboIndexConverter>
+
     <converters:KisimComboIndexConverter x:Key="KisimComboIndexConverter"></converters:KisimComboIndexConverter>
     <converters:NullValueToBoolConverter x:Key="NullValueToBoolConverter">
         

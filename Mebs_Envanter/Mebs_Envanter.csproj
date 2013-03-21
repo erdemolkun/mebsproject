@@ -68,8 +68,10 @@
     <Compile Include="ComputerUserControl.xaml.cs">
       <DependentUpon>ComputerUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\KomutanlikComboIndexConverter.cs" />
     <Compile Include="Converters\MonitorTypesConverter.cs" />
     <Compile Include="DB\DBValueHelpers.cs" />
+    <Compile Include="GeneralObjects\Komutanlik.cs" />
     <Compile Include="GokhanaKod.cs" />
     <Compile Include="GUIHelpers\BindableRichTextBox.cs" />
     <Compile Include="Command\CommandMap.cs" />
@@ -88,7 +90,8 @@
     <Compile Include="EnvanterDataViewModel.cs" />
     <Compile Include="GeneralObjects\SenetInfo.cs" />
     <Compile Include="GeneralObjects\Tempest.cs" />
-    <Compile Include="GeneralObjects\TempestRepository.cs" />
+    <Compile Include="Repositories\KomutanlikRepository.cs" />
+    <Compile Include="Repositories\TempestRepository.cs" />
     <Compile Include="GUIHelpers\VisualHelperWPF.cs" />
     <Compile Include="HardwareUserControls\GeneralInfoUserControl.xaml.cs">
       <DependentUpon>GeneralInfoUserControl.xaml</DependentUpon>
@@ -162,13 +165,13 @@
     <Compile Include="EmptyClass.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="GeneralObjects\BagliAg.cs" />
-    <Compile Include="GeneralObjects\BagliAgRepository.cs" />
+    <Compile Include="Repositories\BagliAgRepository.cs" />
     <Compile Include="GeneralObjects\Birlik.cs" />
-    <Compile Include="GeneralObjects\BirlikRepository.cs" />
+    <Compile Include="Repositories\BirlikRepository.cs" />
     <Compile Include="GeneralObjects\Kisim.cs" />
-    <Compile Include="GeneralObjects\KisimRepository.cs" />
+    <Compile Include="Repositories\KisimRepository.cs" />
     <Compile Include="GeneralObjects\Marka.cs" />
-    <Compile Include="GeneralObjects\MarkaRepository.cs" />
+    <Compile Include="Repositories\MarkaRepository.cs" />
     <Compile Include="GUIHelpers\GridUtils.cs" />
     <Compile Include="GUIHelpers\MacMaskedTextBox.cs" />
     <Compile Include="GUIHelpers\SelectionPersistance.cs" />

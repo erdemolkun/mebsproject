@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MEBS_Envanter.GeneralObjects;
 using MEBS_Envanter;
+using Mebs_Envanter.GeneralObjects;
 
 namespace Mebs_Envanter.HardwareUserControls
 {
@@ -30,18 +31,24 @@ namespace Mebs_Envanter.HardwareUserControls
         {
             ComboBox combo_senet = sender as ComboBox;
             KisimRepository kisim_rep = new KisimRepository();
-            kisim_rep.FillKisimlar((combo_senet.SelectedItem as Birlik));
+            //kisim_rep.FillKisimlar((combo_senet.SelectedItem as Birlik));
+            kisim_rep.FillKisimlar(null);
             senetKisimCombo.ItemsSource = kisim_rep.Kisimlar;
             KisimRepository.INSTANCE = kisim_rep;
         }
 
         public void Init() {
 
+            KomutanlikRepository Komutanlik_Repository = new KomutanlikRepository();
+            Komutanlik_Repository.FillKomutanliklar();
+            senetKomutanlikCombo.ItemsSource = Komutanlik_Repository.Komutanliklar;
+            KomutanlikRepository.INSTANCE = Komutanlik_Repository;
+
             // Birlikler arayüze atanıyor
-            BirlikRepository Birlik_Repository = new BirlikRepository();
-            Birlik_Repository.FillBirlikler();
-            senetBirlikCombo.ItemsSource = Birlik_Repository.Birlikler;
-            BirlikRepository.INSTANCE = Birlik_Repository;
+            //BirlikRepository Birlik_Repository = new BirlikRepository();
+            //Birlik_Repository.FillBirlikler();
+            //senetBirlikCombo.ItemsSource = Birlik_Repository.Birlikler;
+            //BirlikRepository.INSTANCE = Birlik_Repository;
         }
 
         public void SetSenetInfo(SenetInfo inf) {
@@ -61,6 +68,15 @@ namespace Mebs_Envanter.HardwareUserControls
             {
                 inf.Alan_kisi_kisim = (senetKisimCombo.SelectedItem as Kisim);
             }
+        }
+
+        private void senetKomutanlikCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combo_senet = sender as ComboBox;
+            BirlikRepository birlik_rep = new BirlikRepository();
+            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik));
+            senetBirlikCombo.ItemsSource = birlik_rep.Birlikler;
+            BirlikRepository.INSTANCE = birlik_rep;
         }
     }
 }

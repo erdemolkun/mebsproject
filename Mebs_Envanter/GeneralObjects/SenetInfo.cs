@@ -3,25 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MEBS_Envanter.GeneralObjects;
+using Mebs_Envanter.GeneralObjects;
 
 namespace MEBS_Envanter
 {
     public class SenetInfo
     {
-
-
-
         public SenetInfo() {
 
-            //Alan_kisi_rutbe = StaticFields.rutbeler[3];
-            //Veren_kisi_isim = "Taner Kaya";
-            //Alan_kisi_isim = "Aygün Bayar";     
-   
-
+           
         }
 
         private int id=-1;
-
         public int Id
         {
             get { return id; }
@@ -44,6 +37,13 @@ namespace MEBS_Envanter
             set { alan_kisi_isim = value; }
         }
 
+
+        private Komutanlik alan_kisi_komutanlik = new Komutanlik(-1, "");
+        public Komutanlik Alan_kisi_komutanlik
+        {
+            get { return alan_kisi_komutanlik; }
+            set { alan_kisi_komutanlik = value; }
+        }
 
         private Birlik alan_kisi_birlik=new Birlik(-1,"");
 
