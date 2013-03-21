@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using MEBS_Envanter.DB;
+using Mebs_Envanter.GeneralObjects;
 
 namespace MEBS_Envanter.GeneralObjects
 {
@@ -25,10 +26,15 @@ namespace MEBS_Envanter.GeneralObjects
             Birlikler.Add(new Birlik(-1,""));
         }
 
-        public void FillBirlikler()
+        public void FillBirlikler(Komutanlik komutanlik)
         {
+            if (komutanlik == null)
+            {
+                ClearBirlikler();
+                return;
+            }
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
-            string sqlText = "SELECT * FROM tbl_birlik";
+            string sqlText = "SELECT * FROM tbl_birlik where komutanlik_id=@komutanlik_id";
             SqlCommand cmd = new SqlCommand(sqlText, cnn);
 
             bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
@@ -36,6 +42,7 @@ namespace MEBS_Envanter.GeneralObjects
             if (res)
             {
                 ClearBirlikler();
+                cmd.Parameters.AddWithValue("@komutanlik_id", komutanlik.Komutanlik_id);
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_birlik = null;
                 int current_birlik_id = -1;

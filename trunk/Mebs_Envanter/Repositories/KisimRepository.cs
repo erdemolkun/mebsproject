@@ -38,8 +38,7 @@ namespace MEBS_Envanter.GeneralObjects
             {
                 ClearKisimlar();
                 cmd.Parameters.AddWithValue("@birlik_id", birlik.Birlik_id);
-
-                //ClearMarkalar();
+                
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_kisim = null;
                 int current_kisim_id = -1;

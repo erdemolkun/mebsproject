@@ -78,14 +78,13 @@ namespace MEBS_Envanter
         {
 
             // Birlikler arayüze atanıyor
-            BirlikRepository Birlik_Repository = new BirlikRepository();
-            Birlik_Repository.FillBirlikler();
-            searchGridBirliklerCombo.ItemsSource = Birlik_Repository.Birlikler;
+            //BirlikRepository Birlik_Repository = new BirlikRepository();
+            //Birlik_Repository.FillBirlikler();
+            //searchGridBirliklerCombo.ItemsSource = Birlik_Repository.Birlikler;
 
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
             rep_bagli_ag.Fill_Aglar();
             searchGridAglarCombo.ItemsSource = rep_bagli_ag.BagliAglar;
-
 
             TempestRepository tempest_rep = new TempestRepository();
             tempest_rep.FillSeviyeler();

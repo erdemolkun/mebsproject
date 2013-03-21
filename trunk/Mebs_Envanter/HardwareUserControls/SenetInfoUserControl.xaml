@@ -10,6 +10,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -27,39 +28,57 @@
             </Style>
         </Grid.Resources>
         <!--<Grid Grid.Column="0" Background="Gray" Grid.RowSpan="100"></Grid>-->
+        
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Alan Kişi Rütbesi"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="Alan Kişi İsim"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Alan Kişi Birlik"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="Alan Kişi Kısım"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="4" Text="Veren Kişi İsim"></TextBlock>
-
         <ComboBox Grid.Column="1" MinWidth="60" 
                                 x:Name="senetRutbelerCombo"
                                 VerticalAlignment="Center"
                                 SelectedIndex="{Binding Alan_kisi_rutbe,
                                 Converter={StaticResource RutbeComboIndexConverter},UpdateSourceTrigger=Explicit}"
                                 HorizontalAlignment="Left" 
-                                ItemsSource="{Binding Source={x:Static x1:StaticFields.rutbeler}}">
-
-        </ComboBox>
-
+                                ItemsSource="{Binding Source={x:Static x1:StaticFields.rutbeler}}"/>
+        
+                        
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Alan Kişi İsim"></TextBlock>
         <TextBox x:Name="senetAlamIsimTextBox"
                             VerticalAlignment="Center"
-                            Text="{Binding Alan_kisi_isim,UpdateSourceTrigger=Explicit}"  Grid.Column="1" Grid.Row="1"  Margin="2"></TextBox>
-
-
+                            Text="{Binding Alan_kisi_isim,UpdateSourceTrigger=Explicit}"  Grid.Column="1" Grid.Row="1"  Margin="2"/>
+        
+        
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Alan Kişi Komutanlık"></TextBlock>
+        <ComboBox VerticalAlignment="Center" SelectionChanged="senetKomutanlikCombo_SelectionChanged"
+                  SelectedIndex="{Binding Alan_kisi_komutanlik,Converter={StaticResource KomutanlikComboIndexConverter},UpdateSourceTrigger=Explicit}" 
+                  x:Name="senetKomutanlikCombo" ItemsSource="{Binding Komutanliklar}"
+                  MinWidth="60" Margin="2"  Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2"/>
+        
+        
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Alan Kişi Birlik"></TextBlock>
         <ComboBox SelectionChanged="senetBirlikCombo_SelectionChanged"
                                   VerticalAlignment="Center" 
                                   SelectedIndex="{Binding Alan_kisi_birlik,Converter={StaticResource BirlikComboIndexConverter},UpdateSourceTrigger=Explicit}" 
                                   x:Name="senetBirlikCombo" ItemsSource="{Binding Birlikler}"
-                                  MinWidth="60" Margin="2"  Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2"></ComboBox>
-
+                                  MinWidth="60" Margin="2"  Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3"/>
+        
+        
+        
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Alan Kişi Kısım"></TextBlock>
         <ComboBox VerticalAlignment="Center" 
                             ItemsSource="{Binding Kisimlar}" x:Name="senetKisimCombo"
                             SelectedIndex="{Binding Alan_kisi_kisim,Converter={StaticResource KisimComboIndexConverter},UpdateSourceTrigger=Explicit}" 
-                            MinWidth="60" Margin="2" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3"></ComboBox>
-
-        <TextBox Text="{Binding Veren_kisi_isim,UpdateSourceTrigger=Explicit}" Grid.Column="1" Grid.Row="4" Margin="2"
+                            MinWidth="60" Margin="2" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4"></ComboBox>
+        
+        
+        
+        
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Veren Kişi İsim"></TextBlock>
+        <TextBox Text="{Binding Veren_kisi_isim,UpdateSourceTrigger=Explicit}" Grid.Column="1" Grid.Row="5" Margin="2"
                                  VerticalAlignment="Center" x:Name="senetVerenKisiTextBox"></TextBox>
+
+
+
+
+
+
+
     </Grid>
 </UserControl>
