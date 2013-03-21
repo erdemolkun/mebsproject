@@ -84,7 +84,7 @@
     <Compile Include="Converters\NullValueToBoolConverter.cs" />
     <Compile Include="Converters\KisimComboIndexConverter.cs" />
     <Compile Include="Converters\RutbeComboIndexConverter.cs" />
-    <Compile Include="DeviceEntryControl.xaml.cs">
+    <Compile Include="HardwareUserControls\DeviceEntryControl.xaml.cs">
       <DependentUpon>DeviceEntryControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="EnvanterDataViewModel.cs" />
@@ -121,7 +121,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DeviceEntryControl.xaml">
+    <Page Include="HardwareUserControls\DeviceEntryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

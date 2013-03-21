@@ -6,10 +6,10 @@
              >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="12*"/>
-            <ColumnDefinition Width="120" />
-            <ColumnDefinition Width="246*"/>
-            <ColumnDefinition Width="246*"/>
+            
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition MinWidth="32" Width="5*"/>
+            <ColumnDefinition MinWidth="32" Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style TargetType="{x:Type TextBlock}">
@@ -20,8 +20,8 @@
                 <Setter Property="MaxHeight" Value="20"></Setter>
             </Style>
         </Grid.Resources>
-        <TextBlock Margin="2,2" Text="{Binding ParcaTipiIsmi}" Grid.Column="1"></TextBlock>
-        <TextBox x:Name="deviceInfoTextBox" Margin="4,2" Text="{Binding DevOem.DeviceInfo}" Grid.Column="2"></TextBox>
-        <TextBox x:Name="serialNumberTextBox" Margin="4,2"  Text="{Binding DevOem.SerialNumber}" Grid.Column="3"></TextBox>
+        <TextBlock Margin="2,2" Text="{Binding ParcaTipiIsmi}" Grid.Column="0"></TextBlock>
+        <TextBox x:Name="deviceInfoTextBox" Margin="4,2" Text="{Binding DevOem.DeviceInfo}" Grid.Column="1"></TextBox>
+        <TextBox x:Name="serialNumberTextBox" Margin="4,2"  Text="{Binding DevOem.SerialNumber}" Grid.Column="2"></TextBox>
     </Grid>
 </UserControl>
