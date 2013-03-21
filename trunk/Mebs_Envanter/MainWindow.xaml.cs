@@ -76,12 +76,10 @@ namespace MEBS_Envanter
 
         private void SetContextForSearchFields()
         {
-
-            // Birlikler arayüze atanıyor
-            //BirlikRepository Birlik_Repository = new BirlikRepository();
-            //Birlik_Repository.FillBirlikler();
-            //searchGridBirliklerCombo.ItemsSource = Birlik_Repository.Birlikler;
-
+            KomutanlikRepository Rep_Komutanllik = new KomutanlikRepository();
+            Rep_Komutanllik.FillKomutanliklar();
+            searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Komutanliklar;
+           
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
             rep_bagli_ag.Fill_Aglar();
             searchGridAglarCombo.ItemsSource = rep_bagli_ag.BagliAglar;
@@ -285,8 +283,14 @@ namespace MEBS_Envanter
 
         private SortedList<String, object> GetParameterListForSearch()
         {
-
             SortedList<String, object> list = new SortedList<string, object>();
+            if (searchGridKomutanliklarCombo.SelectedItem != null)
+            {
+                if ((searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Komutanlik_id > 0)
+                {
+                    list.Add("@komutanlik_id", (searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Komutanlik_id);
+                }
+            }
             if (searchGridBirliklerCombo.SelectedItem != null)
             {
                 if ((searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id > 0)
@@ -317,16 +321,12 @@ namespace MEBS_Envanter
             }
             if (searchGridMonitorTipler.SelectedItem != null)
             {
-
                 try
                 {
                     MonitorTypes monTipi = (MonitorTypes)searchGridMonitorTipler.SelectedItem;
                     list.Add("@monitor_tipi", (int)monTipi);
                 }
-                catch (Exception)
-                {
-                }
-
+                catch (Exception){}
             }
             if (searchGridMonitorMarkalar.SelectedItem != null)
             {
@@ -350,7 +350,7 @@ namespace MEBS_Envanter
             {
                 list.Add("@model", pcModel);
             }
-           return list;
+            return list;
         }
 
         private void RefreshComputerList(SortedList<String, object> parameterList, bool selectLast)
@@ -443,6 +443,15 @@ namespace MEBS_Envanter
             InfoWindow w = new InfoWindow();
             w.Owner = this;
             w.Show();
+        }
+
+        private void searchGridKomutanliklarCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combo_senet = sender as ComboBox;
+            BirlikRepository birlik_rep = new BirlikRepository();
+            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik));
+            searchGridBirliklerCombo.ItemsSource = birlik_rep.Birlikler;
+            BirlikRepository.INSTANCE = birlik_rep;
         }
     }
 }
