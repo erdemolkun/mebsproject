@@ -6,29 +6,33 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:MEBS_Envanter.Converters"
              xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
+             xmlns:mebs="clr-namespace:MEBS_Envanter"
              mc:Ignorable="d"              
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="320" d:DesignWidth="400" d:DataContext="{Binding Source={StaticResource computerSample}}">
+    <UserControl.Resources>
+        <mebs:ComputerInfo x:Key="computerSample"></mebs:ComputerInfo>
+    </UserControl.Resources>
     <Grid>
-        <TabControl  Grid.Column="2" x:Name="pcEnvanterTabControl">
+        <TabControl x:Name="pcEnvanterTabControl">
             <TabControl.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="Background">
                         <Setter.Value>
                             <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1" >
-                                <GradientStop Color="#FF638CB7" Offset="0" />
-                                <GradientStop Color="#FF71AA98" Offset="1" />
+                                <GradientStop Color="#FFBCC7D8" Offset="0" />
+                                <GradientStop Color="#FF45597C" Offset="1" />
                             </LinearGradientBrush>
                         </Setter.Value>
                     </Setter>
                     <Setter Property="BorderThickness" Value="0"></Setter>
-                    <Setter Property="Margin" Value="2"></Setter>
-                    <Setter Property="CornerRadius" Value="12"></Setter>
+                    <Setter Property="Margin" Value="0"></Setter>
+                    <Setter Property="CornerRadius" Value="8"></Setter>
                     <Setter Property="BorderBrush" Value="LightBlue"></Setter>
                 </Style>
             </TabControl.Resources>
 
             <TabItem Header="Genel Bilgiler" x:Name="generalInfoTab" >
-                <Border >
+                <Border>
                     <hardwareusercontrols:GeneralInfoUserControl x:Name="generalInfoUserControl1">
                     </hardwareusercontrols:GeneralInfoUserControl>
                 </Border>
@@ -37,7 +41,7 @@
             <TabItem Header="Donanım" x:Name="hardwareTab" >
                 <Border >
                     <hardwareusercontrols:OemDevicesUserControl DataContext="{Binding OemDevicesVModel}"
-                    x:Name="oemDeviceUserControl1" >
+                        x:Name="oemDeviceUserControl1" >
                     </hardwareusercontrols:OemDevicesUserControl>                    
                 </Border>
             </TabItem>
@@ -47,7 +51,6 @@
                     <hardwareusercontrols:MonitorInfoUserControl x:Name="monitorUserControl1" DataContext="{Binding MonitorInfo}">
 
                     </hardwareusercontrols:MonitorInfoUserControl>
-
                 </Border>
             </TabItem>
 
