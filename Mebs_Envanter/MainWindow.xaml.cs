@@ -112,8 +112,8 @@ namespace MEBS_Envanter
                 pcEnvanterControl.Assign_ComputerInfo_By_GUI(Current_Computer_Info, freshComputerInfo, isEdit);
 
 
-                object count = DBFunctions.ExecuteToFetchSingleItem("Select Count(*) as Count from tbl_bilgisayar where Pc_adi like '%" +
-                    freshComputerInfo.Pc_adi.Trim().ToString() + "%'", "Count");
+                object count = DBFunctions.ExecuteToFetchSingleItem("Select Count(*) as Count from tbl_bilgisayar where Pc_adi like '" +
+                    freshComputerInfo.Pc_adi.Trim().ToString() + "'", "Count");
 
                 if (count != null && Convert.ToInt32(count) > 0)
                 {

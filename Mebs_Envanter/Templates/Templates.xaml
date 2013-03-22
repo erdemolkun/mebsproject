@@ -8,9 +8,7 @@
                 Stroke="{StaticResource HorizontalNormalBorderBrush}" RadiusX="12" RadiusY="12" Opacity="0.5">
             </Rectangle>-->
             <!--sasd HorizontalNormalBorderBrush FF232323-->
-
-            <Border x:Name="border1" BorderThickness="6" BorderBrush="Transparent" 
-                    
+            <Border x:Name="border1" BorderThickness="2" BorderBrush="Transparent"                     
                     CornerRadius="12">
                 <Border.Background>
                     <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1" >
@@ -19,7 +17,7 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="9"/>
+                    <DropShadowEffect BlurRadius="6"/>
                 </Border.Effect>
                 <!--<Border.Background>
                     <RadialGradientBrush>
