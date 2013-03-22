@@ -103,7 +103,6 @@ namespace MEBS_Envanter.DB
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_kisim_id", SqlDbType.Int));
         }
 
-
         public static bool DeletePC(ComputerInfo infoComputer)
         {
             try
@@ -379,6 +378,39 @@ namespace MEBS_Envanter.DB
             }
             catch (Exception) { }
             return false;
+        }
+
+
+        public static object ExecuteToFetchSingleItem(String command, String itemName)
+        {
+            SqlDataReader dr = null;
+            try
+            {
+                SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+                SqlCommand cmd = new SqlCommand(command, cnn);
+
+                bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+
+                dr = cmd.ExecuteReader();
+                object obj = null;
+                if (dr.HasRows && dr.Read())
+                {
+                    obj = dr[itemName];
+                }
+                dr.Close();
+                cnn.Close();
+
+                return obj;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                if (dr != null)
+                    dr.Close();
+            }
         }
     }
 }

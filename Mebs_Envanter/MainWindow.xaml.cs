@@ -40,9 +40,6 @@ namespace MEBS_Envanter
         {
             InitializeComponent();
 
-
-
-
             Thread thSqlInit = new Thread(StartSqlInit);
             thSqlInit.IsBackground = true;
             thSqlInit.Start();
@@ -69,7 +66,8 @@ namespace MEBS_Envanter
                 else
                 {
                     MessageBox.Show("Bağlantı Sağlanamadı. Çıkıyorum");
-                    Environment.Exit(0);
+                    IsEnabled = true;
+                    //Environment.Exit(0);
                 }
             }));
         }
@@ -79,7 +77,7 @@ namespace MEBS_Envanter
             KomutanlikRepository Rep_Komutanllik = new KomutanlikRepository();
             Rep_Komutanllik.FillKomutanliklar();
             searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Komutanliklar;
-           
+
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
             rep_bagli_ag.Fill_Aglar();
             searchGridAglarCombo.ItemsSource = rep_bagli_ag.BagliAglar;
@@ -98,12 +96,38 @@ namespace MEBS_Envanter
 
         }
 
+
+        private void ShowError(String msg)
+        {
+
+            InfoWindow w = new InfoWindow(this);
+            w.ShowMessage(msg);
+        }
+
         private bool AddOrEditPCFunction(bool isEdit)
         {
             try
             {
                 ComputerInfo freshComputerInfo = new ComputerInfo();
                 pcEnvanterControl.Assign_ComputerInfo_By_GUI(Current_Computer_Info, freshComputerInfo, isEdit);
+
+
+                object count = DBFunctions.ExecuteToFetchSingleItem("Select Count(*) as Count from tbl_bilgisayar where Pc_adi like '%" +
+                    freshComputerInfo.Pc_adi.Trim().ToString() + "%'", "Count");
+
+                if (count != null && Convert.ToInt32(count) > 0)
+                {
+                    if (isEdit && Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi))
+                    {
+
+                    }
+                    else
+                    {
+                        ShowError("Aynı isimli bilgisayar mevcut");
+                        return false;
+                    }
+                }                
+
                 freshComputerInfo.IsEdit = isEdit;
 
                 BackgroundWorker worker = new BackgroundWorker();
@@ -249,7 +273,7 @@ namespace MEBS_Envanter
             }
             else
             {
-                MessageBox.Show("Hata Oluştu");
+               // MessageBox.Show("Hata Oluştu");
             }
 
         }
@@ -326,7 +350,7 @@ namespace MEBS_Envanter
                     MonitorTypes monTipi = (MonitorTypes)searchGridMonitorTipler.SelectedItem;
                     list.Add("@monitor_tipi", (int)monTipi);
                 }
-                catch (Exception){}
+                catch (Exception) { }
             }
             if (searchGridMonitorMarkalar.SelectedItem != null)
             {
@@ -441,7 +465,7 @@ namespace MEBS_Envanter
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            InfoWindow w = new InfoWindow();
+            InfoWindow w = new InfoWindow(this);
             w.Owner = this;
             w.Show();
         }

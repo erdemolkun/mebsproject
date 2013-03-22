@@ -50,12 +50,12 @@
             <x2:ComputerUserControl x:Name="pcEnvanterControl"></x2:ComputerUserControl>
         </Grid>
 
-        <Grid Margin="3"  Background="Transparent" Grid.Row="1" Grid.Column="1">
+        <Grid Margin="6,0"  Background="Transparent" Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Margin="0,4" Background="SkyBlue" CornerRadius="6">
+            <Border Margin="0,12" Height="60" Background="SkyBlue" CornerRadius="0">
                 <TextBlock Text="Bilgisayarlar" Foreground="MintCream"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>

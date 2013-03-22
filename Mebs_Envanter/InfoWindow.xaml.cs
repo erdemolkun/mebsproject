@@ -18,14 +18,31 @@ namespace Mebs_Envanter
     /// </summary>
     public partial class InfoWindow : Window
     {
-        public InfoWindow()
+        public InfoWindow(Window owner)
         {
             InitializeComponent();
+            this.Owner = owner;
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+
+            if (e.Key == Key.Escape) {
+
+                Close();
+            }
+            base.OnKeyDown(e);
         }
 
         private void closeBtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        public void ShowMessage(String msg) {
+
+            infoTxtBlock.Text = msg;
+            ShowDialog();
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
