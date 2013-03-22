@@ -27,7 +27,8 @@ namespace Mebs_Envanter
         protected override void OnKeyDown(KeyEventArgs e)
         {
 
-            if (e.Key == Key.Escape) {
+            if (e.Key == Key.Escape || e.Key == Key.Enter)
+            {
 
                 Close();
             }
@@ -56,6 +57,11 @@ namespace Mebs_Envanter
                 catch { }
             }
             base.OnMouseDown(e);
+        }
+
+        private void okBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
