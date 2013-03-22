@@ -10,8 +10,14 @@
             <!--sasd HorizontalNormalBorderBrush FF232323-->
 
             <Border x:Name="border1" BorderThickness="6" BorderBrush="Transparent" 
-                    Background="SkyBlue"
+                    
                     CornerRadius="12">
+                <Border.Background>
+                    <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1" >
+                        <GradientStop Color="#FFECF5FA" Offset="0" />
+                        <GradientStop Color="#FFC4D8E8" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="9"/>
                 </Border.Effect>

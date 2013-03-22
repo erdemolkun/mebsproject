@@ -4,7 +4,7 @@
 
     <ControlTemplate TargetType="ListBoxItem" x:Key="computerInfoListBoxItemTemplate">
         <Grid Background="Transparent" Margin="0" Name="mainGrid">            
-            <Border Name="ItemBorder" CornerRadius="3" Margin="6,3" Background="Transparent"
+            <Border Name="ItemBorder" CornerRadius="0" Margin="6,3" Background="Transparent"
                 BorderBrush="Wheat" BorderThickness="1" >
                 <ContentPresenter         
                     Margin="3" HorizontalAlignment="Center" />
@@ -21,11 +21,11 @@
                 </Setter>
                 <Setter TargetName="ItemBorder" Property="Margin" Value="0,3" />
                 <Setter TargetName="ItemBorder" Property="BorderBrush" Value="transparent" />
-                <Setter TargetName="mainGrid" Property="Grid.BitmapEffect">
+                <!--<Setter TargetName="mainGrid" Property="Grid.BitmapEffect">
                     <Setter.Value>
-                        <OuterGlowBitmapEffect GlowSize="3" GlowColor="Chocolate" />
+                        <OuterGlowBitmapEffect GlowSize="12" GlowColor="Chocolate" />
                     </Setter.Value>
-                </Setter>
+                </Setter>-->
             </Trigger>
             
             <MultiTrigger>
