@@ -478,5 +478,13 @@ namespace MEBS_Envanter
             searchGridBirliklerCombo.ItemsSource = birlik_rep.Birlikler;
             BirlikRepository.INSTANCE = birlik_rep;
         }
+
+        private void pcList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+             ComputerUserControlVertical x = new ComputerUserControlVertical();
+             x.DataContext = (pcList.SelectedItem as ComputerInfo);
+             x.Show();
+                
+        }
     }
 }
