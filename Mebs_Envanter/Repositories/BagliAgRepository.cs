@@ -10,12 +10,11 @@ namespace MEBS_Envanter.GeneralObjects
 {
     public class BagliAgRepository
     {
-
         public static BagliAgRepository INSTANCE = new BagliAgRepository();
         private void ClearAglar()
         {
             BagliAglar.Clear();
-            BagliAglar.Add(new BagliAg("",-1 ));
+            BagliAglar.Add(new BagliAg("", -1));
         }
 
         private ObservableCollection<BagliAg> bagliAglar = new ObservableCollection<BagliAg>();
@@ -25,7 +24,8 @@ namespace MEBS_Envanter.GeneralObjects
         }
 
 
-        public void Fill_Aglar() {
+        public void Fill_Aglar()
+        {
 
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             string sqlText = "SELECT * FROM tbl_bagli_ag";
@@ -50,7 +50,7 @@ namespace MEBS_Envanter.GeneralObjects
                 dr.Close();
                 cnn.Close();
             }
-        
+
         }
 
     }

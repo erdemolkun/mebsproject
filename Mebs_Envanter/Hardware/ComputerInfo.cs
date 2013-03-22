@@ -10,6 +10,7 @@ using MEBS_Envanter.DB;
 using Mebs_Envanter;
 using Mebs_Envanter.GeneralObjects;
 using Mebs_Envanter.DB;
+using System.Windows;
 
 namespace MEBS_Envanter
 {
@@ -22,6 +23,12 @@ namespace MEBS_Envanter
             MonitorInfo = new Monitor();
             Senet = new SenetInfo();
             EklenmeTarihi = new DateTime(2010, 9, 12);
+
+            bool designTime = System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject());
+            if (designTime)
+            {
+                Pc_adi = "PC_ADI_DESIGN_TIME";
+            }
         }
 
         public void SetGeneralFields(DataRow rowPC)
