@@ -5,11 +5,17 @@
         Title="InfoWindow" Height="240" Width="320" Opacity="1" WindowStartupLocation="CenterOwner">
     <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="28"></RowDefinition>
+            <RowDefinition Height="3"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid>
+        <!--<Rectangle HorizontalAlignment="Stretch" Fill="Blue" Stroke="Black"/>-->
+        <ContentControl Template="{StaticResource SampleControlTemplate}" Grid.Row="1"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                        x:Name="DetailBackgroundContent" Grid.RowSpan="6"
+                        Content="ContentControl"  />
+        <Grid Grid.Row="1" Margin="0,4,0,0">
             <!--<Grid.Background>
                 <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1" >
                     <GradientStop Color="#FFECF5FA" Offset="0" />
@@ -17,32 +23,36 @@
                 </LinearGradientBrush>
             </Grid.Background>-->
             <Grid.ColumnDefinitions>
+
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="32"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" Background="#FF95C1DB" CornerRadius="6" Margin="6,0,0,0">
-                <TextBlock Text="Bilgi Ekranı" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <Border Grid.Column="0" Grid.ColumnSpan="2" Background="#FF95C1DB" CornerRadius="12,12,0,0" Margin="3,0">
+                <Grid>
+                    <TextBlock Text="Bilgi Ekranı" HorizontalAlignment="Center" VerticalAlignment="Center" 
                        TextBlock.Foreground="Black" TextBlock.FontSize="16" TextBlock.FontWeight="Bold">
 
-                </TextBlock>
-            </Border>
-            <Button   x:Name="closeBtn" Click="closeBtn_Click" Width="24" Height="24" 
-                    Grid.Column="1" Content="X" TextBlock.FontSize="10" HorizontalAlignment="Center">
+                    </TextBlock>
 
-            </Button>
+                    <Button   x:Name="closeBtn" Click="closeBtn_Click" Width="24" Height="24" Margin="0,0,3,0"
+                    Grid.Column="1" Content="X" TextBlock.FontSize="10" HorizontalAlignment="Right">
+                    </Button>
+                </Grid>
+            </Border>
+
+
+
+
         </Grid>
-        <ContentControl Template="{StaticResource SampleControlTemplate}" Grid.Row="1"
-                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                        x:Name="DetailBackgroundContent" Grid.RowSpan="6"
-                        Content="ContentControl"  />
-        <Grid Grid.Row="1" >
-           
+
+        <Grid Grid.Row="2" >
+
             <TextBlock HorizontalAlignment="Center"  VerticalAlignment="Center"
                        x:Name="infoTxtBlock"  TextWrapping="Wrap"  FontSize="13"
                        FontWeight="Bold" Text="asdasdasd"
                        Foreground="#FF893838"></TextBlock>
-            
+
             <Button Content="Tamam" VerticalAlignment="Bottom" 
                     Margin="0,6" Width="120" x:Name="okBtn" Click="okBtn_Click"
                     HorizontalAlignment="Center"></Button>

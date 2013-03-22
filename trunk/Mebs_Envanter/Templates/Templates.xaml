@@ -20,21 +20,14 @@
         <Setter Property="BorderBrush" Value="LightBlue"></Setter>
     </Style>
 
-
-
-
-
-
-
     <ControlTemplate x:Key="SampleControlTemplate">
         <Grid>
-            <!--<Rectangle 
-                Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter},Path=IsActive}"
-                Fill="{StaticResource HorizontalNormalBorderBrush}" 
-                Stroke="{StaticResource HorizontalNormalBorderBrush}" RadiusX="12" RadiusY="12" Opacity="0.5">
-            </Rectangle>-->
+            <Rectangle 
+                Fill="Gray" 
+                Stroke="Gray" RadiusX="12" RadiusY="12" Opacity="0.4">
+            </Rectangle>
             <!--sasd HorizontalNormalBorderBrush FF232323-->
-            <Border x:Name="border1" BorderThickness="2" BorderBrush="Transparent"                     
+            <Border x:Name="border1" Margin="5"                  
                     CornerRadius="12">
                 <Border.Background>
                     <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1" >
@@ -42,9 +35,9 @@
                         <GradientStop Color="#FFC4D8E8" Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
-                <Border.Effect>
+                <!--<Border.Effect>
                     <DropShadowEffect BlurRadius="6"/>
-                </Border.Effect>
+                </Border.Effect>-->
                 <!--<Border.Background>
                     <RadialGradientBrush>
                         <GradientStop Color="#FF159FDC" Offset="0" />
