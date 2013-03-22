@@ -67,6 +67,9 @@
     <Compile Include="ComputerUserControl.xaml.cs">
       <DependentUpon>ComputerUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ComputerUserControlVertical.xaml.cs">
+      <DependentUpon>ComputerUserControlVertical.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\KomutanlikComboIndexConverter.cs" />
     <Compile Include="Converters\MonitorTypesConverter.cs" />
     <Compile Include="DB\DBValueHelpers.cs" />
@@ -117,6 +120,10 @@
     <Compile Include="SerializationTool.cs" />
     <Compile Include="StaticFields.cs" />
     <Page Include="ComputerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComputerUserControlVertical.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

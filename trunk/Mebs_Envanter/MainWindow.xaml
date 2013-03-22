@@ -61,7 +61,7 @@
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
 
-            <ListBox x:Name="pcList" 
+            <ListBox x:Name="pcList" MouseDoubleClick="pcList_MouseDoubleClick"
                  SelectionChanged="pcList_SelectionChanged"                 
                  ItemsSource="{Binding Computers}"
                  ItemContainerStyle="{StaticResource computerInfoListBoxItemStyle}"

@@ -15,19 +15,7 @@
     <Grid>
         <TabControl x:Name="pcEnvanterTabControl">
             <TabControl.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1" >
-                                <GradientStop Color="#FFBCC7D8" Offset="0" />
-                                <GradientStop Color="#FF45597C" Offset="1" />
-                            </LinearGradientBrush>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="BorderThickness" Value="0"></Setter>
-                    <Setter Property="Margin" Value="0"></Setter>
-                    <Setter Property="CornerRadius" Value="8"></Setter>
-                    <Setter Property="BorderBrush" Value="LightBlue"></Setter>
+                <Style BasedOn="{StaticResource borderStyleForComputerItems}" TargetType="{x:Type Border}">
                 </Style>
             </TabControl.Resources>
 
