@@ -59,15 +59,13 @@ namespace MEBS_Envanter
                     Current_Computer_Info = new ComputerInfo();
                     setGUIDataContextForInitialization();
                     RefreshComputerList(null, true);
-                    pcList_SelectionChanged(pcList, null);
-                    //IsEnabled = true;
+                    pcList_SelectionChanged(pcList, null);                    
                     IsBusy = false;
                     pcList.Focus();
                 }
                 else
                 {
-                    MessageBox.Show("Bağlantı Sağlanamadı. Çıkıyorum");
-                    //IsEnabled = true;
+                    MessageBox.Show("Bağlantı Sağlanamadı. Çıkıyorum");                    
                     IsBusy = false;
                     //Environment.Exit(0);
                 }
@@ -150,9 +148,8 @@ namespace MEBS_Envanter
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Arrow;
-            //this.IsEnabled = true;
-            IsBusy = true;
+            Mouse.OverrideCursor = Cursors.Arrow;           
+            IsBusy = false;
             ComputerDbWorkInfo addInfo = e.Result as ComputerDbWorkInfo;
             ComputerInfoRepository computerRep = (pcList.DataContext as ComputerInfoRepository);
             if (addInfo.computer.IsEdit)
