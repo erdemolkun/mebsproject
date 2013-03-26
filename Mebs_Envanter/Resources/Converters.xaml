@@ -31,5 +31,7 @@
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter">
         
     </converters:BoolToVisibilityConverter>
+
+    <converters:NotBoolToVisibilityConverter x:Key="NotBoolToVisibilityConverter"></converters:NotBoolToVisibilityConverter>
     
 </ResourceDictionary>

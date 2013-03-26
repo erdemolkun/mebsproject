@@ -60,5 +60,16 @@ namespace MEBS_Envanter
             }
         }
 
+
+
+        private String ipAddress;
+       /// <summary>
+       /// IP Adresi
+       /// </summary>
+        public String IpAddress
+        {
+            get { return ipAddress; }
+            set { ipAddress = value; OnPropertyChanged("IpAddress"); }
+        }
     }
 }

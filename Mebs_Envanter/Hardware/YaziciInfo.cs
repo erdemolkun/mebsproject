@@ -31,5 +31,23 @@ namespace Mebs_Envanter.Hardware
             get { return yaziciModeli; }
             set { yaziciModeli = value; OnPropertyChanged("YaziciModeli"); }
         }
+
+
+        private NetworkInfo networkInfo = new NetworkInfo();
+
+        public NetworkInfo NetworkInfo
+        {
+            get { return networkInfo; }
+            set { networkInfo = value; OnPropertyChanged("NetworkInfo"); }
+        }
+
+        private SenetInfo senetInfo = new SenetInfo();
+
+        public SenetInfo SenetInfo
+        {
+            get { return senetInfo; }
+            set { senetInfo = value; OnPropertyChanged("SenetInfo"); }
+        }
+
     }
 }

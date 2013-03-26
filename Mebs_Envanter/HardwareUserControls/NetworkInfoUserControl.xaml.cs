@@ -27,7 +27,13 @@ namespace Mebs_Envanter.HardwareUserControls
             InitializeComponent();
         }
         public void SetNetworkInfo(NetworkInfo inf) {
-            inf.MacAddressString = pcMacAddressTextBox.Text.Trim().ToString();
+            if (!IsUsedForPrinter)
+            {
+                inf.MacAddressString = pcMacAddressTextBox.Text.Trim().ToString();
+            }
+            else {
+                inf.IpAddress = ipAddressTextBox.Text.Trim().ToString();
+            }
             inf.BagliAg = bagliAgCombo.SelectedItem as BagliAg;            
         }
         public void Init() {
@@ -38,5 +44,20 @@ namespace Mebs_Envanter.HardwareUserControls
             bagliAgCombo.ItemsSource = repoBagliAglar.BagliAglar;
             BagliAgRepository.INSTANCE = repoBagliAglar;
         }
+
+
+
+
+        public bool IsUsedForPrinter
+        {
+            get { return (bool)GetValue(IsUsedForPrinterProperty); }
+            set { SetValue(IsUsedForPrinterProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsUsedForPrinter.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsUsedForPrinterProperty =
+            DependencyProperty.Register("IsUsedForPrinter", typeof(bool), typeof(NetworkInfoUserControl), new UIPropertyMetadata(false));
+
+        
     }
 }

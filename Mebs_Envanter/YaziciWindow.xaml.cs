@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Mebs_Envanter.Hardware;
 
 namespace Mebs_Envanter
 {
@@ -21,7 +22,50 @@ namespace Mebs_Envanter
         public YaziciWindow()
         {
             InitializeComponent();
+            LoadItems();
+
+            YaziciInfo x = new YaziciInfo();
+            x.YaziciModeli = "asdz1";
+            x.NetworkInfo.IpAddress = "asdz2";
+            x.SenetInfo.Alan_kisi_isim = "asdz3";
+
+            gridYaziciBilgileri.DataContext
+                 = x;
+
         }
+
+        private void LoadItems() {
+
+            yaziciUserControl1.Init();
+            senetInfoControl1.Init();
+            networkInfoControl1.Init();
+
+
+            
+        }
+        private bool AddOrEditPCFunction(bool isEdit)
+        {
+            YaziciInfo infYazici = new YaziciInfo();
+
+            YaziciInfo currentYazidi = yaziciList.SelectedItem as YaziciInfo;
+            if (currentYazidi != null) {
+                
+
+
+            
+            }
+            return true;
+        
+        }
+
+        private void AssignYaziciInfo(YaziciInfo current,YaziciInfo toAssign,bool isEdit) { 
+        
+
+            
+
+            
+        }
+
 
         private void yaziciList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
