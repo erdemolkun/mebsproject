@@ -3,11 +3,9 @@
     
 
     <ControlTemplate TargetType="ListBoxItem" x:Key="computerInfoListBoxItemTemplate">
-        <Grid Background="Transparent" Margin="0" Name="mainGrid">            
-            <Border Name="ItemBorder" CornerRadius="0" Margin="6,3" Background="Transparent"
-                BorderBrush="Wheat" BorderThickness="1" >
-                <ContentPresenter         
-                    Margin="3" HorizontalAlignment="Center" />
+        <Grid HorizontalAlignment="Stretch" Background="Transparent" Margin="0" Name="mainGrid">            
+            <Border Name="ItemBorder" CornerRadius="0" Margin="6,3" Background="Transparent" BorderBrush="Wheat" BorderThickness="1" >
+                <ContentPresenter   Margin="3" HorizontalAlignment="Stretch" />
             </Border>
         </Grid>
         <ControlTemplate.Triggers>
@@ -43,13 +41,13 @@
     <Style x:Key="computerInfoListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Background" Value="#ffD4A4A4" />
         <Setter Property="Template" Value="{StaticResource computerInfoListBoxItemTemplate}" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="Padding" Value="0,0,0,0" />
         <Setter Property="ClipToBounds" Value="True" />
-        <Style.Triggers>
-            
+        <Style.Triggers>            
             <Trigger Property="Selector.IsSelected" Value="True">
                 <Setter Property="Template" Value="{StaticResource computerInfoListBoxItemTemplate}" />
             </Trigger>
@@ -64,9 +62,9 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>            
             
-            <Grid Grid.Row="0" Name="pcAdiGrid" TextBlock.FontFamily="Tahoma">                
+            <Grid Grid.Row="0" Name="pcAdiGrid" TextBlock.FontFamily="Tahoma" >                
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="PC ADI : " Foreground="Brown"></TextBlock>
+                    <TextBlock  Text="PC ADI : " Foreground="Brown"></TextBlock>
                     <TextBlock Name="pcAdiTxtBlock" Margin="0,0,2,0" Text="{Binding Pc_adi}" />
                 </StackPanel>                
             </Grid>
