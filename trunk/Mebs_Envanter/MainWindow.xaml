@@ -35,6 +35,17 @@
             <RowDefinition MaxHeight="250"></RowDefinition>
         </Grid.RowDefinitions>
 
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="#FFE5E3E3">
+            <Menu IsMainMenu="True" TextBlock.FontSize="12" HorizontalAlignment="Left">
+                <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
+                <MenuItem Header="Yazdırma Seçenekleri">
+                    <MenuItem x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="InfoWindow" Click="MenuItem_Click"></MenuItem>
+            </Menu>
+        </Grid>
+        
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
             Background="#7BAEC2D1"
             Visibility="{Binding IsBusy,ElementName=mainwin,Converter={StaticResource BoolToVisibilityConverter}}"  
@@ -43,15 +54,7 @@
                                          HorizontalAlignment="Center" VerticalAlignment="Center"></animations:LoadingAnimation >            
         </Grid>
         
-        <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="#FFE5E3E3">
-            <Menu IsMainMenu="True" TextBlock.FontSize="12" HorizontalAlignment="Left">
-                <MenuItem Header="Çıkış"></MenuItem>
-                <MenuItem Header="Yazdırma Seçenekleri">
-                    <MenuItem x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
-                </MenuItem>
-                <MenuItem Header="InfoWindow" Click="MenuItem_Click"></MenuItem>
-            </Menu>
-        </Grid>
+        
 
         <!--<Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Background="#FF284169"></Grid>-->
 
