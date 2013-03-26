@@ -81,18 +81,20 @@
                     <Style  TargetType="ListBox">
                         <Setter Property="SnapsToDevicePixels" Value="true"/>
                         <Setter Property="OverridesDefaultStyle" Value="true"/>
-                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
                         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
                         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
                         <Setter Property="MinWidth" Value="90"/>
                         <Setter Property="MinHeight" Value="80"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBox">
                                     <Border Name="Border" Background="Transparent" BorderBrush="Transparent" 
                                             BorderThickness="2" CornerRadius="4">
-                                        <ScrollViewer Margin="0" Focusable="false">
-                                            <StackPanel Margin="2,0" IsItemsHost="True" />
+                                        <ScrollViewer Margin="0" Focusable="false" HorizontalContentAlignment="Stretch" >
+                                            <StackPanel HorizontalAlignment="Stretch" Margin="2,0" IsItemsHost="True"  />
                                         </ScrollViewer>
                                     </Border>
                                     <ControlTemplate.Triggers>
