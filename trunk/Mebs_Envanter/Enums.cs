@@ -18,6 +18,7 @@ namespace MEBS_Envanter
         OPTIC_DRIVE = 7,
         KEYBOARD_MOUSE = 8,
         MONITOR = 9,
+        PRINTER=10
     }
 
     public enum MonitorTypes : int

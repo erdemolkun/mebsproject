@@ -11,6 +11,7 @@ using Mebs_Envanter;
 using Mebs_Envanter.GeneralObjects;
 using Mebs_Envanter.DB;
 using System.Windows;
+using Mebs_Envanter.Hardware;
 
 namespace MEBS_Envanter
 {
@@ -87,9 +88,7 @@ namespace MEBS_Envanter
                     adp.Fill(dt);
                 }
                 catch (Exception)
-                {
-
-                }
+                {}
                 finally
                 {
                     cnn.Close();
@@ -107,6 +106,44 @@ namespace MEBS_Envanter
                     }
                     (devOem as Monitor).StokNo = stok_no;
                     (devOem as Monitor).Mon_id = mon_id;
+                }
+            }
+        }
+
+        internal void Set_YaziciInfo(OEMDevice devOem)
+        {
+            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            String conString = "Select * From tbl_yazici where parca_id=@parca_id";
+            SqlCommand cmd = new SqlCommand(conString, cnn);
+            cmd.Parameters.AddWithValue("@parca_id", devOem.Id);
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            if (res)
+            {
+                try
+                {
+                    adp.Fill(dt);
+                }
+                catch (Exception)
+                { }
+                finally
+                {
+                    cnn.Close();
+                    cnn.Dispose();
+                }
+                foreach (DataRow rowYazici in dt.Rows)
+                {
+                    String yazici_modeli = rowYazici["yazici_modeli"].ToString();
+                    int yaz_id = (int)rowYazici["yazici_id"];
+                    //int mon_type = DBValueHelpers.GetInt32(rowYazici["monitor_tipi"], -1);
+
+                   /* if (mon_type > 0)
+                    {
+                        (devOem as Monitor).MonType = (MonitorTypes)mon_type;
+                    }*/
+                    (devOem as YaziciInfo).YaziciModeli = yazici_modeli;
+                    (devOem as YaziciInfo).Yaz_id = yaz_id;
                 }
             }
         }
@@ -185,25 +222,54 @@ namespace MEBS_Envanter
                         int markaid = DBValueHelpers.GetInt32(rowParca["marka_id"], -1);
                         int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
 
+
+                        OEMDevice devOem = null;
+                        if (tip == DeviceTypes.MONITOR) {
+
+                            devOem = new Monitor();
+                        }
+                        else if (tip == DeviceTypes.PRINTER)
+                        {
+                            devOem = new YaziciInfo();
+                        }
+                        else {
+                            devOem = new OEMDevice(tip);
+                        }
+                        
+                        //Ortak alanlar
+                        devOem.Id = parca_id;
+                        devOem.SerialNumber = seri_no;
+                        devOem.Parca_no = parca_no;
+                        devOem.Marka = new Marka(markaid, "");
+                        devOem.Tempest = new Tempest(tempestid, "");
+                        devOem.DeviceInfo = parca_tanimi;
+
                         if (tip == DeviceTypes.MONITOR)
                         {
-                            Monitor mon = new Monitor();
-                            mon.Id = parca_id;
-                            mon.SerialNumber = seri_no;
-                            mon.Parca_no = parca_no;
-                            mon.Marka = new Marka(markaid, "");
-                            mon.Tempest = new Tempest(tempestid, "");
+                            Monitor mon = devOem as Monitor;
+                            //mon.Id = parca_id;
+                            //mon.SerialNumber = seri_no;
+                            //mon.Parca_no = parca_no;
+                            //mon.Marka = new Marka(markaid, "");
+                            //mon.Tempest = new Tempest(tempestid, "");
                             Set_MonitorInfo(mon);
                             MonitorInfo = mon;
                         }
-                        else
+                        else if (tip == DeviceTypes.PRINTER)
                         {
-                            OEMDevice devOem = new OEMDevice(tip);
-                            devOem.Id = parca_id;
-                            devOem.Marka = new Marka(markaid, "");
-                            devOem.SerialNumber = seri_no;
-                            devOem.Parca_no = parca_no;
-                            devOem.DeviceInfo = parca_tanimi;
+                            YaziciInfo infYazi = devOem as YaziciInfo;
+                            Set_YaziciInfo(infYazi);
+                            YaziciInfo = infYazi;
+                            
+                        }
+                        else 
+                        {
+                            //OEMDevice devOem = new OEMDevice(tip);
+                            //devOem.Id = parca_id;
+                            //devOem.Marka = new Marka(markaid, "");
+                            //devOem.SerialNumber = seri_no;
+                            //devOem.Parca_no = parca_no;
+                            //devOem.DeviceInfo = parca_tanimi;
                             OemDevicesVModel.AssignOemDevice(devOem);
                         }
                     }
@@ -293,6 +359,15 @@ namespace MEBS_Envanter
             get { return monitorInfo; }
             set { monitorInfo = value; OnPropertyChanged("MonitorInfo"); }
         }
+
+        private YaziciInfo yaziciInfo = new YaziciInfo();
+
+        public YaziciInfo YaziciInfo
+        {
+            get { return yaziciInfo; }
+            set { yaziciInfo = value; OnPropertyChanged("YaziciInfo"); }
+        }
+
 
         private string pc_adi;
         /// <summary>
