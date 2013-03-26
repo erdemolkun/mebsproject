@@ -28,14 +28,14 @@
                 <ColumnDefinition Width="32"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" Grid.ColumnSpan="2" Background="#FF95C1DB" CornerRadius="12,12,0,0" Margin="3,0">
+            <Border Grid.Column="0" Grid.ColumnSpan="2" Background="#FF95C1DB" CornerRadius="12,12,0,0" Margin="5,0">
                 <Grid>
                     <TextBlock Text="Bilgi Ekranı" HorizontalAlignment="Center" VerticalAlignment="Center" 
                        TextBlock.Foreground="Black" TextBlock.FontSize="16" TextBlock.FontWeight="Bold">
 
                     </TextBlock>
 
-                    <Button   x:Name="closeBtn" Click="closeBtn_Click" Width="24" Height="24" Margin="0,0,3,0"
+                    <Button   x:Name="closeBtn" Click="closeBtn_Click" Width="24" Height="24" Margin="0,0,6,0"
                     Grid.Column="1" Content="X" TextBlock.FontSize="10" HorizontalAlignment="Right">
                     </Button>
                 </Grid>
