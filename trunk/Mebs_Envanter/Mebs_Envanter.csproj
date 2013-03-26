@@ -77,6 +77,7 @@
       <DependentUpon>ComputerUserControlVertical.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\NotBoolToVisibilityConverter.cs" />
     <Compile Include="Converters\KomutanlikComboIndexConverter.cs" />
     <Compile Include="Converters\MonitorTypesConverter.cs" />
     <Compile Include="DB\DBValueHelpers.cs" />
