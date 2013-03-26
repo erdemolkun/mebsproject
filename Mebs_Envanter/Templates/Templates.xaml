@@ -8,9 +8,9 @@
     <Style TargetType="{x:Type Border}" x:Key="borderStyleForComputerItems">
         <Setter Property="Background">
             <Setter.Value>
-                <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1" >
-                    <GradientStop Color="#FFBCC7D8" Offset="0" />
-                    <GradientStop Color="#FF45597C" Offset="1" />
+                <LinearGradientBrush  StartPoint="0.5,0" EndPoint="0.5,1" >
+                    <GradientStop Color="#FF98A5B4" Offset="0" />
+                    <GradientStop Color="#FF6D8393" Offset="1" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
