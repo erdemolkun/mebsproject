@@ -130,6 +130,9 @@
     <Compile Include="ViewModels\OemDeviceViewModel.cs" />
     <Compile Include="SerializationTool.cs" />
     <Compile Include="StaticFields.cs" />
+    <Compile Include="YaziciWindow.xaml.cs">
+      <DependentUpon>YaziciWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Animations\LoadingAnimation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -228,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Templates\WindowTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="YaziciWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
