@@ -42,6 +42,14 @@
                 </Border>
             </TabItem>
 
+            <TabItem Header="Yazıcı" x:Name="yaziciTab" >
+                <Border >
+                    <hardwareusercontrols:YaziciUserControl x:Name="yaziciUserControl1" DataContext="{Binding YaziciInfo}">
+
+                    </hardwareusercontrols:YaziciUserControl>
+                </Border>
+            </TabItem>
+            
             <TabItem Header="Senet" x:Name="senetTab" >
                 <Border >
                     <hardwareusercontrols:SenetInfoUserControl x:Name="senetInfoUserControl1" 

@@ -32,6 +32,7 @@ namespace MEBS_Envanter
                 if (devType == DeviceTypes.PROCESSOR) { return "İşlemci"; }
                 if (devType == DeviceTypes.KEYBOARD_MOUSE) { return "Klavye/Mouse"; }
                 if (devType == DeviceTypes.MONITOR) { return "Monitor"; }
+                if (devType == DeviceTypes.PRINTER) { return "Yazıcı"; }
             }
             catch (Exception) { }
             return "N/A";

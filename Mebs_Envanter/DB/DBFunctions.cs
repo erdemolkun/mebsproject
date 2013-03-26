@@ -7,6 +7,7 @@ using System.Data;
 using System.IO;
 using DatabaseConnection;
 using System.Windows;
+using Mebs_Envanter.Hardware;
 
 namespace MEBS_Envanter.DB
 {
@@ -38,8 +39,9 @@ namespace MEBS_Envanter.DB
         static SqlCommand cmParcaEkleSilDuz;
         static SqlCommand cmMonitorEkleSilDuz;
         static SqlCommand cmSenetEkleDilDuz;
+        static SqlCommand cmYaziciEkleSilDuz;
         private static void prepareStoredProcedures()
-        { 
+        {
             cmBilgisayarEkleSilDuz = new SqlCommand("p_bilgisayar_ek_sil_duz");
             cmBilgisayarEkleSilDuz.CommandType = CommandType.StoredProcedure;
 
@@ -48,7 +50,7 @@ namespace MEBS_Envanter.DB
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@marka_id", SqlDbType.Int));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@pc_adi", SqlDbType.NVarChar, 100));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@bagli_ag_id", SqlDbType.Int));
-            cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@tempest_id", SqlDbType.Int));            
+            cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@tempest_id", SqlDbType.Int));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@mac", SqlDbType.NVarChar, 30));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar, 50));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@pc_stok_no", SqlDbType.NVarChar, 50));
@@ -72,7 +74,7 @@ namespace MEBS_Envanter.DB
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@tempest_id", SqlDbType.Int));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@parca_tipi", SqlDbType.SmallInt));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@temp_parca_id", SqlDbType.Int));
-            
+
             cmParcaEkleSilDuz.Parameters["@temp_parca_id"].Direction = ParameterDirection.Output;
 
 
@@ -86,6 +88,16 @@ namespace MEBS_Envanter.DB
             cmMonitorEkleSilDuz.Parameters.Add(new SqlParameter("@temp_monitor_id", SqlDbType.Int));
             cmMonitorEkleSilDuz.Parameters["@temp_monitor_id"].Direction = ParameterDirection.Output;
 
+
+
+            cmYaziciEkleSilDuz = new SqlCommand("p_yazici_ek_sil_duz");
+            cmYaziciEkleSilDuz.CommandType = CommandType.StoredProcedure;
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar, 5));
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@parca_id", SqlDbType.Int));
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@yazici_id", SqlDbType.Int));
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@yazici_modeli", SqlDbType.NVarChar, 50));
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@temp_yazici_id", SqlDbType.Int));
+            cmYaziciEkleSilDuz.Parameters["@temp_yazici_id"].Direction = ParameterDirection.Output;
 
 
             cmSenetEkleDilDuz = new SqlCommand("p_senet_ek_sil_duz");
@@ -127,7 +139,7 @@ namespace MEBS_Envanter.DB
         {
             try
             {
-                bool shouldBeEdit = (infoMonitor.Mon_id>0) && isEdit;
+                bool shouldBeEdit = (infoMonitor.Mon_id > 0) && isEdit;
                 cmMonitorEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_SQL_Connection();
                 bool res = GlobalDataAccess.Open_SQL_Connection(cmMonitorEkleSilDuz.Connection);
                 if (res)
@@ -160,6 +172,43 @@ namespace MEBS_Envanter.DB
 
         }
 
+        public static bool InsertOrUpdateYazici(YaziciInfo infoYazici, bool isEdit)
+        {
+            try
+            {
+                bool shouldBeEdit = (infoYazici.Yaz_id > 0) && isEdit;
+                cmYaziciEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_SQL_Connection();
+                bool res = GlobalDataAccess.Open_SQL_Connection(cmYaziciEkleSilDuz.Connection);
+                if (res)
+                {
+                    if (!shouldBeEdit)
+                    {
+                        cmYaziciEkleSilDuz.Parameters["@type"].Value = "E";
+                    }
+                    else
+                    {
+                        cmYaziciEkleSilDuz.Parameters["@type"].Value = "D";
+                        cmYaziciEkleSilDuz.Parameters["@yazici_id"].Value = infoYazici.Yaz_id;
+                    }
+                    cmYaziciEkleSilDuz.Parameters["@parca_id"].Value = infoYazici.Id;
+                    //cmYaziciEkleSilDuz.Parameters["@yazici_id"].Value = infoYazici.yaz;
+                    cmYaziciEkleSilDuz.Parameters["@yazici_modeli"].Value = infoYazici.YaziciModeli;
+                    cmYaziciEkleSilDuz.ExecuteNonQuery();
+                    if (!shouldBeEdit)
+                    {
+                        int yazID = Convert.ToInt32(cmYaziciEkleSilDuz.Parameters["@temp_yazici_id"].Value);
+                        infoYazici.Yaz_id = yazID;
+                    }
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+
+        }
+
         public static bool InsertOrUpdateOemDevice(OEMDevice deviceOem, int bilgisayar_id, bool isEdit)
         {
             try
@@ -178,20 +227,23 @@ namespace MEBS_Envanter.DB
                     }
                     else
                     {
-                        cmParcaEkleSilDuz.Parameters["@type"].Value = "E";                        
+                        cmParcaEkleSilDuz.Parameters["@type"].Value = "E";
                     }
                     if (deviceOem.Marka != null && deviceOem.Marka.MarkaID > 0)
                     {
                         cmParcaEkleSilDuz.Parameters["@marka_id"].Value = deviceOem.Marka.MarkaID;
                     }
-                    else{
+                    else
+                    {
                         cmParcaEkleSilDuz.Parameters["@marka_id"].Value = null;
                     }
-                    if (deviceOem.Tempest != null && deviceOem.Tempest.Id > 0) {
+                    if (deviceOem.Tempest != null && deviceOem.Tempest.Id > 0)
+                    {
                         cmParcaEkleSilDuz.Parameters["@tempest_id"].Value = deviceOem.Tempest.Id;
-                    
+
                     }
-                    else{
+                    else
+                    {
                         cmParcaEkleSilDuz.Parameters["@tempest_id"].Value = null;
                     }
                     cmParcaEkleSilDuz.Parameters["@seri_no"].Value = deviceOem.SerialNumber;
@@ -210,6 +262,10 @@ namespace MEBS_Envanter.DB
                 if (deviceOem.DeviceType == DeviceTypes.MONITOR)
                 {
                     InsertOrUpdateMonitor(deviceOem as Monitor, isEdit);
+                }
+                else if (deviceOem.DeviceType == DeviceTypes.PRINTER)
+                {
+                    InsertOrUpdateYazici(deviceOem as YaziciInfo, isEdit);
                 }
                 return true;
             }
@@ -243,7 +299,8 @@ namespace MEBS_Envanter.DB
                     {
                         cmBilgisayarEkleSilDuz.Parameters["@marka_id"].Value = infoComputer.Marka.MarkaID;
                     }
-                    else {
+                    else
+                    {
                         cmBilgisayarEkleSilDuz.Parameters["@marka_id"].Value = null;
                     }
                     cmBilgisayarEkleSilDuz.Parameters["@pc_adi"].Value = infoComputer.Pc_adi;
@@ -252,7 +309,8 @@ namespace MEBS_Envanter.DB
                     {
                         cmBilgisayarEkleSilDuz.Parameters["@bagli_ag_id"].Value = infoComputer.NetworkInfo.BagliAg.Ag_id;
                     }
-                    else {
+                    else
+                    {
                         cmBilgisayarEkleSilDuz.Parameters["@bagli_ag_id"].Value = null;
                     }
                     if (infoComputer.Tempest != null && infoComputer.Tempest.Id > 0)
@@ -260,7 +318,8 @@ namespace MEBS_Envanter.DB
 
                         cmBilgisayarEkleSilDuz.Parameters["@tempest_id"].Value = infoComputer.Tempest.Id;
                     }
-                    else {
+                    else
+                    {
                         cmBilgisayarEkleSilDuz.Parameters["@tempest_id"].Value = null;
                     }
 
@@ -328,7 +387,8 @@ namespace MEBS_Envanter.DB
                             cmSenetEkleDilDuz.Parameters["@alan_kisi_birilk_id"].Value = null;
                         }
                     }
-                    else {
+                    else
+                    {
                         cmSenetEkleDilDuz.Parameters["@alan_kisi_komutanlik_id"].Value = null;
                     }
                     cmSenetEkleDilDuz.ExecuteNonQuery();
