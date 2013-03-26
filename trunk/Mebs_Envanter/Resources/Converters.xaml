@@ -27,5 +27,9 @@
     </converters:StringToFlowDocumentConverter>
 
     <converters:MonitorTypesConverter x:Key="MonitorTypesConverter"></converters:MonitorTypesConverter>
+
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter">
+        
+    </converters:BoolToVisibilityConverter>
     
 </ResourceDictionary>
