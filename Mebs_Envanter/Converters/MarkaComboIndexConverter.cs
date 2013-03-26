@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Data;
 using System.Windows.Controls;
+using MEBS_Envanter.Repositories;
 
 namespace MEBS_Envanter.Converters
 {

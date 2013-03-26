@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MEBS_Envanter;
 using Mebs_Envanter.GeneralObjects;
+using MEBS_Envanter.Repositories;
+using Mebs_Envanter.Repositories;
 
 namespace Mebs_Envanter.HardwareUserControls
 {

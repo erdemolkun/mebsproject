@@ -103,6 +103,7 @@
       <DependentUpon>YaziciUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Hardware\YaziciInfo.cs" />
+    <Compile Include="Repositories\YaziciInfoRepository.cs" />
     <Compile Include="Repositories\KomutanlikRepository.cs" />
     <Compile Include="Repositories\TempestRepository.cs" />
     <Compile Include="GUIHelpers\VisualHelperWPF.cs" />
@@ -209,7 +210,7 @@
     <Compile Include="GUIHelpers\SelectionPersistance.cs" />
     <Compile Include="GUIHelpers\TextBoxMaskBehavior.cs" />
     <Compile Include="Hardware\ComputerInfo.cs" />
-    <Compile Include="Hardware\ComputerInfoRepository.cs" />
+    <Compile Include="Repositories\ComputerInfoRepository.cs" />
     <Compile Include="Hardware\DeviceTypeNameHelper.cs" />
     <Compile Include="Hardware\Monitor.cs" />
     <Compile Include="Hardware\NetworkInfo.cs" />

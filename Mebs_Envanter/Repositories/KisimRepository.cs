@@ -5,8 +5,9 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using MEBS_Envanter.DB;
+using MEBS_Envanter.GeneralObjects;
 
-namespace MEBS_Envanter.GeneralObjects
+namespace MEBS_Envanter.Repositories
 {
     public class KisimRepository:MebsBaseObject
     {

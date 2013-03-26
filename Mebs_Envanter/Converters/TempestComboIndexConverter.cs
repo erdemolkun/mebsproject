@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Data;
 using MEBS_Envanter.GeneralObjects;
 using Mebs_Envanter.GeneralObjects;
+using Mebs_Envanter.Repositories;
 
 namespace MEBS_Envanter.Converters
 {
@@ -12,7 +13,8 @@ namespace MEBS_Envanter.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value != null && (value is Tempest) && TempestRepository.INSTANCE != null)
+            if (value != null && (value is Tempest) && TempestRepository
+                .INSTANCE != null)
             {
                 Tempest infoTempest = value as Tempest;
                 int index = -1;
