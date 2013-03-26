@@ -42,8 +42,7 @@ namespace MEBS_Envanter
 
             Thread thSqlInit = new Thread(StartSqlInit);
             thSqlInit.IsBackground = true;
-            thSqlInit.Start();
-            //IsEnabled = false;
+            thSqlInit.Start();            
             IsBusy = true;
 
         }
