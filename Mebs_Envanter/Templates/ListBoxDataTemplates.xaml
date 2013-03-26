@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
 
-    <ControlTemplate TargetType="ListBoxItem" x:Key="computerInfoListBoxItemTemplate">
-        <Grid HorizontalAlignment="Stretch" Background="Transparent" Margin="0" Name="mainGrid">            
+    <ControlTemplate TargetType="ListBoxItem" x:Key="generalListBoxItemTemplate">
+        <Grid HorizontalAlignment="Stretch" Background="Transparent" Name="mainGrid">            
             <Border Name="ItemBorder" CornerRadius="0" Margin="6,3" Background="Transparent" BorderBrush="Wheat" BorderThickness="1" >
                 <ContentPresenter   Margin="3" HorizontalAlignment="Stretch" />
             </Border>
@@ -38,20 +38,20 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="computerInfoListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+    <Style x:Key="generalListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Background" Value="#ffD4A4A4" />
-        <Setter Property="Template" Value="{StaticResource computerInfoListBoxItemTemplate}" />
+        <Setter Property="Template" Value="{StaticResource generalListBoxItemTemplate}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="Padding" Value="0,0,0,0" />
         <Setter Property="ClipToBounds" Value="True" />
-        <Style.Triggers>            
+        <!--<Style.Triggers>            
             <Trigger Property="Selector.IsSelected" Value="True">
-                <Setter Property="Template" Value="{StaticResource computerInfoListBoxItemTemplate}" />
+                <Setter Property="Template" Value="{StaticResource generalListBoxItemTemplate}" />
             </Trigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
     </Style>
 
     <DataTemplate x:Key="computerInfoListboxDataTemplate">
@@ -101,4 +101,6 @@
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
+    
+    
 </ResourceDictionary>

@@ -95,7 +95,6 @@ namespace MEBS_Envanter
 
         }
 
-
         private void ShowError(String msg)
         {
 
@@ -161,8 +160,6 @@ namespace MEBS_Envanter
             {
                 int index = computerRep.Computers.IndexOf(Current_Computer_Info);
                 computerRep.Computers[index] = addInfo.computer;
-
-
                 /*int index = 0;
                 foreach (var itemx in computerRep.Computers)
                 {
@@ -181,8 +178,6 @@ namespace MEBS_Envanter
                 }*/
                 //computerRep.Computers.Remove(Current_Computer_Info);
                 //computerRep.Computers.Add(addInfo.computer);
-
-
                 Current_Computer_Info = addInfo.computer;
                 pcList.SelectedItem = Current_Computer_Info;
                 pcEnvanterControl.SetDataContext(Current_Computer_Info);
@@ -493,9 +488,6 @@ namespace MEBS_Envanter
                 
         }
 
-
-
-
         public bool IsBusy
         {
             get { return (bool)GetValue(IsBusyProperty); }
@@ -511,6 +503,10 @@ namespace MEBS_Envanter
             Close();
         }
 
-        
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            YaziciWindow w = new YaziciWindow();
+            w.ShowDialog();
+        }        
     }
 }

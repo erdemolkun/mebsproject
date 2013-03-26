@@ -4,7 +4,7 @@
         xmlns:x1="clr-namespace:MEBS_Envanter" 
         xmlns:x2="clr-namespace:Mebs_Envanter"
         xmlns:guihelpers="clr-namespace:MEBS_Envanter.GUIHelpers"
-        x:Name="mainwin"
+        x:Name="mainwin" Width="920"
         MaxHeight="800" MinHeight="480"  Left="20" Top="20"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
@@ -13,10 +13,9 @@
         xmlns:converters="clr-namespace:MEBS_Envanter.Converters"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
-        Title="Bilgisayar Envanter Kaydı"
-        Width="920"
+        Title="Bilgisayar Envanter Kaydı"        
         SizeToContent="Height"  ResizeMode="NoResize">
-    <Grid HorizontalAlignment="Stretch">
+    <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox">
                 <GradientStop Color="#FF7094BE" Offset="0" />
@@ -43,6 +42,7 @@
                     <MenuItem x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="InfoWindow" Click="MenuItem_Click"></MenuItem>
+                <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
             </Menu>
         </Grid>
         
@@ -52,16 +52,17 @@
             Grid.ColumnSpan="10" Grid.RowSpan="12" Canvas.ZIndex="99">
             <animations:LoadingAnimation LoadingText="Yükleniyor.."  
                                          HorizontalAlignment="Center" VerticalAlignment="Center"></animations:LoadingAnimation >            
-        </Grid>
-        
-        
+        </Grid>                
 
         <!--<Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Background="#FF284169"></Grid>-->
-
+         
+        
+        
         <Grid Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch">
             <x2:ComputerUserControl x:Name="pcEnvanterControl"></x2:ComputerUserControl>
         </Grid>
 
+        <!--Bilgisayar listesi-->
         <Grid Margin="6,0"  Background="Transparent" Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -75,49 +76,18 @@
 
             <ListBox x:Name="pcList" MouseDoubleClick="pcList_MouseDoubleClick"
                  SelectionChanged="pcList_SelectionChanged"                 
-                 ItemsSource="{Binding Computers}"
-                 ItemContainerStyle="{StaticResource computerInfoListBoxItemStyle}"
+                 ItemsSource="{Binding Computers}" Style="{StaticResource generalListBoxStyle}"
+                 ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
                  Grid.Row="1" MinHeight="120"  Background="Transparent">
 
-                <ListBox.Style>
-                    <Style  TargetType="ListBox">
-                        <Setter Property="SnapsToDevicePixels" Value="true"/>
-                        <Setter Property="OverridesDefaultStyle" Value="true"/>
-                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-                        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-                        <Setter Property="MinWidth" Value="90"/>
-                        <Setter Property="MinHeight" Value="80"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBox">
-                                    <Border Name="Border" Background="Transparent" BorderBrush="Transparent" 
-                                            BorderThickness="2" CornerRadius="4">
-                                        <ScrollViewer Margin="0" Focusable="false" HorizontalContentAlignment="Stretch" >
-                                            <StackPanel HorizontalAlignment="Stretch" Margin="2,0" IsItemsHost="True"  />
-                                        </ScrollViewer>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <!--<Trigger Property="IsEnabled" Value="false">
-                                            <Setter TargetName="Border" Property="Background" Value="Transparent" />
-                                            <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
-                                        </Trigger>-->
-                                        <Trigger Property="IsGrouping" Value="true">
-                                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.Style>
+                
             </ListBox>
 
         </Grid>
 
+        
+        <!--Düzenleme Kısmı (Ekle,Sil,Düzenle)-->
         <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -140,6 +110,7 @@
                      Name="refreshListBtn"  Click="refreshListBtn_Click" />
         </Grid>
 
+        <!--Arama Seçenekleri-->
         <Grid Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" Margin="4,0">
 
             <Grid.RowDefinitions>
