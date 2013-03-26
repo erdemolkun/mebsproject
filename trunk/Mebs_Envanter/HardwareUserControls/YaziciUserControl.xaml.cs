@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using Mebs_Envanter.Hardware;
 using MEBS_Envanter;
 using Mebs_Envanter.GeneralObjects;
+using Mebs_Envanter.Repositories;
+using MEBS_Envanter.Repositories;
 
 namespace Mebs_Envanter.HardwareUserControls
 {

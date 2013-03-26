@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using MEBS_Envanter.DB;
 
-namespace MEBS_Envanter
+namespace MEBS_Envanter.Repositories
 {
     public class MarkaRepository
     {

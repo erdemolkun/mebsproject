@@ -6,8 +6,9 @@ using MEBS_Envanter;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using MEBS_Envanter.DB;
+using Mebs_Envanter.GeneralObjects;
 
-namespace Mebs_Envanter.GeneralObjects
+namespace Mebs_Envanter.Repositories
 {
     internal class TempestRepository : MebsBaseObject
     {

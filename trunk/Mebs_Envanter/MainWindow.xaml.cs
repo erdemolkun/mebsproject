@@ -17,7 +17,6 @@ using MEBS_Envanter.DB;
 using System.Data.SqlClient;
 using MEBS_Envanter.GeneralObjects;
 using System.Data;
-using MEBS_Envanter.Hardware;
 using System.Threading;
 using System.Windows.Threading;
 using System.Collections;
@@ -28,6 +27,8 @@ using System.ComponentModel;
 using Mebs_Envanter.GeneralObjects;
 using System.Drawing.Printing;
 using Mebs_Envanter.PrintOperations;
+using MEBS_Envanter.Repositories;
+using Mebs_Envanter.Repositories;
 
 namespace MEBS_Envanter
 {

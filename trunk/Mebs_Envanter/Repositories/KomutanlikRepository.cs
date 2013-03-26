@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using MEBS_Envanter.DB;
 using Mebs_Envanter.GeneralObjects;
 
-namespace MEBS_Envanter.GeneralObjects
+namespace MEBS_Envanter.Repositories
 {
     public class KomutanlikRepository : MebsBaseObject
     {

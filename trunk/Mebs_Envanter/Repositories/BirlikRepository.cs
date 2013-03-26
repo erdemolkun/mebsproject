@@ -6,8 +6,9 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using MEBS_Envanter.DB;
 using Mebs_Envanter.GeneralObjects;
+using MEBS_Envanter.GeneralObjects;
 
-namespace MEBS_Envanter.GeneralObjects
+namespace MEBS_Envanter.Repositories
 {
     public class BirlikRepository : MebsBaseObject
     {
