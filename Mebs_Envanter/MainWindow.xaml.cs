@@ -114,6 +114,12 @@ namespace MEBS_Envanter
                 object count = DBFunctions.ExecuteToFetchSingleItem("Select Count(*) as Count from tbl_bilgisayar where Pc_adi like '" +
                     freshComputerInfo.Pc_adi.Trim().ToString() + "'", "Count");
 
+                if (String.IsNullOrEmpty(freshComputerInfo.Pc_adi.Trim().ToString())) {
+
+                    ShowError("Lütfen Bilgisayar ismini giriniz !!!");
+                    return false;
+                }
+
                 if (count != null && Convert.ToInt32(count) > 0)
                 {
                     if (isEdit && Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi))
@@ -122,7 +128,7 @@ namespace MEBS_Envanter
                     }
                     else
                     {
-                        ShowError("Aynı isimli bilgisayar mevcut");
+                        ShowError("Aynı isimli bilgisayar mevcut !!!");
                         return false;
                     }
                 }                
