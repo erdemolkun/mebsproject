@@ -43,8 +43,8 @@ namespace MEBS_Envanter
             Thread thSqlInit = new Thread(StartSqlInit);
             thSqlInit.IsBackground = true;
             thSqlInit.Start();
-            IsEnabled = false;
-
+            //IsEnabled = false;
+            IsBusy = true;
 
         }
 
@@ -60,13 +60,15 @@ namespace MEBS_Envanter
                     setGUIDataContextForInitialization();
                     RefreshComputerList(null, true);
                     pcList_SelectionChanged(pcList, null);
-                    IsEnabled = true;
+                    //IsEnabled = true;
+                    IsBusy = false;
                     pcList.Focus();
                 }
                 else
                 {
                     MessageBox.Show("Bağlantı Sağlanamadı. Çıkıyorum");
-                    IsEnabled = true;
+                    //IsEnabled = true;
+                    IsBusy = false;
                     //Environment.Exit(0);
                 }
             }));
@@ -134,7 +136,8 @@ namespace MEBS_Envanter
                 worker.DoWork += new DoWorkEventHandler(worker_DoWork);
                 worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
                 Mouse.OverrideCursor = Cursors.Wait;
-                this.IsEnabled = false;
+                //this.IsEnabled = false;
+                IsBusy = true;
 
                 worker.RunWorkerAsync(freshComputerInfo);
                 return true;
@@ -148,7 +151,8 @@ namespace MEBS_Envanter
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Arrow;
-            this.IsEnabled = true;
+            //this.IsEnabled = true;
+            IsBusy = true;
             ComputerDbWorkInfo addInfo = e.Result as ComputerDbWorkInfo;
             ComputerInfoRepository computerRep = (pcList.DataContext as ComputerInfoRepository);
             if (addInfo.computer.IsEdit)
@@ -486,5 +490,20 @@ namespace MEBS_Envanter
              x.Show();
                 
         }
+
+
+
+
+        public bool IsBusy
+        {
+            get { return (bool)GetValue(IsBusyProperty); }
+            set { SetValue(IsBusyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsBusy.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsBusyProperty =
+            DependencyProperty.Register("IsBusy", typeof(bool), typeof(MainWindow), new UIPropertyMetadata(false));
+
+        
     }
 }

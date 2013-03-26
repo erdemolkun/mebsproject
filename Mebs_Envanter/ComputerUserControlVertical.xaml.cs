@@ -32,7 +32,7 @@ namespace Mebs_Envanter
 
         void ComputerUserControlVertical_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            Title = (DataContext as ComputerInfo).Pc_adi +" Özellikleri";
+            Title = (DataContext as ComputerInfo).Pc_adi +" No'lu Bilgisayar Özellikleri";
         }
 
     }
