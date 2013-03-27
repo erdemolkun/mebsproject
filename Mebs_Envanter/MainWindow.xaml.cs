@@ -413,7 +413,7 @@ namespace MEBS_Envanter
                     {
                         tempComputer.SetGeneralFields(rowPC);
                         tempComputer.Set_HardwareInfos(cnn);
-                        tempComputer.Set_SenetInfos();
+                        tempComputer.Senet.Set_SenetInfos(true,tempComputer.Id,-1) ;
                     }
                     catch (Exception) { }
                     repositoryNew.Computers.Add(tempComputer);

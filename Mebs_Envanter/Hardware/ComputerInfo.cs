@@ -63,7 +63,7 @@ namespace MEBS_Envanter
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
 
 
-            Pc_adi = rowPC["pc_adi"].ToString(); ;
+            Pc_adi = rowPC["pc_adi"].ToString(); 
             PcStokNo = rowPC["pc_stok_no"].ToString();
             Model = rowPC["model"].ToString();
             SerialNumber = rowPC["seri_no"].ToString();
@@ -148,49 +148,7 @@ namespace MEBS_Envanter
             }
         }
 
-        internal void Set_SenetInfos()
-        {
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
-            String conString = "Select * From tbl_senet where bilgisayar_id=@bilgisayar_id";
-            SqlCommand cmd = new SqlCommand(conString, cnn);
-            cmd.Parameters.AddWithValue("@bilgisayar_id", Id);
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
-            try
-            {
-                adp.Fill(dt);
-            }
-            catch (Exception)
-            {
-            }
-            finally
-            {
-                cnn.Close();
-                cnn.Dispose();
-            }
-            foreach (DataRow rowParca in dt.Rows)
-            {
-                String alan_kisi_rutbe = rowParca["alan_kisi_rutbe"].ToString();
-                String alan_kisi_isim = rowParca["alan_kisi_isim"].ToString();
-                String veren_kisi_isim = rowParca["veren_kisi_isim"].ToString();
-
-                Senet.Alan_kisi_isim = alan_kisi_isim;
-                Senet.Alan_kisi_rutbe = alan_kisi_rutbe;
-                Senet.Veren_kisi_isim = veren_kisi_isim;
-
-
-                int alanKisiKomutanlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_komutanlik_id"], -1);
-                int alanKisiBirlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_birilk_id"], -1);
-                int alanKisiKisimId = DBValueHelpers.GetInt32(rowParca["alan_kisi_kisim_id"], -1);
-
-                Senet.Alan_kisi_komutanlik = new Komutanlik(alanKisiKomutanlikId, "");
-                Senet.Alan_kisi_birlik = new Birlik(alanKisiBirlikId, "");
-                Senet.Alan_kisi_kisim = new Kisim(alanKisiKisimId, "");
-                Senet.Id = Convert.ToInt32(rowParca["senet_id"]);
-            }
-        }
+        
 
         internal void Set_HardwareInfos(SqlConnection sqlCon)
         {
