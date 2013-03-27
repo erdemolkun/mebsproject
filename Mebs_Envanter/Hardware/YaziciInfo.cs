@@ -30,11 +30,20 @@ namespace Mebs_Envanter.Hardware
             NetworkInfo.IpAddress = rowYazici["ip_adresi"].ToString();
 
 
-            int tempest_id = DBValueHelpers.GetInt32(rowYazici["tempest_id"].ToString(), -1);
-            Tempest = new Tempest(tempest_id, "");
-
             int senet_id = DBValueHelpers.GetInt32(rowYazici["senet_id"].ToString(), -1);
             SenetInfo.Set_SenetInfos(false, -1, senet_id);
+            YaziciModeli = rowYazici["yazici_modeli"].ToString();
+            //int parca_id = DBValueHelpers.GetInt32(rowYazici["parca_id"].ToString(), -1);
+
+            //List<OEMDevice> devs =  OEMDevice.GetOemDevices(null, false, -1, parca_id);
+            //foreach (var item in devs)
+            //{
+            //    if (item is YaziciInfo) {
+                    
+                    
+
+            //    }
+            //}
 
         }
 

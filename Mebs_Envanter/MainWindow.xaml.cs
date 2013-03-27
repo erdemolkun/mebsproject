@@ -412,7 +412,7 @@ namespace MEBS_Envanter
                     try
                     {
                         tempComputer.SetGeneralFields(rowPC);
-                        tempComputer.Set_HardwareInfos(cnn);
+                        tempComputer.Set_ComputerOemDevices(cnn);
                         tempComputer.Senet.Set_SenetInfos(true,tempComputer.Id,-1) ;
                     }
                     catch (Exception) { }

@@ -63,7 +63,7 @@ namespace MEBS_Envanter
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
 
 
-            Pc_adi = rowPC["pc_adi"].ToString(); 
+            Pc_adi = rowPC["pc_adi"].ToString();
             PcStokNo = rowPC["pc_stok_no"].ToString();
             Model = rowPC["model"].ToString();
             SerialNumber = rowPC["seri_no"].ToString();
@@ -88,7 +88,7 @@ namespace MEBS_Envanter
                     adp.Fill(dt);
                 }
                 catch (Exception)
-                {}
+                { }
                 finally
                 {
                     cnn.Close();
@@ -138,112 +138,131 @@ namespace MEBS_Envanter
                     int yaz_id = (int)rowYazici["yazici_id"];
                     //int mon_type = DBValueHelpers.GetInt32(rowYazici["monitor_tipi"], -1);
 
-                   /* if (mon_type > 0)
-                    {
-                        (devOem as Monitor).MonType = (MonitorTypes)mon_type;
-                    }*/
+                    /* if (mon_type > 0)
+                     {
+                         (devOem as Monitor).MonType = (MonitorTypes)mon_type;
+                     }*/
                     (devOem as YaziciInfo).YaziciModeli = yazici_modeli;
                     (devOem as YaziciInfo).Yaz_id = yaz_id;
                 }
             }
         }
 
-        
-
-        internal void Set_HardwareInfos(SqlConnection sqlCon)
+        public void Set_ComputerOemDevices(SqlConnection sqlCon)
         {
-            SqlConnection cnn = sqlCon;//GlobalDataAccess.Get_Fresh_SQL_Connection();
 
-            String conString = "Select * From tbl_parca where bilgisayar_id=@bilgisayar_id";
-            SqlCommand cmd = new SqlCommand(conString, cnn);
-            cmd.Parameters.AddWithValue("@bilgisayar_id", Id);
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
+            Set_HardwareInfos(sqlCon);
 
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
-            if (res)
+        }
+
+
+        private void Set_HardwareInfos(SqlConnection sqlCon)
+        {
+
+            List<OEMDevice> devs = OEMDevice.GetOemDevices(sqlCon, true, Id, -1);
+
+            foreach (OEMDevice item in devs)
             {
-                try
+
+                if (item is Monitor)
                 {
-                    adp.Fill(dt);
-                    #region Fill Hardware Properties
-
-                    foreach (DataRow rowParca in dt.Rows)
-                    {
-                        int parcaTipi = DBValueHelpers.GetInt32(rowParca["parca_tipi"], (int)DeviceTypes.NONE);
-                        DeviceTypes tip = (DeviceTypes)parcaTipi;
-                        int parca_id = (int)rowParca["parca_id"];
-                        String seri_no = rowParca["seri_no"].ToString();
-                        String parca_tanimi = rowParca["parca_tanimi"].ToString();
-                        String parca_no = rowParca["parca_no"].ToString();
-
-                        int markaid = DBValueHelpers.GetInt32(rowParca["marka_id"], -1);
-                        int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
-
-
-                        OEMDevice devOem = null;
-                        if (tip == DeviceTypes.MONITOR) {
-
-                            devOem = new Monitor();
-                        }
-                        else if (tip == DeviceTypes.PRINTER)
-                        {
-                            devOem = new YaziciInfo();
-                        }
-                        else {
-                            devOem = new OEMDevice(tip);
-                        }
-                        
-                        //Ortak alanlar
-                        devOem.Id = parca_id;
-                        devOem.SerialNumber = seri_no;
-                        devOem.Parca_no = parca_no;
-                        devOem.Marka = new Marka(markaid, "");
-                        devOem.Tempest = new Tempest(tempestid, "");
-                        devOem.DeviceInfo = parca_tanimi;
-
-                        if (tip == DeviceTypes.MONITOR)
-                        {
-                            Monitor mon = devOem as Monitor;
-                            //mon.Id = parca_id;
-                            //mon.SerialNumber = seri_no;
-                            //mon.Parca_no = parca_no;
-                            //mon.Marka = new Marka(markaid, "");
-                            //mon.Tempest = new Tempest(tempestid, "");
-                            Set_MonitorInfo(mon);
-                            MonitorInfo = mon;
-                        }
-                        else if (tip == DeviceTypes.PRINTER)
-                        {
-                            YaziciInfo infYazi = devOem as YaziciInfo;
-                            Set_YaziciInfo(infYazi);
-                            YaziciInfo = infYazi;
-                            
-                        }
-                        else 
-                        {
-                            //OEMDevice devOem = new OEMDevice(tip);
-                            //devOem.Id = parca_id;
-                            //devOem.Marka = new Marka(markaid, "");
-                            //devOem.SerialNumber = seri_no;
-                            //devOem.Parca_no = parca_no;
-                            //devOem.DeviceInfo = parca_tanimi;
-                            OemDevicesVModel.AssignOemDevice(devOem);
-                        }
-                    }
-
-                    #endregion
+                    Monitor mon = item as Monitor;
+                    Set_MonitorInfo(mon);
+                    MonitorInfo = mon;
                 }
-                catch (Exception)
+                else if (item is YaziciInfo)
                 {
-
+                    YaziciInfo infYazi = item as YaziciInfo;
+                    Set_YaziciInfo(infYazi);
+                    YaziciInfo = infYazi;
                 }
-                finally
+                else
                 {
-                    //cnn.Close();
-                    //cnn.Dispose();
+                    OemDevicesVModel.AssignOemDevice(item);
                 }
             }
+            //return;
+            //SqlConnection cnn = sqlCon;//GlobalDataAccess.Get_Fresh_SQL_Connection();
+
+            //String conString = "Select * From tbl_parca where bilgisayar_id=@bilgisayar_id";
+            //SqlCommand cmd = new SqlCommand(conString, cnn);
+            //cmd.Parameters.AddWithValue("@bilgisayar_id", Id);
+            //SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            //DataTable dt = new DataTable();
+
+            //bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            //if (res)
+            //{
+            //    try
+            //    {
+            //        adp.Fill(dt);
+            //        #region Fill Hardware Properties
+
+            //        foreach (DataRow rowParca in dt.Rows)
+            //        {
+            //            int parcaTipi = DBValueHelpers.GetInt32(rowParca["parca_tipi"], (int)DeviceTypes.NONE);
+            //            DeviceTypes tip = (DeviceTypes)parcaTipi;
+            //            int parca_id = (int)rowParca["parca_id"];
+            //            String seri_no = rowParca["seri_no"].ToString();
+            //            String parca_tanimi = rowParca["parca_tanimi"].ToString();
+            //            String parca_no = rowParca["parca_no"].ToString();
+
+            //            int markaid = DBValueHelpers.GetInt32(rowParca["marka_id"], -1);
+            //            int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
+
+
+            //            OEMDevice devOem = null;
+            //            if (tip == DeviceTypes.MONITOR)
+            //            {
+            //                devOem = new Monitor();
+            //            }
+            //            else if (tip == DeviceTypes.PRINTER)
+            //            {
+            //                devOem = new YaziciInfo();
+            //            }
+            //            else
+            //            {
+            //                devOem = new OEMDevice(tip);
+            //            }
+
+            //            //Ortak alanlar
+            //            devOem.Id = parca_id;
+            //            devOem.SerialNumber = seri_no;
+            //            devOem.Parca_no = parca_no;
+            //            devOem.Marka = new Marka(markaid, "");
+            //            devOem.Tempest = new Tempest(tempestid, "");
+            //            devOem.DeviceInfo = parca_tanimi;
+
+            //            if (tip == DeviceTypes.MONITOR)
+            //            {
+            //                Monitor mon = devOem as Monitor;
+            //                Set_MonitorInfo(mon);
+            //                MonitorInfo = mon;
+            //            }
+            //            else if (tip == DeviceTypes.PRINTER)
+            //            {
+            //                YaziciInfo infYazi = devOem as YaziciInfo;
+            //                Set_YaziciInfo(infYazi);
+            //                YaziciInfo = infYazi;
+            //            }
+            //            else
+            //            {
+            //                OemDevicesVModel.AssignOemDevice(devOem);
+            //            }
+            //        }
+
+            //        #endregion
+            //    }
+            //    catch (Exception)
+            //    {
+
+            //    }
+            //    finally
+            //    {
+            //        //cnn.Close();
+            //        //cnn.Dispose();
+            //    }
+            //}
 
         }
 

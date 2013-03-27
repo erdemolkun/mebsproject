@@ -16,6 +16,8 @@ using MEBS_Envanter.Repositories;
 using MEBS_Envanter.DB;
 using System.Data.SqlClient;
 using System.Data;
+using Mebs_Envanter.DB;
+using MEBS_Envanter;
 
 namespace Mebs_Envanter
 {
@@ -97,15 +99,25 @@ namespace Mebs_Envanter
                 //dataGridSample.ItemsSource = dt.DefaultView;
                 foreach (DataRow rowPC in dt.Rows)
                 {
-                    YaziciInfo tempYazici = new YaziciInfo();
+                    int parca_id = DBValueHelpers.GetInt32(rowPC["parca_id"].ToString(), -1);
+                    List<OEMDevice> xx= OEMDevice.GetOemDevices(cnn, false, -1, parca_id);
+                    YaziciInfo tempYazici = null;
+                    foreach (var item in xx)
+                    {
+                        if (item is YaziciInfo) {
+                            tempYazici = item as YaziciInfo;
+                        }
+                    }
+                    //YaziciInfo tempYazici = new YaziciInfo();
                     try
                     {
                         tempYazici.SetGeneralFields(rowPC);
                         //tempComputer.Set_HardwareInfos(cnn);
                         //tempComputer.Set_SenetInfos();
+                        repositoryNew.Yazicilar.Add(tempYazici);
                     }
                     catch (Exception) { }
-                    repositoryNew.Yazicilar.Add(tempYazici);
+                    
                 }
                 yaziciList.DataContext = repositoryNew;
                 if (selectLast)

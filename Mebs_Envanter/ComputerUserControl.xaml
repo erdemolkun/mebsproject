@@ -42,7 +42,7 @@
                 </Border>
             </TabItem>
 
-            <TabItem Header="Yazıcı" x:Name="yaziciTab" >
+            <TabItem Header="Yazıcı" x:Name="yaziciTab" Visibility="Collapsed">
                 <Border >
                     <hardwareusercontrols:YaziciUserControl x:Name="yaziciUserControl1" DataContext="{Binding YaziciInfo}">
 
