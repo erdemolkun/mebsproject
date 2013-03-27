@@ -35,8 +35,7 @@
                    Visibility="{Binding ElementName=me,Path=IsUsedForPrinter,Converter={StaticResource NotBoolToVisibilityConverter}}"
                    Grid.Row="1" Text="MAC"></TextBlock>
 
-        <ComboBox VerticalAlignment="Center"  
-                  
+        <ComboBox VerticalAlignment="Center"                    
                             HorizontalAlignment="Left"                          
                             SelectedIndex="{Binding Path=BagliAg,
                             Converter={StaticResource BagliAgComboIndexConverter},UpdateSourceTrigger=Explicit}"                             

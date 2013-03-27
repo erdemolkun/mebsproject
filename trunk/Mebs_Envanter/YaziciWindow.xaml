@@ -56,7 +56,7 @@
 
             <ListBox x:Name="yaziciList"
                  SelectionChanged="yaziciList_SelectionChanged"      
-                 ItemsSource="{Binding Computers}" Style="{StaticResource generalListBoxStyle}"
+                 ItemsSource="{Binding Yazicilar}" Style="{StaticResource generalListBoxStyle}"
                  ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
                  Grid.Row="1" MinHeight="120"  Background="Transparent">

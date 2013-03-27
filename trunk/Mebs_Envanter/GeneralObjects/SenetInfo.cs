@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using MEBS_Envanter.GeneralObjects;
 using Mebs_Envanter.GeneralObjects;
+using System.Data.SqlClient;
+using System.Data;
+using MEBS_Envanter.DB;
+using Mebs_Envanter.DB;
 
 namespace MEBS_Envanter
 {
@@ -68,5 +72,66 @@ namespace MEBS_Envanter
             get { return veren_kisi_isim; }
             set { veren_kisi_isim = value; }
         }
+
+
+
+        internal void Set_SenetInfos(bool isInComputer,int bilgisayar_id,int senet_id)
+        {
+            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+
+            SqlCommand cmd = null;
+
+            if (isInComputer)
+            {
+                String conString = "Select * From tbl_senet where bilgisayar_id=@bilgisayar_id";
+                cmd = new SqlCommand(conString, cnn);
+                cmd.Parameters.AddWithValue("@bilgisayar_id", bilgisayar_id);
+            }
+            else {
+
+                String conString = "Select * From tbl_senet where senet_id=@senet_id";
+                cmd = new SqlCommand(conString, cnn);
+                cmd.Parameters.AddWithValue("@senet_id", senet_id);
+            }
+            
+            
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            try
+            {
+                adp.Fill(dt);
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                cnn.Close();
+                cnn.Dispose();
+            }
+            foreach (DataRow rowParca in dt.Rows)
+            {
+                String alan_kisi_rutbe = rowParca["alan_kisi_rutbe"].ToString();
+                String alan_kisi_isim = rowParca["alan_kisi_isim"].ToString();
+                String veren_kisi_isim = rowParca["veren_kisi_isim"].ToString();
+
+                Alan_kisi_isim = alan_kisi_isim;
+                Alan_kisi_rutbe = alan_kisi_rutbe;
+                Veren_kisi_isim = veren_kisi_isim;
+
+
+                int alanKisiKomutanlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_komutanlik_id"], -1);
+                int alanKisiBirlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_birilk_id"], -1);
+                int alanKisiKisimId = DBValueHelpers.GetInt32(rowParca["alan_kisi_kisim_id"], -1);
+
+                Alan_kisi_komutanlik = new Komutanlik(alanKisiKomutanlikId, "");
+                Alan_kisi_birlik = new Birlik(alanKisiBirlikId, "");
+                Alan_kisi_kisim = new Kisim(alanKisiKisimId, "");
+                Id = Convert.ToInt32(rowParca["senet_id"]);
+            }
+        }
+
     }
 }
