@@ -17,6 +17,19 @@ namespace MEBS_Envanter
 {
     public class ComputerInfo : MebsBaseObject
     {
+
+
+        public void Fetch() {
+            if (!PropertiesFetched) {
+
+                Set_ComputerOemDevices(null);
+                Senet.Set_SenetInfos(true, Id, -1);
+                PropertiesFetched = true;
+            }        
+        }
+
+        public bool PropertiesFetched = false;
+
         public bool IsEdit = false;
         public ComputerInfo()
         {
@@ -36,21 +49,23 @@ namespace MEBS_Envanter
         {
             Id = (int)rowPC["bilgisayar_id"];
 
-            int markaid = DBValueHelpers.GetInt32(rowPC["marka_id"].ToString(), -1);
-            //if (!String.IsNullOrEmpty(rowPC["marka_id"].ToString())) {
+            
+            //if (!String.IsNullOrEmpty(rowPC["marka_id"].ToString()))
+            //{
             //    markaid = (int)rowPC["marka_id"];
             //}
-            //try {
+            //try
+            //{
             //    bool x = String.IsNullOrEmpty(rowPC["marka_id"].ToString());
             //    int deneme = -1;
             //    Int32.TryParse(rowPC["marka_id"].ToString(), out deneme);
             //    //markaid = (int)rowPC["marka_id"]; if (markaid < 0)markaid = -1;
             //}
-            //catch (Exception) {
+            //catch (Exception)
+            //{
             //}
-
+            int markaid = DBValueHelpers.GetInt32(rowPC["marka_id"].ToString(), -1);
             Marka = new Marka(markaid, "");
-
 
             int bagli_ag_id = DBValueHelpers.GetInt32(rowPC["bagli_ag_id"].ToString(), -1);
 
@@ -62,7 +77,7 @@ namespace MEBS_Envanter
 
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
 
-
+            
             Pc_adi = rowPC["pc_adi"].ToString();
             PcStokNo = rowPC["pc_stok_no"].ToString();
             Model = rowPC["model"].ToString();
@@ -150,9 +165,8 @@ namespace MEBS_Envanter
 
         public void Set_ComputerOemDevices(SqlConnection sqlCon)
         {
-
-            Set_HardwareInfos(sqlCon);
-
+            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            Set_HardwareInfos(cnn);
         }
 
 

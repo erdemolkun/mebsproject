@@ -253,6 +253,7 @@ namespace MEBS_Envanter
             //pcEnvanterTabControl.DataContext = Current_Computer_Info;
             //pcEnvanterControl.DataContext = Current_Computer_Info;
             pcEnvanterControl.SetDataContext(Current_Computer_Info);
+            Current_Computer_Info.Fetch();
             //changeCurrentPCContext(list.SelectedItem as ComputerInfo );
         }
 
@@ -381,7 +382,6 @@ namespace MEBS_Envanter
 
         private void RefreshComputerList(SortedList<String, object> parameterList, bool selectLast)
         {
-
             Stopwatch w = Stopwatch.StartNew();
             ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
@@ -414,8 +414,9 @@ namespace MEBS_Envanter
                     try
                     {
                         tempComputer.SetGeneralFields(rowPC);
-                        tempComputer.Set_ComputerOemDevices(cnn);
-                        tempComputer.Senet.Set_SenetInfos(true,tempComputer.Id,-1) ;
+                        //tempComputer.Fetch();
+                        //tempComputer.Set_ComputerOemDevices(cnn);
+                        //tempComputer.Senet.Set_SenetInfos(true,tempComputer.Id,-1);
                     }
                     catch (Exception) { }
                     repositoryNew.Computers.Add(tempComputer);
