@@ -340,8 +340,7 @@ namespace Mebs_Envanter
             RefreshPrinterList(GetParameterListForSearch(), false);
         }
         private SortedList<String, object> GetParameterListForSearch()
-        {            
-            //@seri_no
+        {                        
             //parca_no
 
             SortedList<String, object> list = new SortedList<string, object>();
@@ -380,17 +379,23 @@ namespace Mebs_Envanter
                     list.Add("@marka_id", (searchGridMarkalarCombo.SelectedItem as Marka).MarkaID);
                 }
             }
-            
-            //String alan_kisi_isim = searchGridalanKisiIsimTxtBox.Text.Trim().ToString();
-            //if (!String.IsNullOrEmpty(alan_kisi_isim))
-            //{
-            //    list.Add("@alan_kisi_isim", alan_kisi_isim);
-            //}
+
+            String alan_kisi_isim = searchGridalanKisiIsimTxtBox.Text.Trim().ToString();
+            if (!String.IsNullOrEmpty(alan_kisi_isim))
+            {
+                list.Add("@alan_kisi_isim", alan_kisi_isim);
+            }
             
             String pcModel = searchGridModelTxtBox.Text.Trim().ToString();
             if (!String.IsNullOrEmpty(pcModel))
             {
                 list.Add("@yazici_modeli", pcModel);
+            }
+
+            String serial = searchGridSerialNumberTxtBox.Text.Trim().ToString();
+            if (!String.IsNullOrEmpty(serial))
+            {
+                list.Add("@seri_no", serial);
             }
             return list;
         }
