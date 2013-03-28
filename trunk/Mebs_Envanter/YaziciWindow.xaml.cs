@@ -208,25 +208,21 @@ namespace Mebs_Envanter
             bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
             try
             {
-                adp.Fill(dt);
-                //dataGridSample.ItemsSource = dt.DefaultView;
+                adp.Fill(dt);                
                 foreach (DataRow rowPC in dt.Rows)
                 {
                     int parca_id = DBValueHelpers.GetInt32(rowPC["parca_id"].ToString(), -1);
-                    List<OEMDevice> xx= OEMDevice.GetOemDevices(cnn, false, -1, parca_id);
+                    List<OEMDevice> devs= OEMDevice.GetOemDevices(cnn, false, -1, parca_id);
                     YaziciInfo tempYazici = null;
-                    foreach (var item in xx)
+                    foreach (var item in devs)
                     {
                         if (item is YaziciInfo) {
                             tempYazici = item as YaziciInfo;
                         }
-                    }
-                    //YaziciInfo tempYazici = new YaziciInfo();
+                    }                    
                     try
                     {
-                        tempYazici.SetGeneralFields(rowPC);
-                        //tempComputer.Set_HardwareInfos(cnn);
-                        //tempComputer.Set_SenetInfos();
+                        tempYazici.SetGeneralFields(rowPC);                        
                         repositoryNew.Yazicilar.Add(tempYazici);
                     }
                     catch (Exception) { }
@@ -255,7 +251,6 @@ namespace Mebs_Envanter
             Console.WriteLine("Yazıcı listesi " + x + " milisaniye içinde yenilendi");
         }
 
-
         private void yaziciList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -270,13 +265,8 @@ namespace Mebs_Envanter
                 infYazici = new YaziciInfo();
             }
             list.ScrollIntoView(infYazici);
-            Current_YaziciInfo = infYazici;
-            //pcEnvanterTabControl.DataContext = Current_Computer_Info;
-            //pcEnvanterControl.DataContext = Current_Computer_Info;
-            Current_YaziciInfo = infYazici;
-            gridYaziciBilgileri.DataContext = Current_YaziciInfo;
-            //changeCurrentPCContext(list.SelectedItem as ComputerInfo );
-
+            Current_YaziciInfo = infYazici;            
+            gridYaziciBilgileri.DataContext = Current_YaziciInfo;            
         }
 
         private YaziciInfo Current_YaziciInfo = new YaziciInfo();
