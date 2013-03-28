@@ -19,6 +19,9 @@ using System.Data;
 using Mebs_Envanter.DB;
 using MEBS_Envanter;
 using System.ComponentModel;
+using Mebs_Envanter.GeneralObjects;
+using MEBS_Envanter.GeneralObjects;
+using Mebs_Envanter.Repositories;
 
 namespace Mebs_Envanter
 {
@@ -33,15 +36,16 @@ namespace Mebs_Envanter
             LoadItems();
 
             YaziciInfo x = new YaziciInfo();
-            x.YaziciModeli = "asdz1";
-            x.NetworkInfo.IpAddress = "asdz2";
-            x.SenetInfo.Alan_kisi_isim = "asdz3";
+            //x.YaziciModeli = "asdz1";
+            //x.NetworkInfo.IpAddress = "asdz2";
+            //x.SenetInfo.Alan_kisi_isim = "asdz3";
 
 
             Current_YaziciInfo = x;
-            gridYaziciBilgileri.DataContext = Current_YaziciInfo;
+            //gridYaziciBilgileri.DataContext = Current_YaziciInfo;
 
             RefreshPrinterList(null, true);
+            SetContextForSearchFields();
 
         }
 
@@ -57,10 +61,17 @@ namespace Mebs_Envanter
             {
                 YaziciInfo infYazici = new YaziciInfo();
 
-                YaziciInfo currentYazidi = yaziciList.SelectedItem as YaziciInfo;
-                if (currentYazidi != null)
+                YaziciInfo currentYazici = yaziciList.SelectedItem as YaziciInfo;
+
+                if (currentYazici == null) {
+                    Current_YaziciInfo = new YaziciInfo();
+                }
+                else{
+                    Current_YaziciInfo = currentYazici;
+                }
+                //if (currentYazidi != null)
                 {
-                    AssignYaziciInfoByGui(currentYazidi, infYazici, isEdit);
+                    AssignYaziciInfoByGui(Current_YaziciInfo, infYazici, isEdit);
 
                     BackgroundWorker worker = new BackgroundWorker();
                     worker.DoWork += new DoWorkEventHandler(worker_DoWork);
@@ -73,7 +84,7 @@ namespace Mebs_Envanter
                 }
             }
             catch (Exception) { return false; }
-            return true;
+            
         
         }
 
@@ -82,6 +93,13 @@ namespace Mebs_Envanter
             Mouse.OverrideCursor = Cursors.Arrow;
             IsBusy = false;
             YaziciDbWorkInfo addInfo = e.Result as YaziciDbWorkInfo;
+            if (addInfo == null) {
+
+                InfoWindow w = new InfoWindow(this);
+                w.ShowMessage("Hata");
+                return;
+            }
+            
             YaziciInfoRepository yaziciRep = (yaziciList.DataContext as YaziciInfoRepository);
 
             if (addInfo.yazici.isEdit)
@@ -112,9 +130,10 @@ namespace Mebs_Envanter
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             YaziciInfo yaziciInfo = e.Argument as YaziciInfo;
+            bool dbres2 = DBFunctions.InsertOrUpdateSenet(-1, yaziciInfo.SenetInfo, yaziciInfo.isEdit);
             bool dbresult = DBFunctions.InsertOrUpdateOemDevice(yaziciInfo,-1,yaziciInfo.isEdit);
             if (dbresult)
-            {
+            {                
                 //bool dbresult2 = DBFunctions.InsertOrUpdateYazici(yaziciInfo, yaziciInfo.isEdit);
                 YaziciDbWorkInfo addInfo = new YaziciDbWorkInfo();
                 addInfo.yazici = yaziciInfo;
@@ -143,6 +162,27 @@ namespace Mebs_Envanter
 
         }
 
+        private void SetContextForSearchFields()
+        {
+            KomutanlikRepository Rep_Komutanllik = new KomutanlikRepository();
+            Rep_Komutanllik.FillKomutanliklar();
+            searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Komutanliklar;
+
+            BagliAgRepository rep_bagli_ag = new BagliAgRepository();
+            rep_bagli_ag.Fill_Aglar();
+            searchGridAglarCombo.ItemsSource = rep_bagli_ag.BagliAglar;
+
+            TempestRepository tempest_rep = new TempestRepository();
+            tempest_rep.FillSeviyeler();
+            searchGridTempestCombo.ItemsSource = tempest_rep.TempestSeviyeler;
+
+            MarkaRepository marka_rep = new MarkaRepository();
+            marka_rep.FillMarkalar();
+            searchGridMarkalarCombo.ItemsSource = marka_rep.Markalar;
+
+
+        }
+
         private void RefreshPrinterList(SortedList<String, object> parameterList, bool selectLast)
         {
 
@@ -150,10 +190,10 @@ namespace Mebs_Envanter
             YaziciInfoRepository repositoryNew = new YaziciInfoRepository();
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
 
-            String commandText = "Select TOP 10 * From tbl_yazici pc order by yazici_id Desc";
-            //String commandText = "pc_genel_arama";
+            //String commandText = "Select TOP 10 * From tbl_yazici pc order by yazici_id Desc";
+            String commandText = "p_yazici_arama";
             SqlCommand cmd = new SqlCommand(commandText, cnn);
-            //cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
 
             if (parameterList != null)
             {
@@ -254,7 +294,16 @@ namespace Mebs_Envanter
 
         private void yaziciDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            bool isSuccess = DBFunctions.DeleteYazici(Current_YaziciInfo);
+            if (isSuccess)
+            {
+                YaziciInfoRepository currentInfoRep = (yaziciList.DataContext as YaziciInfoRepository);
+                if (currentInfoRep != null)
+                {
+                    currentInfoRep.Yazicilar.Remove(Current_YaziciInfo);
+                }
+                //RefreshComputerList(null,true);
+            }
         }
 
         private void refreshListBtn_Click(object sender, RoutedEventArgs e)
@@ -271,5 +320,88 @@ namespace Mebs_Envanter
         // Using a DependencyProperty as the backing store for IsBusy.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsBusyProperty =
             DependencyProperty.Register("IsBusy", typeof(bool), typeof(YaziciWindow), new UIPropertyMetadata(false));
+
+        private void btnClearSearch_Click(object sender, RoutedEventArgs e)
+        {
+            searchGridAglarCombo.SelectedIndex = -1;
+            searchGridalanKisiIsimTxtBox.Text = "";
+            searchGridBirliklerCombo.SelectedIndex = -1;
+            searchGridMarkalarCombo.SelectedIndex = -1;
+            searchGridModelTxtBox.Text = "";
+            
+            
+            searchGridTempestCombo.SelectedIndex = -1;
+            
+            searchGridKomutanliklarCombo.SelectedIndex = -1;
+        }
+
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshPrinterList(GetParameterListForSearch(), false);
+        }
+        private SortedList<String, object> GetParameterListForSearch()
+        {            
+            //@seri_no
+            //parca_no
+
+            SortedList<String, object> list = new SortedList<string, object>();
+            if (searchGridKomutanliklarCombo.SelectedItem != null)
+            {
+                if ((searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Komutanlik_id > 0)
+                {
+                    list.Add("@komutanlik_id", (searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Komutanlik_id);
+                }
+            }
+            if (searchGridBirliklerCombo.SelectedItem != null)
+            {
+                if ((searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id > 0)
+                {
+                    list.Add("@birlik_id", (searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id);
+                }
+            }
+            if (searchGridAglarCombo.SelectedItem != null)
+            {
+                if ((searchGridAglarCombo.SelectedItem as BagliAg).Ag_id > 0)
+                {
+                    list.Add("@bagli_ag_id", (searchGridAglarCombo.SelectedItem as BagliAg).Ag_id);
+                }
+            }
+            if (searchGridTempestCombo.SelectedItem != null)
+            {
+                if ((searchGridTempestCombo.SelectedItem as Tempest).Id > 0)
+                {
+                    list.Add("@tempest_id", (searchGridTempestCombo.SelectedItem as Tempest).Id);
+                }
+            }
+            if (searchGridMarkalarCombo.SelectedItem != null)
+            {
+                if ((searchGridMarkalarCombo.SelectedItem as Marka).MarkaID > 0)
+                {
+                    list.Add("@marka_id", (searchGridMarkalarCombo.SelectedItem as Marka).MarkaID);
+                }
+            }
+            
+            //String alan_kisi_isim = searchGridalanKisiIsimTxtBox.Text.Trim().ToString();
+            //if (!String.IsNullOrEmpty(alan_kisi_isim))
+            //{
+            //    list.Add("@alan_kisi_isim", alan_kisi_isim);
+            //}
+            
+            String pcModel = searchGridModelTxtBox.Text.Trim().ToString();
+            if (!String.IsNullOrEmpty(pcModel))
+            {
+                list.Add("@yazici_modeli", pcModel);
+            }
+            return list;
+        }
+
+        private void searchGridKomutanliklarCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combo_senet = sender as ComboBox;
+            BirlikRepository birlik_rep = new BirlikRepository();
+            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik));
+            searchGridBirliklerCombo.ItemsSource = birlik_rep.Birlikler;
+            BirlikRepository.INSTANCE = birlik_rep;
+        }
     }
 }

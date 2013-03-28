@@ -95,7 +95,10 @@ namespace MEBS_Envanter.DB
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar, 5));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@parca_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@yazici_id", SqlDbType.Int));
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@senet_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@yazici_modeli", SqlDbType.NVarChar, 50));
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@ip_adresi", SqlDbType.NVarChar, 50));
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@bagli_ag_id", SqlDbType.Int));            
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@temp_yazici_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters["@temp_yazici_id"].Direction = ParameterDirection.Output;
 
@@ -113,6 +116,26 @@ namespace MEBS_Envanter.DB
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_birilk_id", SqlDbType.Int));
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_komutanlik_id", SqlDbType.Int));
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_kisim_id", SqlDbType.Int));
+        }
+
+        public static bool DeleteYazici(YaziciInfo infoYazici)
+        {
+            try
+            {
+                cmParcaEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_SQL_Connection();
+                bool res = GlobalDataAccess.Open_SQL_Connection(cmParcaEkleSilDuz.Connection);
+                if (res)
+                { cmParcaEkleSilDuz.Parameters["@type"].Value = "S"; }
+
+                cmParcaEkleSilDuz.Parameters["@parca_id"].Value = infoYazici.Id;
+                cmParcaEkleSilDuz.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+
         }
 
         public static bool DeletePC(ComputerInfo infoComputer)
@@ -191,8 +214,15 @@ namespace MEBS_Envanter.DB
                         cmYaziciEkleSilDuz.Parameters["@yazici_id"].Value = infoYazici.Yaz_id;
                     }
                     cmYaziciEkleSilDuz.Parameters["@parca_id"].Value = infoYazici.Id;
-                    //cmYaziciEkleSilDuz.Parameters["@yazici_id"].Value = infoYazici.yaz;
+                    cmYaziciEkleSilDuz.Parameters["@ip_adresi"].Value = infoYazici.NetworkInfo.IpAddress;
                     cmYaziciEkleSilDuz.Parameters["@yazici_modeli"].Value = infoYazici.YaziciModeli;
+                    if (infoYazici.NetworkInfo.BagliAg!=null && infoYazici.NetworkInfo.BagliAg.Ag_id > 0) {
+                        cmYaziciEkleSilDuz.Parameters["@bagli_ag_id"].Value = infoYazici.NetworkInfo.BagliAg.Ag_id;
+                    }
+                    if (infoYazici.SenetInfo.Id > 0) {
+
+                        cmYaziciEkleSilDuz.Parameters["@senet_id"].Value = infoYazici.SenetInfo.Id;
+                    }
                     cmYaziciEkleSilDuz.ExecuteNonQuery();
                     if (!shouldBeEdit)
                     {
@@ -350,7 +380,7 @@ namespace MEBS_Envanter.DB
             catch (Exception) { return false; }
         }
 
-        public static bool InsertOrUpdateSenet(ComputerInfo infoComputer, bool isEdit)
+        public static bool InsertOrUpdateSenet(int bilgisayar_id, SenetInfo infoSenet, bool isEdit)
         {
             try
             {
@@ -365,22 +395,28 @@ namespace MEBS_Envanter.DB
                     else
                     {
                         cmSenetEkleDilDuz.Parameters["@type"].Value = "D";
-                        cmSenetEkleDilDuz.Parameters["@senet_id"].Value = infoComputer.Senet.Id;
+                        cmSenetEkleDilDuz.Parameters["@senet_id"].Value = infoSenet.Id;
                     }
-                    cmSenetEkleDilDuz.Parameters["@bilgisayar_id"].Value = infoComputer.Id;
-                    cmSenetEkleDilDuz.Parameters["@alan_kisi_rutbe"].Value = infoComputer.Senet.Alan_kisi_rutbe;
-                    cmSenetEkleDilDuz.Parameters["@alan_kisi_isim"].Value = infoComputer.Senet.Alan_kisi_isim;
-                    cmSenetEkleDilDuz.Parameters["@veren_kisi_isim"].Value = infoComputer.Senet.Veren_kisi_isim;
-
-                    if (infoComputer.Senet.Alan_kisi_komutanlik.Komutanlik_id > 0)
+                    if (bilgisayar_id > 0)
                     {
-                        cmSenetEkleDilDuz.Parameters["@alan_kisi_komutanlik_id"].Value = infoComputer.Senet.Alan_kisi_komutanlik.Komutanlik_id;
-                        if (infoComputer.Senet.Alan_kisi_birlik.Birlik_id > 0)
+                        cmSenetEkleDilDuz.Parameters["@bilgisayar_id"].Value = bilgisayar_id;
+                    }
+                    else{
+                        cmSenetEkleDilDuz.Parameters["@bilgisayar_id"].Value = null;
+                    }
+                    cmSenetEkleDilDuz.Parameters["@alan_kisi_rutbe"].Value = infoSenet.Alan_kisi_rutbe;
+                    cmSenetEkleDilDuz.Parameters["@alan_kisi_isim"].Value = infoSenet.Alan_kisi_isim;
+                    cmSenetEkleDilDuz.Parameters["@veren_kisi_isim"].Value = infoSenet.Veren_kisi_isim;
+
+                    if (infoSenet.Alan_kisi_komutanlik.Komutanlik_id > 0)
+                    {
+                        cmSenetEkleDilDuz.Parameters["@alan_kisi_komutanlik_id"].Value = infoSenet.Alan_kisi_komutanlik.Komutanlik_id;
+                        if (infoSenet.Alan_kisi_birlik.Birlik_id > 0)
                         {
-                            cmSenetEkleDilDuz.Parameters["@alan_kisi_birilk_id"].Value = infoComputer.Senet.Alan_kisi_birlik.Birlik_id;
-                            if (infoComputer.Senet.Alan_kisi_kisim.Kisim_id > 0)
+                            cmSenetEkleDilDuz.Parameters["@alan_kisi_birilk_id"].Value = infoSenet.Alan_kisi_birlik.Birlik_id;
+                            if (infoSenet.Alan_kisi_kisim.Kisim_id > 0)
                             {
-                                cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = infoComputer.Senet.Alan_kisi_kisim.Kisim_id;
+                                cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = infoSenet.Alan_kisi_kisim.Kisim_id;
                             }
                             else
                             {
@@ -400,11 +436,9 @@ namespace MEBS_Envanter.DB
                     if (!isEdit)
                     {
                         int senetID = Convert.ToInt32(cmSenetEkleDilDuz.Parameters["@temp_senet_id"].Value);
-                        infoComputer.Senet.Id = senetID;
+                        infoSenet.Id = senetID;
                     }
                 }
-
-
                 return true;
             }
             catch (Exception)
@@ -435,7 +469,7 @@ namespace MEBS_Envanter.DB
                         }
                     }
                     // Parçaları Ekle                    
-                    bool resultSenet = DBFunctions.InsertOrUpdateSenet(freshComputerInfo, isEdit);
+                    bool resultSenet = DBFunctions.InsertOrUpdateSenet(freshComputerInfo.Id,freshComputerInfo.Senet, isEdit);
                     isOk |= resultSenet;
 
                     return isOk;

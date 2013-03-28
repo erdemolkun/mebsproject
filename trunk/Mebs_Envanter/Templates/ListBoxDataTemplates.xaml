@@ -54,6 +54,37 @@
         </Style.Triggers>-->
     </Style>
 
+
+
+
+    <DataTemplate x:Key="yaziciInfoListboxDataTemplate">
+        <Grid Margin="2" Name="mainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Name="pcAdiGrid" TextBlock.FontFamily="Tahoma" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  Text="Model : " Foreground="Brown"></TextBlock>
+                    <TextBlock Name="pcAdiTxtBlock" Margin="0,0,2,0" Text="{Binding YaziciModeli}" />
+                </StackPanel>
+            </Grid>
+
+            
+
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource=
+                                {RelativeSource Mode=FindAncestor, AncestorType=
+                                {x:Type ListBoxItem}},Path=IsSelected,Mode=OneWay}" Value="True">
+                <Setter TargetName="pcAdiTxtBlock" Property="FontSize" Value="14"/>
+                <Setter TargetName="pcAdiTxtBlock" Property="FontWeight" Value="Bold"/>                
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
     <DataTemplate x:Key="computerInfoListboxDataTemplate">
         <Grid Margin="2" Name="mainGrid">             
             <Grid.RowDefinitions>
