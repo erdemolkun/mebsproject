@@ -33,14 +33,15 @@
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition MaxHeight="250"></RowDefinition>
         </Grid.RowDefinitions>
-
-
         
         <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="#FFE5E3E3">
             <Menu IsMainMenu="True" TextBlock.FontSize="12" HorizontalAlignment="Left">
                 <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
-                <MenuItem Header="Yazdırma Seçenekleri">
-                    <MenuItem x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
+                <MenuItem Header="Yazdırma Seçenekleri"
+                          IsEnabled="{Binding ElementName=pcList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}">
+                    <MenuItem 
+                        
+                        x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="InfoWindow" Click="MenuItem_Click"></MenuItem>
                 <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
