@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Yazıcı Kaydı" Height="720"  
         MinHeight="480"
-        xmlns:x1="clr-namespace:MEBS_Envanter" 
+        xmlns:x1="clr-namespace:MEBS_Envanter" x:Name="mainwin"
         xmlns:x2="clr-namespace:Mebs_Envanter"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
+        xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
         Width="920" SizeToContent="Height"  ResizeMode="NoResize">
     <Grid>
         <Grid.Resources>
@@ -30,6 +31,15 @@
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition MaxHeight="250"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <!--Loading-->
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            Background="#7BAEC2D1"
+            Visibility="{Binding IsBusy,ElementName=mainwin,Converter={StaticResource BoolToVisibilityConverter}}"  
+            Grid.ColumnSpan="10" Grid.RowSpan="12" Canvas.ZIndex="99">
+            <animations:LoadingAnimation LoadingText="Yükleniyor.."  
+                                         HorizontalAlignment="Center" VerticalAlignment="Center"></animations:LoadingAnimation >
+        </Grid>
 
         <Grid Grid.Column="0" Grid.Row="1"  Margin="6,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
