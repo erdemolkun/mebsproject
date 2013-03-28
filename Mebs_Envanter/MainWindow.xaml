@@ -34,13 +34,13 @@
             <RowDefinition MaxHeight="250"></RowDefinition>
         </Grid.RowDefinitions>
         
+        <!--Menu Items-->
         <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="#FFE5E3E3">
             <Menu IsMainMenu="True" TextBlock.FontSize="12" HorizontalAlignment="Left">
                 <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
                 <MenuItem Header="Yazdırma Seçenekleri"
                           IsEnabled="{Binding ElementName=pcList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}">
-                    <MenuItem 
-                        
+                    <MenuItem                         
                         x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="InfoWindow" Click="MenuItem_Click"></MenuItem>
@@ -57,10 +57,7 @@
                                          HorizontalAlignment="Center" VerticalAlignment="Center"></animations:LoadingAnimation >            
         </Grid>                
 
-        <!--<Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Background="#FF284169"></Grid>-->
-         
-        
-        
+                              
         <Grid Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch">
             <x2:ComputerUserControl x:Name="pcEnvanterControl"></x2:ComputerUserControl>
         </Grid>
@@ -69,6 +66,7 @@
         <Grid Margin="6,0"  Background="Transparent" Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="24"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Border Margin="0,12" Height="60" Background="SkyBlue" CornerRadius="0">
@@ -77,18 +75,25 @@
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
 
-            <ListBox x:Name="pcList" MouseDoubleClick="pcList_MouseDoubleClick"
+            <Grid Grid.Row="1" Background="SkyBlue">
+                <StackPanel HorizontalAlignment="Center" TextBlock.FontSize="14"
+                            TextBlock.Foreground="MintCream" Orientation="Horizontal">
+                    <TextBlock Text="Bilgisayar Sayısı : "></TextBlock>
+                    <TextBlock Text="{Binding ElementName=pcList,Path=Items.Count}"></TextBlock>
+                </StackPanel>
+            </Grid>
+            
+            <ListBox Grid.Row="2" x:Name="pcList" MouseDoubleClick="pcList_MouseDoubleClick"
                  SelectionChanged="pcList_SelectionChanged"                 
                  ItemsSource="{Binding Computers}" Style="{StaticResource generalListBoxStyle}"
                  ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
-                 Grid.Row="1" MinHeight="120"  Background="Transparent">
+                 MinHeight="120"  Background="Transparent">
 
                 
             </ListBox>
 
         </Grid>
-
         
         <!--Düzenleme Kısmı (Ekle,Sil,Düzenle)-->
         <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4">
