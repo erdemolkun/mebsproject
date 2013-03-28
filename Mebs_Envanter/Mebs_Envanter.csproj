@@ -273,7 +273,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bin\Debug\DBSettings.xml" />
     <Content Include="bin\Debug\WPFToolkit.dll" />
     <Content Include="bin\Debug\Xceed.Wpf.Controls.dll" />
   </ItemGroup>
