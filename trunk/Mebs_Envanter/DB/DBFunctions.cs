@@ -13,9 +13,11 @@ namespace MEBS_Envanter.DB
 {
     public class DBFunctions
     {
+        static DateTime nowTime;
         static DBFunctions()
         {
             prepareStoredProcedures();
+            nowTime = DateTime.Now;
         }
 
         public static SqlConnection proviceConnection()
@@ -32,7 +34,26 @@ namespace MEBS_Envanter.DB
             return connecitonProvider.start(false);
         }
 
-        static void connecitonProvider_ConnectionInformation(string error, int hataTipi) { }
+        static void connecitonProvider_ConnectionInformation(string error, int hataTipi)
+        {
+            try
+            {
+                String fileName = nowTime.ToShortDateString() + " " + nowTime.ToShortTimeString() + ".txt";
+                fileName = fileName.Replace(':', '_');
+                String content = error + "\r\n Hata tipi : " + hataTipi;
+                using (StreamWriter sw = File.AppendText(fileName))
+                {
+                    DateTime dt = DateTime.Now;
+                    String header = dt.ToLongTimeString() + dt.ToString("':'fff");
+                    //String header = DateTime.Now.ToLongTimeString() + ":" + DateTime.Now.Millisecond + " : ";
+                    String message = header + "\n\r" + content;
+                    sw.WriteLine(message);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
         static void connecitonProvider_connectionResult(SqlConnection result) { }
 
         static SqlCommand cmBilgisayarEkleSilDuz;
@@ -98,7 +119,7 @@ namespace MEBS_Envanter.DB
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@senet_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@yazici_modeli", SqlDbType.NVarChar, 50));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@ip_adresi", SqlDbType.NVarChar, 50));
-            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@bagli_ag_id", SqlDbType.Int));            
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@bagli_ag_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@temp_yazici_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters["@temp_yazici_id"].Direction = ParameterDirection.Output;
 
@@ -216,10 +237,12 @@ namespace MEBS_Envanter.DB
                     cmYaziciEkleSilDuz.Parameters["@parca_id"].Value = infoYazici.Id;
                     cmYaziciEkleSilDuz.Parameters["@ip_adresi"].Value = infoYazici.NetworkInfo.IpAddress;
                     cmYaziciEkleSilDuz.Parameters["@yazici_modeli"].Value = infoYazici.YaziciModeli;
-                    if (infoYazici.NetworkInfo.BagliAg!=null && infoYazici.NetworkInfo.BagliAg.Ag_id > 0) {
+                    if (infoYazici.NetworkInfo.BagliAg != null && infoYazici.NetworkInfo.BagliAg.Ag_id > 0)
+                    {
                         cmYaziciEkleSilDuz.Parameters["@bagli_ag_id"].Value = infoYazici.NetworkInfo.BagliAg.Ag_id;
                     }
-                    if (infoYazici.SenetInfo.Id > 0) {
+                    if (infoYazici.SenetInfo.Id > 0)
+                    {
 
                         cmYaziciEkleSilDuz.Parameters["@senet_id"].Value = infoYazici.SenetInfo.Id;
                     }
@@ -283,7 +306,8 @@ namespace MEBS_Envanter.DB
                     {
                         cmParcaEkleSilDuz.Parameters["@bilgisayar_id"].Value = bilgisayar_id;
                     }
-                    else{
+                    else
+                    {
                         cmParcaEkleSilDuz.Parameters["@bilgisayar_id"].Value = null;
                     }
 
@@ -401,7 +425,8 @@ namespace MEBS_Envanter.DB
                     {
                         cmSenetEkleDilDuz.Parameters["@bilgisayar_id"].Value = bilgisayar_id;
                     }
-                    else{
+                    else
+                    {
                         cmSenetEkleDilDuz.Parameters["@bilgisayar_id"].Value = null;
                     }
                     cmSenetEkleDilDuz.Parameters["@alan_kisi_rutbe"].Value = infoSenet.Alan_kisi_rutbe;
@@ -469,7 +494,7 @@ namespace MEBS_Envanter.DB
                         }
                     }
                     // Parçaları Ekle                    
-                    bool resultSenet = DBFunctions.InsertOrUpdateSenet(freshComputerInfo.Id,freshComputerInfo.Senet, isEdit);
+                    bool resultSenet = DBFunctions.InsertOrUpdateSenet(freshComputerInfo.Id, freshComputerInfo.Senet, isEdit);
                     isOk |= resultSenet;
 
                     return isOk;
