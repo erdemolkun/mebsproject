@@ -13,6 +13,16 @@ namespace Mebs_Envanter.Hardware
     public class YaziciInfo : OEMDevice
     {
 
+        public bool PropertiesFetched = false;
+        public void Fetch() {
+
+            if (!PropertiesFetched) {
+
+                PropertiesFetched = true;
+            }
+        }
+
+
         public bool isEdit = false;
         public YaziciInfo() {
 
