@@ -240,7 +240,6 @@ namespace MEBS_Envanter.DB
                     if (deviceOem.Tempest != null && deviceOem.Tempest.Id > 0)
                     {
                         cmParcaEkleSilDuz.Parameters["@tempest_id"].Value = deviceOem.Tempest.Id;
-
                     }
                     else
                     {
@@ -250,7 +249,13 @@ namespace MEBS_Envanter.DB
                     cmParcaEkleSilDuz.Parameters["@parca_tipi"].Value = (Int16)deviceOem.DeviceType;
                     cmParcaEkleSilDuz.Parameters["@parca_no"].Value = deviceOem.Parca_no;
                     cmParcaEkleSilDuz.Parameters["@parca_tanimi"].Value = deviceOem.DeviceInfo;
-                    cmParcaEkleSilDuz.Parameters["@bilgisayar_id"].Value = bilgisayar_id;
+                    if (bilgisayar_id > 0)
+                    {
+                        cmParcaEkleSilDuz.Parameters["@bilgisayar_id"].Value = bilgisayar_id;
+                    }
+                    else{
+                        cmParcaEkleSilDuz.Parameters["@bilgisayar_id"].Value = null;
+                    }
 
                     cmParcaEkleSilDuz.ExecuteNonQuery();
                 }

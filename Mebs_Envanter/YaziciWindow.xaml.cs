@@ -18,6 +18,7 @@ using System.Data.SqlClient;
 using System.Data;
 using Mebs_Envanter.DB;
 using MEBS_Envanter;
+using System.ComponentModel;
 
 namespace Mebs_Envanter
 {
@@ -51,22 +52,95 @@ namespace Mebs_Envanter
         }
         private bool AddOrEditPCFunction(bool isEdit)
         {
-            YaziciInfo infYazici = new YaziciInfo();
 
-            YaziciInfo currentYazidi = yaziciList.SelectedItem as YaziciInfo;
-            if (currentYazidi != null) {
-                            
+            try
+            {
+                YaziciInfo infYazici = new YaziciInfo();
+
+                YaziciInfo currentYazidi = yaziciList.SelectedItem as YaziciInfo;
+                if (currentYazidi != null)
+                {
+                    AssignYaziciInfoByGui(currentYazidi, infYazici, isEdit);
+
+                    BackgroundWorker worker = new BackgroundWorker();
+                    worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+                    worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+                    Mouse.OverrideCursor = Cursors.Wait;                    
+                    IsBusy = true;
+                    infYazici.isEdit = isEdit;
+                    worker.RunWorkerAsync(infYazici);
+                    return true;
+                }
             }
+            catch (Exception) { return false; }
             return true;
         
         }
 
-        private void AssignYaziciInfoByGui(YaziciInfo current,YaziciInfo toAssign,bool isEdit) { 
+        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Arrow;
+            IsBusy = false;
+            YaziciDbWorkInfo addInfo = e.Result as YaziciDbWorkInfo;
+            YaziciInfoRepository yaziciRep = (yaziciList.DataContext as YaziciInfoRepository);
+
+            if (addInfo.yazici.isEdit)
+            {
+                int index = yaziciRep.Yazicilar.IndexOf(Current_YaziciInfo);
+                yaziciRep.Yazicilar[index] = addInfo.yazici;
+
+                Current_YaziciInfo = addInfo.yazici;
+                yaziciList.SelectedItem = Current_YaziciInfo;
+                gridYaziciBilgileri.DataContext=Current_YaziciInfo;
+                
+            }
+            else
+            {
+                yaziciRep.Yazicilar.Add(addInfo.yazici);
+                yaziciList.SelectedItem = addInfo.yazici;
+            }
+        }
+
+        internal class YaziciDbWorkInfo
+        {
+
+            public bool isSuccess = false;
+            //public bool isEdit = false;
+            public YaziciInfo yazici = null;
+        }
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            YaziciInfo yaziciInfo = e.Argument as YaziciInfo;
+            bool dbresult = DBFunctions.InsertOrUpdateOemDevice(yaziciInfo,-1,yaziciInfo.isEdit);
+            if (dbresult)
+            {
+                //bool dbresult2 = DBFunctions.InsertOrUpdateYazici(yaziciInfo, yaziciInfo.isEdit);
+                YaziciDbWorkInfo addInfo = new YaziciDbWorkInfo();
+                addInfo.yazici = yaziciInfo;
+                addInfo.isSuccess = dbresult;
+                //e.Result = dbresult;
+                e.Result = addInfo;
+            }
+        }
+
+        private void AssignYaziciInfoByGui(YaziciInfo current,YaziciInfo toAssign,bool isEdit) {
+
+            yaziciUserControl1.SetYaziciInfo(toAssign);
+            senetInfoControl1.SetSenetInfo(toAssign.SenetInfo);
+            networkInfoControl1.SetNetworkInfo(toAssign.NetworkInfo);
+
+            if (isEdit)
+            {
+                toAssign.Id = current.Id;
+                toAssign.Yaz_id = current.Yaz_id;
+                toAssign.SenetInfo.Id = current.SenetInfo.Id;
+            }    
         
 
-            
 
-            
+
+
         }
 
         private void RefreshPrinterList(SortedList<String, object> parameterList, bool selectLast)
@@ -170,12 +244,12 @@ namespace Mebs_Envanter
 
         private void yaziciAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            AddOrEditPCFunction(false);
         }
 
         private void yaziciEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            AddOrEditPCFunction(true);
         }
 
         private void yaziciDelete_Click(object sender, RoutedEventArgs e)
@@ -187,5 +261,15 @@ namespace Mebs_Envanter
         {
 
         }
+
+        public bool IsBusy
+        {
+            get { return (bool)GetValue(IsBusyProperty); }
+            set { SetValue(IsBusyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsBusy.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsBusyProperty =
+            DependencyProperty.Register("IsBusy", typeof(bool), typeof(YaziciWindow), new UIPropertyMetadata(false));
     }
 }

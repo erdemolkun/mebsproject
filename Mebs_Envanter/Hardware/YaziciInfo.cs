@@ -13,7 +13,7 @@ namespace Mebs_Envanter.Hardware
     public class YaziciInfo : OEMDevice
     {
 
-
+        public bool isEdit = false;
         public YaziciInfo() {
 
             DeviceType = DeviceTypes.PRINTER;
