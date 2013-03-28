@@ -109,6 +109,10 @@
 
 
 
+                    <TextBlock Text="Seri Numarası" Grid.Row="6" 
+                               VerticalAlignment="Center" ></TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" MinWidth="120" x:Name="searchGridSerialNumberTxtBox"></TextBox>
 
                     <TextBlock Text="Yazici Modeli" Grid.Row="7" VerticalAlignment="Center" />
                     <TextBox MinWidth="120" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
