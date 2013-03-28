@@ -33,23 +33,16 @@ namespace Mebs_Envanter
         public YaziciWindow()
         {
             InitializeComponent();
-            LoadItems();
+            InitItems();
 
-            YaziciInfo x = new YaziciInfo();
-            //x.YaziciModeli = "asdz1";
-            //x.NetworkInfo.IpAddress = "asdz2";
-            //x.SenetInfo.Alan_kisi_isim = "asdz3";
-
-
-            Current_YaziciInfo = x;
+            Current_YaziciInfo = new YaziciInfo();
             //gridYaziciBilgileri.DataContext = Current_YaziciInfo;
 
             RefreshPrinterList(null, true);
             SetContextForSearchFields();
-
         }
 
-        private void LoadItems() {
+        private void InitItems() {
             yaziciUserControl1.Init();
             senetInfoControl1.Init();
             networkInfoControl1.Init();            
@@ -155,11 +148,6 @@ namespace Mebs_Envanter
                 toAssign.Yaz_id = current.Yaz_id;
                 toAssign.SenetInfo.Id = current.SenetInfo.Id;
             }    
-        
-
-
-
-
         }
 
         private void SetContextForSearchFields()
@@ -297,7 +285,7 @@ namespace Mebs_Envanter
 
         private void refreshListBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            RefreshPrinterList(null, true);
         }
 
         public bool IsBusy
