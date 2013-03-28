@@ -331,6 +331,7 @@ namespace Mebs_Envanter
             
             
             searchGridTempestCombo.SelectedIndex = -1;
+            searchGridSerialNumberTxtBox.Text = "";
             
             searchGridKomutanliklarCombo.SelectedIndex = -1;
         }
