@@ -204,8 +204,7 @@ namespace Mebs_Envanter
             }
 
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-
+            DataTable dt = new DataTable();            
             bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
             try
             {
