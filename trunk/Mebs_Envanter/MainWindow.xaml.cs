@@ -186,7 +186,8 @@ namespace MEBS_Envanter
             }
             else
             {
-                computerRep.Computers.Add(addInfo.computer);
+                computerRep.Computers.Insert(0, addInfo.computer);
+                //computerRep.Computers.Add(addInfo.computer);
                 pcList.SelectedItem = addInfo.computer;
             }
             /*if ((bool)e.Result)
@@ -405,6 +406,7 @@ namespace MEBS_Envanter
             try
             {
                 adp.Fill(dt);
+                //adp.Fill(0, 2, dt);
                 //dataGridSample.ItemsSource = dt.DefaultView;
                 foreach (DataRow rowPC in dt.Rows)
                 {
