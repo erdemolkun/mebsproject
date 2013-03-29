@@ -13,7 +13,10 @@ namespace MEBS_Envanter
 {
     public class OEMDevice : MebsBaseObject
     {
-
+        public override string ToString()
+        {
+            return DeviceInfo;
+        }
 
         public static List<OEMDevice> GetOemDevices(SqlConnection sqlCon, bool isForComputer, int bilgisayar_id, int _parca_id)
         {
