@@ -41,8 +41,7 @@ namespace Mebs_Envanter.HardwareUserControls
                     DependencyObject dp = generator.GenerateNext();
                     generator.PrepareItemContainer(dp);
                 }
-            }
-            
+            }            
         }
 
         public void SetOemDevicesInfo(ComputerInfo inf) {
@@ -52,6 +51,7 @@ namespace Mebs_Envanter.HardwareUserControls
             AssignOemDeviceInfoByGui(hardwareItemsControl, inf);
             AssignOemDeviceInfoByGui(hardwareExtraItemsControl, inf);        
         }
+        
         private void AssignOemDeviceInfoByGui(ItemsControl control, ComputerInfo freshComputerInfo)
         {
             foreach (var item in control.ItemsSource)

@@ -26,10 +26,9 @@ namespace Mebs_Envanter
         {
             get {
                 
-
                 oemDevicesAll = new ObservableCollection<OemDeviceViewModel>
     (OemDevices.Union(OemDevicesExtra).ToList());
-               
+                               
                 return oemDevicesAll;
 
             }
