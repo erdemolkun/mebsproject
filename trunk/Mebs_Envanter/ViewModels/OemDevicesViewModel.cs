@@ -28,7 +28,7 @@ namespace Mebs_Envanter
                 
 
                 oemDevicesAll = new ObservableCollection<OemDeviceViewModel>
-    (OemDevicesExtra.Union(OemDevices).ToList());
+    (OemDevices.Union(OemDevicesExtra).ToList());
                
                 return oemDevicesAll;
 
