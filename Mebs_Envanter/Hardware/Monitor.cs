@@ -9,12 +9,12 @@ namespace MEBS_Envanter
     {
         public override string ToString()
         {
-            String str = "StokNo : " + StokNo + "";
+            String str = "";// "StokNo : " + StokNo + "";
             if ((int)MonType > 0) {
                 str+="Tipi : " + MonType.ToString();
             }
             if (Marka.MarkaID > 0) {
-                str += "Marka : " + Marka.MarkaName;
+                str += " Marka : " + Marka.MarkaName;
             }
             return str;
             
