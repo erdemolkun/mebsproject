@@ -8,16 +8,17 @@ using System.IO;
 using DatabaseConnection;
 using System.Windows;
 using Mebs_Envanter.Hardware;
+using Mebs_Envanter;
 
 namespace MEBS_Envanter.DB
 {
     public class DBFunctions
     {
-        static DateTime nowTime;
+        
         static DBFunctions()
         {
             prepareStoredProcedures();
-            nowTime = DateTime.Now;
+            
         }
 
         public static SqlConnection proviceConnection()
@@ -38,17 +39,17 @@ namespace MEBS_Envanter.DB
         {
             try
             {
-                String fileName = nowTime.ToShortDateString() + " " + nowTime.ToShortTimeString() + ".txt";
-                fileName = fileName.Replace(':', '_');
-                String content = error + "\r\n Hata tipi : " + hataTipi;
-                using (StreamWriter sw = File.AppendText(fileName))
-                {
-                    DateTime dt = DateTime.Now;
-                    String header = dt.ToLongTimeString() + dt.ToString("':'fff");
-                    //String header = DateTime.Now.ToLongTimeString() + ":" + DateTime.Now.Millisecond + " : ";
-                    String message = header + "\n\r" + content;
-                    sw.WriteLine(message);
-                }
+               
+
+                
+                StringBuilder sb = new StringBuilder();                
+                sb.Append(error); //Add tabulation
+                sb.Append(System.Environment.NewLine);
+                sb.Append("Hata tipi : " + hataTipi); //Add tabulation
+
+                String content = sb.ToString(); // error + "\rHata tipi : " + hataTipi;            
+
+                LoggerMebs.WriteToFile(content);
             }
             catch (Exception)
             {

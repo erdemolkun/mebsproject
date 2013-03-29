@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:x1="clr-namespace:MEBS_Envanter"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml" DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>                

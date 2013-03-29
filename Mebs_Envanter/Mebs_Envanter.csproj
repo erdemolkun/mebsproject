@@ -105,6 +105,7 @@
       <DependentUpon>YaziciUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Hardware\YaziciInfo.cs" />
+    <Compile Include="LoggerMebs.cs" />
     <Compile Include="PrintOperations\GridPrinter.cs" />
     <Compile Include="Repositories\YaziciInfoRepository.cs" />
     <Compile Include="Repositories\KomutanlikRepository.cs" />
