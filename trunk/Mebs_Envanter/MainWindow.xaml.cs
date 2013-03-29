@@ -53,21 +53,28 @@ namespace MEBS_Envanter
             SqlConnection conSql = DBFunctions.proviceConnection();
             Dispatcher.Invoke(DispatcherPriority.DataBind, new Action(delegate()
             {
-                if (conSql != null)
+                try
                 {
-                    GlobalDataAccess.Set_Current_SQL_Connection(conSql);
-                    Current_Computer_Info = new ComputerInfo();
-                    setGUIDataContextForInitialization();
-                    RefreshComputerList(null, true);
-                    pcList_SelectionChanged(pcList, null);                    
-                    IsBusy = false;
-                    pcList.Focus();
+                    if (conSql != null)
+                    {
+                        GlobalDataAccess.Set_Current_SQL_Connection(conSql);
+                        Current_Computer_Info = new ComputerInfo();
+                        setGUIDataContextForInitialization();
+                        RefreshComputerList(null, true);
+                        pcList_SelectionChanged(pcList, null);
+                        IsBusy = false;
+                        pcList.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bağlantı Sağlanamadı. Çıkıyorum");
+                        IsBusy = false;
+                        //Environment.Exit(0);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Bağlantı Sağlanamadı. Çıkıyorum");                    
-                    IsBusy = false;
-                    //Environment.Exit(0);
+                catch (Exception ex) {
+
+                    LoggerMebs.WriteToFile(ex.Message.ToString());
                 }
             }));
         }
@@ -383,66 +390,72 @@ namespace MEBS_Envanter
 
         private void RefreshComputerList(SortedList<String, object> parameterList, bool selectLast)
         {
-            Stopwatch w = Stopwatch.StartNew();
-            ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
-
-            //String commandText = "Select TOP 1 * From tbl_bilgisayar pc order by bilgisayar_id Desc";
-            String commandText = "pc_genel_arama";
-            SqlCommand cmd = new SqlCommand(commandText, cnn);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            if (parameterList != null)
-            {
-                foreach (var item in parameterList)
-                {
-                    cmd.Parameters.AddWithValue(item.Key, item.Value);
-                }
-            }
-
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
             try
             {
-                adp.Fill(dt);
-                //adp.Fill(0, 2, dt);
-                //dataGridSample.ItemsSource = dt.DefaultView;
-                foreach (DataRow rowPC in dt.Rows)
-                {
-                    ComputerInfo tempComputer = new ComputerInfo();
-                    try
-                    {
-                        tempComputer.SetGeneralFields(rowPC);
-                        //tempComputer.Fetch();
-                        //tempComputer.Set_ComputerOemDevices(cnn);
-                        //tempComputer.Senet.Set_SenetInfos(true,tempComputer.Id,-1);
-                    }
-                    catch (Exception) { }
-                    repositoryNew.Computers.Add(tempComputer);
-                }
-                pcList.DataContext = repositoryNew;
-                if (selectLast)
-                {
-                    pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
-                }
-                else
-                {
-                    pcList.SelectedIndex = -1;
-                }
-            }
-            catch (Exception)
-            {
-            }
-            finally
-            {
-                cnn.Close();
-                cnn.Dispose();
-            }
+                Stopwatch w = Stopwatch.StartNew();
+                ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
+                SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
 
-            long x = w.ElapsedMilliseconds;
-            Console.WriteLine("Bilgisayar listesi " + x + " milisaniye içinde yenilendi");
+                //String commandText = "Select TOP 1 * From tbl_bilgisayar pc order by bilgisayar_id Desc";
+                String commandText = "pc_genel_arama";
+                SqlCommand cmd = new SqlCommand(commandText, cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                if (parameterList != null)
+                {
+                    foreach (var item in parameterList)
+                    {
+                        cmd.Parameters.AddWithValue(item.Key, item.Value);
+                    }
+                }
+
+                SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+                try
+                {
+                    adp.Fill(dt);
+                    //adp.Fill(0, 2, dt);
+                    //dataGridSample.ItemsSource = dt.DefaultView;
+                    foreach (DataRow rowPC in dt.Rows)
+                    {
+                        ComputerInfo tempComputer = new ComputerInfo();
+                        try
+                        {
+                            tempComputer.SetGeneralFields(rowPC);
+                            //tempComputer.Fetch();
+                            //tempComputer.Set_ComputerOemDevices(cnn);
+                            //tempComputer.Senet.Set_SenetInfos(true,tempComputer.Id,-1);
+                        }
+                        catch (Exception) { }
+                        repositoryNew.Computers.Add(tempComputer);
+                    }
+                    pcList.DataContext = repositoryNew;
+                    if (selectLast)
+                    {
+                        pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
+                    }
+                    else
+                    {
+                        pcList.SelectedIndex = -1;
+                    }
+                }
+                catch (Exception)
+                {
+                }
+                finally
+                {
+                    cnn.Close();
+                    cnn.Dispose();
+                }
+
+                long x = w.ElapsedMilliseconds;
+                Console.WriteLine("Bilgisayar listesi " + x + " milisaniye içinde yenilendi");
+            }
+            catch (Exception ex) {
+                LoggerMebs.WriteToFile("\nRefreshComputerList Hatası : \n" + ex.Message);
+            }
         }
 
         private void btnClearSearch_Click(object sender, RoutedEventArgs e)
