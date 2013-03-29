@@ -129,6 +129,14 @@ namespace MEBS_Envanter
             set { tempest = value; OnPropertyChanged("Tempest"); }
         }
 
+
+        private int verilenMiktar = 1;
+        public int VerilenMiktar
+        {
+            get { return verilenMiktar; }
+            set { verilenMiktar = value; OnPropertyChanged("VerilenMiktar"); }
+        }
+
         private String deviceInfo;
         /// <summary>
         /// Parça Tanımı
