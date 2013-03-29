@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MEBS_Envanter.Repositories;
 
 namespace MEBS_Envanter.GeneralObjects
 {
@@ -15,7 +16,7 @@ namespace MEBS_Envanter.GeneralObjects
         public Birlik(int birlik_id, String birlik_ismi) {
 
             Birlik_id = birlik_id;
-            Birlik_ismi = birlik_ismi;
+            Birlik_ismi = birlik_ismi;            
         }
 
         private String _birlik_ismi;

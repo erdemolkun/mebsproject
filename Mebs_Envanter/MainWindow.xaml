@@ -13,7 +13,7 @@
         xmlns:converters="clr-namespace:MEBS_Envanter.Converters"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
-        Title="Bilgisayar Envanter Kaydı"        
+        Title="Bilgisayar Envanter Kaydı" IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
         SizeToContent="Height"  ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
@@ -47,10 +47,9 @@
                 <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
             </Menu>
         </Grid>
-        
-        <!--Loading-->
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-            Background="#7BAEC2D1"
+
+        <!--LoadingBackground="#7BAEC2D1"-->
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
             Visibility="{Binding IsBusy,ElementName=mainwin,Converter={StaticResource BoolToVisibilityConverter}}"  
             Grid.ColumnSpan="10" Grid.RowSpan="12" Canvas.ZIndex="99">
             <animations:LoadingAnimation LoadingText="Yükleniyor.."  
