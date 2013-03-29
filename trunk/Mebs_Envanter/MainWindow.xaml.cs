@@ -252,8 +252,9 @@ namespace MEBS_Envanter
             Current_Computer_Info = infComp;
             //pcEnvanterTabControl.DataContext = Current_Computer_Info;
             //pcEnvanterControl.DataContext = Current_Computer_Info;
-            pcEnvanterControl.SetDataContext(Current_Computer_Info);
             Current_Computer_Info.Fetch();
+            pcEnvanterControl.SetDataContext(Current_Computer_Info);
+            
             //changeCurrentPCContext(list.SelectedItem as ComputerInfo );
         }
 

@@ -33,5 +33,7 @@
     </converters:BoolToVisibilityConverter>
 
     <converters:NotBoolToVisibilityConverter x:Key="NotBoolToVisibilityConverter"></converters:NotBoolToVisibilityConverter>
-    
+
+
+    <converters:NotBoolConverter x:Key="NotBoolConverter"></converters:NotBoolConverter>
 </ResourceDictionary>
