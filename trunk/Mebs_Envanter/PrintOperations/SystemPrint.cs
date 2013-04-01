@@ -17,96 +17,128 @@ namespace Mebs_Envanter.PrintOperations
             this.computerInfo = _computerInfo;
             
         }
-        string isim = "Erdem OLKUN" + "Gökhan ÖNEN";
+        
 
 
-       
+        void printOemDeviceProperties(GridPrinter p2, Graphics g, OEMDevice dev, int row, String isim, Font fntString11)
+        {
 
-      
+            String name = isim;
+            String ozellikler = dev.ToString();
+
+            PointF x = p2.getlocation(row, 1);
+            PointF xrowarti1 = p2.getlocation(row+1, 1);
+            int a = (int)((x.Y + xrowarti1.Y) / 2);
+
+            PointF x1 = p2.getlocation(row, 2);
+            PointF x1rowarti12 = p2.getlocation(row + 1, 2);
+            int b = (int)((x1.Y + x1rowarti12.Y) / 2);
+
+            PointF x0 = p2.getlocation(row, 0);
+            PointF x2rowarti1 = p2.getlocation(row + 1, 0);
+            int c = (int)((x1.Y + x2rowarti1.Y) / 2);
+
+            PointF x3 = p2.getlocation(row, 3);
+            PointF x4 = p2.getlocation(row, 4);
+
+            //g.DrawString(name, fntString11,
+            //                   Brushes.Black, x.X, a-6);
+
+            p2.printString(g, row, 1, fntString11, name,false,true);
+            g.DrawString(ozellikler, fntString11,
+                               Brushes.Black, x1.X, b-6);
+
+            g.DrawString(dev.SerialNumber, fntString11,
+                               Brushes.Black, x0.X, c-6);
+
+            //g.DrawString("EA", fntString11,
+            //                 Brushes.Black, x3.X, x3.Y);
+
+            p2.printString(g, row, 3, fntString11, "EA", true,true);
+
+            //g.DrawString(dev.VerilenMiktar.ToString(), fntString11,
+            //                   Brushes.Black, x4.X, x4.Y);
+
+            p2.printString(g, row, 4, fntString11, dev.VerilenMiktar.ToString(), true,true);
+        
+        }
+
 
         void PD_PrintPage(object sender, PrintPageEventArgs e)
         {
 
-            System.Drawing.Font fntString1 = new Font("Times New Roman", 12,
+            System.Drawing.Font fntString12 = new Font("Tahoma", 12,
                                                      FontStyle.Regular);
-            //int Row_sayisi; int col_sayisi; int x_nok; int y_nok; float en; float yukseklik;
-            //for (int i = 1; i <= Row_sayisi; i++)
-            //{
-               
-            //        e.Graphics.DrawRectangle(Pens.Black, (x_nok-4,y_nok-4,en-4,yukseklik-4,
-            //        percantageRect.Top, percantageRect.Width, percantageRect.Height);                
-            //}
+            System.Drawing.Font fntString11 = new Font("Tahoma", 11,
+                                                     FontStyle.Regular);
+            System.Drawing.Font fntString13 = new Font("Tahoma", 13,
+                                                     FontStyle.Regular);
+          
+
+
+            /*Geçici mutemet senedi*/
             List<int> xPercantages = new List<int>();
             xPercantages.Add(10);
-            xPercantages.Add(80);
-            xPercantages.Add(10);
+           
             List<int> yPercantages = new List<int>();
-            yPercantages.Add(10);
-            yPercantages.Add(80);
-            yPercantages.Add(10);
-            GridPrinter p = new GridPrinter(new Rectangle(300, 300, 500, 500), yPercantages.Count, xPercantages.Count, xPercantages, yPercantages);
-            //p.Paint(e.Graphics);
+            yPercantages.Add(20);
+           
+            GridPrinter p0 = new GridPrinter(new Rectangle(100, 40, 999, 30), yPercantages.Count, xPercantages.Count, xPercantages, yPercantages);
+            p0.Paint(e.Graphics);
+
+
+            //System.Drawing.Font fntString2 = new Font("Times New Roman", 12,
+            //                                        FontStyle.Regular);
+            //e.Graphics.DrawString("GEÇİCİ MUTEMET SENEDİ" , fntString11,
+            //                       Brushes.Black,400, 55);
+
+            PointF gecici_mutemet_senedi_Loc = p0.getlocation(0, 0);
+
+            PointF x_gecici_rowarti1 = p0.getlocation(1, 0);
+            int b = (int)((gecici_mutemet_senedi_Loc.Y + x_gecici_rowarti1.Y) / 2);
+
+
+            //PointF y_gecici_columnarti1 = p0.getlocation(0, 1);
+            //int c = (int)((gecici_mutemet_senedi_Loc.X + y_gecici_columnarti1.X) / 2);
+
+            //e.Graphics.DrawString("GEÇİCİ MUTEMET SENEDİ", fntString13,
+            //                       Brushes.Black, c-100, b-10);
+
+
+            p0.printString(e.Graphics, 0, 0, fntString13, "GEÇİCİ MUTEMET SENEDİ", true,true);
+
 
             /*  
-              bilgisayar özelliklerinin yazıldığı gridler
+              malzeme veren isim kısmı
              */
 
-            List<int> xPercantages2 = new List<int>();
-            xPercantages2.Add(20);
-            xPercantages2.Add(15);
-            xPercantages2.Add(40);
-            xPercantages2.Add(10);
-            xPercantages2.Add(11);
-            xPercantages2.Add(9);
-
-            List<int> yPercantages2 = new List<int>();
-            yPercantages2.Add(10);
-            yPercantages2.Add(10);
-            yPercantages2.Add(10);
-            yPercantages2.Add(10);
-            yPercantages2.Add(10);
-            yPercantages2.Add(10);
-            yPercantages2.Add(10);
-            yPercantages2.Add(10);
-            yPercantages2.Add(10);
-
-            GridPrinter p2 = new GridPrinter(new Rectangle(100, 160, 1000, 500), yPercantages2.Count,xPercantages2.Count, xPercantages2, yPercantages2);
-            p2.Paint(e.Graphics);
-
-            int row = 1;
-            foreach (OemDeviceViewModel item in computerInfo.OemDevicesVModel.OemDevicesAll)
-            {
-                String name = item.ParcaTipiIsmi;
-                String ozellikler = item.DevOem.DeviceInfo;
-
-                PointF x = p2.getlocation(row ,1);
-                PointF x1 = p2.getlocation(row, 2);
-                PointF x0 = p2.getlocation(row, 0);
-                e.Graphics.DrawString(name, fntString1,
-                                   Brushes.Black, x.X, x.Y);
-
-                e.Graphics.DrawString(ozellikler, fntString1,
-                                   Brushes.Black, x1.X, x1.Y);
-
-                e.Graphics.DrawString(item.DevOem.SerialNumber, fntString1,
-                                   Brushes.Black, x0.X, x0.Y);
-                row++;
-
-            }
+            List<int> xPercantages4 = new List<int>();
+            xPercantages4.Add(45);
+            xPercantages4.Add(30);
+            xPercantages4.Add(30);
 
 
-            PointF pc_adi_Loc = p2.getlocation(0, 1);
-            e.Graphics.DrawString("Bilgisayar Adı:", fntString1,
-                                   Brushes.Black, pc_adi_Loc.X, pc_adi_Loc.Y);
+            List<int> yPercantages4 = new List<int>();
+            yPercantages4.Add(20);
 
-            PointF pc_Adi_Loc1 = p2.getlocation(0, 2);
-            e.Graphics.DrawString(computerInfo.Pc_adi.ToString(), fntString1,
-                                   Brushes.Black, pc_Adi_Loc1.X, pc_Adi_Loc1.Y);
 
-           
 
-     
-          
+            GridPrinter p4 = new GridPrinter(new Rectangle(100, 70, 1000, 50), yPercantages4.Count, xPercantages4.Count, xPercantages4, yPercantages4);
+            p4.Paint(e.Graphics);
+
+            PointF senedi_dosyalayacak = p4.getlocation(0, 0);
+            e.Graphics.DrawString("Senedi Dosyalayacak Olan(Sorumlu Sb.)", fntString12,
+                                   Brushes.Black, senedi_dosyalayacak.X, senedi_dosyalayacak.Y);
+
+            PointF malzemeyi_veren = p4.getlocation(0, 1);
+            e.Graphics.DrawString("Malzemeyi Veren", fntString12,
+                                   Brushes.Black, malzemeyi_veren.X, malzemeyi_veren.Y);
+
+
+            PointF iade_edecegi_tarih = p4.getlocation(0, 2);
+            e.Graphics.DrawString("İade Edeceği Tarih", fntString12,
+                                   Brushes.Black, iade_edecegi_tarih.X, iade_edecegi_tarih.Y);
+
         
             /*  
               isim veya evsaf kısmı
@@ -128,45 +160,120 @@ namespace Mebs_Envanter.PrintOperations
 
 
             PointF seri_no_Loc = p3.getlocation(0,0);
-            e.Graphics.DrawString("Seri Numarası", fntString1,
-                                   Brushes.Black, seri_no_Loc.X, seri_no_Loc.Y);
+            //e.Graphics.DrawString("Seri Numarası", fntString12,
+            //                       Brushes.Black, seri_no_Loc.X, seri_no_Loc.Y);
 
+            p3.printString(e.Graphics, 0, 0, fntString12, "Seri Numarası", true,true);
 
-            PointF isim_evsaf_Loc1 = p3.getlocation(0, 1);
-            e.Graphics.DrawString("İSİM VEYA EVSAFI", fntString1,
-                                   Brushes.Black, isim_evsaf_Loc1.X, isim_evsaf_Loc1.Y);
+            //PointF isim_evsaf_Loc1 = p3.getlocation(0, 1);
+            //e.Graphics.DrawString("İSİM VEYA EVSAFI", fntString12,
+            //                       Brushes.Black, isim_evsaf_Loc1.X, isim_evsaf_Loc1.Y);
 
-            PointF birimi_Loc1 = p3.getlocation(0,2);
-            e.Graphics.DrawString("Birimi", fntString1,
-                                   Brushes.Black, birimi_Loc1.X, birimi_Loc1.Y);
+            p3.printString(e.Graphics, 0, 1 ,fntString12, "İSİM VEYA EVSAFI", true,true);
 
-            PointF verilen_miktar_Loc1 = p3.getlocation(0, 3);
-            e.Graphics.DrawString("Verilen Miktar", fntString1,
-                                   Brushes.Black, verilen_miktar_Loc1.X, verilen_miktar_Loc1.Y);
+            //PointF birimi_Loc1 = p3.getlocation(0,2);
+            //e.Graphics.DrawString("Birimi", fntString12,
+            //                       Brushes.Black, birimi_Loc1.X, birimi_Loc1.Y);
 
+            p3.printString(e.Graphics, 0, 2, fntString12, "Birimi", true,true);
 
-            PointF fiyati_Loc1 = p3.getlocation(0, 4);
-            e.Graphics.DrawString("Fiyatı", fntString1,
-                                   Brushes.Black, fiyati_Loc1.X, fiyati_Loc1.Y);
+            //PointF verilen_miktar_Loc1 = p3.getlocation(0, 3);
+            //e.Graphics.DrawString("Verilen Miktar", fntString12,
+            //                       Brushes.Black, verilen_miktar_Loc1.X, verilen_miktar_Loc1.Y);
+
+            p3.printString(e.Graphics, 0, 3, fntString12, "Verilen Miktar", true,true);
+
+            //PointF fiyati_Loc1 = p3.getlocation(0, 4);
+            //e.Graphics.DrawString("Fiyatı", fntString12,
+            //                       Brushes.Black, fiyati_Loc1.X, fiyati_Loc1.Y);
+
+            p3.printString(e.Graphics, 0, 4, fntString12, "Fiyatı", true,true);
 
             /*  
-              malzeme veren isim kısmı
-             */
+             bilgisayar özelliklerinin yazıldığı gridler
+            */
 
-            List<int> xPercantages4 = new List<int>();
-            xPercantages4.Add(45);
-            xPercantages4.Add(30);
-            xPercantages4.Add(30);
-          
+            List<int> xPercantages2 = new List<int>();
+            xPercantages2.Add(20);
+            xPercantages2.Add(15);
+            xPercantages2.Add(40);
+            xPercantages2.Add(10);
+            xPercantages2.Add(11);
+            xPercantages2.Add(9);
 
-            List<int> yPercantages4 = new List<int>();
-            yPercantages4.Add(20);
+            List<int> yPercantages2 = new List<int>();
+            yPercantages2.Add(10);
+            yPercantages2.Add(10);
+            yPercantages2.Add(10);
+            yPercantages2.Add(10);
+            yPercantages2.Add(10);
+            yPercantages2.Add(10);
+            yPercantages2.Add(10);
+            yPercantages2.Add(10);
+            yPercantages2.Add(10);
+            yPercantages2.Add(10);
+            yPercantages2.Add(10);
+
+            GridPrinter p2 = new GridPrinter(new Rectangle(100, 160, 1000, 500), yPercantages2.Count, xPercantages2.Count, xPercantages2, yPercantages2);
+            p2.Paint(e.Graphics);
+
+            int row = 1;
+            foreach (OemDeviceViewModel item in computerInfo.OemDevicesVModel.OemDevicesAll)
+            {
+                String name = item.ParcaTipiIsmi;
+                //String ozellikler = item.DevOem.ToString();
+
+                //PointF x = p2.getlocation(row, 1);
+                //PointF x1 = p2.getlocation(row, 2);
+                //PointF x0 = p2.getlocation(row, 0);
+                //PointF x3 = p2.getlocation(row, 3);
+                //PointF x4 = p2.getlocation(row, 4);
+
+                //e.Graphics.DrawString(name, fntString11,
+                //                   Brushes.Black, x.X, x.Y);
+
+                //e.Graphics.DrawString(ozellikler, fntString11,
+                //                   Brushes.Black, x1.X, x1.Y);
+
+                //e.Graphics.DrawString(item.DevOem.SerialNumber, fntString11,
+                //                   Brushes.Black, x0.X, x0.Y);
+
+                //e.Graphics.DrawString("EA", fntString11,
+                //                 Brushes.Black, x3.X, x3.Y);
+
+                //e.Graphics.DrawString(item.DevOem.VerilenMiktar.ToString(), fntString11,
+                //                   Brushes.Black, x4.X, x4.Y);
+
+
+                printOemDeviceProperties(p2, e.Graphics, item.DevOem, row, name, fntString11);
+                row++;
+
+            }
+            printOemDeviceProperties(p2, e.Graphics, computerInfo.MonitorInfo, row, "Monitör", fntString11);
 
 
 
-            GridPrinter p4 = new GridPrinter(new Rectangle(100, 80, 1000, 40), yPercantages4.Count, xPercantages4.Count, xPercantages4, yPercantages4);
-            p4.Paint(e.Graphics);
 
+            PointF pc_adi_Loc = p2.getlocation(0, 1);
+            e.Graphics.DrawString("Bilgisayar Adı", fntString11,
+                                   Brushes.Black, pc_adi_Loc.X, pc_adi_Loc.Y+10);
+
+
+            PointF pc_Adi_Loc1 = p2.getlocation(0, 2);
+            e.Graphics.DrawString(computerInfo.Pc_adi.ToString(), fntString11,
+                                   Brushes.Black, pc_Adi_Loc1.X, pc_Adi_Loc1.Y + 10);
+
+            //PointF pc_adi_birimi = p2.getlocation(0, 3);
+            //e.Graphics.DrawString("EA", fntString11,
+            //                       Brushes.Black, pc_adi_birimi.X, pc_adi_birimi.Y + 10);
+            p2.printString(e.Graphics, 0, 3, fntString11, "EA", true,true);
+
+            //PointF pc_verilen_miktar = p2.getlocation(0, 4);
+            //e.Graphics.DrawString("1", fntString11,
+            //                       Brushes.Black, pc_verilen_miktar.X, pc_verilen_miktar.Y + 10);
+
+
+            p2.printString(e.Graphics, 0, 4, fntString11, "1", true,true);
 
             /*  
              açıklma kısmı
@@ -186,21 +293,26 @@ namespace Mebs_Envanter.PrintOperations
             GridPrinter p5 = new GridPrinter(new Rectangle(100, 656, 996, 40), yPercantages5.Count, xPercantages5.Count, xPercantages5, yPercantages5);
             p5.Paint(e.Graphics);
 
+
+            SizeF yaziBoyutu = e.Graphics.MeasureString("AÇIKLAMALAR:", fntString12);
+
             PointF aciklama_Loc = p5.getlocation(0, 0);
-            e.Graphics.DrawString("AÇIKLAMALAR:", fntString1,
+            e.Graphics.DrawString("AÇIKLAMALAR:", fntString12,
                                    Brushes.Black, aciklama_Loc.X, aciklama_Loc.Y);
 
+            e.Graphics.DrawString(computerInfo.Notlar, fntString11,
+                                     Brushes.Black, aciklama_Loc.X + yaziBoyutu.Width, aciklama_Loc.Y);
+          
             /*  
              ad ,soyad, imza kısmı
             */
 
             List<int> xPercantages6 = new List<int>();
             xPercantages6.Add(20);
-            xPercantages6.Add(15);
-            xPercantages6.Add(40);
+            xPercantages6.Add(55);
             xPercantages6.Add(10);
-            xPercantages6.Add(11);
-            xPercantages6.Add(9);
+            xPercantages6.Add(20);
+        
 
             List<int> yPercantages6 = new List<int>();
             yPercantages6.Add(10);
@@ -214,125 +326,45 @@ namespace Mebs_Envanter.PrintOperations
 
            
             
-            e.Graphics.DrawString(computerInfo.EklenmeTarihi.ToString(), fntString1,
-                                   Brushes.Black, 100, 717);
+            
 
-            System.Drawing.Font fntString2 = new Font("Times New Roman", 12,
-                                                    FontStyle.Regular);
-            e.Graphics.DrawString(computerInfo.Senet.Alan_kisi_isim+", "+computerInfo.Senet.Alan_kisi_rutbe, fntString1,
-                                   Brushes.Black, 300, 717); 
+            PointF tarih_Loc1 = p6.getlocation(0, 0);
+            e.Graphics.DrawString("Tarih", fntString12,
+                                   Brushes.Black, tarih_Loc1.X, tarih_Loc1.Y);
+
+            PointF tarih_Loc2 = p6.getlocation(1, 0);
+            e.Graphics.DrawString(computerInfo.EklenmeTarihi.ToString("yyyy/mm/dd"), fntString11,
+                                   Brushes.Black, tarih_Loc2.X, tarih_Loc2.Y);
+
+            //System.Drawing.Font fntString2 = new Font("Times New Roman", 12,
+            //                                        FontStyle.Regular);
+            //e.Graphics.DrawString(computerInfo.Senet.Alan_kisi_isim+", "+computerInfo.Senet.Alan_kisi_rutbe, fntString11,
+            //                       Brushes.Black, 300, 717);
+
+           
+            PointF ad_soyad_rutbe_Loc1 = p6.getlocation(0, 1);
+            e.Graphics.DrawString("Alanın ; Adı,Soyadı,Rütbesi,Sicil No. ve Görevi", fntString12,
+                                   Brushes.Black, ad_soyad_rutbe_Loc1.X, ad_soyad_rutbe_Loc1.Y);
+
+            PointF ad_soyad_rutbe_Loc2 = p6.getlocation(1, 1);
+            e.Graphics.DrawString(computerInfo.Senet.Alan_kisi_isim + ", " + computerInfo.Senet.Alan_kisi_rutbe, fntString11,
+                                   Brushes.Black, ad_soyad_rutbe_Loc2.X, ad_soyad_rutbe_Loc2.Y);
+
+            //e.Graphics.DrawString("Alanın ; Adı,Soyadı,Rütbesi,Sicil No. ve Görevi", fntString12,
+            //                       Brushes.Black, 300, 697);
+
+             PointF imza_Loc1 = p6.getlocation(0, 2);
+             e.Graphics.DrawString("İmzası", fntString12,
+                                    Brushes.Black, imza_Loc1.X, imza_Loc1.Y);
+
+             PointF is_telefonu_Loc1 = p6.getlocation(0, 3);
+             e.Graphics.DrawString("İş Telefonu", fntString12,
+                                    Brushes.Black, is_telefonu_Loc1.X, is_telefonu_Loc1.Y);
 
 
             return;
             
-            //pc_adi = computerInfo.Pc_adi;
-            //pc_marka = computerInfo.Marka.ToString();
-            //e.PageSettings.PaperSize = new PaperSize("Custom", 800, 300);
-
-            RectangleF percantageRect =  getPrintingRect(4, 4, 120,60);
-            RectangleF ic_cerceve = getPrintingRect(10, 10, 105, 50);
-            //e.Graphics.DrawPath(Pens.Black, getPrintingRect(200, 200, 200, 200));
-            //hastane bilğilerinin etrafını çiz
-
-            GraphicsPath path = RoundedRectangle.Create((int)percantageRect.Left,
-                (int)percantageRect.Top, (int)percantageRect.Width, (int)percantageRect.Height);
-            //e.Graphics.DrawPath(Pens.Black, path);
-            e.Graphics.DrawRectangle(Pens.Black, percantageRect.Left,
-                percantageRect.Top, percantageRect.Width, percantageRect.Height);
-
-            GraphicsPath path1 = RoundedRectangle.Create((int)ic_cerceve.Left,
-                (int)ic_cerceve.Top, (int)ic_cerceve.Width, (int)ic_cerceve.Height);
-            e.Graphics.DrawPath(Pens.Black, path1);
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), 60, 90, 700, 90);
-            e.Graphics.DrawLine(new Pen(Color.Black, 1), 60, 93, 700, 93);
-
-            string strDisplay = "MEBS";
-            System.Drawing.Font fntString = new Font("Times New Roman", 28,
-                                                     FontStyle.Bold);
-            e.Graphics.DrawString(strDisplay, fntString,
-                                  Brushes.Black, 280, 100);
-
-            strDisplay = "BİLGİSAYAR YAZDIRMA EKRANI";
-            fntString = new System.Drawing.Font("Times New Roman", 18,
-                                                FontStyle.Bold);
-            e.Graphics.DrawString(strDisplay, fntString,
-                                  Brushes.Black, 320, 150);
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 1), 60, 184, 700, 184);
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), 60, 187, 700, 187);
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), 100, 250, 680, 250);
-
-            fntString = new System.Drawing.Font("Times New Roman", 10,
-                                                FontStyle.Bold);
-            e.Graphics.DrawString("Bilgisayar Adı:", fntString,
-                                  Brushes.Black, 100, 260);
-            fntString = new System.Drawing.Font("Times New Roman", 10,
-                                                FontStyle.Regular);
-            e.Graphics.DrawString(computerInfo.Pc_adi, fntString,
-                                  Brushes.Black, 260, 260); ;
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 1), 100, 280, 680, 280);
-
-            fntString = new Font("Times New Roman", 10, FontStyle.Bold);
-            e.Graphics.DrawString("Markası:", fntString,
-                Brushes.Black, 100, 290);
-            fntString = new Font("Times New Roman", 10, FontStyle.Regular);
-            e.Graphics.DrawString(computerInfo.Marka.ToString(), fntString,
-                Brushes.Black, 260, 290); ;
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), 100, 310, 680, 310);
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), 100, 340, 680, 340);
-
-            fntString = new Font("Times New Roman", 10, FontStyle.Bold);
-            e.Graphics.DrawString("Bilgisayar Modeli:", fntString, Brushes.Black, 100, 350);
-            fntString = new Font("Times New Roman", 10, FontStyle.Regular);
-
-            e.Graphics.DrawString(computerInfo.Model, fntString, Brushes.Black, 260, 350);
-            e.Graphics.DrawLine(new Pen(Color.Black, 1), 100, 370, 680, 370);
-
-            fntString = new Font("Times New Roman", 10, FontStyle.Bold);
-            e.Graphics.DrawString("Eklenme Tarihi:", fntString,
-                Brushes.Black, 100, 380);
-            fntString = new Font("Times New Roman", 10, FontStyle.Regular);
-            e.Graphics.DrawString(computerInfo.EklenmeTarihi.ToString("YYYY-dd-mm"), fntString,
-                                  Brushes.Black,
-                                  new RectangleF(260, 380, 420, 380));
-            e.Graphics.DrawString("%", fntString, Brushes.Black, 300, 380);
-            e.Graphics.DrawLine(new Pen(Color.Black, 1), 100, 400, 680, 400);
-
-            fntString = new Font("Times New Roman", 10, FontStyle.Bold);
-            e.Graphics.DrawString("Periods:", fntString,
-                                  Brushes.Black, 100, 410);
-            fntString = new Font("Times New Roman", 10, FontStyle.Regular);
-            e.Graphics.DrawString(isim, fntString,
-                                  Brushes.Black,
-                                  new RectangleF(260, 410, 400, 410));
-            e.Graphics.DrawString("Months", fntString, Brushes.Black, 300, 410);
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), 100, 430, 680, 430);
-
-            e.Graphics.DrawString("Interest Earned:", fntString,
-                                  Brushes.Black, 100, 440);
-            fntString = new Font("Times New Roman", 10, FontStyle.Regular);
-            e.Graphics.DrawString(isim, fntString,
-                                  Brushes.Black,
-                                  new RectangleF(260, 440, 420, 440));
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 1), 100, 460, 680, 460);
-
-            e.Graphics.DrawString("Future Value:", fntString,
-                                  Brushes.Black, 100, 470);
-            fntString = new Font("Times New Roman", 10, FontStyle.Regular);
-            e.Graphics.DrawString(isim, fntString,
-                                  Brushes.Black,
-                                  new RectangleF(260, 470, 420, 470));
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), 100, 500, 680, 500);
-
-            
+           
         }
 
 

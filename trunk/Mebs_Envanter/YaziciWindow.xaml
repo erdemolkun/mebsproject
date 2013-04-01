@@ -8,6 +8,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
+        IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
         Width="920" SizeToContent="Height"  ResizeMode="NoResize">
     <Grid>
         <Grid.Resources>
@@ -34,11 +35,12 @@
 
         <!--Loading-->
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-            Background="#7BAEC2D1"
             Visibility="{Binding IsBusy,ElementName=mainwin,Converter={StaticResource BoolToVisibilityConverter}}"  
             Grid.ColumnSpan="10" Grid.RowSpan="12" Canvas.ZIndex="99">
             <animations:LoadingAnimation LoadingText="Yükleniyor.."  
-                                         HorizontalAlignment="Center" VerticalAlignment="Center"></animations:LoadingAnimation >
+                                         HorizontalAlignment="Center" VerticalAlignment="Center">
+                
+            </animations:LoadingAnimation >
         </Grid>
 
         <Grid Grid.Column="0" Grid.Row="1"  Margin="6,0" Grid.RowSpan="2">
@@ -142,9 +144,12 @@
             </Grid>
 
         </Grid>
+        
+        <!-- Yazıcı Listesi-->
         <Grid Grid.Column="1" Margin="6,0" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="24"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Border Margin="0,12" Height="60" Background="SkyBlue" CornerRadius="0">
@@ -153,12 +158,19 @@
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
 
+            <Grid Grid.Row="1" Background="SkyBlue">
+                <StackPanel HorizontalAlignment="Center" TextBlock.FontSize="14"
+                            TextBlock.Foreground="MintCream" Orientation="Horizontal">
+                    <TextBlock Text="Yazıcı Sayısı : "></TextBlock>
+                    <TextBlock Text="{Binding ElementName=yaziciList,Path=Items.Count}"></TextBlock>
+                </StackPanel>
+            </Grid>
             <ListBox x:Name="yaziciList"
                  SelectionChanged="yaziciList_SelectionChanged"      
                  ItemsSource="{Binding Yazicilar}" Style="{StaticResource generalListBoxStyle}"
                  ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
                  ItemTemplate="{StaticResource yaziciInfoListboxDataTemplate}"
-                 Grid.Row="1" MinHeight="120"  Background="Transparent">
+                 Grid.Row="2" MinHeight="120"  Background="Transparent">
 
 
             </ListBox>
