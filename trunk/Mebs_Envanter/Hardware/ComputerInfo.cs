@@ -467,7 +467,7 @@ namespace MEBS_Envanter
         }
 
 
-        private DateTime ? eklenmeTarihi;
+        private DateTime ? eklenmeTarihi=null;
         public DateTime ? EklenmeTarihi
         {
             get { return eklenmeTarihi; }

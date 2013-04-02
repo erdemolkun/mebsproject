@@ -80,6 +80,7 @@
       <DependentUpon>ComputerUserControlVertical.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\DateTimeFormatConverter.cs" />
     <Compile Include="Converters\NotBoolConverter.cs" />
     <Compile Include="Converters\NotBoolToVisibilityConverter.cs" />
     <Compile Include="Converters\KomutanlikComboIndexConverter.cs" />

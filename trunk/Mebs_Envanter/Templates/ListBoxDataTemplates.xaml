@@ -124,7 +124,7 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock Text="Tarih : " Foreground="Brown"></TextBlock>
                     <TextBlock Name="tarihTxtBlock" TextWrapping="Wrap" Margin="0,0,2,0" 
-                               Text="{Binding EklenmeTarihi}" />
+                               Text="{Binding EklenmeTarihi,Converter={StaticResource DateTimeFormatConverter}}" />
 
                 </StackPanel>
             </Grid>
