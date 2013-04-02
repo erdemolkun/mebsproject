@@ -12,9 +12,9 @@ namespace Mebs_Envanter.PrintOperations
     internal class SystemPrint
     {
         ComputerInfo computerInfo = null;
-        public SystemPrint(ComputerInfo _computerInfo) {
+        public SystemPrint(ComputerInfo _computerInfo2) {
 
-            this.computerInfo = _computerInfo;
+            this.computerInfo = _computerInfo2;
             
         }
         
