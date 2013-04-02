@@ -473,9 +473,11 @@ namespace MEBS_Envanter.DB
                             else
                             {
                                 int newId = InsertKisim(infoSenet.Alan_kisi_kisim, infoSenet.Alan_kisi_birlik.Birlik_id);
+                               
                                 if (newId > 0)
                                 {
-                                    cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = null;
+                                    cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = newId;
+                                    infoSenet.Alan_kisi_kisim.Kisim_id = newId;
                                 }
                             }
                         }
