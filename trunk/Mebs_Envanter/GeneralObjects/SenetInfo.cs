@@ -11,7 +11,7 @@ using Mebs_Envanter.DB;
 
 namespace MEBS_Envanter
 {
-    public class SenetInfo
+    public class SenetInfo:MebsBaseObject
     {
         public SenetInfo() {
            
@@ -37,7 +37,12 @@ namespace MEBS_Envanter
         public String Alan_kisi_isim
         {
             get { return alan_kisi_isim; }
-            set { if (value == null) alan_kisi_isim = ""; else alan_kisi_isim = value; }
+            set { 
+                if (value == null) alan_kisi_isim = "";
+                else alan_kisi_isim = value;
+
+                OnPropertyChanged("Alan_kisi_isim");
+            }
         }
 
 
@@ -45,7 +50,7 @@ namespace MEBS_Envanter
         public Komutanlik Alan_kisi_komutanlik
         {
             get { return alan_kisi_komutanlik; }
-            set { alan_kisi_komutanlik = value; }
+            set { alan_kisi_komutanlik = value; OnPropertyChanged("Alan_kisi_komutanlik"); }
         }
 
         private Birlik alan_kisi_birlik=new Birlik(-1,"");
@@ -53,7 +58,7 @@ namespace MEBS_Envanter
         public Birlik Alan_kisi_birlik
         {
             get { return alan_kisi_birlik; }
-            set { alan_kisi_birlik = value; }
+            set { alan_kisi_birlik = value; OnPropertyChanged("Alan_kisi_birlik"); }
         }
 
         private Kisim alan_kisi_kisim=new Kisim(-1,"");
@@ -62,8 +67,9 @@ namespace MEBS_Envanter
         {
             get { return alan_kisi_kisim; }
             set {
-                
-                alan_kisi_kisim = value; }
+
+                alan_kisi_kisim = value; OnPropertyChanged("Alan_kisi_kisim");
+            }
         }
 
         private String veren_kisi_isim="";
@@ -74,6 +80,7 @@ namespace MEBS_Envanter
             set {
                 if (value == null) veren_kisi_isim = "";
                 else  veren_kisi_isim = value;
+                OnPropertyChanged("Veren_kisi_isim");
             }
         }
 
@@ -127,7 +134,7 @@ namespace MEBS_Envanter
 
 
                 int alanKisiKomutanlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_komutanlik_id"], -1);
-                int alanKisiBirlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_birilk_id"], -1);
+                int alanKisiBirlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_birlik_id"], -1);
                 int alanKisiKisimId = DBValueHelpers.GetInt32(rowParca["alan_kisi_kisim_id"], -1);
 
                 Alan_kisi_komutanlik = new Komutanlik(alanKisiKomutanlikId, "");
