@@ -139,7 +139,18 @@ namespace MEBS_Envanter
                         ShowError("Aynı isimli bilgisayar mevcut !!!");
                         return false;
                     }
-                }                
+                }
+
+                if (!Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi) && isEdit) {
+
+                    MessageBoxResult x1=
+                        MessageBox.Show("Bilgisayar İsmini Düzenlemek istiyor musunuz ? ", 
+                        "Dikkat !!!", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    if (!x1.Equals(MessageBoxResult.Yes)) {
+                        return false;
+                    }
+                   
+                }
 
                 freshComputerInfo.IsEdit = isEdit;
 
@@ -448,9 +459,9 @@ namespace MEBS_Envanter
                     }
                     pcList.DataContext = repositoryNew;
                     current_In_MemoryList = repositoryNew;
-                    if (selectLast)
+                    if (selectLast && repositoryNew.Computers.Count>0)
                     {
-                        pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
+                        pcList.SelectedIndex = 0;//repositoryNew.Computers.Count - 1;
                     }
                     else
                     {
@@ -495,17 +506,11 @@ namespace MEBS_Envanter
             if (pcList.SelectedItem != null)
             {
                 SystemPrint printFunc = new SystemPrint(pcList.SelectedItem as ComputerInfo);
-                printFunc.Print(true);
+                printFunc.Print(false);
             }
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            InfoWindow w = new InfoWindow(this);
-            w.Owner = this;
-            w.Show();
-        }
-
+       
         private void searchGridKomutanliklarCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox combo_senet = sender as ComboBox;
@@ -519,9 +524,8 @@ namespace MEBS_Envanter
         {
              ComputerUserControlVertical x = new ComputerUserControlVertical();
              x.DataContext = (pcList.SelectedItem as ComputerInfo);
-             x.Show();
-                
-        }
+             x.Show();                
+       }
 
         public bool IsBusy
         {
@@ -543,7 +547,6 @@ namespace MEBS_Envanter
             YaziciWindow w = new YaziciWindow();
             w.ShowDialog();
         }
-
 
         private ComputerInfoRepository getSearchRepository(String searchText) {
 
@@ -601,6 +604,15 @@ namespace MEBS_Envanter
             }
             catch (Exception)
             {
+            }
+        }
+
+        private void printSenetPreview_Click(object sender, RoutedEventArgs e)
+        {
+            if (pcList.SelectedItem != null)
+            {
+                SystemPrint printFunc = new SystemPrint(pcList.SelectedItem as ComputerInfo);
+                printFunc.Print(true);
             }
         }        
     }

@@ -43,16 +43,19 @@
                 <MenuItem Header="Yazdırma Seçenekleri"
                           IsEnabled="{Binding ElementName=pcList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}">
                     <MenuItem                         
+                        x:Name="printSenetPreview" Click="printSenetPreview_Click"
+                        Header="Senet Önizleme"></MenuItem>
+                    <MenuItem                         
                         x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="InfoWindow" Click="MenuItem_Click"></MenuItem>
+               
                 <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
                 <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"
 ></MenuItem>            </Menu>
         </Grid>
 
         <!--LoadingBackground="#7BAEC2D1"-->
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" 
             Visibility="{Binding IsBusy,ElementName=mainwin,Converter={StaticResource BoolToVisibilityConverter}}"  
             Grid.ColumnSpan="10" Grid.RowSpan="12" Canvas.ZIndex="99">
             <animations:LoadingAnimation LoadingText="Yükleniyor.."  
@@ -71,7 +74,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="24"></RowDefinition>
-                <RowDefinition Height="26"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Border Margin="0,12" Height="60" Background="SkyBlue" CornerRadius="0">
@@ -82,7 +85,7 @@
 
             <Grid Grid.Row="1" Background="SkyBlue">
                 <StackPanel HorizontalAlignment="Center" TextBlock.FontSize="14"
-                            TextBlock.Foreground="MintCream" Orientation="Horizontal">
+                            TextBlock.Foreground="BlanchedAlmond" Orientation="Horizontal">
                     <TextBlock Text="Bilgisayar Sayısı : "></TextBlock>
                     <TextBlock Text="{Binding ElementName=pcList,Path=Items.Count}"></TextBlock>
                 </StackPanel>
