@@ -30,6 +30,7 @@ using Mebs_Envanter.PrintOperations;
 using MEBS_Envanter.Repositories;
 using Mebs_Envanter.Repositories;
 
+
 namespace MEBS_Envanter
 {
     /// <summary>
@@ -259,7 +260,14 @@ namespace MEBS_Envanter
             Current_Computer_Info = infComp;
             //pcEnvanterTabControl.DataContext = Current_Computer_Info;
             //pcEnvanterControl.DataContext = Current_Computer_Info;
-            Current_Computer_Info.Fetch();
+            foreach (var item in list.SelectedItems)
+            {
+                ComputerInfo x = item as ComputerInfo;
+                if (x != null) {
+                    x.Fetch();
+                }
+            }
+            //Current_Computer_Info.Fetch();
             pcEnvanterControl.SetDataContext(Current_Computer_Info);
             
             //changeCurrentPCContext(list.SelectedItem as ComputerInfo );
@@ -291,6 +299,12 @@ namespace MEBS_Envanter
 
         private void pcDeleteBtn_Click(object sender, RoutedEventArgs e)
         {
+            System.Windows.Forms.DialogResult result1 = System.Windows.Forms.MessageBox.Show("Silmek İstediğinize Emin misiniz?",
+                    "Önemli Soru !!!",
+                System.Windows.Forms.MessageBoxButtons.YesNoCancel,
+                System.Windows.Forms.MessageBoxIcon.Question);
+            if (result1 != System.Windows.Forms.DialogResult.Yes) { return; }
+
             bool isSuccess = DBFunctions.DeletePC(Current_Computer_Info);
             if (isSuccess)
             {
