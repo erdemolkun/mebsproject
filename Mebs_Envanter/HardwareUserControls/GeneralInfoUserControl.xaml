@@ -21,6 +21,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -35,7 +36,8 @@
         <TextBlock Grid.Column="0" Grid.Row="4" Text="Parça No"></TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="5" Text="Seri No"></TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="6" Text="Tempest Seviyesi"></TextBlock>
-        <TextBlock Text="Notlar" Grid.Row="7" Grid.Column="0" ></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="7" Text="Eklenme Tarihi"></TextBlock>
+        <TextBlock Text="Notlar" Grid.Row="8" Grid.Column="0" ></TextBlock>
 
         <!--Burayı değiştir-->
         <TextBox   x:Name="pcAdiTextBox" VerticalAlignment="Center"
@@ -53,6 +55,9 @@
         <TextBox x:Name="pcStokNoTextBox" VerticalAlignment="Center" Text="{Binding PcStokNo,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="3" ></TextBox>
         <TextBox x:Name="pcParcaNoTextBox" VerticalAlignment="Center" Text="{Binding DeviceNo,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="4" ></TextBox>
         <TextBox x:Name="pcSerialNumberTextBox" VerticalAlignment="Center" Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="5" ></TextBox>
+        <TextBox x:Name="pcEklenmeTarihiTextBox" IsEnabled="False"
+                 VerticalAlignment="Center" Text="{Binding EklenmeTarihi,UpdateSourceTrigger=Explicit}"
+                 Margin="2,2" Grid.Column="1" Grid.Row="7" ></TextBox>
 
 
         <ComboBox x:Name="genelBilgilerTempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,4"                                  
@@ -60,7 +65,7 @@
                                   ItemsSource="{Binding TempestSeviyeler}" Grid.Row="6"
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
-        <x1:BindableRichTextBox Grid.Row="7"
+        <x1:BindableRichTextBox Grid.Row="8"
                      x:Name="notlarRichTxtBox" HorizontalAlignment="Left"
                      Document="{Binding Notlar,Converter={StaticResource StringToFlowDocumentConverter}}"
                      Grid.Column="1" Height="80" Margin="2,4" MinWidth="120">
