@@ -91,8 +91,9 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>            
-            
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--EklenmeTarihi-->
             <Grid Grid.Row="0" Name="pcAdiGrid" TextBlock.FontFamily="Tahoma" >                
                 <StackPanel Orientation="Horizontal">
                     <TextBlock  Text="PC ADI : " Foreground="Brown"></TextBlock>
@@ -119,6 +120,15 @@
                 </StackPanel>
             </Grid>
 
+            <Grid MinHeight="20" Grid.Row="3" Name="tarihGrid" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Tarih : " Foreground="Brown"></TextBlock>
+                    <TextBlock Name="tarihTxtBlock" TextWrapping="Wrap" Margin="0,0,2,0" 
+                               Text="{Binding EklenmeTarihi}" />
+
+                </StackPanel>
+            </Grid>
+
         </Grid>
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding RelativeSource=
@@ -128,6 +138,8 @@
                 <Setter TargetName="pcAdiTxtBlock" Property="FontWeight" Value="Bold"/>
                 <Setter TargetName="alanKisiGrid" Property="Visibility" Value="Visible"/>
                 <Setter TargetName="birlikGrid" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="tarihGrid" Property="Visibility" Value="Visible"/>
+                
                 
             </DataTrigger>
         </DataTemplate.Triggers>
