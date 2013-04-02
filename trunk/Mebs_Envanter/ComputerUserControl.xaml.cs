@@ -26,7 +26,7 @@ namespace Mebs_Envanter
         }
         public void Assign_ComputerInfo_By_GUI(ComputerInfo current_Computer, ComputerInfo computerInfo, bool isEdit)
         {
-            generalInfoUserControl1.SetGeneralInfo(computerInfo);
+            generalInfoUserControl1.SetGeneralInfo(computerInfo, isEdit);
             networkUserControl1.SetNetworkInfo(computerInfo.NetworkInfo);
 
             monitorUserControl1.SetMonitorInfo(computerInfo.MonitorInfo);

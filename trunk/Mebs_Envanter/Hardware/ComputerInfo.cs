@@ -85,6 +85,14 @@ namespace MEBS_Envanter
             DeviceNo = rowPC["parca_no"].ToString();
             Notlar = rowPC["notlar"].ToString();
             Tempest = new Tempest(tempest_id, "");
+            try
+            {
+                EklenmeTarihi = (DateTime)rowPC["kayit_ekleme_tarihi"];
+            }
+            catch (Exception) { 
+            
+            }
+
         }
 
         internal void Set_MonitorInfo(OEMDevice devOem)
@@ -359,14 +367,17 @@ namespace MEBS_Envanter
         }
 
 
-        private string pc_adi;
+        private string pc_adi="";
         /// <summary>
         /// Bilgisayar Adı
         /// </summary>
         public string Pc_adi
         {
             get { return pc_adi; }
-            set { pc_adi = value; OnPropertyChanged("Pc_adi"); }
+            set {
+                pc_adi = value;
+                OnPropertyChanged("Pc_adi");
+            }
         }
 
 
