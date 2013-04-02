@@ -60,9 +60,14 @@ namespace Mebs_Envanter.HardwareUserControls
             {
                 inf.Alan_kisi_birlik = (senetBirlikCombo.SelectedItem as Birlik);
             }
+                        
             if (senetKisimCombo.SelectedItem != null)
             {
                 inf.Alan_kisi_kisim = (senetKisimCombo.SelectedItem as Kisim);
+            }
+            else if (!String.IsNullOrEmpty(senetKisimCombo.Text.Trim())) {
+
+                inf.Alan_kisi_kisim = new Kisim(-1, senetKisimCombo.Text.Trim());
             }
         }
 
@@ -79,8 +84,8 @@ namespace Mebs_Envanter.HardwareUserControls
         {
             ComboBox combo_senet = sender as ComboBox;
             KisimRepository kisim_rep = new KisimRepository();
-            //kisim_rep.FillKisimlar((combo_senet.SelectedItem as Birlik));
-            kisim_rep.FillKisimlar(null);
+            kisim_rep.FillKisimlar((combo_senet.SelectedItem as Birlik));
+            //kisim_rep.FillKisimlar(null);
             senetKisimCombo.ItemsSource = kisim_rep.Kisimlar;
             KisimRepository.INSTANCE = kisim_rep;
         }

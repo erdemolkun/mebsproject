@@ -33,12 +33,12 @@ namespace MEBS_Envanter
             set { alan_kisi_rutbe = value; }
         }
 
-        private String alan_kisi_isim;
+        private String alan_kisi_isim="";
 
         public String Alan_kisi_isim
         {
             get { return alan_kisi_isim; }
-            set { alan_kisi_isim = value; }
+            set { if (value == null) alan_kisi_isim = ""; else alan_kisi_isim = value; }
         }
 
 
@@ -62,15 +62,20 @@ namespace MEBS_Envanter
         public Kisim Alan_kisi_kisim
         {
             get { return alan_kisi_kisim; }
-            set { alan_kisi_kisim = value; }
+            set {
+                
+                alan_kisi_kisim = value; }
         }
 
-        private String veren_kisi_isim;
+        private String veren_kisi_isim="";
 
         public String Veren_kisi_isim
         {
             get { return veren_kisi_isim; }
-            set { veren_kisi_isim = value; }
+            set {
+                if (value == null) veren_kisi_isim = "";
+                else  veren_kisi_isim = value;
+            }
         }
 
 

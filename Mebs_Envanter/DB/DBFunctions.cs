@@ -9,6 +9,7 @@ using DatabaseConnection;
 using System.Windows;
 using Mebs_Envanter.Hardware;
 using Mebs_Envanter;
+using MEBS_Envanter.GeneralObjects;
 
 namespace MEBS_Envanter.DB
 {
@@ -405,6 +406,31 @@ namespace MEBS_Envanter.DB
             catch (Exception) { return false; }
         }
 
+
+        private static int InsertKisim(Kisim kisim,int birlik_id) {
+
+            try
+            {
+                SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+                SqlCommand cmd = new SqlCommand("insert into tbl_kisim (birlik_id,kisim_adi) values (@birlik_id,@kisim_adi)"+
+
+                " SELECT IDENT_CURRENT('dbo.tbl_kisim')", cnn);
+
+                cmd.Parameters.AddWithValue("@birlik_id", birlik_id);
+                cmd.Parameters.AddWithValue("@kisim_adi", kisim.Kisim_adi);
+                bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+                if (res)
+                {
+                    object kisimid  = cmd.ExecuteScalar();
+                    return Convert.ToInt32(kisimid);
+                }
+            }
+            catch (Exception) { 
+                
+            }
+            return -1;
+        }
+
         public static bool InsertOrUpdateSenet(int bilgisayar_id, SenetInfo infoSenet, bool isEdit)
         {
             try
@@ -446,7 +472,11 @@ namespace MEBS_Envanter.DB
                             }
                             else
                             {
-                                cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = null;
+                                int newId = InsertKisim(infoSenet.Alan_kisi_kisim, infoSenet.Alan_kisi_birlik.Birlik_id);
+                                if (newId > 0)
+                                {
+                                    cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = null;
+                                }
                             }
                         }
                         else

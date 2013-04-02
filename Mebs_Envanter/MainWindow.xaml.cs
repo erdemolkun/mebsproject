@@ -432,6 +432,7 @@ namespace MEBS_Envanter
                         repositoryNew.Computers.Add(tempComputer);
                     }
                     pcList.DataContext = repositoryNew;
+                    current_In_MemoryList = repositoryNew;
                     if (selectLast)
                     {
                         pcList.SelectedIndex = repositoryNew.Computers.Count - 1;
@@ -440,6 +441,7 @@ namespace MEBS_Envanter
                     {
                         pcList.SelectedIndex = -1;
                     }
+                    
                 }
                 catch (Exception)
                 {
@@ -457,6 +459,7 @@ namespace MEBS_Envanter
                 LoggerMebs.WriteToFile("\nRefreshComputerList Hatası : \n" + ex.Message);
             }
         }
+        ComputerInfoRepository current_In_MemoryList = null;
 
         private void btnClearSearch_Click(object sender, RoutedEventArgs e)
         {
@@ -524,6 +527,44 @@ namespace MEBS_Envanter
         {
             YaziciWindow w = new YaziciWindow();
             w.ShowDialog();
+        }
+
+
+        private ComputerInfoRepository getSearchRepository(String searchText) {
+
+            if (!String.IsNullOrEmpty(searchText) && searchText.Length > 0)
+            {
+                ComputerInfoRepository repNew = new ComputerInfoRepository();
+                foreach (ComputerInfo item in current_In_MemoryList.Computers)
+                {
+                    if (item.Pc_adi.ToLower().Contains(searchText.ToLower()) ||
+                        item.Senet.Alan_kisi_isim.ToLower().Contains(searchText.ToLower()) ||
+                        item.Senet.Alan_kisi_komutanlik.Komutanlik_ismi.ToLower().Contains(searchText.ToLower()) ||
+                        item.Senet.Veren_kisi_isim.ToLower().Contains(searchText.ToLower())
+                        )
+                    {
+                        repNew.Computers.Add(item);
+                    }
+                }
+                return repNew;
+            }
+            else {
+                return current_In_MemoryList;
+            }
+        }
+
+        private void quickSearchBtn_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!quickSearchBtn.Text.Equals(quickSearchBtn.DisplayText))
+            {                
+                if (quickSearchBtn.IsKeyboardFocused) {
+
+                    String txt = quickSearchBtn.Text;
+                    ComputerInfoRepository newList = getSearchRepository(txt);
+                    pcList.DataContext= newList;
+
+                }
+            }
         }        
     }
 }

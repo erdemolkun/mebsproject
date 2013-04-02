@@ -13,6 +13,7 @@
         xmlns:converters="clr-namespace:MEBS_Envanter.Converters"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
+        xmlns:guihelpers2="clr-namespace:Mebs_Envanter.GUIHelpers"
         Title="Bilgisayar Envanter Kaydı" 
         IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
         SizeToContent="Height"  ResizeMode="NoResize">
@@ -69,6 +70,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="24"></RowDefinition>
+                <RowDefinition Height="26"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Border Margin="0,12" Height="60" Background="SkyBlue" CornerRadius="0">
@@ -84,8 +86,14 @@
                     <TextBlock Text="{Binding ElementName=pcList,Path=Items.Count}"></TextBlock>
                 </StackPanel>
             </Grid>
+
+            <guihelpers2:VistaTypeTextBox x:Name="quickSearchBtn" 
+                                 DisplayText="Hızlı Arama"
+                                 Grid.Row="2" Margin="0,1"
+                             TextChanged="quickSearchBtn_TextChanged" VerticalAlignment="Center"
+                                 HorizontalAlignment="Center" Width="160" Height="Auto"></guihelpers2:VistaTypeTextBox>
             
-            <ListBox Grid.Row="2" x:Name="pcList" MouseDoubleClick="pcList_MouseDoubleClick"
+            <ListBox Grid.Row="3" x:Name="pcList" MouseDoubleClick="pcList_MouseDoubleClick"
                  SelectionChanged="pcList_SelectionChanged"                 
                  ItemsSource="{Binding Computers}" Style="{StaticResource generalListBoxStyle}"
                  ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
