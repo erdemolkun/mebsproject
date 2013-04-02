@@ -47,7 +47,8 @@
                 </MenuItem>
                 <MenuItem Header="InfoWindow" Click="MenuItem_Click"></MenuItem>
                 <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
-            </Menu>
+                <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"
+></MenuItem>            </Menu>
         </Grid>
 
         <!--LoadingBackground="#7BAEC2D1"-->
