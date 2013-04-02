@@ -36,7 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Rskys-Windows-Business-My-Computer.ico</ApplicationIcon>
+    <ApplicationIcon>MyComputer.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -282,7 +282,7 @@
   <ItemGroup>
     <Content Include="bin\Debug\WPFToolkit.dll" />
     <Content Include="bin\Debug\Xceed.Wpf.Controls.dll" />
-    <Resource Include="Rskys-Windows-Business-My-Computer.ico" />
+    <Resource Include="MyComputer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
