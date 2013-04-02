@@ -89,7 +89,7 @@
             </Grid>
 
             <guihelpers2:VistaTypeTextBox x:Name="quickSearchBtn" 
-                                 DisplayText="Hızlı Arama"
+                                 DisplayText="Listede Hızlı Arama"
                                  Grid.Row="2" Margin="0,1"
                              TextChanged="quickSearchBtn_TextChanged" VerticalAlignment="Center"
                                  HorizontalAlignment="Center" Width="160" Height="Auto"></guihelpers2:VistaTypeTextBox>
