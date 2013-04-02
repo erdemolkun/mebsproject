@@ -19,13 +19,15 @@ namespace MEBS_Envanter
     {
 
 
-        public void Fetch() {
-            if (!PropertiesFetched) {
+        public void Fetch()
+        {
+            if (!PropertiesFetched)
+            {
 
                 Set_ComputerOemDevices(null);
                 Senet.Set_SenetInfos(true, Id, -1);
                 PropertiesFetched = true;
-            }        
+            }
         }
 
         public bool PropertiesFetched = false;
@@ -48,8 +50,6 @@ namespace MEBS_Envanter
         public void SetGeneralFields(DataRow rowPC)
         {
             Id = (int)rowPC["bilgisayar_id"];
-
-            
             //if (!String.IsNullOrEmpty(rowPC["marka_id"].ToString()))
             //{
             //    markaid = (int)rowPC["marka_id"];
@@ -77,7 +77,7 @@ namespace MEBS_Envanter
 
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
 
-            
+
             Pc_adi = rowPC["pc_adi"].ToString();
             PcStokNo = rowPC["pc_stok_no"].ToString();
             Model = rowPC["model"].ToString();
@@ -277,7 +277,6 @@ namespace MEBS_Envanter
             //        //cnn.Dispose();
             //    }
             //}
-
         }
 
         internal OEMDevice Get_OemDevice(DeviceTypes devType)

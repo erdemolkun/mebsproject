@@ -14,7 +14,6 @@ namespace MEBS_Envanter
     public class SenetInfo
     {
         public SenetInfo() {
-
            
         }
 
