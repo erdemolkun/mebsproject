@@ -56,7 +56,7 @@
         <TextBox x:Name="pcParcaNoTextBox" VerticalAlignment="Center" Text="{Binding DeviceNo,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="4" ></TextBox>
         <TextBox x:Name="pcSerialNumberTextBox" VerticalAlignment="Center" Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="5" ></TextBox>
         <TextBox x:Name="pcEklenmeTarihiTextBox" IsEnabled="False"
-                 VerticalAlignment="Center" Text="{Binding EklenmeTarihi,UpdateSourceTrigger=Explicit}"
+                 VerticalAlignment="Center" Text="{Binding EklenmeTarihi,UpdateSourceTrigger=Explicit,Converter={StaticResource DateTimeFormatConverter}}"
                  Margin="2,2" Grid.Column="1" Grid.Row="7" ></TextBox>
 
 

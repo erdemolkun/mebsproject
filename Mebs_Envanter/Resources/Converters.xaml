@@ -36,4 +36,6 @@
 
 
     <converters:NotBoolConverter x:Key="NotBoolConverter"></converters:NotBoolConverter>
+
+    <converters:DateTimeFormatConverter x:Key="DateTimeFormatConverter"></converters:DateTimeFormatConverter>
 </ResourceDictionary>
