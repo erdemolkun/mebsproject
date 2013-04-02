@@ -29,6 +29,7 @@ using System.Drawing.Printing;
 using Mebs_Envanter.PrintOperations;
 using MEBS_Envanter.Repositories;
 using Mebs_Envanter.Repositories;
+using System.Reflection;
 
 
 namespace MEBS_Envanter
@@ -578,6 +579,28 @@ namespace MEBS_Envanter
                     pcList.DataContext= newList;
 
                 }
+            }
+        }
+        
+        private void hakkindaMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                string version = fvi.ProductVersion;
+
+                InfoWindow x = new
+                    InfoWindow(this);
+
+                String msg = "MEBS Bölük Komutanlığı \nBilgisayar Envanter Kayıt Programı\n\n\n";
+                msg += "\tVersiyon : " + fvi.ProductBuildPart + "." + fvi.ProductPrivatePart;
+
+                x.ShowMessage(msg);
+                
+            }
+            catch (Exception)
+            {
             }
         }        
     }
