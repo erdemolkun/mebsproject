@@ -9,23 +9,24 @@ namespace MEBS_Envanter
     {
         public override string ToString()
         {
-            String str = "";// "StokNo : " + StokNo + "";
-            if ((int)MonType > 0) {
-                str+="Tipi : " + MonType.ToString();
+            String str = "";
+            bool hasMonType = false;
+            if ((int)MonType > 0)
+            {
+                hasMonType = true;
+                str += "Tipi : " + MonType.ToString();
             }
-            if (Marka.MarkaID > 0) {
+            if (Marka.MarkaID > 0)
+            {
+                if (hasMonType) {
+                    str += ",";
+                }
                 str += " Marka : " + Marka.MarkaName;
             }
             return str;
-            
         }
         public Monitor()
         {
-
-            //Marka = new Marka(-1, "Dell");
-            //StokNo = "55";
-            //SerialNumber = "21N8SHKSL21";
-            //DeviceNo = "210";
             DeviceType = DeviceTypes.MONITOR;
         }
 
