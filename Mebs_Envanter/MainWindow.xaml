@@ -94,7 +94,7 @@
                                  HorizontalAlignment="Center" Width="160" Height="Auto"></guihelpers2:VistaTypeTextBox>
             
             <ListBox Grid.Row="3" x:Name="pcList" MouseDoubleClick="pcList_MouseDoubleClick"
-                 SelectionChanged="pcList_SelectionChanged"                 
+                 SelectionChanged="pcList_SelectionChanged"  
                  ItemsSource="{Binding Computers}" Style="{StaticResource generalListBoxStyle}"
                  ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
