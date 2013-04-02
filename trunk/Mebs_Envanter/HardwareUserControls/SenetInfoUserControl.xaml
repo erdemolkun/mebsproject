@@ -63,6 +63,7 @@
         
         <TextBlock Grid.Column="0" Grid.Row="4" Text="Alan Kişi Kısım"></TextBlock>
         <ComboBox VerticalAlignment="Center" 
+                  IsEditable="True" MaxWidth="120"
                             ItemsSource="{Binding Kisimlar}" x:Name="senetKisimCombo"
                             SelectedIndex="{Binding Alan_kisi_kisim,Converter={StaticResource KisimComboIndexConverter},UpdateSourceTrigger=Explicit}" 
                             MinWidth="60" Margin="2" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4"></ComboBox>

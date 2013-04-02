@@ -95,6 +95,7 @@
     <Compile Include="Converters\NullValueToBoolConverter.cs" />
     <Compile Include="Converters\KisimComboIndexConverter.cs" />
     <Compile Include="Converters\RutbeComboIndexConverter.cs" />
+    <Compile Include="GUIHelpers\VistaTypeTextBox.cs" />
     <Compile Include="HardwareUserControls\DeviceEntryControl.xaml.cs">
       <DependentUpon>DeviceEntryControl.xaml</DependentUpon>
     </Compile>
