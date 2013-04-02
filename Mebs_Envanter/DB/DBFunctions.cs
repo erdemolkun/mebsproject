@@ -136,7 +136,7 @@ namespace MEBS_Envanter.DB
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_rutbe", SqlDbType.NVarChar, 50));
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_isim", SqlDbType.NVarChar, 50));
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@veren_kisi_isim", SqlDbType.NVarChar, 50));
-            cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_birilk_id", SqlDbType.Int));
+            cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_birlik_id", SqlDbType.Int));
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_komutanlik_id", SqlDbType.Int));
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_kisim_id", SqlDbType.Int));
         }
@@ -465,7 +465,7 @@ namespace MEBS_Envanter.DB
                         cmSenetEkleDilDuz.Parameters["@alan_kisi_komutanlik_id"].Value = infoSenet.Alan_kisi_komutanlik.Komutanlik_id;
                         if (infoSenet.Alan_kisi_birlik.Birlik_id > 0)
                         {
-                            cmSenetEkleDilDuz.Parameters["@alan_kisi_birilk_id"].Value = infoSenet.Alan_kisi_birlik.Birlik_id;
+                            cmSenetEkleDilDuz.Parameters["@alan_kisi_birlik_id"].Value = infoSenet.Alan_kisi_birlik.Birlik_id;
                             if (infoSenet.Alan_kisi_kisim.Kisim_id > 0)
                             {
                                 cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = infoSenet.Alan_kisi_kisim.Kisim_id;
@@ -483,7 +483,7 @@ namespace MEBS_Envanter.DB
                         }
                         else
                         {
-                            cmSenetEkleDilDuz.Parameters["@alan_kisi_birilk_id"].Value = null;
+                            cmSenetEkleDilDuz.Parameters["@alan_kisi_birlik_id"].Value = null;
                         }
                     }
                     else
