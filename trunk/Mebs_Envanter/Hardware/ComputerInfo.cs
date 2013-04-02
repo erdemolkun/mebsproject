@@ -38,7 +38,7 @@ namespace MEBS_Envanter
             NetworkInfo = new NetworkInfo();
             MonitorInfo = new Monitor();
             Senet = new SenetInfo();
-            EklenmeTarihi = new DateTime(2010, 9, 12);
+            //EklenmeTarihi = new DateTime(2010, 9, 12);
 
             bool designTime = System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject());
             if (designTime)
@@ -467,8 +467,8 @@ namespace MEBS_Envanter
         }
 
 
-        private DateTime eklenmeTarihi;
-        public DateTime EklenmeTarihi
+        private DateTime ? eklenmeTarihi;
+        public DateTime ? EklenmeTarihi
         {
             get { return eklenmeTarihi; }
             set { eklenmeTarihi = value; OnPropertyChanged("EklenmeTarihi"); }

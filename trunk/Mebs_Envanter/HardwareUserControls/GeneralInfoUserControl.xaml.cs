@@ -37,11 +37,14 @@ namespace Mebs_Envanter.HardwareUserControls
             TempestRepository.INSTANCE = Rep_Tempest;
         
         }
-        public void SetGeneralInfo(ComputerInfo inf,bool isEdit) {
+        public void SetGeneralInfo(ComputerInfo inf,ComputerInfo current_Computer,bool isEdit) {
 
             if (!isEdit)
             {
                 inf.EklenmeTarihi = DateTime.Now;
+            }
+            else {
+                inf.EklenmeTarihi = current_Computer.EklenmeTarihi;
             }
             inf.Pc_adi = pcAdiTextBox.Text.Trim().ToString();
             inf.Model = pcModelTextBox.Text.Trim().ToString();

@@ -333,8 +333,8 @@ namespace Mebs_Envanter.PrintOperations
                                    Brushes.Black, tarih_Loc1.X, tarih_Loc1.Y);
 
             PointF tarih_Loc2 = p6.getlocation(1, 0);
-            e.Graphics.DrawString(computerInfo.EklenmeTarihi.ToString("yyyy/mm/dd"), fntString11,
-                                   Brushes.Black, tarih_Loc2.X, tarih_Loc2.Y);
+            //e.Graphics.DrawString(computerInfo.EklenmeTarihi.ToString("yyyy/mm/dd"), fntString11,
+              //                     Brushes.Black, tarih_Loc2.X, tarih_Loc2.Y);
 
             //System.Drawing.Font fntString2 = new Font("Times New Roman", 12,
             //                                        FontStyle.Regular);
