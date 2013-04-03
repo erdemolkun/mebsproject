@@ -50,8 +50,14 @@
 
             <TextBlock HorizontalAlignment="Center"  VerticalAlignment="Center"
                        x:Name="infoTxtBlock"  TextWrapping="Wrap"  FontSize="13"
-                       FontWeight="Bold" Text="asdasdasd"
-                       Foreground="#FF893838"></TextBlock>
+                       FontWeight="Bold" Text="Bilgi"
+                       Foreground="#FF893838">
+                <TextBlock.BitmapEffect>
+                    <OuterGlowBitmapEffect GlowColor="LightGray" GlowSize="8">
+                        
+                    </OuterGlowBitmapEffect>
+                </TextBlock.BitmapEffect>
+            </TextBlock>
 
             <Button Content="Tamam" VerticalAlignment="Bottom" 
                     Margin="0,6" Width="120" x:Name="okBtn" Click="okBtn_Click"

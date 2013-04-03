@@ -50,6 +50,7 @@
                 </MenuItem>
 
                 <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
+                <MenuItem Header="Barcode Deneme" Click="MenuItem_Click"></MenuItem>
                 <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
             </Menu>
         </Grid>
@@ -103,10 +104,16 @@
                  ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
                  MinHeight="120"  Background="Transparent">
-
-
             </ListBox>
 
+            <Grid Grid.Row="3" Visibility="{Binding ElementName=pcList,Path=Items.Count, Converter={StaticResource ListBoxElementVisibilityConverter}}">
+                <TextBlock Text="Kayıt Bulunamadı." FontFamily="Tahoma" FontSize="24"
+                           Foreground="Wheat" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock.RenderTransform>
+                                <RotateTransform Angle="-45"/>
+                            </TextBlock.RenderTransform>
+                </TextBlock>
+            </Grid>
         </Grid>
 
         <!--Düzenleme Kısmı (Ekle,Sil,Düzenle)-->

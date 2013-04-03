@@ -38,4 +38,8 @@
     <converters:NotBoolConverter x:Key="NotBoolConverter"></converters:NotBoolConverter>
 
     <converters:DateTimeFormatConverter x:Key="DateTimeFormatConverter"></converters:DateTimeFormatConverter>
+
+    <converters:ListBoxElementVisibilityConverter x:Key="ListBoxElementVisibilityConverter">
+        
+    </converters:ListBoxElementVisibilityConverter>
 </ResourceDictionary>

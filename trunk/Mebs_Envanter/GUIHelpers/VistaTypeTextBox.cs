@@ -111,6 +111,12 @@ namespace Mebs_Envanter.GUIHelpers
             this.Text = DisplayText;
         }
 
+        public void Clear() {
+
+            this.Text = "";
+            SetDefaultProperties();
+            OnLostFocus(null);
+        }
 
         protected override void OnGotFocus(System.Windows.RoutedEventArgs e)
         {
@@ -123,7 +129,10 @@ namespace Mebs_Envanter.GUIHelpers
 
         protected override void OnLostFocus(System.Windows.RoutedEventArgs e)
         {
-            base.OnLostFocus(e);
+            if (e != null)
+            {
+                base.OnLostFocus(e);
+            }
             this.Background = NewBackground;
             if (this.Text == string.Empty)
             {

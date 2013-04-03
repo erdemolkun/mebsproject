@@ -13,6 +13,13 @@ namespace Mebs_Envanter
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnActivated(EventArgs e)
+        {
+
+            Unnecessary.CreateImageFile();
+            base.OnActivated(e);
+        }
+
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             LoggerMebs.WriteToFile("Application_DispatcherUnhandledException\n"
