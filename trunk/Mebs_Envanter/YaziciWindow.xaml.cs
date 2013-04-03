@@ -47,7 +47,7 @@ namespace Mebs_Envanter
             senetInfoControl1.Init();
             networkInfoControl1.Init();            
         }
-        private bool AddOrEditPCFunction(bool isEdit)
+        private bool AddOrEditYaziciFunction(bool isEdit)
         {
 
             try
@@ -87,9 +87,8 @@ namespace Mebs_Envanter
             IsBusy = false;
             YaziciDbWorkInfo addInfo = e.Result as YaziciDbWorkInfo;
             if (addInfo == null) {
-
-                InfoWindow w = new InfoWindow(this);
-                w.ShowMessage("Hata");
+               
+                InfoWindow.ShowMessage(this,"Hata");
                 return;
             }
             
@@ -261,12 +260,12 @@ namespace Mebs_Envanter
 
         private void yaziciAdd_Click(object sender, RoutedEventArgs e)
         {
-            AddOrEditPCFunction(false);
+            AddOrEditYaziciFunction(false);
         }
 
         private void yaziciEdit_Click(object sender, RoutedEventArgs e)
         {
-            AddOrEditPCFunction(true);
+            AddOrEditYaziciFunction(true);
         }
 
         private void yaziciDelete_Click(object sender, RoutedEventArgs e)
@@ -278,8 +277,7 @@ namespace Mebs_Envanter
                 if (currentInfoRep != null)
                 {
                     currentInfoRep.Yazicilar.Remove(Current_YaziciInfo);
-                }
-                //RefreshComputerList(null,true);
+                }                
             }
         }
 

@@ -40,10 +40,23 @@ namespace Mebs_Envanter
             Close();
         }
 
-        public void ShowMessage(String msg) {
+        private void ShowMessage(String msg) {
 
             infoTxtBlock.Text = msg;
             ShowDialog();
+        }
+
+        public static void ShowMessage(Window owner,String msg) {
+            InfoWindow w = new InfoWindow(owner);
+            w.ShowMessage(msg);            
+        }
+
+        public static MessageBoxResult AskQuestion(String msg, String header)
+        {
+
+            MessageBoxResult result1 = MessageBox.Show(msg, header,
+                    MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            return result1;
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)

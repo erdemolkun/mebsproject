@@ -111,7 +111,8 @@ namespace Mebs_Envanter.GUIHelpers
             this.Text = DisplayText;
         }
 
-        public void Clear() {
+        public void ClearText()
+        {
 
             this.Text = "";
             SetDefaultProperties();
