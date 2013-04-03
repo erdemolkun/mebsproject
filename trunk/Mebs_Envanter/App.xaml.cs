@@ -15,7 +15,8 @@ namespace Mebs_Envanter
     {
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            LoggerMebs.WriteToFile(e.Exception.Message);
+            LoggerMebs.WriteToFile("Application_DispatcherUnhandledException\n"
+                + e.Exception.Message);
             e.Handled = true;
         }
     }
