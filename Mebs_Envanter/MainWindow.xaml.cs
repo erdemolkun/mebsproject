@@ -45,7 +45,7 @@ namespace MEBS_Envanter
 
             Thread thSqlInit = new Thread(StartSqlInit);
             thSqlInit.IsBackground = true;
-            thSqlInit.Start();            
+            thSqlInit.Start();
             IsBusy = true;
 
         }
@@ -74,7 +74,8 @@ namespace MEBS_Envanter
                         //Environment.Exit(0);
                     }
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
 
                     LoggerMebs.WriteToFile(ex.Message.ToString());
                 }
@@ -107,9 +108,7 @@ namespace MEBS_Envanter
 
         private void ShowError(String msg)
         {
-
-            InfoWindow w = new InfoWindow(this);
-            w.ShowMessage(msg);
+            InfoWindow.ShowMessage(this, msg);
         }
 
         private bool AddOrEditPCFunction(bool isEdit)
@@ -122,10 +121,11 @@ namespace MEBS_Envanter
                 object count = DBFunctions.ExecuteToFetchSingleItem("Select Count(*) as Count from tbl_bilgisayar where Pc_adi like '" +
                     freshComputerInfo.Pc_adi.Trim().ToString() + "'", "Count");
 
-                if (String.IsNullOrEmpty(freshComputerInfo.Pc_adi.Trim().ToString())) {
+                if (String.IsNullOrEmpty(freshComputerInfo.Pc_adi.Trim().ToString()))
+                {
 
                     ShowError("Lütfen Bilgisayar ismini giriniz !!!");
-                    return false;
+                    return true;
                 }
 
                 if (count != null && Convert.ToInt32(count) > 0)
@@ -137,19 +137,20 @@ namespace MEBS_Envanter
                     else
                     {
                         ShowError("Aynı isimli bilgisayar mevcut !!!");
-                        return false;
+                        return true;
                     }
                 }
 
-                if (!Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi) && isEdit) {
+                if (!Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi) && isEdit)
+                {
 
-                    MessageBoxResult x1=
-                        MessageBox.Show("Bilgisayar İsmini Düzenlemek istiyor musunuz ? ", 
+                    MessageBoxResult x1 =
+                        MessageBox.Show("Bilgisayar İsmini Düzenlemek istiyor musunuz ? ",
                         "Dikkat !!!", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-                    if (!x1.Equals(MessageBoxResult.Yes)) {
-                        return false;
+                    if (!x1.Equals(MessageBoxResult.Yes))
+                    {
+                        return true;
                     }
-                   
                 }
 
                 freshComputerInfo.IsEdit = isEdit;
@@ -172,7 +173,7 @@ namespace MEBS_Envanter
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Arrow;           
+            Mouse.OverrideCursor = Cursors.Arrow;
             IsBusy = false;
             ComputerDbWorkInfo addInfo = e.Result as ComputerDbWorkInfo;
             ComputerInfoRepository computerRep = (pcList.DataContext as ComputerInfoRepository);
@@ -180,29 +181,9 @@ namespace MEBS_Envanter
             {
                 int index = computerRep.Computers.IndexOf(Current_Computer_Info);
                 computerRep.Computers[index] = addInfo.computer;
-                /*int index = 0;
-                foreach (var itemx in computerRep.Computers)
-                {
-                    if (itemx.Id == Current_Computer_Info.Id) {
-                        computerRep.Computers[index] = addInfo.computer;
-                        break;
-                    }
-                    index++;
-                }*/
-
-
-                /*var item = computerRep.Computers.FirstOrDefault(i => i.Id == Current_Computer_Info.Id);
-                if (item != null)
-                {
-                    item = (addInfo.computer);
-                }*/
-                //computerRep.Computers.Remove(Current_Computer_Info);
-                //computerRep.Computers.Add(addInfo.computer);
                 Current_Computer_Info = addInfo.computer;
                 pcList.SelectedItem = Current_Computer_Info;
                 pcEnvanterControl.SetDataContext(Current_Computer_Info);
-                //pcList.SelectedIndex = -1;
-                //pcList.SelectedItem = Current_Computer_Info;
             }
             else
             {
@@ -210,13 +191,6 @@ namespace MEBS_Envanter
                 //computerRep.Computers.Add(addInfo.computer);
                 pcList.SelectedItem = addInfo.computer;
             }
-            /*if ((bool)e.Result)
-            {
-                RefreshComputerList(null,true);
-            }
-            else {
-                MessageBox.Show("Hata Oluştu");
-            }*/
         }
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
@@ -270,19 +244,16 @@ namespace MEBS_Envanter
             }
             list.ScrollIntoView(infComp);
             Current_Computer_Info = infComp;
-            //pcEnvanterTabControl.DataContext = Current_Computer_Info;
-            //pcEnvanterControl.DataContext = Current_Computer_Info;
+
             foreach (var item in list.SelectedItems)
             {
                 ComputerInfo x = item as ComputerInfo;
-                if (x != null) {
+                if (x != null)
+                {
                     x.Fetch();
                 }
             }
-            //Current_Computer_Info.Fetch();
             pcEnvanterControl.SetDataContext(Current_Computer_Info);
-            
-            //changeCurrentPCContext(list.SelectedItem as ComputerInfo );
         }
 
         private void pcAddBtn_Click(object sender, RoutedEventArgs e)
@@ -297,25 +268,15 @@ namespace MEBS_Envanter
 
         private void PCAddCallerFunction(bool isEdit)
         {
-
-            if (AddOrEditPCFunction(isEdit))
+            if (!AddOrEditPCFunction(isEdit))
             {
-
-            }
-            else
-            {
-               // MessageBox.Show("Hata Oluştu");
-            }
-
+                InfoWindow.ShowMessage(this,"Ekleme Sırasında Hata Oluştu");
+            }           
         }
 
         private void pcDeleteBtn_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.DialogResult result1 = System.Windows.Forms.MessageBox.Show("Silmek İstediğinize Emin misiniz?",
-                    "Önemli Soru !!!",
-                System.Windows.Forms.MessageBoxButtons.YesNoCancel,
-                System.Windows.Forms.MessageBoxIcon.Question);
-            if (result1 != System.Windows.Forms.DialogResult.Yes) { return; }
+        {            
+            if (InfoWindow.AskQuestion("Silmek İstediğinize Emin misiniz?", "Önemli Soru !!!") != MessageBoxResult.Yes) { return; }
 
             bool isSuccess = DBFunctions.DeletePC(Current_Computer_Info);
             if (isSuccess)
@@ -323,23 +284,25 @@ namespace MEBS_Envanter
                 ComputerInfoRepository currentInfoRep = (pcList.DataContext as ComputerInfoRepository);
                 if (currentInfoRep != null)
                 {
-
                     currentInfoRep.Computers.Remove(Current_Computer_Info);
+                    SetSelectedItemAfterContextChange(true);
                 }
-                //RefreshComputerList(null,true);
+            }
+            else
+            {
+                InfoWindow.ShowMessage(this, "Silme Sırasında Hata Oluştu");
             }
         }
         private void refreshListBtn_Click(object sender, RoutedEventArgs e)
         {
             RefreshComputerList(null, true);
-            //changeCurrentPCContext((pcList.DataContext as ComputerInfoRepository).Computers[0]);
         }
 
         #endregion
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            RefreshComputerList(GetParameterListForSearch(), false);
+            RefreshComputerList(GetParameterListForSearch(), true);
         }
 
         private SortedList<String, object> GetParameterListForSearch()
@@ -414,7 +377,8 @@ namespace MEBS_Envanter
             return list;
         }
 
-        private void SetSelectedItemAfterContextChange(bool selectLast) {
+        private void SetSelectedItemAfterContextChange(bool selectLast)
+        {
 
             ComputerInfoRepository repositoryNew = (pcList.DataContext as ComputerInfoRepository);
             if (selectLast && repositoryNew.Computers.Count > 0)
@@ -425,7 +389,6 @@ namespace MEBS_Envanter
             {
                 pcList.SelectedIndex = -1;
             }
-            
         }
 
         private void RefreshComputerList(SortedList<String, object> parameterList, bool selectLast)
@@ -472,9 +435,9 @@ namespace MEBS_Envanter
                         repositoryNew.Computers.Add(tempComputer);
                     }
                     pcList.DataContext = repositoryNew;
-                    current_In_MemoryList = repositoryNew;                    
-                    quickSearchBtn.Clear();
-                    SetSelectedItemAfterContextChange(selectLast);                    
+                    current_In_MemoryList = repositoryNew;
+                    quickSearchBtn.ClearText();
+                    SetSelectedItemAfterContextChange(selectLast);
                 }
                 catch (Exception)
                 {
@@ -484,11 +447,11 @@ namespace MEBS_Envanter
                     cnn.Close();
                     cnn.Dispose();
                 }
-
                 long x = w.ElapsedMilliseconds;
                 Console.WriteLine("Bilgisayar listesi " + x + " milisaniye içinde yenilendi");
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 LoggerMebs.WriteToFile("\nRefreshComputerList Hatası : \n" + ex.Message);
             }
         }
@@ -517,7 +480,6 @@ namespace MEBS_Envanter
             }
         }
 
-       
         private void searchGridKomutanliklarCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox combo_senet = sender as ComboBox;
@@ -529,10 +491,10 @@ namespace MEBS_Envanter
 
         private void pcList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-             ComputerUserControlVertical x = new ComputerUserControlVertical();
-             x.DataContext = (pcList.SelectedItem as ComputerInfo);
-             x.Show();                
-       }
+            ComputerUserControlVertical x = new ComputerUserControlVertical();
+            x.DataContext = (pcList.SelectedItem as ComputerInfo);
+            x.Show();
+        }
 
         public bool IsBusy
         {
@@ -559,17 +521,18 @@ namespace MEBS_Envanter
         private void quickSearchBtn_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!quickSearchBtn.Text.Equals(quickSearchBtn.DisplayText))
-            {                
-                if (quickSearchBtn.IsKeyboardFocused) {
+            {
+                if (quickSearchBtn.IsKeyboardFocused)
+                {
 
                     String txt = quickSearchBtn.Text;
                     ComputerInfoRepository newList = current_In_MemoryList.getSearchRepository(txt);
-                    pcList.DataContext= newList;
+                    pcList.DataContext = newList;
                     SetSelectedItemAfterContextChange(true);
                 }
             }
         }
-        
+
         private void hakkindaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -578,14 +541,13 @@ namespace MEBS_Envanter
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
                 string version = fvi.ProductVersion;
 
-                InfoWindow x = new
-                    InfoWindow(this);
+
 
                 String msg = "MEBS Bölük Komutanlığı \nBilgisayar Envanter Kayıt Programı\n\n\n";
                 msg += "\tVersiyon : " + fvi.ProductBuildPart + "." + fvi.ProductPrivatePart;
 
-                x.ShowMessage(msg);
-                
+                InfoWindow.ShowMessage(this, msg);
+
             }
             catch (Exception)
             {
@@ -605,6 +567,6 @@ namespace MEBS_Envanter
         {
             SampleWindow x = new SampleWindow();
             x.ShowDialog();
-        }        
+        }
     }
 }
