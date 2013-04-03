@@ -80,6 +80,7 @@
       <DependentUpon>ComputerUserControlVertical.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\ListBoxElementVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeFormatConverter.cs" />
     <Compile Include="Converters\NotBoolConverter.cs" />
     <Compile Include="Converters\NotBoolToVisibilityConverter.cs" />
@@ -87,7 +88,6 @@
     <Compile Include="Converters\MonitorTypesConverter.cs" />
     <Compile Include="DB\DBValueHelpers.cs" />
     <Compile Include="GeneralObjects\Komutanlik.cs" />
-    <Compile Include="GokhanaKod.cs" />
     <Compile Include="GUIHelpers\BindableRichTextBox.cs" />
     <Compile Include="Command\CommandMap.cs" />
     <Compile Include="Command\DelegateCommand.cs" />
@@ -136,6 +136,10 @@
     </Compile>
     <Compile Include="PrintOperations\RoundedRectangle.cs" />
     <Compile Include="PrintOperations\SystemPrint.cs" />
+    <Compile Include="SampleWindow.xaml.cs">
+      <DependentUpon>SampleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Unnecessary.cs" />
     <Compile Include="ViewModels\OemDevicesViewModel.cs" />
     <Compile Include="ViewModels\OemDeviceViewModel.cs" />
     <Compile Include="SerializationTool.cs" />
@@ -229,6 +233,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SampleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

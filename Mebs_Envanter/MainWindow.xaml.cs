@@ -414,6 +414,20 @@ namespace MEBS_Envanter
             return list;
         }
 
+        private void SetSelectedItemAfterContextChange(bool selectLast) {
+
+            ComputerInfoRepository repositoryNew = (pcList.DataContext as ComputerInfoRepository);
+            if (selectLast && repositoryNew.Computers.Count > 0)
+            {
+                pcList.SelectedIndex = 0;//repositoryNew.Computers.Count - 1;
+            }
+            else
+            {
+                pcList.SelectedIndex = -1;
+            }
+            
+        }
+
         private void RefreshComputerList(SortedList<String, object> parameterList, bool selectLast)
         {
             try
@@ -458,16 +472,9 @@ namespace MEBS_Envanter
                         repositoryNew.Computers.Add(tempComputer);
                     }
                     pcList.DataContext = repositoryNew;
-                    current_In_MemoryList = repositoryNew;
-                    if (selectLast && repositoryNew.Computers.Count>0)
-                    {
-                        pcList.SelectedIndex = 0;//repositoryNew.Computers.Count - 1;
-                    }
-                    else
-                    {
-                        pcList.SelectedIndex = -1;
-                    }
-                    
+                    current_In_MemoryList = repositoryNew;                    
+                    quickSearchBtn.Clear();
+                    SetSelectedItemAfterContextChange(selectLast);                    
                 }
                 catch (Exception)
                 {
@@ -548,28 +555,6 @@ namespace MEBS_Envanter
             w.ShowDialog();
         }
 
-        private ComputerInfoRepository getSearchRepository(String searchText) {
-
-            if (!String.IsNullOrEmpty(searchText) && searchText.Length > 0)
-            {
-                ComputerInfoRepository repNew = new ComputerInfoRepository();
-                foreach (ComputerInfo item in current_In_MemoryList.Computers)
-                {
-                    if (item.Pc_adi.ToLower().Contains(searchText.ToLower()) ||
-                        item.Senet.Alan_kisi_isim.ToLower().Contains(searchText.ToLower()) ||
-                        item.Senet.Alan_kisi_komutanlik.Komutanlik_ismi.ToLower().Contains(searchText.ToLower()) ||
-                        item.Senet.Veren_kisi_isim.ToLower().Contains(searchText.ToLower())
-                        )
-                    {
-                        repNew.Computers.Add(item);
-                    }
-                }
-                return repNew;
-            }
-            else {
-                return current_In_MemoryList;
-            }
-        }
 
         private void quickSearchBtn_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -578,9 +563,9 @@ namespace MEBS_Envanter
                 if (quickSearchBtn.IsKeyboardFocused) {
 
                     String txt = quickSearchBtn.Text;
-                    ComputerInfoRepository newList = getSearchRepository(txt);
+                    ComputerInfoRepository newList = current_In_MemoryList.getSearchRepository(txt);
                     pcList.DataContext= newList;
-
+                    SetSelectedItemAfterContextChange(true);
                 }
             }
         }
@@ -614,6 +599,12 @@ namespace MEBS_Envanter
                 SystemPrint printFunc = new SystemPrint(pcList.SelectedItem as ComputerInfo);
                 printFunc.Print(true);
             }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            SampleWindow x = new SampleWindow();
+            x.ShowDialog();
         }        
     }
 }

@@ -15,8 +15,7 @@
             <DataTemplate x:Key="deviceDataTemplate">
                 <x1:DeviceEntryControl ></x1:DeviceEntryControl>
             </DataTemplate>
-            <ObjectDataProvider x:Key="dataMonEnum"
-       MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider x:Key="dataMonEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="x1:MonitorTypes"/>
                 </ObjectDataProvider.MethodParameters>
