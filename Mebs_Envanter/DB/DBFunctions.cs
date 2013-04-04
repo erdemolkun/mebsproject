@@ -470,7 +470,7 @@ namespace MEBS_Envanter.DB
                             {
                                 cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = infoSenet.Alan_kisi_kisim.Kisim_id;
                             }
-                            else
+                            else if (!String.IsNullOrEmpty(infoSenet.Alan_kisi_kisim.Kisim_adi))
                             {
                                 int newId = InsertKisim(infoSenet.Alan_kisi_kisim, infoSenet.Alan_kisi_birlik.Birlik_id);
                                

@@ -9,7 +9,13 @@ namespace MEBS_Envanter
     {
         public override string ToString()
         {
-            return MarkaName.ToUpper().ToString();// + " ID : " + MarkaID; ;
+            if (MarkaID > 0)
+            {
+                return MarkaName.ToUpper().ToString();// + " ID : " + MarkaID; ;
+            }
+            else {
+                return MarkaName;
+            }
         }
         public Marka(int marka_id, String markaName) {
 

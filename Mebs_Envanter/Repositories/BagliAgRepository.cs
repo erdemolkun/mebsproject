@@ -15,7 +15,7 @@ namespace MEBS_Envanter.Repositories
         private void ClearAglar()
         {
             BagliAglar.Clear();
-            BagliAglar.Add(new BagliAg("", -1));
+            BagliAglar.Add(new BagliAg("Hepsi", -1));
         }
 
         private ObservableCollection<BagliAg> bagliAglar = new ObservableCollection<BagliAg>();

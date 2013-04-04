@@ -23,7 +23,7 @@ namespace MEBS_Envanter.Repositories
 
         private void ClearBirlikler() {
             Komutanliklar.Clear();
-            Komutanliklar.Add(new Komutanlik(-1, ""));
+            Komutanliklar.Add(new Komutanlik(-1, "Hepsi"));
         }
 
         public void FillKomutanliklar()
