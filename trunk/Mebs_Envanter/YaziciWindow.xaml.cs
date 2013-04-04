@@ -37,15 +37,16 @@ namespace Mebs_Envanter
 
             Current_YaziciInfo = new YaziciInfo();
             //gridYaziciBilgileri.DataContext = Current_YaziciInfo;
-
+            yaziciList.DataContext = new YaziciInfoRepository();
             RefreshPrinterList(null, true);
             SetContextForSearchFields();
         }
 
-        private void InitItems() {
+        private void InitItems()
+        {
             yaziciUserControl1.Init();
             senetInfoControl1.Init();
-            networkInfoControl1.Init();            
+            networkInfoControl1.Init();
         }
         private bool AddOrEditYaziciFunction(bool isEdit)
         {
@@ -56,10 +57,12 @@ namespace Mebs_Envanter
 
                 YaziciInfo currentYazici = yaziciList.SelectedItem as YaziciInfo;
 
-                if (currentYazici == null) {
+                if (currentYazici == null)
+                {
                     Current_YaziciInfo = new YaziciInfo();
                 }
-                else{
+                else
+                {
                     Current_YaziciInfo = currentYazici;
                 }
                 //if (currentYazidi != null)
@@ -69,7 +72,7 @@ namespace Mebs_Envanter
                     BackgroundWorker worker = new BackgroundWorker();
                     worker.DoWork += new DoWorkEventHandler(worker_DoWork);
                     worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
-                    Mouse.OverrideCursor = Cursors.Wait;                    
+                    Mouse.OverrideCursor = Cursors.Wait;
                     IsBusy = true;
                     infYazici.isEdit = isEdit;
                     worker.RunWorkerAsync(infYazici);
@@ -77,8 +80,8 @@ namespace Mebs_Envanter
                 }
             }
             catch (Exception) { return false; }
-            
-        
+
+
         }
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -86,12 +89,13 @@ namespace Mebs_Envanter
             Mouse.OverrideCursor = Cursors.Arrow;
             IsBusy = false;
             YaziciDbWorkInfo addInfo = e.Result as YaziciDbWorkInfo;
-            if (addInfo == null) {
-               
-                InfoWindow.ShowMessage(this,"Hata");
+            if (addInfo == null)
+            {
+
+                InfoWindow.ShowMessage(this, "Hata");
                 return;
             }
-            
+
             YaziciInfoRepository yaziciRep = (yaziciList.DataContext as YaziciInfoRepository);
 
             if (addInfo.yazici.isEdit)
@@ -101,8 +105,8 @@ namespace Mebs_Envanter
 
                 Current_YaziciInfo = addInfo.yazici;
                 yaziciList.SelectedItem = Current_YaziciInfo;
-                gridYaziciBilgileri.DataContext=Current_YaziciInfo;
-                
+                gridYaziciBilgileri.DataContext = Current_YaziciInfo;
+
             }
             else
             {
@@ -123,9 +127,9 @@ namespace Mebs_Envanter
         {
             YaziciInfo yaziciInfo = e.Argument as YaziciInfo;
             bool dbres2 = DBFunctions.InsertOrUpdateSenet(-1, yaziciInfo.SenetInfo, yaziciInfo.isEdit);
-            bool dbresult = DBFunctions.InsertOrUpdateOemDevice(yaziciInfo,-1,yaziciInfo.isEdit);
+            bool dbresult = DBFunctions.InsertOrUpdateOemDevice(yaziciInfo, -1, yaziciInfo.isEdit);
             if (dbresult)
-            {                
+            {
                 //bool dbresult2 = DBFunctions.InsertOrUpdateYazici(yaziciInfo, yaziciInfo.isEdit);
                 YaziciDbWorkInfo addInfo = new YaziciDbWorkInfo();
                 addInfo.yazici = yaziciInfo;
@@ -135,7 +139,8 @@ namespace Mebs_Envanter
             }
         }
 
-        private void AssignYaziciInfoByGui(YaziciInfo current,YaziciInfo toAssign,bool isEdit) {
+        private void AssignYaziciInfoByGui(YaziciInfo current, YaziciInfo toAssign, bool isEdit)
+        {
 
             yaziciUserControl1.SetYaziciInfo(toAssign);
             senetInfoControl1.SetSenetInfo(toAssign.SenetInfo);
@@ -146,7 +151,7 @@ namespace Mebs_Envanter
                 toAssign.Id = current.Id;
                 toAssign.Yaz_id = current.Yaz_id;
                 toAssign.SenetInfo.Id = current.SenetInfo.Id;
-            }    
+            }
         }
 
         private void SetContextForSearchFields()
@@ -191,29 +196,31 @@ namespace Mebs_Envanter
             }
 
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();            
+            DataTable dt = new DataTable();
             bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
             try
             {
-                adp.Fill(dt);                
+                adp.Fill(dt);
                 foreach (DataRow rowPC in dt.Rows)
                 {
-                    int parca_id = DBValueHelpers.GetInt32(rowPC["parca_id"].ToString(), -1);
-                    List<OEMDevice> devs= OEMDevice.GetOemDevices(cnn, false, -1, parca_id);
-                    YaziciInfo tempYazici = null;
-                    foreach (var item in devs)
-                    {
-                        if (item is YaziciInfo) {
-                            tempYazici = item as YaziciInfo;
-                        }
-                    }                    
                     try
                     {
-                        tempYazici.SetGeneralFields(rowPC);                        
+                        int parca_id = DBValueHelpers.GetInt32(rowPC["parca_id"].ToString(), -1);
+                        List<OEMDevice> devs = OEMDevice.GetOemDevices(cnn, false, -1, parca_id);
+                        YaziciInfo tempYazici = null;
+                        foreach (var item in devs)
+                        {
+                            if (item is YaziciInfo)
+                            {
+                                tempYazici = item as YaziciInfo;
+                            }
+                        }
+
+                        tempYazici.SetGeneralFields(rowPC);
                         repositoryNew.Yazicilar.Add(tempYazici);
                     }
                     catch (Exception) { }
-                    
+
                 }
                 yaziciList.DataContext = repositoryNew;
                 if (selectLast)
@@ -252,8 +259,8 @@ namespace Mebs_Envanter
                 infYazici = new YaziciInfo();
             }
             list.ScrollIntoView(infYazici);
-            Current_YaziciInfo = infYazici;            
-            gridYaziciBilgileri.DataContext = Current_YaziciInfo;            
+            Current_YaziciInfo = infYazici;
+            gridYaziciBilgileri.DataContext = Current_YaziciInfo;
         }
 
         private YaziciInfo Current_YaziciInfo = new YaziciInfo();
@@ -277,7 +284,7 @@ namespace Mebs_Envanter
                 if (currentInfoRep != null)
                 {
                     currentInfoRep.Yazicilar.Remove(Current_YaziciInfo);
-                }                
+                }
             }
         }
 
@@ -303,11 +310,11 @@ namespace Mebs_Envanter
             searchGridBirliklerCombo.SelectedIndex = -1;
             searchGridMarkalarCombo.SelectedIndex = -1;
             searchGridModelTxtBox.Text = "";
-            
-            
+
+
             searchGridTempestCombo.SelectedIndex = -1;
             searchGridSerialNumberTxtBox.Text = "";
-            
+
             searchGridKomutanliklarCombo.SelectedIndex = -1;
         }
 
@@ -316,7 +323,7 @@ namespace Mebs_Envanter
             RefreshPrinterList(GetParameterListForSearch(), false);
         }
         private SortedList<String, object> GetParameterListForSearch()
-        {                        
+        {
             //parca_no
 
             SortedList<String, object> list = new SortedList<string, object>();
@@ -361,7 +368,7 @@ namespace Mebs_Envanter
             {
                 list.Add("@alan_kisi_isim", alan_kisi_isim);
             }
-            
+
             String pcModel = searchGridModelTxtBox.Text.Trim().ToString();
             if (!String.IsNullOrEmpty(pcModel))
             {
