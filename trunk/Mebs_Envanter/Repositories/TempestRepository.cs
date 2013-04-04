@@ -23,7 +23,7 @@ namespace Mebs_Envanter.Repositories
         private void ClearSeviyeler()
         {
             TempestSeviyeler.Clear();
-            TempestSeviyeler.Add(new Tempest());
+            TempestSeviyeler.Add(new Tempest(-1, "Hepsi"));
         }
         public void FillSeviyeler() {
 

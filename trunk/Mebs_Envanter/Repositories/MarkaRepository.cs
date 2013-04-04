@@ -24,7 +24,7 @@ namespace MEBS_Envanter.Repositories
         private void ClearMarkalar() {
 
             Markalar.Clear();
-            Markalar.Add(new Marka(-1, ""));        
+            Markalar.Add(new Marka(-1, "Hepsi"));        
         }
 
         public void FillMarkalar()
