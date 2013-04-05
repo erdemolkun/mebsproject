@@ -13,7 +13,7 @@ namespace MEBS_Envanter.Repositories
 
         public static MarkaRepository INSTANCE = null;
 
-        public MarkaRepository() { ClearMarkalar(); }
+        public MarkaRepository() { }
 
         private ObservableCollection<Marka> markalar = new ObservableCollection<Marka>();
         public ObservableCollection<Marka> Markalar
@@ -21,13 +21,19 @@ namespace MEBS_Envanter.Repositories
             get { return markalar; }
         }
 
-        private void ClearMarkalar() {
+        private void ClearMarkalar(bool isForSearch) {
 
             Markalar.Clear();
-            Markalar.Add(new Marka(-1, "Hepsi"));        
+            if (isForSearch)
+            {
+                Markalar.Add(new Marka(-1, "Hepsi"));
+            }
+            else {
+                Markalar.Add(new Marka(-1, ""));
+            }
         }
 
-        public void FillMarkalar()
+        public void FillMarkalar(bool isForSearch)
         {
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             string sqlText = "SELECT * FROM tbl_marka";
@@ -38,7 +44,7 @@ namespace MEBS_Envanter.Repositories
             if (res)
             {
 
-                ClearMarkalar();
+                ClearMarkalar(isForSearch);
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_marka = null;
                 int current_marka_id = -1;

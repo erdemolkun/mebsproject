@@ -20,12 +20,15 @@ namespace Mebs_Envanter.Repositories
             get { return tempestSeviyeler; }
         }
 
-        private void ClearSeviyeler()
+        private void ClearSeviyeler(bool isForSearch)
         {
             TempestSeviyeler.Clear();
+            if (isForSearch)
             TempestSeviyeler.Add(new Tempest(-1, "Hepsi"));
+            else TempestSeviyeler.Add(new Tempest(-1, ""));
         }
-        public void FillSeviyeler() {
+        public void FillSeviyeler(bool isForSearch)
+        {
 
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             string sqlText = "SELECT * FROM tbl_tempest";
@@ -35,7 +38,7 @@ namespace Mebs_Envanter.Repositories
 
             if (res)
             {
-                ClearSeviyeler();
+                ClearSeviyeler(isForSearch);
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_tempest = null;
                 int current_tempest_id = -1;

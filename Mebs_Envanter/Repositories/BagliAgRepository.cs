@@ -12,10 +12,17 @@ namespace MEBS_Envanter.Repositories
     public class BagliAgRepository
     {
         public static BagliAgRepository INSTANCE = new BagliAgRepository();
-        private void ClearAglar()
+        private void ClearAglar(bool isForSearch)
         {
             BagliAglar.Clear();
-            BagliAglar.Add(new BagliAg("Hepsi", -1));
+            if (isForSearch)
+            {
+                BagliAglar.Add(new BagliAg("Hepsi", -1));
+            }
+            else
+            {
+                BagliAglar.Add(new BagliAg("", -1));
+            }
         }
 
         private ObservableCollection<BagliAg> bagliAglar = new ObservableCollection<BagliAg>();
@@ -25,7 +32,7 @@ namespace MEBS_Envanter.Repositories
         }
 
 
-        public void Fill_Aglar()
+        public void Fill_Aglar(bool isForSearch)
         {
 
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
@@ -36,7 +43,7 @@ namespace MEBS_Envanter.Repositories
 
             if (res)
             {
-                ClearAglar();
+                ClearAglar(isForSearch);
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_bagliag_adi = null;
                 int current_bagliag_id = -1;

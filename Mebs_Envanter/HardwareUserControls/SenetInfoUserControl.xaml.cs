@@ -31,7 +31,7 @@ namespace Mebs_Envanter.HardwareUserControls
         public void Init() {
 
             KomutanlikRepository Komutanlik_Repository = new KomutanlikRepository();
-            Komutanlik_Repository.FillKomutanliklar();
+            Komutanlik_Repository.FillKomutanliklar(false);
             senetKomutanlikCombo.ItemsSource = Komutanlik_Repository.Komutanliklar;
             KomutanlikRepository.INSTANCE = Komutanlik_Repository;
 
@@ -75,7 +75,7 @@ namespace Mebs_Envanter.HardwareUserControls
         {
             ComboBox combo_senet = sender as ComboBox;
             BirlikRepository birlik_rep = new BirlikRepository();
-            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik));
+            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik),false);
             senetBirlikCombo.ItemsSource = birlik_rep.Birlikler;
             BirlikRepository.INSTANCE = birlik_rep;
         }

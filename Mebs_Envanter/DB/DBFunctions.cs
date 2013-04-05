@@ -109,6 +109,7 @@ namespace MEBS_Envanter.DB
             cmMonitorEkleSilDuz.Parameters.Add(new SqlParameter("@monitor_tipi", SqlDbType.SmallInt));
             cmMonitorEkleSilDuz.Parameters.Add(new SqlParameter("@stok_no", SqlDbType.NVarChar, 50));
             cmMonitorEkleSilDuz.Parameters.Add(new SqlParameter("@temp_monitor_id", SqlDbType.Int));
+            cmMonitorEkleSilDuz.Parameters.Add(new SqlParameter("@boyut_id", SqlDbType.Int));
             cmMonitorEkleSilDuz.Parameters["@temp_monitor_id"].Direction = ParameterDirection.Output;
 
 
@@ -201,6 +202,13 @@ namespace MEBS_Envanter.DB
                     }
                     cmMonitorEkleSilDuz.Parameters["@parca_id"].Value = infoMonitor.Id;
                     cmMonitorEkleSilDuz.Parameters["@monitor_tipi"].Value = infoMonitor.MonType;
+                    if (infoMonitor.MonSize != null && infoMonitor.MonSize.Id > 0) {
+
+                        cmMonitorEkleSilDuz.Parameters["@boyut_id"].Value = infoMonitor.MonSize.Id;
+                    }
+                    else{
+                        cmMonitorEkleSilDuz.Parameters["@boyut_id"].Value = null;
+                    }
                     cmMonitorEkleSilDuz.Parameters["@stok_no"].Value = infoMonitor.StokNo;
                     cmMonitorEkleSilDuz.ExecuteNonQuery();
                     if (!shouldBeEdit)
