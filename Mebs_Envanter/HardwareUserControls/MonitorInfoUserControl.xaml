@@ -66,11 +66,16 @@
                   MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
                                   SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
                                   ItemsSource="{Binding TempestSeviyeler}" Grid.Row="5"
-                                  HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
+                                  HorizontalAlignment="Left" Grid.Column="1">
+           
+                
+                
+        </ComboBox>
 
         
         
         <ComboBox x:Name="monitorBoyutlarCombo" Grid.Column="1" Grid.Row="7"
+                   
                   SelectedIndex="{Binding MonSize,Converter={StaticResource MonitorSizeComboIndexConverter},UpdateSourceTrigger=Explicit}"
                   TabIndex="7" MinWidth="80" Margin="2,2" VerticalAlignment="Center" HorizontalAlignment="Left">
             
