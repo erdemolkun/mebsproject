@@ -21,7 +21,10 @@ namespace MEBS_Envanter.Converters
                 foreach (var item in MonitorSizesRepository.INSTANCE.Sizes)
                 {
                     index++;
-                    if (infoSize.Id == item.Id) { return index; }
+                    if (infoSize.Id == item.Id) {
+                        infoSize.MonitorLength = item.MonitorLength;
+                        return index; 
+                    }
 
                 }
                 return -1;// throw new NotImplementedException();
