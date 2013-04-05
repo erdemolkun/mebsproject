@@ -21,6 +21,7 @@ namespace Mebs_Envanter
         public SampleWindow()
         {
             InitializeComponent();
+            //Unnecessary.CreateImageFile();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

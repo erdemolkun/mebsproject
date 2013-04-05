@@ -42,4 +42,8 @@
     <converters:ListBoxElementVisibilityConverter x:Key="ListBoxElementVisibilityConverter">
         
     </converters:ListBoxElementVisibilityConverter>
+
+    <converters:MonitorSizeComboIndexConverter x:Key="MonitorSizeComboIndexConverter">
+        
+    </converters:MonitorSizeComboIndexConverter>
 </ResourceDictionary>

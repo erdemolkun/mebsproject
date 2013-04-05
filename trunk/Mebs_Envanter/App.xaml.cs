@@ -14,9 +14,7 @@ namespace Mebs_Envanter
     public partial class App : Application
     {
         protected override void OnActivated(EventArgs e)
-        {
-
-            Unnecessary.CreateImageFile();
+        {            
             base.OnActivated(e);
         }
 

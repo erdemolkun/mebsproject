@@ -29,7 +29,8 @@ namespace Mebs_Envanter.HardwareUserControls
             InitializeComponent();
         }
 
-        public void SetYaziciInfo(YaziciInfo inf) {
+        public void SetYaziciInfo(YaziciInfo inf)
+        {
             inf.YaziciModeli = yaziciModeliTextBox.Text.Trim().ToString();
             inf.Marka = yaziciMarkalarCombo.SelectedItem as Marka;
             inf.Tempest = yaziciTempestCombo.SelectedItem as Tempest;
@@ -41,15 +42,15 @@ namespace Mebs_Envanter.HardwareUserControls
 
             // Markalar arayüze atanıyor
             MarkaRepository Marka_Repository = new MarkaRepository();
-            Marka_Repository.FillMarkalar();
+            Marka_Repository.FillMarkalar(false);
             //monitorMarkalarCombo.DataContext = Marka_Repository;
             yaziciMarkalarCombo.ItemsSource = Marka_Repository.Markalar;
             MarkaRepository.INSTANCE = Marka_Repository;
 
 
             TempestRepository Rep_Tempest = new TempestRepository();
-           Rep_Tempest.FillSeviyeler();
-           yaziciTempestCombo.ItemsSource = Rep_Tempest.TempestSeviyeler;
+            Rep_Tempest.FillSeviyeler(false);
+            yaziciTempestCombo.ItemsSource = Rep_Tempest.TempestSeviyeler;
             TempestRepository.INSTANCE = Rep_Tempest;
 
         }

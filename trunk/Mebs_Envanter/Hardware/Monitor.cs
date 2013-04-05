@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Mebs_Envanter.GeneralObjects;
 
 namespace MEBS_Envanter
 {
@@ -18,7 +19,8 @@ namespace MEBS_Envanter
             }
             if (Marka.MarkaID > 0)
             {
-                if (hasMonType) {
+                if (hasMonType)
+                {
                     str += ",";
                 }
                 str += " Marka : " + Marka.MarkaName;
@@ -50,7 +52,6 @@ namespace MEBS_Envanter
 
 
         private MonitorTypes monType;
-
         public MonitorTypes MonType
         {
             get { return monType; }
@@ -59,7 +60,12 @@ namespace MEBS_Envanter
 
 
 
-
+        private MonitorSize monSize;
+        public MonitorSize MonSize
+        {
+            get { return monSize; }
+            set { monSize = value; OnPropertyChanged("MonSize"); }
+        }
 
     }
 }

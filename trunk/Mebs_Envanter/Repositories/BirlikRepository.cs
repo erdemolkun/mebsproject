@@ -22,16 +22,22 @@ namespace MEBS_Envanter.Repositories
         }
 
 
-        private void ClearBirlikler() { 
+        private void ClearBirlikler(bool isForSearch) { 
             Birlikler.Clear();
-            Birlikler.Add(new Birlik(-1,""));
+            if (isForSearch)
+            {
+                Birlikler.Add(new Birlik(-1, "Hepsi"));
+            }
+            else{
+                Birlikler.Add(new Birlik(-1, ""));
+            }
         }
 
-        public void FillBirlikler(Komutanlik komutanlik)
+        public void FillBirlikler(Komutanlik komutanlik, bool isForSearch)
         {
             if (komutanlik == null)
             {
-                ClearBirlikler();
+                ClearBirlikler(isForSearch);
                 return;
             }
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
@@ -42,7 +48,7 @@ namespace MEBS_Envanter.Repositories
 
             if (res)
             {
-                ClearBirlikler();
+                ClearBirlikler(isForSearch);
                 cmd.Parameters.AddWithValue("@komutanlik_id", komutanlik.Komutanlik_id);
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_birlik = null;

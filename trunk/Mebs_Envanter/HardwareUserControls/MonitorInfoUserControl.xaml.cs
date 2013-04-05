@@ -45,22 +45,31 @@ namespace Mebs_Envanter.HardwareUserControls
                 
                 }
             }
+            if (monitorBoyutlarCombo.SelectedItem != null) {
+
+                inf.MonSize = monitorBoyutlarCombo.SelectedItem as MonitorSize;
+            }
         }
         public void Init() {
 
             // Markalar arayüze atanıyor
             MarkaRepository Marka_Repository = new MarkaRepository();
-            Marka_Repository.FillMarkalar();            
+            Marka_Repository.FillMarkalar(false);            
             //monitorMarkalarCombo.DataContext = Marka_Repository;
             monitorMarkalarCombo.ItemsSource = Marka_Repository.Markalar;
             MarkaRepository.INSTANCE = Marka_Repository;
 
 
             TempestRepository Rep_Tempest = new TempestRepository();
-            Rep_Tempest.FillSeviyeler();
+            Rep_Tempest.FillSeviyeler(false);
             monitorTempestCombo.ItemsSource = Rep_Tempest.TempestSeviyeler;
             TempestRepository.INSTANCE = Rep_Tempest;
 
+
+            MonitorSizesRepository Size_Rep = new MonitorSizesRepository();
+            Size_Rep.FillSizes();
+            monitorBoyutlarCombo.ItemsSource = Size_Rep.Sizes;
+            MonitorSizesRepository.INSTANCE = Size_Rep;
         }
     }
 }

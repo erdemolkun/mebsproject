@@ -251,6 +251,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="32"></RowDefinition>
                                 <RowDefinition Height="32"></RowDefinition>
+                                <RowDefinition Height="32"></RowDefinition>
                             </Grid.RowDefinitions>
 
                             <TextBlock Text="Monitor Tipi" Grid.Row="0"
@@ -267,9 +268,16 @@
                                 </ComboBox.ItemsSource>
                             </ComboBox>
                             <TextBlock  VerticalAlignment="Center" 
-                                       Text="Marka" Grid.Row="1"></TextBlock>
+                                       Text="Momitör Markası" Grid.Row="1"></TextBlock>
                             <ComboBox Grid.Column="1" Grid.Row="1"
                                 x:Name="searchGridMonitorMarkalar"                                
+                                VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"></ComboBox>
+
+                            <TextBlock  VerticalAlignment="Center" 
+                                       Text="Momitör Boyutu" Grid.Row="2"></TextBlock>
+
+                            <ComboBox Grid.Column="1" Grid.Row="2"
+                                x:Name="searchGridMonitorBoyutlar"                                
                                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"></ComboBox>
 
                         </Grid>

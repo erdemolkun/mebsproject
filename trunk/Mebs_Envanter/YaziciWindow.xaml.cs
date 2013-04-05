@@ -157,19 +157,19 @@ namespace Mebs_Envanter
         private void SetContextForSearchFields()
         {
             KomutanlikRepository Rep_Komutanllik = new KomutanlikRepository();
-            Rep_Komutanllik.FillKomutanliklar();
+            Rep_Komutanllik.FillKomutanliklar(true);
             searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Komutanliklar;
 
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
-            rep_bagli_ag.Fill_Aglar();
+            rep_bagli_ag.Fill_Aglar(true);
             searchGridAglarCombo.ItemsSource = rep_bagli_ag.BagliAglar;
 
             TempestRepository tempest_rep = new TempestRepository();
-            tempest_rep.FillSeviyeler();
+            tempest_rep.FillSeviyeler(true);
             searchGridTempestCombo.ItemsSource = tempest_rep.TempestSeviyeler;
 
             MarkaRepository marka_rep = new MarkaRepository();
-            marka_rep.FillMarkalar();
+            marka_rep.FillMarkalar(true);
             searchGridMarkalarCombo.ItemsSource = marka_rep.Markalar;
 
 
@@ -387,7 +387,7 @@ namespace Mebs_Envanter
         {
             ComboBox combo_senet = sender as ComboBox;
             BirlikRepository birlik_rep = new BirlikRepository();
-            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik));
+            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik),true);
             searchGridBirliklerCombo.ItemsSource = birlik_rep.Birlikler;
             BirlikRepository.INSTANCE = birlik_rep;
         }

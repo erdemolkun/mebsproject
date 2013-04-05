@@ -120,6 +120,9 @@ namespace MEBS_Envanter
                 foreach (DataRow rowMonitor in dt.Rows)
                 {
                     String stok_no = rowMonitor["stok_no"].ToString();
+
+                    int boyut_id = DBValueHelpers.GetInt32(rowMonitor["boyut_id"], -1);
+
                     int mon_id = (int)rowMonitor["monitor_id"];
                     int mon_type = DBValueHelpers.GetInt32(rowMonitor["monitor_tipi"], -1);
 
@@ -129,6 +132,7 @@ namespace MEBS_Envanter
                     }
                     (devOem as Monitor).StokNo = stok_no;
                     (devOem as Monitor).Mon_id = mon_id;
+                    (devOem as Monitor).MonSize = new MonitorSize(boyut_id, 0);
                 }
             }
         }

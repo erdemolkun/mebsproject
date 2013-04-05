@@ -80,6 +80,7 @@
       <DependentUpon>ComputerUserControlVertical.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\MonitorSizeComboIndexConverter.cs" />
     <Compile Include="Converters\ListBoxElementVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeFormatConverter.cs" />
     <Compile Include="Converters\NotBoolConverter.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Converters\MonitorTypesConverter.cs" />
     <Compile Include="DB\DBValueHelpers.cs" />
     <Compile Include="GeneralObjects\Komutanlik.cs" />
+    <Compile Include="GeneralObjects\MonitorSize.cs" />
     <Compile Include="GUIHelpers\BindableRichTextBox.cs" />
     <Compile Include="Command\CommandMap.cs" />
     <Compile Include="Command\DelegateCommand.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Hardware\YaziciInfo.cs" />
     <Compile Include="LoggerMebs.cs" />
     <Compile Include="PrintOperations\GridPrinter.cs" />
+    <Compile Include="Repositories\MonitorSizesRepository.cs" />
     <Compile Include="Repositories\YaziciInfoRepository.cs" />
     <Compile Include="Repositories\KomutanlikRepository.cs" />
     <Compile Include="Repositories\TempestRepository.cs" />

@@ -14,7 +14,7 @@ namespace Mebs_Envanter
     {
         public static void CreateImageFile()
         {
-            return;
+            
 
             Grid workGrid;
             TextBlock workTextBlock;

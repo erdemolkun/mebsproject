@@ -76,7 +76,8 @@ namespace MEBS_Envanter
                 }
                 catch (Exception ex)
                 {
-
+                    MessageBox.Show("Hata Oluştu. Çıkıyorum");
+                    IsBusy = false;
                     LoggerMebs.WriteToFile(ex.Message.ToString());
                 }
             }));
@@ -85,24 +86,28 @@ namespace MEBS_Envanter
         private void SetContextForSearchFields()
         {
             KomutanlikRepository Rep_Komutanllik = new KomutanlikRepository();
-            Rep_Komutanllik.FillKomutanliklar();
+            Rep_Komutanllik.FillKomutanliklar(true);
             searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Komutanliklar;
 
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
-            rep_bagli_ag.Fill_Aglar();
+            rep_bagli_ag.Fill_Aglar(true);
             searchGridAglarCombo.ItemsSource = rep_bagli_ag.BagliAglar;
 
             TempestRepository tempest_rep = new TempestRepository();
-            tempest_rep.FillSeviyeler();
+            tempest_rep.FillSeviyeler(true);
             searchGridTempestCombo.ItemsSource = tempest_rep.TempestSeviyeler;
 
             MarkaRepository marka_rep = new MarkaRepository();
-            marka_rep.FillMarkalar();
+            marka_rep.FillMarkalar(true);
             searchGridMarkalarCombo.ItemsSource = marka_rep.Markalar;
 
             MarkaRepository marka_rep2 = new MarkaRepository();
-            marka_rep2.FillMarkalar();
+            marka_rep2.FillMarkalar(true);
             searchGridMonitorMarkalar.ItemsSource = marka_rep2.Markalar;
+
+            MonitorSizesRepository mon_size_rep = new MonitorSizesRepository();
+            mon_size_rep.FillSizes();
+            searchGridMonitorBoyutlar.ItemsSource = mon_size_rep.Sizes;
 
         }
 
@@ -352,6 +357,20 @@ namespace MEBS_Envanter
                 }
                 catch (Exception) { }
             }
+
+            if (searchGridMonitorBoyutlar.SelectedItem != null)
+            {
+                try
+                {
+                    MonitorSize monSize = searchGridMonitorBoyutlar.SelectedItem as MonitorSize;
+                    if (monSize.Id > 0)
+                    {
+                        list.Add("@boyut_id", monSize.Id);
+                    }
+                }
+                catch (Exception) { }
+            }
+
             if (searchGridMonitorMarkalar.SelectedItem != null)
             {
                 if ((searchGridMonitorMarkalar.SelectedItem as Marka).MarkaID > 0)
@@ -484,7 +503,7 @@ namespace MEBS_Envanter
         {
             ComboBox combo_senet = sender as ComboBox;
             BirlikRepository birlik_rep = new BirlikRepository();
-            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik));
+            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik),true);
             searchGridBirliklerCombo.ItemsSource = birlik_rep.Birlikler;
             BirlikRepository.INSTANCE = birlik_rep;
         }

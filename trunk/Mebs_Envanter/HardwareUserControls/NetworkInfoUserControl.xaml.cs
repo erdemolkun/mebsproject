@@ -40,7 +40,7 @@ namespace Mebs_Envanter.HardwareUserControls
 
             // Bağlı Olduğu Ağlar arayüze atanıyor
             BagliAgRepository repoBagliAglar = new BagliAgRepository();
-            repoBagliAglar.Fill_Aglar();            
+            repoBagliAglar.Fill_Aglar(false);            
             bagliAgCombo.ItemsSource = repoBagliAglar.BagliAglar;
             BagliAgRepository.INSTANCE = repoBagliAglar;
         }
