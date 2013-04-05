@@ -26,7 +26,8 @@ namespace MEBS_Envanter
         public void SetOemDeviceProperties(OEMDevice device) {
 
             device.SerialNumber = serialNumberTextBox.Text.ToString();
-            device.DeviceInfo = deviceInfoTextBox.Text.ToString();        
+            device.DeviceInfo = deviceInfoTextBox.Text.ToString();
+            device.Adet = numericTextBoxAdet.Value;
         }
     }
 }

@@ -25,7 +25,8 @@
         <TextBox x:Name="serialNumberTextBox" Margin="4,2"  Text="{Binding DevOem.SerialNumber}" Grid.Column="2"></TextBox>
         <guihelpers:NumericUpDownControl Grid.Column="3" Width="50"
                                          Minimum="0" Maximum="10"
-                                         Value="{Binding Adet}"
+                                         Value="{Binding DevOem.Adet}"
+                                         x:Name="numericTextBoxAdet"
                                          Margin="2,1"></guihelpers:NumericUpDownControl>
             
     </Grid>
