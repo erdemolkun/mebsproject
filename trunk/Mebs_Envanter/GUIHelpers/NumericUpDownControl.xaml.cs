@@ -26,7 +26,7 @@ namespace Mebs_Envanter.GUIHelpers
             InitializeComponent();
             _numMatch = new Regex(@"^-?\d+$");
             Maximum = int.MaxValue;
-            Minimum = 0;
+            Minimum = 1;
             TextBoxValue.Text = "0";
         }
 
