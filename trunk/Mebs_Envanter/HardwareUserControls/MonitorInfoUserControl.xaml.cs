@@ -15,6 +15,7 @@ using MEBS_Envanter;
 using Mebs_Envanter.GeneralObjects;
 using MEBS_Envanter.Repositories;
 using Mebs_Envanter.Repositories;
+using System.Text.RegularExpressions;
 
 namespace Mebs_Envanter.HardwareUserControls
 {
@@ -26,6 +27,27 @@ namespace Mebs_Envanter.HardwareUserControls
         public MonitorInfoUserControl()
         {
             InitializeComponent();
+           
+        }
+        protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
+        {
+            
+            base.OnRender(drawingContext);
+            
+            TextBox TxtBox = monitorBoyutlarCombo.Template.FindName("PART_EditableTextBox", monitorBoyutlarCombo) as TextBox;
+            //TextBox txt = GetTemplateChild("PART_EditableTextBox") as TextBox;
+            //txt.PreviewTextInput += new TextCompositionEventHandler(txt_PreviewTextInput);
+            if(TxtBox!=null)
+            TxtBox.PreviewTextInput += new TextCompositionEventHandler(txt_PreviewTextInput);
+        }
+
+        void txt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            String x = e.Text;
+            //Regex pattern = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
+            Regex pattern = new Regex(@"^[0-9]*(?:\,[0-9]*)?$");
+            e.Handled = pattern.IsMatch(x) == false;
+            
         }
         public void SetMonitorInfo(Monitor inf)
         {
@@ -71,5 +93,7 @@ namespace Mebs_Envanter.HardwareUserControls
             monitorBoyutlarCombo.ItemsSource = Size_Rep.Sizes;
             MonitorSizesRepository.INSTANCE = Size_Rep;
         }
+
+        
     }
 }

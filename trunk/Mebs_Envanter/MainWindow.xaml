@@ -4,7 +4,7 @@
         xmlns:x1="clr-namespace:MEBS_Envanter" 
         xmlns:x2="clr-namespace:Mebs_Envanter"
         xmlns:guihelpers="clr-namespace:MEBS_Envanter.GUIHelpers"
-        x:Name="mainwin" Width="920"
+        x:Name="mainwin" Width="1000"
         MaxHeight="900" MinHeight="640"  Left="32" Top="32"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
