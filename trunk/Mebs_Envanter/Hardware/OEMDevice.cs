@@ -8,6 +8,7 @@ using System.Data;
 using MEBS_Envanter.DB;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.Hardware;
+using Mebs_Envanter;
 
 namespace MEBS_Envanter
 {
@@ -18,9 +19,23 @@ namespace MEBS_Envanter
             return DeviceInfo;
         }
 
+        private int adet = 1;
+        public int Adet
+        {
+            get { return adet; }
+            set
+            {
+                if (value > 0)
+                {
+                    adet = value;
+                    OnPropertyChanged("Adet");
+                }
+            }
+        }
+
         public static List<OEMDevice> GetOemDevices(SqlConnection sqlCon, bool isForComputer, int bilgisayar_id, int _parca_id)
         {
-            List<OEMDevice> devs = new List<OEMDevice>();
+            List<OEMDevice> devModels = new List<OEMDevice>();
             SqlConnection cnn = sqlCon;//GlobalDataAccess.Get_Fresh_SQL_Connection();
             SqlCommand cmd = null;
             if (isForComputer)
@@ -56,7 +71,7 @@ namespace MEBS_Envanter
 
                         int markaid = DBValueHelpers.GetInt32(rowParca["marka_id"], -1);
                         int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
-
+                        int parca_adedi = DBValueHelpers.GetInt32(rowParca["parca_adedi"], 1);
 
                         OEMDevice devOem = null;
                         if (tip == DeviceTypes.MONITOR)
@@ -74,14 +89,15 @@ namespace MEBS_Envanter
                         }
 
                         //Ortak alanlar
+                        
                         devOem.Id = parca_id;
                         devOem.SerialNumber = seri_no;
                         devOem.Parca_no = parca_no;
                         devOem.Marka = new Marka(markaid, "");
                         devOem.Tempest = new Tempest(tempestid, "");
                         devOem.DeviceInfo = parca_tanimi;
-
-                        devs.Add(devOem);
+                        devOem.Adet = parca_adedi;                                               
+                        devModels.Add(devOem);
                     }
 
                     #endregion
@@ -97,7 +113,7 @@ namespace MEBS_Envanter
                 }
             }
 
-            return devs;
+            return devModels;
         
         }
 
@@ -133,12 +149,12 @@ namespace MEBS_Envanter
         }
 
 
-        private int verilenMiktar = 1;
-        public int VerilenMiktar
-        {
-            get { return verilenMiktar; }
-            set { verilenMiktar = value; OnPropertyChanged("VerilenMiktar"); }
-        }
+        //private int verilenMiktar = 1;
+        //public int VerilenMiktar
+        //{
+        //    get { return verilenMiktar; }
+        //    set { verilenMiktar = value; OnPropertyChanged("VerilenMiktar"); }
+        //}
 
         private String deviceInfo;
         /// <summary>

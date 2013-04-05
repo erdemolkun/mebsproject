@@ -59,7 +59,7 @@ namespace Mebs_Envanter.PrintOperations
             //g.DrawString(dev.VerilenMiktar.ToString(), fntString11,
             //                   Brushes.Black, x4.X, x4.Y);
 
-            p2.printString(g, row, 4, fntString11, dev.VerilenMiktar.ToString(), true,true);
+            //p2.printString(g, row, 4, fntString11, dev.VerilenMiktar.ToString(), true,true);
         
         }
 

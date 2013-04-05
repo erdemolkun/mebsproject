@@ -96,6 +96,7 @@ namespace MEBS_Envanter.DB
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@parca_no", SqlDbType.NVarChar, 50));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@tempest_id", SqlDbType.Int));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@parca_tipi", SqlDbType.SmallInt));
+            cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@parca_adedi", SqlDbType.SmallInt));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@temp_parca_id", SqlDbType.Int));
 
             cmParcaEkleSilDuz.Parameters["@temp_parca_id"].Direction = ParameterDirection.Output;
@@ -311,6 +312,7 @@ namespace MEBS_Envanter.DB
                     cmParcaEkleSilDuz.Parameters["@seri_no"].Value = deviceOem.SerialNumber;
                     cmParcaEkleSilDuz.Parameters["@parca_tipi"].Value = (Int16)deviceOem.DeviceType;
                     cmParcaEkleSilDuz.Parameters["@parca_no"].Value = deviceOem.Parca_no;
+                    cmParcaEkleSilDuz.Parameters["@parca_adedi"].Value = deviceOem.Adet;
                     cmParcaEkleSilDuz.Parameters["@parca_tanimi"].Value = deviceOem.DeviceInfo;
                     if (bilgisayar_id > 0)
                     {

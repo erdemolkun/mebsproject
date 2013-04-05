@@ -14,13 +14,20 @@ namespace Mebs_Envanter
             this.DevOem = _devOem;
         }
 
-        private int adet = 1;
+        //private int adet = 1;
 
-        public int Adet
-        {
-            get { return adet; }
-            set { adet = value; OnPropertyChanged("Adet"); }
-        }
+        //public int Adet
+        //{
+        //    get { return adet; }
+        //    set {
+        //        if (value > 0)
+        //        {
+        //            adet = value;
+        //            DevOem.Adet = value;
+        //            OnPropertyChanged("Adet");
+        //        }
+        //    }
+        //}
 
         public String ParcaTipiIsmi
         {
