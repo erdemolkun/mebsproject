@@ -21,6 +21,7 @@
     <Grid>
         <Grid.Resources>
             <SolidColorBrush x:Key="headerColor1" Color="SkyBlue"></SolidColorBrush>
+            
         </Grid.Resources>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox">
@@ -112,7 +113,9 @@
 
             <ListBox Grid.Row="3" x:Name="pcList" MouseDoubleClick="pcList_MouseDoubleClick"
                  SelectionChanged="pcList_SelectionChanged"  
-                 ItemsSource="{Binding Computers}" Style="{StaticResource generalListBoxStyle}"
+                 ItemsSource="{Binding Computers}"                  
+                 IsSynchronizedWithCurrentItem="True"
+                 Style="{StaticResource generalListBoxStyle}"
                  ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
                  MinHeight="120"  Background="Transparent">

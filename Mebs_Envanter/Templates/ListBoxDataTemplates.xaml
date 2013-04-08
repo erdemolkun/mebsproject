@@ -86,8 +86,45 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
+    <ControlTemplate x:Key="closeButonTemplate" TargetType="{x:Type Button}">
+        <Border x:Name="borderTemplate" CornerRadius="4">
+            <Grid>
+                <Image Margin="2">
+                    <Image.Source>
+                        <DrawingImage>
+                            <DrawingImage.Drawing>
+                                <GeometryDrawing 
+                                x:Name="X" Geometry= "m 2,18 l 16,-16 m -16,0 l 16,16">
+                                    <GeometryDrawing.Pen>
+                                        <Pen Brush="#ff827163" Thickness="2" />
+                                    </GeometryDrawing.Pen>
+                                </GeometryDrawing>
+                            </DrawingImage.Drawing>
+                        </DrawingImage>
+                    </Image.Source>
+                </Image>
+                <Viewbox>
+                    <ContentControl Margin="20" Content="{TemplateBinding Content}"/>
+                </Viewbox>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="borderTemplate" Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="#66232323"/>
+                            <GradientStop Offset="0.5" Color="#88232323"/>
+                            <GradientStop Offset="1" Color="#66232323"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
     <DataTemplate x:Key="computerInfoListboxDataTemplate">
-        <Grid Margin="2" Name="mainGrid">            
+        <Grid Margin="2" Name="mainGrid">
             <Grid.Triggers>
                 <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                     <BeginStoryboard>
@@ -110,17 +147,23 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+
+            <!--<Button x:Name="CLOSE_BUTTON"
+                    HorizontalAlignment="Right" Margin="2" Width="20" Height="20"
+                    VerticalAlignment="Top" Grid.RowSpan="4"
+                    Template="{StaticResource closeButonTemplate}"></Button>-->
+
             <!--EklenmeTarihi-->
-            <Grid Grid.Row="0" Name="pcAdiGrid" TextBlock.FontFamily="Tahoma" >                
+            <Grid Grid.Row="0" Name="pcAdiGrid" TextBlock.FontFamily="Tahoma" >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock  Text="PC ADI : " Foreground="Brown"></TextBlock>
                     <TextBlock Name="pcAdiTxtBlock" Margin="0,0,2,0" Text="{Binding Pc_adi}" />
-                </StackPanel>                
+                </StackPanel>
             </Grid>
-            
+
             <Grid MinHeight="20" Grid.Row="1" Name="alanKisiGrid" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Alan Kişi : " Foreground="Brown"></TextBlock>                    
+                    <TextBlock Text="Alan Kişi : " Foreground="Brown"></TextBlock>
                     <TextBlock Name="textBlock3" TextWrapping="Wrap" Margin="0,0,2,0" 
                                Text="{Binding Senet.Alan_kisi_rutbe,Mode=OneWay,UpdateSourceTrigger=Explicit}" />
                     <TextBlock Name="textBlock4" TextWrapping="Wrap" Margin="0,0,2,0" 
@@ -133,7 +176,7 @@
                     <TextBlock Text="Birliği : " Foreground="Brown"></TextBlock>
                     <TextBlock Name="birlikTxtBlock" TextWrapping="Wrap" Margin="0,0,2,0" 
                                Text="{Binding Senet.Alan_kisi_birlik.Birlik_ismi}" />
-                    
+
                 </StackPanel>
             </Grid>
 
@@ -156,11 +199,10 @@
                 <Setter TargetName="alanKisiGrid" Property="Visibility" Value="Visible"/>
                 <Setter TargetName="birlikGrid" Property="Visibility" Value="Visible"/>
                 <Setter TargetName="tarihGrid" Property="Visibility" Value="Visible"/>
-                
-                
+
+
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
-    
-    
+
 </ResourceDictionary>

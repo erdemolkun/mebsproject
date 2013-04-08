@@ -63,8 +63,7 @@ namespace Mebs_Envanter.HardwareUserControls
                 
                 if (dp != null)
                 {
-                    DeviceEntryControl devControl = VisualHelperWPF.FindVisualChildByType<DeviceEntryControl>(dp);                    
-                    
+                    DeviceEntryControl devControl = VisualHelperWPF.FindVisualChildByType<DeviceEntryControl>(dp);                                        
                     if (devOem != null)
                     {
                         if (devControl != null)
