@@ -22,6 +22,7 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
+            
             <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition Width="250"></ColumnDefinition>
             <ColumnDefinition Width="*" ></ColumnDefinition>
@@ -177,7 +178,6 @@
 
         </Grid>
         
-
         <Grid 
             x:Name="gridYaziciBilgileri"
             Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,12">
@@ -213,7 +213,6 @@
             
         </Grid>
 
-
         <!--Düzenleme Kısmı (Ekle,Sil,Düzenle)-->
         <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" >
             <Grid.ColumnDefinitions>
@@ -236,5 +235,23 @@
                     Width="200" VerticalAlignment="Center" 
                      Name="refreshListBtn"  Click="refreshListBtn_Click" />
         </Grid>
+
+
+        <!--Menu Items-->
+        <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="#FFE5E3E3">
+            <Menu IsMainMenu="True" TextBlock.FontSize="12" HorizontalAlignment="Left">
+                <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
+                <MenuItem Header="Yazdırma Seçenekleri"
+                          IsEnabled="{Binding ElementName=yaziciList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}">
+                    <MenuItem                         
+                        x:Name="printSenetPreview" Click="printSenetPreview_Click"
+                        Header="Senet Önizleme"></MenuItem>
+                    <MenuItem                         
+                        x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
+                </MenuItem>                                
+                <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
+            </Menu>
+        </Grid>
+
     </Grid>
 </Window>

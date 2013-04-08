@@ -558,7 +558,7 @@ namespace MEBS_Envanter
                     //dataGridSample.ItemsSource = dt.DefaultView;
                     foreach (DataRow rowPC in dt.Rows)
                     {
-                        ComputerInfo tempComputer = new ComputerInfo();
+                        ComputerInfo tempComputer = new ComputerInfo(x2 => pcDeleteBtn_Click(null,null));
                         try
                         {
                             tempComputer.SetGeneralFields(rowPC);
@@ -670,23 +670,11 @@ namespace MEBS_Envanter
 
         private void hakkindaMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.ProductVersion;
+            
+           
+                InfoWindow.ShowAbout(this);
 
-
-
-                String msg = "MEBS Bölük Komutanlığı \nBilgisayar Envanter Kayıt Programı\n\n\n";
-                msg += "\tVersiyon : " + fvi.ProductBuildPart + "." + fvi.ProductPrivatePart;
-
-                InfoWindow.ShowMessage(this, msg);
-
-            }
-            catch (Exception)
-            {
-            }
+            
         }
 
         private void printSenetPreview_Click(object sender, RoutedEventArgs e)

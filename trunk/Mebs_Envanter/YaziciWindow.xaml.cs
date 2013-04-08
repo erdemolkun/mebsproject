@@ -22,6 +22,7 @@ using System.ComponentModel;
 using Mebs_Envanter.GeneralObjects;
 using MEBS_Envanter.GeneralObjects;
 using Mebs_Envanter.Repositories;
+using Mebs_Envanter.PrintOperations;
 
 namespace Mebs_Envanter
 {
@@ -390,6 +391,34 @@ namespace Mebs_Envanter
             birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik),true);
             searchGridBirliklerCombo.ItemsSource = birlik_rep.Birlikler;
             BirlikRepository.INSTANCE = birlik_rep;
+        }
+
+        private void hakkindaMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            InfoWindow.ShowAbout(this);
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void printSenetPreview_Click(object sender, RoutedEventArgs e)
+        {
+            if (yaziciList.SelectedItem != null)
+            {
+                SystemPrint printFunc = new SystemPrint(yaziciList.SelectedItem as ComputerInfo);
+                printFunc.Print(true);
+            }
+        }
+
+        private void printSenet_Click(object sender, RoutedEventArgs e)
+        {
+            if (yaziciList.SelectedItem != null)
+            {
+                SystemPrint printFunc = new SystemPrint(yaziciList.SelectedItem as ComputerInfo);
+                printFunc.Print(false);
+            }
         }
     }
 }

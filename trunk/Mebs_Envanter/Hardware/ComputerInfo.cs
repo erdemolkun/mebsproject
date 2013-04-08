@@ -18,6 +18,13 @@ namespace MEBS_Envanter
     public class ComputerInfo : MebsBaseObject
     {
 
+        CommandMap commands = null;
+        public CommandMap Commands
+        {
+            get { return commands; }
+            set { commands = value; }
+        }
+
 
         public void Fetch()
         {
@@ -35,6 +42,7 @@ namespace MEBS_Envanter
         public bool IsEdit = false;
         public ComputerInfo()
         {
+            Commands = new CommandMap();
             NetworkInfo = new NetworkInfo();
             MonitorInfo = new Monitor();
             Senet = new SenetInfo();
@@ -46,6 +54,12 @@ namespace MEBS_Envanter
                 Pc_adi = "PC_ADI_DESIGN_TIME";
             }
         }
+
+        public ComputerInfo(Action<object> methodToExecuteOnDelete):this() {
+            
+            Commands.AddCommand("Delete", methodToExecuteOnDelete);
+        }
+
 
         public void SetGeneralFields(DataRow rowPC)
         {
