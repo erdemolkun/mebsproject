@@ -15,6 +15,7 @@
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
         xmlns:guihelpers2="clr-namespace:Mebs_Envanter.GUIHelpers"
         Title="Bilgisayar Envanter Kaydı" 
+         WindowStartupLocation="CenterScreen"
         IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
         SizeToContent="Height"  ResizeMode="NoResize">
     <Grid>
@@ -59,11 +60,10 @@
         </Grid>
 
         <!--LoadingBackground="#7BAEC2D1"-->
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" 
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"
             Visibility="{Binding IsBusy,ElementName=mainwin,Converter={StaticResource BoolToVisibilityConverter}}"  
-            Grid.ColumnSpan="10" Grid.RowSpan="12" Canvas.ZIndex="99">
-            <animations:LoadingAnimation LoadingText="Yükleniyor.."  
-                                         HorizontalAlignment="Center" VerticalAlignment="Center">
+             Canvas.ZIndex="99">
+            <animations:LoadingAnimation LoadingText="Yükleniyor.."  HorizontalAlignment="Center" VerticalAlignment="Center">
 
             </animations:LoadingAnimation >
         </Grid>

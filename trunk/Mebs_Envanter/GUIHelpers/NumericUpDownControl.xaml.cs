@@ -27,7 +27,7 @@ namespace Mebs_Envanter.GUIHelpers
             _numMatch = new Regex(@"^-?\d+$");
             Maximum = int.MaxValue;
             Minimum = 1;
-            TextBoxValue.Text = "0";
+            TextBoxValue.Text = "1";
         }
 
         private void ResetText(TextBox tb)
@@ -52,8 +52,6 @@ namespace Mebs_Envanter.GUIHelpers
             Value = Convert.ToInt32(tb.Text);
             if (Value < Minimum) Value = Minimum;
             if (Value > Maximum) Value = Maximum;
-
-
 
             RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
         }
@@ -97,7 +95,7 @@ namespace Mebs_Envanter.GUIHelpers
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(int), typeof(NumericUpDownControl),
-              new PropertyMetadata(0, new PropertyChangedCallback(OnSomeValuePropertyChanged)));
+              new PropertyMetadata(1, new PropertyChangedCallback(OnSomeValuePropertyChanged)));
 
 
         private static void OnSomeValuePropertyChanged(

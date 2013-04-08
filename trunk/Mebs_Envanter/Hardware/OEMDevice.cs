@@ -19,7 +19,7 @@ namespace MEBS_Envanter
             return DeviceInfo;
         }
 
-        private int adet = 1;
+        private int adet = 2;
         public int Adet
         {
             get { return adet; }
