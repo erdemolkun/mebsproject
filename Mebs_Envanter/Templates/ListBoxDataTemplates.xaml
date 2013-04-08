@@ -87,25 +87,19 @@
     </DataTemplate>
 
     <DataTemplate x:Key="computerInfoListboxDataTemplate">
-        <Grid Margin="2" Name="mainGrid">
+        <Grid Margin="2" Name="mainGrid">            
             <Grid.Triggers>
                 <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                     Duration="00:00:00.500"
-                                                     From="0"
-                                                     To="1" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:00.500" From="0" To="1" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
                 <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                     Duration="00:00:00.500"
-                                                     From="1"
-                                                     To="0" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:00.500" From="1" To="0" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>

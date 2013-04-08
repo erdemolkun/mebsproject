@@ -22,6 +22,12 @@ namespace MEBS_Envanter
         public DeviceEntryControl()
         {
             InitializeComponent();
+            DataContextChanged += new DependencyPropertyChangedEventHandler(DeviceEntryControl_DataContextChanged);
+        }
+
+        void DeviceEntryControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            object aaa = this.DataContext;
         }
         public void SetOemDeviceProperties(OEMDevice device) {
 
