@@ -118,6 +118,7 @@
                  Style="{StaticResource generalListBoxStyle}"
                  ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
+                     
                  MinHeight="120"  Background="Transparent">
             </ListBox>
 
@@ -150,9 +151,9 @@
 
 
             </StackPanel>
-            <Button Grid.Column="1" Content="Yenile"  Height="32" HorizontalAlignment="Center" 
+            <Button Grid.Column="1" Content="Yeni Ekle"  Height="32" HorizontalAlignment="Center" 
                     Width="200" VerticalAlignment="Center" 
-                     Name="refreshListBtn"  Click="refreshListBtn_Click" />
+                    Name="refreshListBtn"  Click="refreshListBtn_Click" />
         </Grid>
 
         <!--Arama Seçenekleri-->

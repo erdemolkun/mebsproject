@@ -50,13 +50,7 @@ namespace MEBS_Envanter
 
         }
 
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-
-        }
-
+       
         //public override void OnApplyTemplate()
         //{
         //    base.OnApplyTemplate();
@@ -130,13 +124,7 @@ namespace MEBS_Envanter
 
         //    }
         //}
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-
-            base.OnRender(drawingContext);
-
-        }
-
+       
         private void StartSqlInit()
         {
             SqlConnection conSql = DBFunctions.proviceConnection();
@@ -233,7 +221,10 @@ namespace MEBS_Envanter
                     }
                 }
 
-                if (!Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi) && isEdit)
+                if (
+                    !string.IsNullOrEmpty(Current_Computer_Info.Pc_adi) &&
+                    !Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi) 
+                    && isEdit)
                 {
 
                     MessageBoxResult x1 =
@@ -269,7 +260,7 @@ namespace MEBS_Envanter
             IsBusy = false;
             ComputerDbWorkInfo addInfo = e.Result as ComputerDbWorkInfo;
             ComputerInfoRepository computerRep = (pcList.DataContext as ComputerInfoRepository);
-            if (addInfo.computer.IsEdit)
+            if (addInfo.computer.IsEdit || Current_Computer_Info.Id<0)
             {
                 int index = computerRep.Computers.IndexOf(Current_Computer_Info);
                 computerRep.Computers[index] = addInfo.computer;
@@ -321,9 +312,41 @@ namespace MEBS_Envanter
             DependencyProperty.Register("Current_Computer_Info", typeof(ComputerInfo), typeof(MainWindow), new UIPropertyMetadata(null));
 
         #region Events
-
+        
+        private bool handleSelection = true;
         private void pcList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            #region Control Selection Change
+            if (handleSelection && e!=null)
+            {
+                ComputerInfo removed = null;
+                ListBox lstBox = (ListBox)sender;
+                foreach (var item in e.RemovedItems)
+                {
+                    removed = item as ComputerInfo;
+                }
+                if (removed != null && (lstBox.DataContext as ComputerInfoRepository).Computers.Contains(removed))
+                {
+                    if (removed.Id < 0)
+                    {
+                        
+                        MessageBoxResult result = InfoWindow.AskQuestion("Bilgisayarı kaydetmeden geçiş yapmak istiyor musunuz ?", "Uyarı !!");
+                        if (result != MessageBoxResult.Yes)
+                        {
+                            
+                            handleSelection = false;
+                            lstBox.SelectedItem = e.RemovedItems[0];
+                            return;
+                        }
+                        else {
+                            (lstBox.DataContext as ComputerInfoRepository).Computers.Remove(removed);
+                        }
+                    }
+                }               
+            }
+            handleSelection = true;
+            #endregion
+
             ListBox list = sender as ListBox;
             ComputerInfo infComp = null;
             if (list.SelectedItem != null)
@@ -339,10 +362,10 @@ namespace MEBS_Envanter
 
             foreach (var item in list.SelectedItems)
             {
-                ComputerInfo x = item as ComputerInfo;
-                if (x != null)
+                ComputerInfo computerItem = item as ComputerInfo;
+                if (computerItem != null)
                 {
-                    x.Fetch();
+                    computerItem.Fetch();
                 }
             }
             pcEnvanterControl.SetDataContext(Current_Computer_Info);
@@ -387,7 +410,14 @@ namespace MEBS_Envanter
         }
         private void refreshListBtn_Click(object sender, RoutedEventArgs e)
         {
-            RefreshComputerList(null, true);
+
+            ComputerInfoRepository currentInfoRep = (pcList.DataContext as ComputerInfoRepository);
+            if (currentInfoRep != null)
+            {
+                currentInfoRep.Computers.Insert(0,new ComputerInfo());
+                SetSelectedItemAfterContextChange(true);
+            }
+            //RefreshComputerList(null, true);
         }
 
         #endregion
@@ -485,7 +515,6 @@ namespace MEBS_Envanter
 
         private void SetSelectedItemAfterContextChange(bool selectLast)
         {
-
             ComputerInfoRepository repositoryNew = (pcList.DataContext as ComputerInfoRepository);
             if (selectLast && repositoryNew.Computers.Count > 0)
             {
