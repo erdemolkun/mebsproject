@@ -50,6 +50,93 @@ namespace MEBS_Envanter
 
         }
 
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+
+        }
+
+        //public override void OnApplyTemplate()
+        //{
+        //    base.OnApplyTemplate();
+        //    try
+        //    {
+        //        pcList.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
+        //        pcList.ItemContainerGenerator.ItemsChanged += new System.Windows.Controls.Primitives.ItemsChangedEventHandler(ItemContainerGenerator_ItemsChanged);
+        //        DataTemplate template1 = base.FindResource("computerInfoListboxDataTemplate") as DataTemplate;
+        //        //Button btnDeleteItem = pcList.ItemTemplate.FindName("CLOSE_BUTTON", pcList) as Button;
+        //    }
+        //    catch (Exception) { 
+
+
+        //    }
+
+        //}
+
+        //void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //void ItemContainerGenerator_ItemsChanged(object sender, System.Windows.Controls.Primitives.ItemsChangedEventArgs e)
+        //{
+
+        //    //MessageBox.Show("Index : "+e.Position.Index.ToString()+"Offset : "+e.Position.Offset.ToString());
+        //    //// Iterate through Books
+
+
+        //    foreach (var item in pcList.Items){
+
+        //        // Get the ListBoxItem around the Book
+        //        ListBoxItem listBoxItem =
+        //            this.pcList.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
+
+
+        //        DependencyObject dp = pcList.ItemContainerGenerator.ContainerFromItem(item) as DependencyObject;        
+
+        //        // Get the ContentPresenter
+        //        ContentPresenter presenter = listBoxItem.FindVisualChild<ContentPresenter>();
+
+        //        // Get the Template instance
+        //        DataTemplate template = presenter.ContentTemplate;
+
+        //        // Find the CheckBox within the Template
+        //        CheckBox checkBox = template.FindName("CLOSE_BUTTON", presenter) as CheckBox;
+        //        checkBox.IsEnabled = !checkBox.IsEnabled;
+        //    }
+        //}
+
+        //public override void OnApplyTemplate(){
+
+        //    base.OnApplyTemplate();
+        //    DataTemplate template1 = base.FindResource("computerInfoListboxDataTemplate") as DataTemplate;
+
+
+        //    //ContentPresenter myContentPresenter = WPFVisualHelpers.FindVisualChild<ContentPresenter>(this);
+
+
+        //    try
+        //    {
+        //        ItemsPresenter itemsPresenter = GetVisualChild<ItemsPresenter>(pcList);
+        //        StackPanel itemsPanelStackPanel = GetVisualChild<StackPanel>(itemsPresenter);
+
+        //        var container = pcList.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
+        //        Button btnDeleteItem = pcList.ItemTemplate.FindName("CLOSE_BUTTON", pcList) as Button;
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //    }
+        //}
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+
+            base.OnRender(drawingContext);
+
+        }
+
         private void StartSqlInit()
         {
             SqlConnection conSql = DBFunctions.proviceConnection();
@@ -275,12 +362,12 @@ namespace MEBS_Envanter
         {
             if (!AddOrEditPCFunction(isEdit))
             {
-                InfoWindow.ShowMessage(this,"Ekleme Sırasında Hata Oluştu");
-            }           
+                InfoWindow.ShowMessage(this, "Ekleme Sırasında Hata Oluştu");
+            }
         }
 
         private void pcDeleteBtn_Click(object sender, RoutedEventArgs e)
-        {            
+        {
             if (InfoWindow.AskQuestion("Silmek İstediğinize Emin misiniz?", "Önemli Soru !!!") != MessageBoxResult.Yes) { return; }
 
             bool isSuccess = DBFunctions.DeletePC(Current_Computer_Info);
@@ -503,7 +590,7 @@ namespace MEBS_Envanter
         {
             ComboBox combo_senet = sender as ComboBox;
             BirlikRepository birlik_rep = new BirlikRepository();
-            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik),true);
+            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik), true);
             searchGridBirliklerCombo.ItemsSource = birlik_rep.Birlikler;
             BirlikRepository.INSTANCE = birlik_rep;
         }
@@ -586,6 +673,11 @@ namespace MEBS_Envanter
         {
             SampleWindow x = new SampleWindow();
             x.ShowDialog();
+        }
+
+        private void CLOSE_BUTTON_Click(object sender, RoutedEventArgs e)
+        {
+            pcDeleteBtn_Click(null, null);
         }
     }
 }
