@@ -16,8 +16,10 @@ namespace Mebs_Envanter
     {
 
         protected override void OnStartup(StartupEventArgs e)
-        {            
+        {
+            
             base.OnStartup(e);
+
         }
         protected override void OnActivated(EventArgs e)
         {            
