@@ -18,7 +18,6 @@ namespace MEBS_Envanter.Repositories
 
         internal ComputerInfoRepository getSearchRepository(String searchText)
         {
-
             if (!String.IsNullOrEmpty(searchText) && searchText.Length > 0)
             {
                 ComputerInfoRepository repNew = new ComputerInfoRepository();
@@ -27,8 +26,7 @@ namespace MEBS_Envanter.Repositories
                     if (item.Pc_adi.ToLower().Contains(searchText.ToLower()) ||
                         item.Senet.Alan_kisi_isim.ToLower().Contains(searchText.ToLower()) ||
                         item.Senet.Alan_kisi_komutanlik.Komutanlik_ismi.ToLower().Contains(searchText.ToLower()) ||
-                        item.Senet.Veren_kisi_isim.ToLower().Contains(searchText.ToLower())
-                        )
+                        item.Senet.Veren_kisi_isim.ToLower().Contains(searchText.ToLower()))
                     {
                         repNew.Computers.Add(item);
                     }

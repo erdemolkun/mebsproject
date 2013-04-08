@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace Mebs_Envanter
 {
@@ -49,6 +51,29 @@ namespace Mebs_Envanter
         public static void ShowMessage(Window owner,String msg) {
             InfoWindow w = new InfoWindow(owner);
             w.ShowMessage(msg);            
+        }
+
+        public static void ShowAbout(Window owner)
+        {
+
+
+            try
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                string version = fvi.ProductVersion;
+
+
+
+                String msg = "MEBS Bölük Komutanlığı \nBilgisayar Envanter Kayıt Programı\n\n\n";
+                msg += "\tVersiyon : " + fvi.ProductBuildPart + "." + fvi.ProductPrivatePart;
+
+                InfoWindow.ShowMessage(owner, msg);
+
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public static MessageBoxResult AskQuestion(String msg, String header)
