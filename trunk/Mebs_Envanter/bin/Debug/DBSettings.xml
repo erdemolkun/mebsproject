@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XmlSqlPersistanceObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IsWindowsAuthentication>false</IsWindowsAuthentication>
+  <IsLocalNode>false</IsLocalNode>
+  <AttachPathNode>dbmodel</AttachPathNode>
+  <DatabaseNode>mebsenvanter</DatabaseNode>
+  <UserId>mebs1</UserId>
+  <Password>mebs1</Password>
+  <DataSource>PCINT0026\MSSQLSERVER1</DataSource>
+  <UserInstance>false</UserInstance>
+  <InitialCatalog>true</InitialCatalog>
+  <TimeOut>3</TimeOut>
+  <PersistSecurityInfo>true</PersistSecurityInfo>
+</XmlSqlPersistanceObject>
