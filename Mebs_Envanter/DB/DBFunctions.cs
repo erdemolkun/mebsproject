@@ -40,9 +40,7 @@ namespace MEBS_Envanter.DB
         {
             try
             {
-               
-
-                
+                               
                 StringBuilder sb = new StringBuilder();                
                 sb.Append(error); //Add tabulation
                 sb.Append(System.Environment.NewLine);
