@@ -301,6 +301,7 @@
   <ItemGroup>
     <Content Include="bin\Debug\WPFToolkit.dll" />
     <Content Include="bin\Debug\Xceed.Wpf.Controls.dll" />
+    <SplashScreen Include="Resources\hava_kuvvetleri_komutanligi.jpg" />
     <Resource Include="GUIHelpers\Images\down.png" />
     <Resource Include="GUIHelpers\Images\up.png" />
     <Resource Include="Resources\MyComputer.ico" />

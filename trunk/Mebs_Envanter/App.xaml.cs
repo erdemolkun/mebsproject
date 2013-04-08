@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
+using System.Threading;
 
 namespace Mebs_Envanter
 {
@@ -13,6 +14,11 @@ namespace Mebs_Envanter
     /// </summary>
     public partial class App : Application
     {
+
+        protected override void OnStartup(StartupEventArgs e)
+        {            
+            base.OnStartup(e);
+        }
         protected override void OnActivated(EventArgs e)
         {            
             base.OnActivated(e);
