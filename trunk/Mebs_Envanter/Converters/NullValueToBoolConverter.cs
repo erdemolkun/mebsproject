@@ -12,7 +12,21 @@ namespace MEBS_Envanter.Converters
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null) return false;
-            else return true;
+            else {
+
+                if (value is ComputerInfo)
+                {
+                    if ((value as ComputerInfo).Id > 0) { 
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            return false;
+            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

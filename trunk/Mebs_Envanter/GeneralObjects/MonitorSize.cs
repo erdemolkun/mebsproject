@@ -7,11 +7,18 @@ namespace Mebs_Envanter.GeneralObjects
 {
     public class MonitorSize
     {
+        public static int MON_ID_FOR_SEARCH=-2;
+        public static int MON_ID_FOR_LIST=-1;
+
         public override string ToString()
         {
             if (Id > 0)
             {
                 return MonitorLength.ToString();
+            }
+            else if (Id == MON_ID_FOR_SEARCH)
+            {
+                return "Hepsi";
             }
             else {
                 return "";

@@ -140,7 +140,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel TextBlock.FontSize="16" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button Margin="4,0" VerticalAlignment="Center"                        
-                        Content="Ekle" Click="pcAddBtn_Click"></Button>
+                        Content="Kaydet" Click="pcAddBtn_Click"></Button>
                 <Button Margin="4,0" VerticalAlignment="Center" Content="Düzenle" 
                         IsEnabled="{Binding ElementName=pcList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}"
                         Click="pcEditBtn_Click"></Button>
@@ -150,8 +150,9 @@
 
 
             </StackPanel>
-            <Button Grid.Column="1" Content="Yeni Ekle"  Height="32" HorizontalAlignment="Center" 
-                    Width="200" VerticalAlignment="Center" 
+            <Button Grid.Column="1" Content="Sıfırdan PC Ekle"  Height="32"
+                    HorizontalAlignment="Left" Margin="100,0,0,0"
+                    Width="Auto" VerticalAlignment="Center" 
                     Name="refreshListBtn"  Click="refreshListBtn_Click" />
         </Grid>
 
@@ -167,7 +168,7 @@
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
-            <Grid Grid.Row="1" Background="#D387CEEB">
+            <Grid Grid.Row="1" Background="#D387CEEB" >
                 <Grid Margin="4,0,0,0"    TextBlock.FontWeight="Bold" 
                       TextBlock.FontSize="12" TextBlock.Foreground="Black">
 
@@ -213,7 +214,7 @@
                     </ComboBox>
 
 
-                    <TextBlock Text="Marka" Grid.Row="2" VerticalAlignment="Center" ></TextBlock>
+                    <TextBlock Text="Bilgisayar Markası" Grid.Row="2" VerticalAlignment="Center" ></TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="2" x:Name="searchGridMarkalarCombo"
                       VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"/>
 

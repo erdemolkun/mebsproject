@@ -89,7 +89,7 @@ namespace Mebs_Envanter.HardwareUserControls
 
 
             MonitorSizesRepository Size_Rep = new MonitorSizesRepository();
-            Size_Rep.FillSizes();
+            Size_Rep.FillSizes(false);
             monitorBoyutlarCombo.ItemsSource = Size_Rep.Sizes;
             MonitorSizesRepository.INSTANCE = Size_Rep;
         }

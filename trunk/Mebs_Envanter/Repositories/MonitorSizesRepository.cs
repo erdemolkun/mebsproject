@@ -21,14 +21,19 @@ namespace MEBS_Envanter.Repositories
             get { return sizes; }
         }
 
-        private void ClearSizes ()
+        private void ClearSizes(bool isForSearch)
         {
             Sizes.Clear();
-
-            Sizes.Add(new MonitorSize(-1, 0));
+            if (isForSearch)
+            {
+                Sizes.Add(new MonitorSize(MonitorSize.MON_ID_FOR_SEARCH, 0));
+            }
+            else {
+                Sizes.Add(new MonitorSize(MonitorSize.MON_ID_FOR_LIST, 0));
+            }
         }
 
-        public void FillSizes()
+        public void FillSizes(bool isForSearch)
         {
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             string sqlText = "SELECT * FROM tbl_monitor_boyutu order by monitor_boyutu ASC";
@@ -37,7 +42,7 @@ namespace MEBS_Envanter.Repositories
 
             if (res)
             {
-                ClearSizes();
+                ClearSizes(isForSearch);
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 float current_length = 0;
