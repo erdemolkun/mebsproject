@@ -181,7 +181,7 @@ namespace MEBS_Envanter
             searchGridMonitorMarkalar.ItemsSource = marka_rep2.Markalar;
 
             MonitorSizesRepository mon_size_rep = new MonitorSizesRepository();
-            mon_size_rep.FillSizes();
+            mon_size_rep.FillSizes(true);
             searchGridMonitorBoyutlar.ItemsSource = mon_size_rep.Sizes;
 
         }
@@ -391,7 +391,7 @@ namespace MEBS_Envanter
 
         private void pcDeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (InfoWindow.AskQuestion("Silmek İstediğinize Emin misiniz?", "Önemli Soru !!!") != MessageBoxResult.Yes) { return; }
+            if (InfoWindow.AskQuestion("Silmek istediğinize emin misiniz?", "Dikkat !!!") != MessageBoxResult.Yes) { return; }
 
             bool isSuccess = DBFunctions.DeletePC(Current_Computer_Info);
             if (isSuccess)
