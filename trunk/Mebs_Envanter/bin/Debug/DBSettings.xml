@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <XmlSqlPersistanceObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <IsWindowsAuthentication>false</IsWindowsAuthentication>
-  <IsLocalNode>false</IsLocalNode>
-  <AttachPathNode>dbmodel</AttachPathNode>
+  <UseAttachPath>false</UseAttachPath>
+  <AttachPathNode>samplePath</AttachPathNode>
   <DatabaseNode>mebsenvanter</DatabaseNode>
   <UserId>mebs1</UserId>
   <Password>mebs1</Password>
