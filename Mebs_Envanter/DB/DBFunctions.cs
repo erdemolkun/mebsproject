@@ -33,7 +33,7 @@ namespace MEBS_Envanter.DB
             ConnectionProvider connecitonProvider = new ConnectionProvider(xmlPath, dbPath, "", true, false);
             connecitonProvider.connectionResult += new ConnectionResultHandler(connecitonProvider_connectionResult);
             connecitonProvider.ConnectionInformation += new DataBaseErrorHandler(connecitonProvider_ConnectionInformation);
-            return connecitonProvider.start(false);
+            return connecitonProvider.Start(false);
         }
 
         static void connecitonProvider_ConnectionInformation(string error, int hataTipi)
