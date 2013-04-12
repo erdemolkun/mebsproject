@@ -20,12 +20,12 @@
     <Grid>
         <Grid.Resources>
             <SolidColorBrush x:Key="headerColor1" Color="SkyBlue"></SolidColorBrush>
-            
+
         </Grid.Resources>
         <Grid.Background>
-            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox">
-                <GradientStop Color="#FF7094BE" Offset="0" />
-                <GradientStop Color="#FFA8C4BF" Offset="1" />
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Color="LightBlue" Offset="0" />
+                <GradientStop Color="LightSlateGray" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -41,22 +41,24 @@
         </Grid.RowDefinitions>
 
         <!--Menu Items-->
-        <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="#FFE5E3E3">
-            <Menu IsMainMenu="True" TextBlock.FontSize="12" HorizontalAlignment="Left">
-                <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
-                <MenuItem Header="Yazdırma Seçenekleri"
+        <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="{x:Null}">
+            <Border CornerRadius="12" Background="SkyBlue" Margin="0,4" >
+                <Menu  Background="{x:Null}" IsMainMenu="True" TextBlock.FontSize="14" TextBlock.FontFamily="Tahoma" HorizontalAlignment="Left">
+                    <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
+                    <MenuItem Header="Yazdırma Seçenekleri"
                           IsEnabled="{Binding ElementName=pcList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}">
-                    <MenuItem                         
+                        <MenuItem                         
                         x:Name="printSenetPreview" Click="printSenetPreview_Click"
                         Header="Senet Önizleme"></MenuItem>
-                    <MenuItem                         
+                        <MenuItem                         
                         x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
-                </MenuItem>
+                    </MenuItem>
 
-                <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
-                <MenuItem Header="Barcode Deneme" Click="MenuItem_Click"></MenuItem>
-                <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
-            </Menu>
+                    <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
+                    <MenuItem Header="Barcode Deneme" Click="MenuItem_Click"></MenuItem>
+                    <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
+                </Menu>
+            </Border>
         </Grid>
 
         <!--LoadingBackground="#7BAEC2D1"-->
