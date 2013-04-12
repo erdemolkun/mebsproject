@@ -124,7 +124,13 @@ namespace MEBS_Envanter
 
         //    }
         //}
-       
+
+
+        private ComputerInfo GetNewComputer() {
+
+            return new ComputerInfo(x2 => pcDeleteBtn_Click(null, null));
+        }
+
         private void StartSqlInit()
         {
             SqlConnection conSql = DBFunctions.proviceConnection();
@@ -135,7 +141,7 @@ namespace MEBS_Envanter
                     if (conSql != null)
                     {
                         GlobalDataAccess.Set_Current_SQL_Connection(conSql);
-                        Current_Computer_Info = new ComputerInfo();
+                        Current_Computer_Info = GetNewComputer();
                         setGUIDataContextForInitialization();
                         RefreshComputerList(null, true);
                         pcList_SelectionChanged(pcList, null);
@@ -195,7 +201,7 @@ namespace MEBS_Envanter
         {
             try
             {
-                ComputerInfo freshComputerInfo = new ComputerInfo();
+                ComputerInfo freshComputerInfo = GetNewComputer();
                 pcEnvanterControl.Assign_ComputerInfo_By_GUI(Current_Computer_Info, freshComputerInfo, isEdit);
 
                 object count = DBFunctions.ExecuteToFetchSingleItem("Select Count(*) as Count from tbl_bilgisayar where Pc_adi like '" +
@@ -355,7 +361,7 @@ namespace MEBS_Envanter
             }
             else
             {
-                infComp = new ComputerInfo();
+                infComp = GetNewComputer();
             }
             list.ScrollIntoView(infComp);
             Current_Computer_Info = infComp;
@@ -414,7 +420,7 @@ namespace MEBS_Envanter
             ComputerInfoRepository currentInfoRep = (pcList.DataContext as ComputerInfoRepository);
             if (currentInfoRep != null)
             {
-                currentInfoRep.Computers.Insert(0,new ComputerInfo());
+                currentInfoRep.Computers.Insert(0, GetNewComputer());
                 SetSelectedItemAfterContextChange(true);
             }
             //RefreshComputerList(null, true);
@@ -558,7 +564,7 @@ namespace MEBS_Envanter
                     //dataGridSample.ItemsSource = dt.DefaultView;
                     foreach (DataRow rowPC in dt.Rows)
                     {
-                        ComputerInfo tempComputer = new ComputerInfo(x2 => pcDeleteBtn_Click(null,null));
+                        ComputerInfo tempComputer = GetNewComputer();
                         try
                         {
                             tempComputer.SetGeneralFields(rowPC);
