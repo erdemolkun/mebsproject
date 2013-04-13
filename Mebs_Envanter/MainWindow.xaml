@@ -24,7 +24,7 @@
         </Grid.Resources>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                <GradientStop Color="LightBlue" Offset="0" />
+                <GradientStop Color="LightSlateGray" Offset="0" />
                 <GradientStop Color="LightSlateGray" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
@@ -42,7 +42,7 @@
 
         <!--Menu Items-->
         <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="{x:Null}">
-            <Border CornerRadius="12" Background="SkyBlue" Margin="0,4" >
+            <Border CornerRadius="6" Background="Snow" Margin="4,2,4,0" >
                 <Menu  Background="{x:Null}" IsMainMenu="True" TextBlock.FontSize="14" TextBlock.FontFamily="Tahoma" HorizontalAlignment="Left">
                     <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
                     <MenuItem Header="Yazdırma Seçenekleri"
@@ -55,7 +55,7 @@
                     </MenuItem>
 
                     <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
-                    <MenuItem Header="Barcode Deneme" Click="MenuItem_Click"></MenuItem>
+                    <MenuItem Header="Barcode Deneme" Visibility="Collapsed" Click="MenuItem_Click"></MenuItem>
                     <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
                 </Menu>
             </Border>
@@ -70,13 +70,13 @@
             </animations:LoadingAnimation >
         </Grid>
 
-
+        <!--Bilgisayar Bilgi-->
         <Grid Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,0,6,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Margin="0,12" Height="42" Background="{StaticResource headerColor1}" CornerRadius="0">
+            <Border  Margin="0,6" Height="42" Background="{StaticResource headerColor1}" CornerRadius="0">
                 <TextBlock Text="Düzenleme Bölümü" Foreground="MintCream"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
@@ -92,7 +92,7 @@
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Margin="0,12" Height="42"  Background="{StaticResource headerColor1}" CornerRadius="0">
+            <Border  Margin="0,6" Height="42"  Background="{StaticResource headerColor1}" CornerRadius="0">
                 <TextBlock Text="Bilgisayarlar" Foreground="MintCream"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
@@ -165,7 +165,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Margin="0,12" Height="42"  Background="{StaticResource headerColor1}" CornerRadius="0">
+            <Border Margin="0,6" Height="42"  Background="{StaticResource headerColor1}" CornerRadius="0">
                 <TextBlock Text="PC Arama Seçenekleri" Foreground="MintCream"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
@@ -300,15 +300,6 @@
                 </Grid>
             </Grid>
         </Grid>
-
-        <!--<GroupBox  Grid.RowSpan="2" Grid.Row="1" TextBlock.Foreground="FloralWhite"
-                   Foreground="FloralWhite" FontWeight="Bold"
-                   Grid.Column="0" Margin="4,2" 
-                   Header="PC Arama Seçenekleri" FontSize="15" >
-            <Border CornerRadius="4" Background="SteelBlue">
-                
-            </Border>
-        </GroupBox>-->
 
         <Grid Visibility="Collapsed"  Background="#FFC4BFBF" Grid.ColumnSpan="4" Grid.Row="3">
             <dg:DataGrid x:Name="dataGridSample"></dg:DataGrid>
