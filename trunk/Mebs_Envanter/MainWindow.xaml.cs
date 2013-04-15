@@ -269,7 +269,14 @@ namespace MEBS_Envanter
             if (addInfo.computer.IsEdit || Current_Computer_Info.Id<0)
             {
                 int index = computerRep.Computers.IndexOf(Current_Computer_Info);
-                computerRep.Computers[index] = addInfo.computer;
+                if (index < 0)
+                {
+                    computerRep.Computers.Insert(0, addInfo.computer);
+                }
+                else
+                {
+                    computerRep.Computers[index] = addInfo.computer;
+                }
                 Current_Computer_Info = addInfo.computer;
                 pcList.SelectedItem = Current_Computer_Info;
                 pcEnvanterControl.SetDataContext(Current_Computer_Info);
