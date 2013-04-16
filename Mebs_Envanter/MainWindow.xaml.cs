@@ -50,84 +50,8 @@ namespace MEBS_Envanter
 
         }
 
-       
-        //public override void OnApplyTemplate()
-        //{
-        //    base.OnApplyTemplate();
-        //    try
-        //    {
-        //        pcList.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
-        //        pcList.ItemContainerGenerator.ItemsChanged += new System.Windows.Controls.Primitives.ItemsChangedEventHandler(ItemContainerGenerator_ItemsChanged);
-        //        DataTemplate template1 = base.FindResource("computerInfoListboxDataTemplate") as DataTemplate;
-        //        //Button btnDeleteItem = pcList.ItemTemplate.FindName("CLOSE_BUTTON", pcList) as Button;
-        //    }
-        //    catch (Exception) { 
-
-
-        //    }
-
-        //}
-
-        //void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //void ItemContainerGenerator_ItemsChanged(object sender, System.Windows.Controls.Primitives.ItemsChangedEventArgs e)
-        //{
-
-        //    //MessageBox.Show("Index : "+e.Position.Index.ToString()+"Offset : "+e.Position.Offset.ToString());
-        //    //// Iterate through Books
-
-
-        //    foreach (var item in pcList.Items){
-
-        //        // Get the ListBoxItem around the Book
-        //        ListBoxItem listBoxItem =
-        //            this.pcList.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
-
-
-        //        DependencyObject dp = pcList.ItemContainerGenerator.ContainerFromItem(item) as DependencyObject;        
-
-        //        // Get the ContentPresenter
-        //        ContentPresenter presenter = listBoxItem.FindVisualChild<ContentPresenter>();
-
-        //        // Get the Template instance
-        //        DataTemplate template = presenter.ContentTemplate;
-
-        //        // Find the CheckBox within the Template
-        //        CheckBox checkBox = template.FindName("CLOSE_BUTTON", presenter) as CheckBox;
-        //        checkBox.IsEnabled = !checkBox.IsEnabled;
-        //    }
-        //}
-
-        //public override void OnApplyTemplate(){
-
-        //    base.OnApplyTemplate();
-        //    DataTemplate template1 = base.FindResource("computerInfoListboxDataTemplate") as DataTemplate;
-
-
-        //    //ContentPresenter myContentPresenter = WPFVisualHelpers.FindVisualChild<ContentPresenter>(this);
-
-
-        //    try
-        //    {
-        //        ItemsPresenter itemsPresenter = GetVisualChild<ItemsPresenter>(pcList);
-        //        StackPanel itemsPanelStackPanel = GetVisualChild<StackPanel>(itemsPresenter);
-
-        //        var container = pcList.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
-        //        Button btnDeleteItem = pcList.ItemTemplate.FindName("CLOSE_BUTTON", pcList) as Button;
-
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //    }
-        //}
-
-
-        private ComputerInfo GetNewComputer() {
-
+        private ComputerInfo GetNewComputer()
+        {
             return new ComputerInfo(x2 => pcDeleteBtn_Click(null, null));
         }
 
@@ -229,7 +153,7 @@ namespace MEBS_Envanter
 
                 if (
                     !string.IsNullOrEmpty(Current_Computer_Info.Pc_adi) &&
-                    !Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi) 
+                    !Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi)
                     && isEdit)
                 {
 
@@ -266,7 +190,7 @@ namespace MEBS_Envanter
             IsBusy = false;
             ComputerDbWorkInfo addInfo = e.Result as ComputerDbWorkInfo;
             ComputerInfoRepository computerRep = (pcList.DataContext as ComputerInfoRepository);
-            if (addInfo.computer.IsEdit || Current_Computer_Info.Id<0)
+            if (addInfo.computer.IsEdit || Current_Computer_Info.Id < 0)
             {
                 int index = computerRep.Computers.IndexOf(Current_Computer_Info);
                 if (index < 0)
@@ -314,23 +238,13 @@ namespace MEBS_Envanter
             SetContextForSearchFields();
         }
 
-        public ComputerInfo Current_Computer_Info
-        {
-            get { return (ComputerInfo)GetValue(Current_Computer_InfoProperty); }
-            set { SetValue(Current_Computer_InfoProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Current_Computer_Info.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Current_Computer_InfoProperty =
-            DependencyProperty.Register("Current_Computer_Info", typeof(ComputerInfo), typeof(MainWindow), new UIPropertyMetadata(null));
-
         #region Events
-        
+
         private bool handleSelection = true;
         private void pcList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             #region Control Selection Change
-            if (handleSelection && e!=null)
+            if (handleSelection && e != null)
             {
                 ComputerInfo removed = null;
                 ListBox lstBox = (ListBox)sender;
@@ -342,20 +256,21 @@ namespace MEBS_Envanter
                 {
                     if (removed.Id < 0)
                     {
-                        
+
                         MessageBoxResult result = InfoWindow.AskQuestion("Bilgisayarı kaydetmeden geçiş yapmak istiyor musunuz ?", "Uyarı !!");
                         if (result != MessageBoxResult.Yes)
                         {
-                            
+
                             handleSelection = false;
                             lstBox.SelectedItem = e.RemovedItems[0];
                             return;
                         }
-                        else {
+                        else
+                        {
                             (lstBox.DataContext as ComputerInfoRepository).Computers.Remove(removed);
                         }
                     }
-                }               
+                }
             }
             handleSelection = true;
             #endregion
@@ -421,6 +336,7 @@ namespace MEBS_Envanter
                 InfoWindow.ShowMessage(this, "Silme Sırasında Hata Oluştu");
             }
         }
+
         private void refreshListBtn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -603,7 +519,6 @@ namespace MEBS_Envanter
                 LoggerMebs.WriteToFile("\nRefreshComputerList Hatası : \n" + ex.Message);
             }
         }
-        ComputerInfoRepository current_In_MemoryList = null;
 
         private void btnClearSearch_Click(object sender, RoutedEventArgs e)
         {
@@ -639,20 +554,10 @@ namespace MEBS_Envanter
 
         private void pcList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ComputerUserControlVertical x = new ComputerUserControlVertical();
+            /*ComputerUserControlVertical x = new ComputerUserControlVertical();
             x.DataContext = (pcList.SelectedItem as ComputerInfo);
-            x.Show();
+            x.Show();*/
         }
-
-        public bool IsBusy
-        {
-            get { return (bool)GetValue(IsBusyProperty); }
-            set { SetValue(IsBusyProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for IsBusy.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsBusyProperty =
-            DependencyProperty.Register("IsBusy", typeof(bool), typeof(MainWindow), new UIPropertyMetadata(false));
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
@@ -664,7 +569,6 @@ namespace MEBS_Envanter
             YaziciWindow w = new YaziciWindow();
             w.ShowDialog();
         }
-
 
         private void quickSearchBtn_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -683,11 +587,7 @@ namespace MEBS_Envanter
 
         private void hakkindaMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            
-           
-                InfoWindow.ShowAbout(this);
-
-            
+            InfoWindow.ShowAbout(this);
         }
 
         private void printSenetPreview_Click(object sender, RoutedEventArgs e)
@@ -709,5 +609,32 @@ namespace MEBS_Envanter
         {
             pcDeleteBtn_Click(null, null);
         }
+
+        #region Variables
+
+        ComputerInfoRepository current_In_MemoryList = null;
+
+        public bool IsBusy
+        {
+            get { return (bool)GetValue(IsBusyProperty); }
+            set { SetValue(IsBusyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsBusy.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsBusyProperty =
+            DependencyProperty.Register("IsBusy", typeof(bool), typeof(MainWindow), new UIPropertyMetadata(false));
+
+
+        public ComputerInfo Current_Computer_Info
+        {
+            get { return (ComputerInfo)GetValue(Current_Computer_InfoProperty); }
+            set { SetValue(Current_Computer_InfoProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Current_Computer_Info.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty Current_Computer_InfoProperty =
+            DependencyProperty.Register("Current_Computer_Info", typeof(ComputerInfo), typeof(MainWindow), new UIPropertyMetadata(null));
+
+        #endregion
     }
 }

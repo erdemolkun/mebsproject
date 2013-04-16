@@ -12,6 +12,82 @@ namespace Mebs_Envanter
 {
     class Unnecessary
     {
+
+        //public override void OnApplyTemplate()
+        //{
+        //    base.OnApplyTemplate();
+        //    try
+        //    {
+        //        pcList.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
+        //        pcList.ItemContainerGenerator.ItemsChanged += new System.Windows.Controls.Primitives.ItemsChangedEventHandler(ItemContainerGenerator_ItemsChanged);
+        //        DataTemplate template1 = base.FindResource("computerInfoListboxDataTemplate") as DataTemplate;
+        //        //Button btnDeleteItem = pcList.ItemTemplate.FindName("CLOSE_BUTTON", pcList) as Button;
+        //    }
+        //    catch (Exception) { 
+
+
+        //    }
+
+        //}
+
+        //void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //void ItemContainerGenerator_ItemsChanged(object sender, System.Windows.Controls.Primitives.ItemsChangedEventArgs e)
+        //{
+
+        //    //MessageBox.Show("Index : "+e.Position.Index.ToString()+"Offset : "+e.Position.Offset.ToString());
+        //    //// Iterate through Books
+
+
+        //    foreach (var item in pcList.Items){
+
+        //        // Get the ListBoxItem around the Book
+        //        ListBoxItem listBoxItem =
+        //            this.pcList.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
+
+
+        //        DependencyObject dp = pcList.ItemContainerGenerator.ContainerFromItem(item) as DependencyObject;        
+
+        //        // Get the ContentPresenter
+        //        ContentPresenter presenter = listBoxItem.FindVisualChild<ContentPresenter>();
+
+        //        // Get the Template instance
+        //        DataTemplate template = presenter.ContentTemplate;
+
+        //        // Find the CheckBox within the Template
+        //        CheckBox checkBox = template.FindName("CLOSE_BUTTON", presenter) as CheckBox;
+        //        checkBox.IsEnabled = !checkBox.IsEnabled;
+        //    }
+        //}
+
+        //public override void OnApplyTemplate(){
+
+        //    base.OnApplyTemplate();
+        //    DataTemplate template1 = base.FindResource("computerInfoListboxDataTemplate") as DataTemplate;
+
+
+        //    //ContentPresenter myContentPresenter = WPFVisualHelpers.FindVisualChild<ContentPresenter>(this);
+
+
+        //    try
+        //    {
+        //        ItemsPresenter itemsPresenter = GetVisualChild<ItemsPresenter>(pcList);
+        //        StackPanel itemsPanelStackPanel = GetVisualChild<StackPanel>(itemsPresenter);
+
+        //        var container = pcList.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
+        //        Button btnDeleteItem = pcList.ItemTemplate.FindName("CLOSE_BUTTON", pcList) as Button;
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //    }
+        //}
+
+
         public static void CreateImageFile()
         {
             
