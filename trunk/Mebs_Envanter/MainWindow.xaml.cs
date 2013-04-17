@@ -48,6 +48,9 @@ namespace MEBS_Envanter
             thSqlInit.Start();
             IsBusy = true;
 
+
+            this.Title = "Bilgisayar Envanter Kaydı    " + VersionInfo.versiyonStr;
+
         }
 
         private ComputerInfo GetNewComputer()
@@ -239,7 +242,6 @@ namespace MEBS_Envanter
         }
 
         #region Events
-
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
