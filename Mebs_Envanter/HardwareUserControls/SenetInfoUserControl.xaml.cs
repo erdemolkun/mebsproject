@@ -30,22 +30,28 @@ namespace Mebs_Envanter.HardwareUserControls
 
         public void Init()
         {
-
             KomutanlikRepository Komutanlik_Repository = new KomutanlikRepository();
             Komutanlik_Repository.FillKomutanliklar(false);
             senetKomutanlikCombo.ItemsSource = Komutanlik_Repository.Komutanliklar;
             KomutanlikRepository.INSTANCE = Komutanlik_Repository;
 
-            // Birlikler arayüze atanıyor
-            //BirlikRepository Birlik_Repository = new BirlikRepository();
-            //Birlik_Repository.FillBirlikler();
-            //senetBirlikCombo.ItemsSource = Birlik_Repository.Birlikler;
-            //BirlikRepository.INSTANCE = Birlik_Repository;
+            foreach (Komutanlik item in Komutanlik_Repository.Komutanliklar)
+            {
+                BirlikRepository birlik_rep = new BirlikRepository();
+                birlik_rep.FillBirlikler(item, false);
+                item.Birlik_Repository = birlik_rep;
+
+                foreach (Birlik itemBirlik in birlik_rep.Birlikler)
+                {
+                    KisimRepository kisim_rep = new KisimRepository();
+                    kisim_rep.FillKisimlar(itemBirlik);
+                    itemBirlik.Kisim_Repository = kisim_rep;
+                }
+            }
         }
 
         public void SetSenetInfo(SenetInfo inf)
         {
-
             // Senet Bilgileri
             if (senetRutbelerCombo.SelectedItem != null)
             {
@@ -69,27 +75,28 @@ namespace Mebs_Envanter.HardwareUserControls
             }
             else if (!String.IsNullOrEmpty(senetKisimCombo.Text.Trim()))
             {
-
                 inf.Alan_kisi_kisim = new Kisim(-1, senetKisimCombo.Text.Trim());
+                inf.Alan_kisi_birlik.Kisim_Repository.Kisimlar.Add(inf.Alan_kisi_kisim);
             }
         }
 
         private void senetKomutanlikCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox combo_senet = sender as ComboBox;
-            Komutanlik current_Komutanlik = (combo_senet.SelectedItem as Komutanlik);
-            BirlikRepository birlik_rep = new BirlikRepository();
-            if (current_Komutanlik != null && current_Komutanlik.Birligi != null)
+        {            
+            ComboBox combo = sender as ComboBox;
+            Komutanlik current_Komutanlik = (combo.SelectedItem as Komutanlik);
+            BirlikRepository birlik_rep = null;
+            if (current_Komutanlik != null && current_Komutanlik.Birlik_Repository != null)
             {
-                birlik_rep = current_Komutanlik.Birligi;
+                birlik_rep = current_Komutanlik.Birlik_Repository;
             }
-            else {
+            else
+            {
+                birlik_rep = new BirlikRepository();
                 birlik_rep.FillBirlikler(current_Komutanlik, false);
             }
 
-            if (current_Komutanlik != null && current_Komutanlik.Birligi == null)
-                current_Komutanlik.Birligi = birlik_rep;
-
+            if (current_Komutanlik != null && current_Komutanlik.Birlik_Repository == null)
+                current_Komutanlik.Birlik_Repository = birlik_rep;
 
             senetBirlikCombo.ItemsSource = birlik_rep.Birlikler;
             BirlikRepository.INSTANCE = birlik_rep;
@@ -97,20 +104,20 @@ namespace Mebs_Envanter.HardwareUserControls
 
         private void senetBirlikCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox combo_senet = sender as ComboBox;
-            Birlik current_Birlik = (combo_senet.SelectedItem as Birlik);
+            ComboBox combo = sender as ComboBox;
+            Birlik current_Birlik = (combo.SelectedItem as Birlik);
 
             KisimRepository kisim_rep = new KisimRepository();
-            if (current_Birlik!=null && current_Birlik.KisimRep != null)
+            if (current_Birlik != null && current_Birlik.Kisim_Repository != null)
             {
-                kisim_rep = current_Birlik.KisimRep;
+                kisim_rep = current_Birlik.Kisim_Repository;
             }
             else
             {
                 kisim_rep.FillKisimlar(current_Birlik);
             }
-            if (current_Birlik != null && current_Birlik.KisimRep==null)
-                current_Birlik.KisimRep = kisim_rep;
+            if (current_Birlik != null && current_Birlik.Kisim_Repository == null)
+                current_Birlik.Kisim_Repository = kisim_rep;
 
             senetKisimCombo.ItemsSource = kisim_rep.Kisimlar;
             KisimRepository.INSTANCE = kisim_rep;
