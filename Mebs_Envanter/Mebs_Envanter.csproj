@@ -148,6 +148,7 @@
       <DependentUpon>SampleWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Unnecessary.cs" />
+    <Compile Include="VersionInfo.cs" />
     <Compile Include="ViewModels\OemDevicesViewModel.cs" />
     <Compile Include="ViewModels\OemDeviceViewModel.cs" />
     <Compile Include="SerializationTool.cs" />

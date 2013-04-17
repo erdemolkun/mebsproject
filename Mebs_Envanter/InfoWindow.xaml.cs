@@ -42,34 +42,26 @@ namespace Mebs_Envanter
             Close();
         }
 
-        private void ShowMessage(String msg) {
+        private void ShowMessage(String msg)
+        {
 
             infoTxtBlock.Text = msg;
             ShowDialog();
         }
 
-        public static void ShowMessage(Window owner,String msg) {
+        public static void ShowMessage(Window owner, String msg)
+        {
             InfoWindow w = new InfoWindow(owner);
-            w.ShowMessage(msg);            
+            w.ShowMessage(msg);
         }
 
         public static void ShowAbout(Window owner)
         {
-
-
             try
             {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.ProductVersion;
-
-
-
                 String msg = "MEBS Bölük Komutanlığı \nBilgisayar Envanter Kayıt Programı\n\n\n";
-                msg += "\tVersiyon : " + fvi.ProductBuildPart + "." + fvi.ProductPrivatePart;
-
+                msg += "\t" + VersionInfo.versiyonStr;
                 InfoWindow.ShowMessage(owner, msg);
-
             }
             catch (Exception)
             {
