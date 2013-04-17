@@ -248,12 +248,12 @@
                      Width="60" x:Name="searchGridModelTxtBox"></TextBox>
 
                     <Expander TabIndex="9" Header="Monitor Arama Seçenekleri" Foreground="#FF8D0E0E" IsExpanded="True" 
-                                    Margin="2,0,0,0"  Grid.ColumnSpan="4" Grid.Row="8" >
+                                    Margin="0,0,0,0"  Grid.ColumnSpan="4" Grid.Row="8" >
 
                         <Grid TextBlock.Foreground="Black">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="32"></RowDefinition>

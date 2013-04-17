@@ -35,11 +35,15 @@ namespace MEBS_Envanter.Repositories
 
         public void FillBirlikler(Komutanlik komutanlik, bool isForSearch)
         {
+            
             if (komutanlik == null)
             {
                 ClearBirlikler(isForSearch);
                 return;
             }
+            if (komutanlik.Birligi != null)
+                return;
+
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             string sqlText = "SELECT * FROM tbl_birlik where komutanlik_id=@komutanlik_id";
             SqlCommand cmd = new SqlCommand(sqlText, cnn);

@@ -28,7 +28,8 @@ namespace Mebs_Envanter.HardwareUserControls
             InitializeComponent();
         }
 
-        public void Init() {
+        public void Init()
+        {
 
             KomutanlikRepository Komutanlik_Repository = new KomutanlikRepository();
             Komutanlik_Repository.FillKomutanliklar(false);
@@ -42,8 +43,9 @@ namespace Mebs_Envanter.HardwareUserControls
             //BirlikRepository.INSTANCE = Birlik_Repository;
         }
 
-        public void SetSenetInfo(SenetInfo inf) {
-            
+        public void SetSenetInfo(SenetInfo inf)
+        {
+
             // Senet Bilgileri
             if (senetRutbelerCombo.SelectedItem != null)
             {
@@ -60,12 +62,13 @@ namespace Mebs_Envanter.HardwareUserControls
             {
                 inf.Alan_kisi_birlik = (senetBirlikCombo.SelectedItem as Birlik);
             }
-                        
+
             if (senetKisimCombo.SelectedItem != null)
             {
                 inf.Alan_kisi_kisim = (senetKisimCombo.SelectedItem as Kisim);
             }
-            else if (!String.IsNullOrEmpty(senetKisimCombo.Text.Trim())) {
+            else if (!String.IsNullOrEmpty(senetKisimCombo.Text.Trim()))
+            {
 
                 inf.Alan_kisi_kisim = new Kisim(-1, senetKisimCombo.Text.Trim());
             }
@@ -74,8 +77,20 @@ namespace Mebs_Envanter.HardwareUserControls
         private void senetKomutanlikCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox combo_senet = sender as ComboBox;
+            Komutanlik current_Komutanlik = (combo_senet.SelectedItem as Komutanlik);
             BirlikRepository birlik_rep = new BirlikRepository();
-            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik),false);
+            if (current_Komutanlik != null && current_Komutanlik.Birligi != null)
+            {
+                birlik_rep = current_Komutanlik.Birligi;
+            }
+            else {
+                birlik_rep.FillBirlikler(current_Komutanlik, false);
+            }
+
+            if (current_Komutanlik != null && current_Komutanlik.Birligi == null)
+                current_Komutanlik.Birligi = birlik_rep;
+
+
             senetBirlikCombo.ItemsSource = birlik_rep.Birlikler;
             BirlikRepository.INSTANCE = birlik_rep;
         }
@@ -83,9 +98,20 @@ namespace Mebs_Envanter.HardwareUserControls
         private void senetBirlikCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox combo_senet = sender as ComboBox;
+            Birlik current_Birlik = (combo_senet.SelectedItem as Birlik);
+
             KisimRepository kisim_rep = new KisimRepository();
-            kisim_rep.FillKisimlar((combo_senet.SelectedItem as Birlik));
-            //kisim_rep.FillKisimlar(null);
+            if (current_Birlik!=null && current_Birlik.KisimRep != null)
+            {
+                kisim_rep = current_Birlik.KisimRep;
+            }
+            else
+            {
+                kisim_rep.FillKisimlar(current_Birlik);
+            }
+            if (current_Birlik != null && current_Birlik.KisimRep==null)
+                current_Birlik.KisimRep = kisim_rep;
+
             senetKisimCombo.ItemsSource = kisim_rep.Kisimlar;
             KisimRepository.INSTANCE = kisim_rep;
         }

@@ -84,8 +84,6 @@ namespace MEBS_Envanter
             }
         }
 
-
-
         internal void Set_SenetInfos(bool isInComputer,int bilgisayar_id,int senet_id)
         {
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
