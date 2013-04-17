@@ -240,6 +240,17 @@ namespace MEBS_Envanter
 
         #region Events
 
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+
+            if (e.Key == Key.LeftCtrl || e.Key == Key.P)
+            {
+                printSenetPreview_Click(null, null);
+            }
+            base.OnKeyDown(e);
+        }
+
         private bool handleSelection = true;
         private void pcList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
