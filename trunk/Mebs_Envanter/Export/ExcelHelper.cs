@@ -89,7 +89,14 @@ namespace Mebs_Envanter
 
             if (type.Name.Contains("Int") || type.Name.Contains("Double") || type.Name.Contains("Decimal") || type.Name.Contains("decimal"))
             {
-                return string.Format("<Cell" + border + "><Data ss:Type=\"Number\">{0}</Data></Cell>", data);
+                if (!type.Name.Contains("Double"))
+                {
+                    return string.Format("<Cell" + border + "><Data ss:Type=\"Number\">{0}</Data></Cell>", data);//İlk Hali
+                }
+                else {
+                    // Kontrol Et
+                    return string.Format("<Cell" + border + "><Data ss:Type=\"Number\">{0}</Data></Cell>", data.ToString().Replace(",","."));
+                }
             }
 
 

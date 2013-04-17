@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MEBS_Envanter;
+using MEBS_Envanter.Repositories;
 
 namespace Mebs_Envanter.GeneralObjects
 {
     public class Komutanlik : MebsBaseObject
     {
+        public BirlikRepository Birligi = null;
+
         public override string ToString()
-        {
-            //return Birlik_ismi+" ID : "+Birlik_id;
+        {            
             return Komutanlik_ismi;
         }
         public Komutanlik(int komutanlik_id, String komutanlik_ismi)
         {
-
-            Komutanlik_id = komutanlik_id;
             Komutanlik_ismi = komutanlik_ismi;
+            Komutanlik_id = komutanlik_id;
         }
 
         private String _komutanlik_ismi;
@@ -33,7 +34,23 @@ namespace Mebs_Envanter.GeneralObjects
         public int Komutanlik_id
         {
             get { return _komutanlik_id; }
-            set { _komutanlik_id = value; OnPropertyChanged("Komutanlik_id"); }
+            set
+            {
+                _komutanlik_id = value;
+                if (KomutanlikRepository.INSTANCE != null)
+                {
+                    foreach (Komutanlik item in KomutanlikRepository.INSTANCE.Komutanliklar)
+                    {
+                        if (value == item.Komutanlik_id)
+                        {
+                            if (value < 0) break;
+                            Komutanlik_ismi = item.Komutanlik_ismi;
+                            break;
+                        }
+                    }
+                }
+                OnPropertyChanged("Komutanlik_id");
+            }
         }
     }
 }
