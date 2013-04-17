@@ -8,23 +8,25 @@ using System.Data.SqlClient;
 using System.Data;
 using MEBS_Envanter.DB;
 using Mebs_Envanter.DB;
+using MEBS_Envanter.Repositories;
 
 namespace MEBS_Envanter
 {
-    public class SenetInfo:MebsBaseObject
+    public class SenetInfo : MebsBaseObject
     {
-        public SenetInfo() {
-           
+        public SenetInfo()
+        {
+
         }
 
-        private int id=-1;
+        private int id = -1;
         public int Id
         {
             get { return id; }
             set { id = value; }
         }
 
-        private String alan_kisi_rutbe="";
+        private String alan_kisi_rutbe = "";
 
         public String Alan_kisi_rutbe
         {
@@ -32,18 +34,20 @@ namespace MEBS_Envanter
             set { alan_kisi_rutbe = value; }
         }
 
-        private String alan_kisi_isim="";
+        private String alan_kisi_isim = "";
 
         public String Alan_kisi_isim
         {
             get { return alan_kisi_isim; }
-            set { 
+            set
+            {
                 if (value == null) alan_kisi_isim = "";
                 else alan_kisi_isim = value;
 
                 OnPropertyChanged("Alan_kisi_isim");
             }
         }
+
 
 
         private Komutanlik alan_kisi_komutanlik = new Komutanlik(-1, "");
@@ -53,7 +57,7 @@ namespace MEBS_Envanter
             set { alan_kisi_komutanlik = value; OnPropertyChanged("Alan_kisi_komutanlik"); }
         }
 
-        private Birlik alan_kisi_birlik=new Birlik(-1,"");
+        private Birlik alan_kisi_birlik = new Birlik(-1, "");
 
         public Birlik Alan_kisi_birlik
         {
@@ -61,30 +65,32 @@ namespace MEBS_Envanter
             set { alan_kisi_birlik = value; OnPropertyChanged("Alan_kisi_birlik"); }
         }
 
-        private Kisim alan_kisi_kisim=new Kisim(-1,"");
+        private Kisim alan_kisi_kisim = new Kisim(-1, "");
 
         public Kisim Alan_kisi_kisim
         {
             get { return alan_kisi_kisim; }
-            set {
+            set
+            {
 
                 alan_kisi_kisim = value; OnPropertyChanged("Alan_kisi_kisim");
             }
         }
 
-        private String veren_kisi_isim="";
+        private String veren_kisi_isim = "";
 
         public String Veren_kisi_isim
         {
             get { return veren_kisi_isim; }
-            set {
+            set
+            {
                 if (value == null) veren_kisi_isim = "";
-                else  veren_kisi_isim = value;
+                else veren_kisi_isim = value;
                 OnPropertyChanged("Veren_kisi_isim");
             }
         }
 
-        internal void Set_SenetInfos(bool isInComputer,int bilgisayar_id,int senet_id)
+        internal void Set_SenetInfos(bool isInComputer, int bilgisayar_id, int senet_id)
         {
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
 
@@ -96,14 +102,15 @@ namespace MEBS_Envanter
                 cmd = new SqlCommand(conString, cnn);
                 cmd.Parameters.AddWithValue("@bilgisayar_id", bilgisayar_id);
             }
-            else {
+            else
+            {
 
                 String conString = "Select * From tbl_senet where senet_id=@senet_id";
                 cmd = new SqlCommand(conString, cnn);
                 cmd.Parameters.AddWithValue("@senet_id", senet_id);
             }
-            
-            
+
+
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
 
@@ -135,9 +142,37 @@ namespace MEBS_Envanter
                 int alanKisiBirlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_birlik_id"], -1);
                 int alanKisiKisimId = DBValueHelpers.GetInt32(rowParca["alan_kisi_kisim_id"], -1);
 
-                Alan_kisi_komutanlik = new Komutanlik(alanKisiKomutanlikId, "");
-                Alan_kisi_birlik = new Birlik(alanKisiBirlikId, "");
-                Alan_kisi_kisim = new Kisim(alanKisiKisimId, "");
+                String komutanlikName = "";
+                String birlikName = "";
+                String kisimName = "";
+                foreach (Komutanlik item in KomutanlikRepository.INSTANCE.Komutanliklar)
+                {
+                    if (alanKisiKomutanlikId == item.Komutanlik_id)
+                    {
+                        komutanlikName = item.Komutanlik_ismi;
+                        foreach (Birlik itemBirlik in item.Birlik_Repository.Birlikler)
+                        {
+                            if (itemBirlik.Birlik_id == alanKisiBirlikId)
+                            {
+                                birlikName = itemBirlik.Birlik_ismi;
+                                foreach (Kisim itemKisim in itemBirlik.Kisim_Repository.Kisimlar)
+                                {
+                                    if (itemKisim.Kisim_id == alanKisiKisimId)
+                                    {
+                                        kisimName = itemKisim.Kisim_adi;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+
+                Alan_kisi_komutanlik = new Komutanlik(alanKisiKomutanlikId, komutanlikName);
+                Alan_kisi_birlik = new Birlik(alanKisiBirlikId, birlikName);
+                Alan_kisi_kisim = new Kisim(alanKisiKisimId, kisimName);
                 Id = Convert.ToInt32(rowParca["senet_id"]);
             }
         }
