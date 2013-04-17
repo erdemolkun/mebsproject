@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Templates\ListBoxDataTemplates.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Templates\Templates.xaml"></ResourceDictionary>
                 
+                
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate x:Key="deviceDataTemplate">
                 <x1:DeviceEntryControl ></x1:DeviceEntryControl>
