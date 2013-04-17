@@ -42,7 +42,6 @@ namespace MEBS_Envanter
         {
             if (!PropertiesFetched)
             {
-
                 Set_ComputerOemDevices(null);
                 Senet.Set_SenetInfos(true, Id, -1);
                 PropertiesFetched = true;
