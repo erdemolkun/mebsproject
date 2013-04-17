@@ -34,7 +34,6 @@ using ReadWriteCsv;
 using Mebs_Envanter.Export;
 
 
-
 namespace MEBS_Envanter
 {
     /// <summary>
@@ -52,7 +51,6 @@ namespace MEBS_Envanter
             IsBusy = true;
 
             this.Title = "Bilgisayar Envanter Kaydı    " + VersionInfo.versiyonStr;
-
         }
 
         private ComputerInfo GetNewComputer()
@@ -118,7 +116,6 @@ namespace MEBS_Envanter
             MonitorSizesRepository mon_size_rep = new MonitorSizesRepository();
             mon_size_rep.FillSizes(true);
             searchGridMonitorBoyutlar.ItemsSource = mon_size_rep.Sizes;
-
         }
 
         private void ShowError(String msg)
@@ -138,7 +135,6 @@ namespace MEBS_Envanter
 
                 if (String.IsNullOrEmpty(freshComputerInfo.Pc_adi.Trim().ToString()))
                 {
-
                     ShowError("Lütfen Bilgisayar ismini giriniz !!!");
                     return true;
                 }
@@ -147,7 +143,6 @@ namespace MEBS_Envanter
                 {
                     if (isEdit && Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi))
                     {
-
                     }
                     else
                     {
@@ -161,9 +156,7 @@ namespace MEBS_Envanter
                     !Current_Computer_Info.Pc_adi.Equals(freshComputerInfo.Pc_adi)
                     && isEdit)
                 {
-
-                    MessageBoxResult x1 =
-                        MessageBox.Show("Bilgisayar İsmini Düzenlemek istiyor musunuz ? ",
+                    MessageBoxResult x1 = MessageBox.Show("Bilgisayar İsmini Düzenlemek istiyor musunuz ? ",
                         "Dikkat !!!", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                     if (!x1.Equals(MessageBoxResult.Yes))
                     {
@@ -177,7 +170,6 @@ namespace MEBS_Envanter
                 worker.DoWork += new DoWorkEventHandler(worker_DoWork);
                 worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
                 Mouse.OverrideCursor = Cursors.Wait;
-                //this.IsEnabled = false;
                 IsBusy = true;
 
                 worker.RunWorkerAsync(freshComputerInfo);
@@ -225,15 +217,12 @@ namespace MEBS_Envanter
             ComputerDbWorkInfo addInfo = new ComputerDbWorkInfo();
             addInfo.computer = freshComputerInfo;
             addInfo.isSuccess = dbresult;
-            //e.Result = dbresult;
             e.Result = addInfo;
         }
 
         internal class ComputerDbWorkInfo
         {
-
             public bool isSuccess = false;
-            //public bool isEdit = false;
             public ComputerInfo computer = null;
         }
 
@@ -590,7 +579,6 @@ namespace MEBS_Envanter
             {
                 if (quickSearchBtn.IsKeyboardFocused)
                 {
-
                     String txt = quickSearchBtn.Text;
                     ComputerInfoRepository newList = current_In_MemoryList.getSearchRepository(txt);
                     pcList.DataContext = newList;
@@ -653,10 +641,9 @@ namespace MEBS_Envanter
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
-            if (pcList.SelectedItem != null) {
-
+            if (pcList.SelectedItem != null)
+            {
                 //ComputerInfo infComp = pcList.SelectedItem as ComputerInfo;
-                
                 ExportHelper h = new ExportHelper();
                 foreach (var item in current_In_MemoryList.Computers)
                 {
@@ -666,7 +653,7 @@ namespace MEBS_Envanter
 
 
                 System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
-                sfd.FileName = "results.xls";                
+                sfd.FileName = "results.xls";
                 sfd.Filter = "Excel File (.xls)|*.xls";
                 if (sfd.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 {
@@ -677,10 +664,11 @@ namespace MEBS_Envanter
                 // multiple worksheets
                 DataSet ds = new DataSet();
                 ds.Tables.Add(table);
-                if (!sfd.FileName.EndsWith("xls")) {
+                if (!sfd.FileName.EndsWith("xls"))
+                {
                     sfd.FileName += ".xls";
                 }
-                ExcelXMLExportHelper.ToFormattedExcel(ds, sfd.FileName);           
+                ExcelXMLExportHelper.ToFormattedExcel(ds, sfd.FileName);
 
 
                 //// Write sample data to CSV file

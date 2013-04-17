@@ -28,7 +28,6 @@ namespace Mebs_Envanter
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-
             if (e.Key == Key.Escape || e.Key == Key.Enter)
             {
 
@@ -44,7 +43,6 @@ namespace Mebs_Envanter
 
         private void ShowMessage(String msg)
         {
-
             infoTxtBlock.Text = msg;
             ShowDialog();
         }
@@ -70,7 +68,6 @@ namespace Mebs_Envanter
 
         public static MessageBoxResult AskQuestion(String msg, String header)
         {
-
             MessageBoxResult result1 = MessageBox.Show(msg, header,
                     MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
             return result1;

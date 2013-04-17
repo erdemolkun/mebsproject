@@ -29,7 +29,7 @@ namespace MEBS_Envanter.Repositories
         public void FillKisimlar(Birlik birlik)
         {
             if (birlik == null) return ;
-            if (birlik.KisimRep != null)
+            if (birlik.Kisim_Repository != null)
                 return ;
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             string sqlText = "SELECT * FROM tbl_kisim where birlik_id=@birlik_id";

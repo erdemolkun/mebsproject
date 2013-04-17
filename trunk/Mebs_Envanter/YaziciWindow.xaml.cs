@@ -36,8 +36,7 @@ namespace Mebs_Envanter
             InitializeComponent();
             InitItems();
 
-            Current_YaziciInfo = new YaziciInfo();
-            //gridYaziciBilgileri.DataContext = Current_YaziciInfo;
+            Current_YaziciInfo = new YaziciInfo();            
             yaziciList.DataContext = new YaziciInfoRepository();
             RefreshPrinterList(null, true);
             SetContextForSearchFields();

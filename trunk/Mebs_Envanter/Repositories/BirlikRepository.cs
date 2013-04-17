@@ -41,7 +41,7 @@ namespace MEBS_Envanter.Repositories
                 ClearBirlikler(isForSearch);
                 return;
             }
-            if (komutanlik.Birligi != null)
+            if (komutanlik.Birlik_Repository != null)
                 return;
 
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();

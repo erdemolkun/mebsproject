@@ -76,8 +76,7 @@ namespace Mebs_Envanter.HardwareUserControls
 
             // Markalar arayüze atanıyor
             MarkaRepository Marka_Repository = new MarkaRepository();
-            Marka_Repository.FillMarkalar(false);            
-            //monitorMarkalarCombo.DataContext = Marka_Repository;
+            Marka_Repository.FillMarkalar(false);                        
             monitorMarkalarCombo.ItemsSource = Marka_Repository.Markalar;
             MarkaRepository.INSTANCE = Marka_Repository;
 

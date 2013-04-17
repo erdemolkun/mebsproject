@@ -9,7 +9,7 @@ namespace MEBS_Envanter.GeneralObjects
 {
     public class Birlik : MebsBaseObject
     {
-        public KisimRepository KisimRep = null;
+        public KisimRepository Kisim_Repository = null;
 
         public override string ToString()
         {
