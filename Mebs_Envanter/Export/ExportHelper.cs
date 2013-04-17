@@ -50,9 +50,20 @@ namespace Mebs_Envanter.Export
             addColumnToDatatable(ref dt, "Monitor Seri No", "System.String", ""); //20
             addColumnToDatatable(ref dt, "Monitor Parça No", "System.String", ""); //21
             addColumnToDatatable(ref dt, "Monitor Tempest Seviyesi", "System.String", ""); //22
-            addColumnToDatatable(ref dt, "Monitor Boyutu", "System.Double",0); //23
-            
+            addColumnToDatatable(ref dt, "Monitor Boyutu", "System.Double", 0); //23
             // Monitor Bilgileri
+
+
+            foreach (ComputerInfo compInfo in comps)
+            {
+                foreach (var oemDeviceModel in compInfo.OemDevicesVModel.OemDevicesAll)
+                {
+                    addColumnToDatatable(ref dt, oemDeviceModel.ParcaTipiIsmi + " Seri Numarası", "System.String", "");
+                    addColumnToDatatable(ref dt, oemDeviceModel.ParcaTipiIsmi + " Parça Bilgisi", "System.String", "");
+                }
+                break;
+            }
+
 
             foreach (ComputerInfo compInfo in comps)
             {
@@ -145,6 +156,12 @@ namespace Mebs_Envanter.Export
                 list1.Add(compInfo.MonitorInfo.MonSize.MonitorLength);
                 //17 //23
                 // Monitor Bilgileri
+
+                foreach (var oemDeviceModel in compInfo.OemDevicesVModel.OemDevicesAll)
+                {
+                    list1.Add(oemDeviceModel.DevOem.SerialNumber);
+                    list1.Add(oemDeviceModel.DevOem.DeviceInfo);
+                }
 
                 dt.Rows.Add(list1.ToArray());
             }
