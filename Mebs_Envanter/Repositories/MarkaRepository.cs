@@ -11,7 +11,15 @@ namespace MEBS_Envanter.Repositories
     public class MarkaRepository
     {
 
-        public static MarkaRepository INSTANCE = null;
+        private static MarkaRepository instance = null;
+
+        public static MarkaRepository INSTANCE
+        {
+            get { return MarkaRepository.instance; }
+            set {
+                MarkaRepository.instance = value; 
+            }
+        }
 
         public MarkaRepository() { }
 

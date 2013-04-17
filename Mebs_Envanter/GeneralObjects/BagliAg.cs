@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MEBS_Envanter.Repositories;
 
 namespace MEBS_Envanter.GeneralObjects
 {
@@ -35,7 +36,22 @@ namespace MEBS_Envanter.GeneralObjects
         public int Ag_id
         {
             get { return ag_id; }
-            set { ag_id = value; }
+            set
+            {
+                if (BagliAgRepository.INSTANCE != null)
+                {
+                    foreach (BagliAg item in BagliAgRepository.INSTANCE.BagliAglar)
+                    {
+                        if (value == item.Ag_id)
+                        {
+                            if(value<0)break;
+                            Ag_adi = item.Ag_adi;
+                            break;
+                        }
+                    }
+                }
+                ag_id = value;
+            }
         }
     }
 }

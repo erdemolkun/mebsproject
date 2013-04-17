@@ -56,6 +56,7 @@
 
                     <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
                     <MenuItem Header="Barcode Deneme" Visibility="Collapsed" Click="MenuItem_Click"></MenuItem>
+                    <MenuItem Header="Export"  Click="MenuItem_Click_3"></MenuItem>
                     <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
                 </Menu>
             </Border>

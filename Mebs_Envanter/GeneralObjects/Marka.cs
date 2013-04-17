@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MEBS_Envanter.Repositories;
 
 namespace MEBS_Envanter
 {
@@ -19,8 +20,9 @@ namespace MEBS_Envanter
         }
         public Marka(int marka_id, String markaName) {
 
-            this.MarkaID = marka_id;
             this.MarkaName = markaName;
+            this.MarkaID = marka_id;
+           
         }
 
         private String _markaName;
@@ -39,7 +41,25 @@ namespace MEBS_Envanter
         public int MarkaID
         {
             get { return _markaID; }
-            set { _markaID = value; OnPropertyChanged("MarkaID"); }
+            set { 
+                _markaID = value;
+                if (MarkaRepository.INSTANCE != null)
+                {
+                    foreach (Marka item in MarkaRepository.INSTANCE.Markalar)
+                    {
+                        if (value == item.MarkaID)
+                        {
+                            if (value < 0) break;
+                            MarkaName = item.MarkaName;
+                            break;
+                        }
+                    }
+                }
+                else if (value > 0) { 
+                
+                
+                }
+                OnPropertyChanged("MarkaID"); }
         }
 
     }
