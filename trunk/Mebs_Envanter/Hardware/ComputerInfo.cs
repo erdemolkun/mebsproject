@@ -18,6 +18,18 @@ namespace MEBS_Envanter
     public class ComputerInfo : MebsBaseObject
     {
 
+        public override string ToString()
+        {
+            String str = "";
+            str = Pc_adi;
+            if (Marka!=null && Marka.MarkaID > 0)
+            {                
+                str += " , Marka : " + Marka.MarkaName;
+            }
+            return str;
+        }
+
+
         CommandMap commands = null;
         public CommandMap Commands
         {
