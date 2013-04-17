@@ -14,7 +14,11 @@ namespace Mebs_Envanter.GeneralObjects
         {
             if (Id > 0)
             {
-                return MonitorLength.ToString();
+                if (MonitorLength > 0)
+                {
+                    return MonitorLength.ToString();
+                }
+                else { return ""; }
             }
             else if (Id == MON_ID_FOR_SEARCH)
             {
@@ -40,15 +44,16 @@ namespace Mebs_Envanter.GeneralObjects
         }
 
 
-        private float monitorLength = 0;
-        public float MonitorLength
+        private double monitorLength = 0;
+        public double MonitorLength
         {
             get { return monitorLength; }
             set
             {
                 if (value > 0)
                 {
-                    monitorLength = value;
+                    
+                    monitorLength = Math.Round(value,1);
                 }
             }
         }

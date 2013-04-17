@@ -30,6 +30,9 @@ using Mebs_Envanter.PrintOperations;
 using MEBS_Envanter.Repositories;
 using Mebs_Envanter.Repositories;
 using System.Reflection;
+using ReadWriteCsv;
+using Mebs_Envanter.Export;
+
 
 
 namespace MEBS_Envanter
@@ -47,7 +50,6 @@ namespace MEBS_Envanter
             thSqlInit.IsBackground = true;
             thSqlInit.Start();
             IsBusy = true;
-
 
             this.Title = "Bilgisayar Envanter Kaydı    " + VersionInfo.versiyonStr;
 
@@ -245,8 +247,7 @@ namespace MEBS_Envanter
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-
-            if (e.Key == Key.LeftCtrl || e.Key == Key.P)
+            if (e.Key == Key.LeftCtrl && e.Key == Key.P)
             {
                 printSenetPreview_Click(null, null);
             }
@@ -649,5 +650,51 @@ namespace MEBS_Envanter
             DependencyProperty.Register("Current_Computer_Info", typeof(ComputerInfo), typeof(MainWindow), new UIPropertyMetadata(null));
 
         #endregion
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            if (pcList.SelectedItem != null) {
+
+                //ComputerInfo infComp = pcList.SelectedItem as ComputerInfo;
+                
+                ExportHelper h = new ExportHelper();
+                foreach (var item in current_In_MemoryList.Computers)
+                {
+                    item.Fetch();
+                }
+                DataTable table = h.GetAsDataTable(current_In_MemoryList.Computers);
+
+
+                System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+                sfd.FileName = "results.xls";                
+                sfd.Filter = "Excel File (.xls)|*.xls";
+                if (sfd.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                {
+                    return;
+                }
+
+                // export helper needs a dataset in case you want to save
+                // multiple worksheets
+                DataSet ds = new DataSet();
+                ds.Tables.Add(table);
+                if (!sfd.FileName.EndsWith("xls")) {
+                    sfd.FileName += ".xls";
+                }
+                ExcelXMLExportHelper.ToFormattedExcel(ds, sfd.FileName);           
+
+
+                //// Write sample data to CSV file
+                //using (CsvFileWriter writer = new CsvFileWriter("WriteTest.csv"))
+                //{
+                //    for (int i = 0; i < 100; i++)
+                //    {
+                //        CsvRow row = new CsvRow();
+                //        for (int j = 0; j < 5; j++)
+                //            row.Add(String.Format("Column{0}", j));
+                //        writer.WriteRow(row);
+                //    }
+                //}
+            }
+        }
     }
 }
