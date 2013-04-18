@@ -3,31 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.IO;
 
 namespace Mebs_Envanter.Export
 {
     internal class HTMLHelper
     {
-        public static string ConvertDataTableToHtml(DataTable targetTable)
+
+        private static String ConvertDataTableToHtmlString(DataTable targetTable)
         {
-            string htmlString = "";
 
-            if (targetTable == null)
-            {
-                throw new System.ArgumentNullException("targetTable");
-            }
-
+            
             StringBuilder htmlBuilder = new StringBuilder();
 
-            //Create Top Portion of HTML Document
-            htmlBuilder.Append("<html>");
-            htmlBuilder.Append("<head>");
-            htmlBuilder.Append("<title>");
-            htmlBuilder.Append("Page-");
-            htmlBuilder.Append(Guid.NewGuid().ToString());
-            htmlBuilder.Append("</title>");
-            htmlBuilder.Append("</head>");
-            htmlBuilder.Append("<body>");
+
             htmlBuilder.Append("<table border='1px' cellpadding='5' cellspacing='0' ");
             htmlBuilder.Append("style='border: solid 1px Black; font-size: small;'>");
 
@@ -60,6 +49,38 @@ namespace Mebs_Envanter.Export
 
             //Create Bottom Portion of HTML Document
             htmlBuilder.Append("</table>");
+
+            return htmlBuilder.ToString();
+            
+        }
+
+
+        private static string ConvertDataTableToHtml(DataSet dsInput)
+        {
+            string htmlString = "";
+
+            if (dsInput == null)
+            {
+                throw new System.ArgumentNullException("dsInput");
+            }
+
+            StringBuilder htmlBuilder = new StringBuilder();
+
+            //Create Top Portion of HTML Document
+            htmlBuilder.Append("<html>");
+            htmlBuilder.Append("<head>");
+            htmlBuilder.Append("<title>");
+            htmlBuilder.Append("Page-");
+            htmlBuilder.Append(Guid.NewGuid().ToString());
+            htmlBuilder.Append("</title>");
+            htmlBuilder.Append("</head>");
+            htmlBuilder.Append("<body>");
+
+            foreach (DataTable dt in dsInput.Tables)
+            {
+                htmlBuilder.Append(ConvertDataTableToHtmlString(dt));
+            }
+
             htmlBuilder.Append("</body>");
             htmlBuilder.Append("</html>");
 
@@ -67,6 +88,34 @@ namespace Mebs_Envanter.Export
             htmlString = htmlBuilder.ToString();
 
             return htmlString;
+        }
+
+
+        // Input Dataset, or the tables we want to export to excel
+        // the Filename
+        public static void ToHTML(DataSet dsInput, string filename)
+        {
+            // we get the xml headers first
+            string excelTemplate = ConvertDataTableToHtml(dsInput);
+
+            
+            // now we write the file
+            try
+            {
+                File.Delete(filename);
+                StreamWriter sw = new StreamWriter(filename,false,Encoding.Unicode);
+
+                sw.Write(excelTemplate);
+
+                sw.Flush();
+                sw.Close();
+
+                sw.Dispose();
+                sw = null;
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

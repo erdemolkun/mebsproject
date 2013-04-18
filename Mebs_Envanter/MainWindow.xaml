@@ -58,11 +58,24 @@
                     <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
                     <MenuItem Header="Barcode Deneme" Visibility="Collapsed" Click="MenuItem_Click"></MenuItem>
                     <MenuItem Header="Dışarı Aktar" >
-                        <MenuItem Header="Seçili Bilgisayarı Aktar"
+
+                        <MenuItem Header="Seçili Bilgisayarı Aktar" 
                                   IsEnabled="{Binding ElementName=pcList,Path=SelectedItem,
-                        Converter={StaticResource NullValueToBoolConverter}}"
+                                     Converter={StaticResource NullValueToBoolConverter}}">
+                            <MenuItem Header="Excel"                                  
                                   Click="MenuItem_Click_5"></MenuItem>
-                        <MenuItem Header="Listeyi Aktar" Click="MenuItem_Click_4"></MenuItem>
+                            <MenuItem Header="HTML"                                  
+                                  Click="MenuItem_Click_6"></MenuItem>
+                        </MenuItem>
+
+
+                        <MenuItem Header="Listeyi Aktar">
+
+                            <MenuItem Header="Excel"                                  
+                                  Click="MenuItem_Click_4"></MenuItem>
+                            <MenuItem Header="HTML"                                  
+                                  Click="MenuItem_Click_7"></MenuItem>
+                        </MenuItem>
                     </MenuItem>
                     <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
                 </Menu>

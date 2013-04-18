@@ -24,10 +24,12 @@ namespace Mebs_Envanter
     public partial class ExportComputersWindow : Window
     {
         Object exportContent;
-        public ExportComputersWindow(Object exportContent)
+        int export_Format = ExportOptions.EXCEL;
+        public ExportComputersWindow(Object exportContent,int export_Format)
         {
             InitializeComponent();
             this.exportContent = exportContent;
+            this.export_Format = export_Format;
         }
 
         private ExportOptions GetOptions() {
@@ -58,8 +60,16 @@ namespace Mebs_Envanter
             }
 
             System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
-            sfd.FileName = "results.xls";
-            sfd.Filter = "Excel File (.xls)|*.xls";
+            if (export_Format == ExportOptions.EXCEL)
+            {
+                sfd.FileName = "results.xls";
+                sfd.Filter = "Excel File (.xls)|*.xls";
+            }
+            else {
+
+                sfd.FileName = "results.html";
+                sfd.Filter = "Excel File (.html)|*.html";
+            }
             if (sfd.ShowDialog() != System.Windows.Forms.DialogResult.OK)
             {
                 return;
@@ -71,28 +81,56 @@ namespace Mebs_Envanter
                 ComputerInfoRepository computerInfoRep = exportContent as ComputerInfoRepository;
                 if (computerInfoRep != null)
                 {
-                    ExportHelper exportHelper = new ExportHelper();
-                    foreach (var item in computerInfoRep.Computers)
+                    bool isSuccess = true;
+                    try
                     {
-                        item.Fetch();
-                    }
+                        ExportHelper exportHelper = new ExportHelper();
+                        foreach (var item in computerInfoRep.Computers)
+                        {
+                            item.Fetch();
+                        }
 
-                    DataTable table = exportHelper.GetAsDataTable(computerInfoRep.Computers, options);
-                    // export helper needs a dataset in case you want to save multiple worksheets
-                    DataSet ds = new DataSet();
-                    ds.Tables.Add(table);
-                    if (!sfd.FileName.EndsWith("xls"))
-                    {
-                        sfd.FileName += ".xls";
+                        DataTable table = exportHelper.GetAsDataTable(computerInfoRep.Computers, options);
+                        // export helper needs a dataset in case you want to save multiple worksheets
+                        DataSet ds = new DataSet();
+                        ds.Tables.Add(table);
+                        if (export_Format == ExportOptions.EXCEL)
+                        {
+                            if (!sfd.FileName.EndsWith("xls"))
+                            {
+                                sfd.FileName += ".xls";
+                            }
+                            ExcelXMLExportHelper.ToFormattedExcel(ds, sfd.FileName);
+                        }
+                        else
+                        {
+                            if (!sfd.FileName.EndsWith("html"))
+                            {
+                                sfd.FileName += ".html";
+                            }
+                            HTMLHelper.ToHTML(ds, sfd.FileName);
+                        }
+
+
                     }
-                    ExcelXMLExportHelper.ToFormattedExcel(ds, sfd.FileName);
+                    catch (Exception) {
+                        isSuccess = false;
+                        
+                    }
                     Dispatcher.Invoke(DispatcherPriority.DataBind, new Action(delegate
                     {
                         Mouse.OverrideCursor = Cursors.Arrow;
                         IsEnabled = true;
-                        MessageBox.Show("Dosya Başarılıyla aktarıldı.");
+                        if (isSuccess)
+                        {
+                            MessageBox.Show("Dosya Başarılıyla aktarıldı.");
+                        }
+                        else {
+                            MessageBox.Show("Hata Oluştu");
+                        }
                         Close();
                     }));
+                    
                 }
 
             }));
