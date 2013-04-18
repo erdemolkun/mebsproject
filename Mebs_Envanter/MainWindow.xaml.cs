@@ -639,18 +639,35 @@ namespace MEBS_Envanter
 
         #endregion
 
-        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
-        {
-            if (current_In_MemoryList != null && current_In_MemoryList.Computers.Count > 0)
+        
+
+        private void Export(ComputerInfoRepository rep) {
+            if (rep != null && rep.Computers.Count > 0)
             {
-                ExportComputersWindow exportWindow = new ExportComputersWindow(current_In_MemoryList);
+                ExportComputersWindow exportWindow = new ExportComputersWindow(rep);
                 exportWindow.Owner = this;
                 exportWindow.ShowDialog();
             }
-            else {
+            else
+            {
 
                 MessageBox.Show("Aktarılacak Öğe Yok");
             }
+        
+        }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            Export(current_In_MemoryList);
+        }
+
+        private void MenuItem_Click_5(object sender, RoutedEventArgs e)
+        {
+           
+
+            ComputerInfoRepository rep = new ComputerInfoRepository();
+            rep.Computers.Add(pcList.SelectedItem as ComputerInfo);
+            Export(rep);
         }
     }
 }
