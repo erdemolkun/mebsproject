@@ -642,33 +642,44 @@ namespace MEBS_Envanter
 
         
 
-        private void Export(ComputerInfoRepository rep) {
+        private void Export(ComputerInfoRepository rep,int export_Format) {
+            
             if (rep != null && rep.Computers.Count > 0)
             {
-                ExportComputersWindow exportWindow = new ExportComputersWindow(rep);
+                ExportComputersWindow exportWindow = new ExportComputersWindow(rep, export_Format);
                 exportWindow.Owner = this;
                 exportWindow.ShowDialog();
             }
             else
             {
-
                 MessageBox.Show("Aktarılacak Öğe Yok");
-            }
-        
+            }        
         }
 
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
         {
-            Export(current_In_MemoryList);
+            Export(current_In_MemoryList,ExportOptions.EXCEL);
         }
 
         private void MenuItem_Click_5(object sender, RoutedEventArgs e)
-        {
-           
-
+        {           
             ComputerInfoRepository rep = new ComputerInfoRepository();
             rep.Computers.Add(pcList.SelectedItem as ComputerInfo);
-            Export(rep);
+            Export(rep, ExportOptions.EXCEL);
+        }
+
+        private void MenuItem_Click_7(object sender, RoutedEventArgs e)
+        {
+            
+
+            Export(current_In_MemoryList, ExportOptions.HTML);
+        }
+
+        private void MenuItem_Click_6(object sender, RoutedEventArgs e)
+        {
+            ComputerInfoRepository rep = new ComputerInfoRepository();
+            rep.Computers.Add(pcList.SelectedItem as ComputerInfo);
+            Export(rep, ExportOptions.HTML);
         }
     }
 }
