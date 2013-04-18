@@ -1,0 +1,67 @@
+﻿<Window x:Class="Mebs_Envanter.ExportComputersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        ShowInTaskbar="False" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        Title="InfoWindow" Height="300" Width="320" Opacity="1" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <ContentControl Template="{StaticResource SampleControlTemplate}" Grid.Row="1"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                        x:Name="DetailBackgroundContent" Grid.RowSpan="6"
+                        Content="ContentControl"  />
+
+        <Grid Grid.Row="1" Margin="0,4,0,0">
+            <!--<Grid.Background>
+                <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1" >
+                    <GradientStop Color="#FFECF5FA" Offset="0" />
+                    <GradientStop Color="#FFC4D8E8" Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>-->
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="32"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Grid.ColumnSpan="2" Background="#FF95C1DB" CornerRadius="12,12,0,0" Margin="5,0">
+                <Grid>
+                    <TextBlock Text="Dışarıya Aktarma Ekranı" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       TextBlock.Foreground="Black" TextBlock.FontSize="16" TextBlock.FontWeight="Bold">
+
+                    </TextBlock>
+
+                    <Button   x:Name="closeBtn" Click="closeBtn_Click" Width="24" Height="24" Margin="0,0,6,0"
+                    Grid.Column="1" Content="X" TextBlock.FontSize="10" HorizontalAlignment="Right">
+                    </Button>
+                </Grid>
+            </Border>
+
+            
+
+
+        </Grid>
+        
+        
+        <Grid Grid.Row="2" Margin="3,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" TextBlock.FontSize="15">                
+                <CheckBox x:Name="generalInfoChkbx" Content="Genel Bilgiler" Margin="2" IsChecked="True"></CheckBox>
+                <CheckBox x:Name="oemsChkbx" Content="Donanım Bilgileri" Margin="2"  IsChecked="True"></CheckBox>
+                <CheckBox x:Name="monitorChkbx" Content="Monitör Bilgileri" Margin="2" IsChecked="True"></CheckBox>
+                <CheckBox x:Name="senetInfoChkbx" Content="Senet Bilgileri" Margin="2" IsChecked="True"></CheckBox>
+                <CheckBox x:Name="networkInfoChkbx" Content="Ağ Bilgileri" Margin="2" IsChecked="True"></CheckBox>                
+            </StackPanel>
+            <Button Grid.Row="1" VerticalAlignment="Bottom" Width="160" x:Name="exportBtn" 
+                    Content="Dışarıya Aktar" Margin="0,6" Click="exportBtn_Click"></Button>
+        </Grid>
+    </Grid>
+</Window>

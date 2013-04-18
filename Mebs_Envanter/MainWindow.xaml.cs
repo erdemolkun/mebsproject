@@ -641,47 +641,15 @@ namespace MEBS_Envanter
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
-            if (pcList.SelectedItem != null)
+            if (current_In_MemoryList != null && current_In_MemoryList.Computers.Count > 0)
             {
-                //ComputerInfo infComp = pcList.SelectedItem as ComputerInfo;
-                ExportHelper h = new ExportHelper();
-                foreach (var item in current_In_MemoryList.Computers)
-                {
-                    item.Fetch();
-                }
-                DataTable table = h.GetAsDataTable(current_In_MemoryList.Computers);
+                ExportComputersWindow exportWindow = new ExportComputersWindow(current_In_MemoryList);
+                exportWindow.Owner = this;
+                exportWindow.ShowDialog();
+            }
+            else {
 
-
-                System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
-                sfd.FileName = "results.xls";
-                sfd.Filter = "Excel File (.xls)|*.xls";
-                if (sfd.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-                {
-                    return;
-                }
-
-                // export helper needs a dataset in case you want to save
-                // multiple worksheets
-                DataSet ds = new DataSet();
-                ds.Tables.Add(table);
-                if (!sfd.FileName.EndsWith("xls"))
-                {
-                    sfd.FileName += ".xls";
-                }
-                ExcelXMLExportHelper.ToFormattedExcel(ds, sfd.FileName);
-
-
-                //// Write sample data to CSV file
-                //using (CsvFileWriter writer = new CsvFileWriter("WriteTest.csv"))
-                //{
-                //    for (int i = 0; i < 100; i++)
-                //    {
-                //        CsvRow row = new CsvRow();
-                //        for (int j = 0; j < 5; j++)
-                //            row.Add(String.Format("Column{0}", j));
-                //        writer.WriteRow(row);
-                //    }
-                //}
+                MessageBox.Show("Aktarılacak Öğe Yok");
             }
         }
     }

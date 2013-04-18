@@ -36,6 +36,20 @@ namespace Mebs_Envanter
             base.OnKeyDown(e);
         }
 
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                try
+                {
+                    this.DragMove();
+                }
+                catch { }
+            }
+            base.OnMouseDown(e);
+        }
+
         private void closeBtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -73,18 +87,6 @@ namespace Mebs_Envanter
             return result1;
         }
 
-        protected override void OnMouseDown(MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                try
-                {
-                    this.DragMove();
-                }
-                catch { }
-            }
-            base.OnMouseDown(e);
-        }
 
         private void okBtn_Click(object sender, RoutedEventArgs e)
         {
