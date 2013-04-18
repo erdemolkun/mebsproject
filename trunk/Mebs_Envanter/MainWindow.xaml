@@ -173,7 +173,7 @@
             </Border>
             <Grid Grid.Row="1" Background="#D387CEEB" >
                 <Grid Margin="4,0,0,0"    TextBlock.FontWeight="Bold" 
-                      TextBlock.FontSize="12" TextBlock.Foreground="Black">
+                      TextBlock.FontSize="12" >
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
