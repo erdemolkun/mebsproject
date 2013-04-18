@@ -52,6 +52,10 @@
         <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
     </ControlTemplate>
 
+
+   
+
+
     <!--CommboBox Style-->
     <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
