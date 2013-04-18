@@ -236,7 +236,8 @@ namespace MEBS_Envanter
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (e.Key == Key.LeftCtrl && e.Key == Key.P)
+
+            if (Keyboard.IsKeyDown(Key.P) && Keyboard.IsKeyDown(Key.LeftCtrl))
             {
                 printSenetPreview_Click(null, null);
             }
