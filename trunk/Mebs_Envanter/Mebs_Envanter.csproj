@@ -87,10 +87,15 @@
     <Compile Include="Converters\NotBoolToVisibilityConverter.cs" />
     <Compile Include="Converters\KomutanlikComboIndexConverter.cs" />
     <Compile Include="Converters\MonitorTypesConverter.cs" />
+    <Compile Include="ExportComputersWindow.xaml.cs">
+      <DependentUpon>ExportComputersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Export\CSV\CSVOps.cs" />
     <Compile Include="DB\DBValueHelpers.cs" />
     <Compile Include="Export\ExcelHelper.cs" />
     <Compile Include="Export\ExportHelper.cs" />
+    <Compile Include="Export\ExportOptions.cs" />
+    <Compile Include="Export\HTMLHelper.cs" />
     <Compile Include="GeneralObjects\Komutanlik.cs" />
     <Compile Include="GeneralObjects\MonitorSize.cs" />
     <Compile Include="GUIHelpers\BindableRichTextBox.cs" />
@@ -172,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ComputerUserControlVertical.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExportComputersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

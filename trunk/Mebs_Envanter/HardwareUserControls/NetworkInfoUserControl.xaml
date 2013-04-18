@@ -13,7 +13,7 @@
                 <Setter Property="VerticalAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalAlignment" Value="Left"></Setter>
                 <Setter Property="FontSize" Value="12"></Setter>
-                <Setter Property="Foreground" Value="black"></Setter>
+                
                 <Setter Property="MaxHeight" Value="20"></Setter>
             </Style>
         </Grid.Resources>
