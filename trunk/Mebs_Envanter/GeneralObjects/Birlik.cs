@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MEBS_Envanter.Repositories;
-using MEBS_Envanter.DB;
+using Mebs_Envanter.Repositories;
+using Mebs_Envanter.DB;
 
-namespace MEBS_Envanter.GeneralObjects
+namespace Mebs_Envanter.GeneralObjects
 {
     public class Birlik : MebsBaseObject
     {

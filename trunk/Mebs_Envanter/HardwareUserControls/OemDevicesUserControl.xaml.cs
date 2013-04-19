@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MEBS_Envanter;
+using Mebs_Envanter;
 using Mebs_Envanter.GUIHelpers;
 using System.Windows.Controls.Primitives;
 

@@ -12,16 +12,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Mebs_Envanter.Hardware;
 using System.Diagnostics;
-using MEBS_Envanter.Repositories;
-using MEBS_Envanter.DB;
+using Mebs_Envanter.Repositories;
+using Mebs_Envanter.DB;
 using System.Data.SqlClient;
 using System.Data;
-using Mebs_Envanter.DB;
-using MEBS_Envanter;
+using Mebs_Envanter;
 using System.ComponentModel;
 using Mebs_Envanter.GeneralObjects;
-using MEBS_Envanter.GeneralObjects;
-using Mebs_Envanter.Repositories;
 using Mebs_Envanter.PrintOperations;
 
 namespace Mebs_Envanter

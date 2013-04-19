@@ -113,6 +113,7 @@
     <Compile Include="GUIHelpers\NumericUpDownControl.xaml.cs">
       <DependentUpon>NumericUpDownControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUIHelpers\TextBoxCaretBehaviour.cs" />
     <Compile Include="GUIHelpers\VistaTypeTextBox.cs" />
     <Compile Include="GUIHelpers\WPFVisualHelpers.cs" />
     <Compile Include="HardwareUserControls\DeviceEntryControl.xaml.cs">

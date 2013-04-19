@@ -4,16 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Data;
-using MEBS_Envanter.GeneralObjects;
-using System.Data.SqlClient;
-using MEBS_Envanter.DB;
-using Mebs_Envanter;
 using Mebs_Envanter.GeneralObjects;
+using System.Data.SqlClient;
 using Mebs_Envanter.DB;
+using Mebs_Envanter;
 using System.Windows;
 using Mebs_Envanter.Hardware;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
     public class ComputerInfo : MebsBaseObject
     {

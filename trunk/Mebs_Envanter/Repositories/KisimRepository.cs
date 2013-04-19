@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
-using MEBS_Envanter.DB;
-using MEBS_Envanter.GeneralObjects;
+using Mebs_Envanter.DB;
+using Mebs_Envanter.GeneralObjects;
 
-namespace MEBS_Envanter.Repositories
+namespace Mebs_Envanter.Repositories
 {
     public class KisimRepository:MebsBaseObject
     {

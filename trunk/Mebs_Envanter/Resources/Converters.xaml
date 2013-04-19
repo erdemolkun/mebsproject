@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:converters="clr-namespace:MEBS_Envanter.Converters">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:converters="clr-namespace:Mebs_Envanter.Converters">
     <converters:BagliAgComboIndexConverter
                     x:Key="BagliAgComboIndexConverter"
                     ></converters:BagliAgComboIndexConverter>

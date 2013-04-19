@@ -10,7 +10,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
     public class SelectionPersistance
     {

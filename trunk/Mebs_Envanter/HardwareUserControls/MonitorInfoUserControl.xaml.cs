@@ -11,9 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MEBS_Envanter;
+using Mebs_Envanter;
 using Mebs_Envanter.GeneralObjects;
-using MEBS_Envanter.Repositories;
 using Mebs_Envanter.Repositories;
 using System.Text.RegularExpressions;
 

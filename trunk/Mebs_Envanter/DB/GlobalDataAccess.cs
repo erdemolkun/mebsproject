@@ -5,7 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 
-namespace MEBS_Envanter.DB
+namespace Mebs_Envanter.DB
 {
     public class GlobalDataAccess
     {

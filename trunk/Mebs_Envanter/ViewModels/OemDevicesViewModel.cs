@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MEBS_Envanter;
+using Mebs_Envanter;
 using System.Collections.ObjectModel;
 
 namespace Mebs_Envanter

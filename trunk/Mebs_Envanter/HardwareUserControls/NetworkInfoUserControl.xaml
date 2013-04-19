@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:xceed ="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
              x:Name="me"
-             xmlns:guihelpers="clr-namespace:MEBS_Envanter.GUIHelpers">
+             xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers">
     <Grid TextBlock.FontWeight="Bold" Margin="2,0">
         
         <Grid.Resources>

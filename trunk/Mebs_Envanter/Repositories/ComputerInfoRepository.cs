@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 
-namespace MEBS_Envanter.Repositories
+namespace Mebs_Envanter.Repositories
 {
     public class ComputerInfoRepository : MebsBaseObject
     {

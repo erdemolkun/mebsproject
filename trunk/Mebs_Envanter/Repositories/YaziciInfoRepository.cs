@@ -5,7 +5,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using Mebs_Envanter.Hardware;
 
-namespace MEBS_Envanter.Repositories
+namespace Mebs_Envanter.Repositories
 {
     public class YaziciInfoRepository : MebsBaseObject
     {

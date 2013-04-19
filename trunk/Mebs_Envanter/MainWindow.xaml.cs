@@ -13,9 +13,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
-using MEBS_Envanter.DB;
+using Mebs_Envanter.DB;
 using System.Data.SqlClient;
-using MEBS_Envanter.GeneralObjects;
+using Mebs_Envanter.GeneralObjects;
 using System.Data;
 using System.Threading;
 using System.Windows.Threading;
@@ -24,17 +24,15 @@ using Mebs_Envanter.GUIHelpers;
 using Mebs_Envanter;
 using System.Diagnostics;
 using System.ComponentModel;
-using Mebs_Envanter.GeneralObjects;
 using System.Drawing.Printing;
 using Mebs_Envanter.PrintOperations;
-using MEBS_Envanter.Repositories;
 using Mebs_Envanter.Repositories;
 using System.Reflection;
 using ReadWriteCsv;
 using Mebs_Envanter.Export;
 
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -236,10 +234,18 @@ namespace MEBS_Envanter
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-
-            if (Keyboard.IsKeyDown(Key.P) && Keyboard.IsKeyDown(Key.LeftCtrl))
+            pcEnvanterControl.KeyEventResponder(e);
+            if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
-                printSenetPreview_Click(null, null);
+                if (Keyboard.IsKeyDown(Key.P))
+                {
+                    printSenetPreview_Click(null, null);
+                }
+                else if (Keyboard.IsKeyDown(Key.H))
+                {
+
+                    hakkindaMenuItem_Click(null, null);
+                }
             }
             base.OnKeyDown(e);
         }
@@ -341,17 +347,6 @@ namespace MEBS_Envanter
             }
         }
 
-        private void refreshListBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-            ComputerInfoRepository currentInfoRep = (pcList.DataContext as ComputerInfoRepository);
-            if (currentInfoRep != null)
-            {
-                currentInfoRep.Computers.Insert(0, GetNewComputer());
-                SetSelectedItemAfterContextChange(true);
-            }
-            //RefreshComputerList(null, true);
-        }
 
         #endregion
 
@@ -639,9 +634,10 @@ namespace MEBS_Envanter
             DependencyProperty.Register("Current_Computer_Info", typeof(ComputerInfo), typeof(MainWindow), new UIPropertyMetadata(null));
 
         #endregion
-        
-        private void Export(ComputerInfoRepository rep,int export_Format) {
-            
+
+        private void Export(ComputerInfoRepository rep, int export_Format)
+        {
+
             if (rep != null && rep.Computers.Count > 0)
             {
                 ExportComputersWindow exportWindow = new ExportComputersWindow(rep, export_Format);
@@ -651,16 +647,16 @@ namespace MEBS_Envanter
             else
             {
                 MessageBox.Show("Aktarılacak Öğe Yok");
-            }        
+            }
         }
 
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
         {
-            Export(current_In_MemoryList,ExportOptions.EXCEL);
+            Export(current_In_MemoryList, ExportOptions.EXCEL);
         }
 
         private void MenuItem_Click_5(object sender, RoutedEventArgs e)
-        {           
+        {
             ComputerInfoRepository rep = new ComputerInfoRepository();
             rep.Computers.Add(pcList.SelectedItem as ComputerInfo);
             Export(rep, ExportOptions.EXCEL);
@@ -668,7 +664,7 @@ namespace MEBS_Envanter
 
         private void MenuItem_Click_7(object sender, RoutedEventArgs e)
         {
-            
+
 
             Export(current_In_MemoryList, ExportOptions.HTML);
         }
@@ -678,6 +674,18 @@ namespace MEBS_Envanter
             ComputerInfoRepository rep = new ComputerInfoRepository();
             rep.Computers.Add(pcList.SelectedItem as ComputerInfo);
             Export(rep, ExportOptions.HTML);
+        }
+
+        private void addNewPcBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ComputerInfoRepository currentInfoRep = (pcList.DataContext as ComputerInfoRepository);
+            if (currentInfoRep != null)
+            {
+                currentInfoRep.Computers.Insert(0, GetNewComputer());
+                pcEnvanterControl.SetFocus(0);
+                SetSelectedItemAfterContextChange(true);
+            }
+            //RefreshComputerList(null, true);
         }
     }
 }

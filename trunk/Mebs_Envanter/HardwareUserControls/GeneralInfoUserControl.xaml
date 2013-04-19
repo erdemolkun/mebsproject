@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:x1="clr-namespace:Mebs_Envanter"
-             xmlns:x2="clr-namespace:MEBS_Envanter">
+             xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
+             xmlns:x2="clr-namespace:Mebs_Envanter">
     <Grid TextBlock.FontWeight="Bold" 
           Margin="2,0" 
           TextBlock.FontFamily="CartoGothic Std.">
@@ -43,6 +44,7 @@
 
         <!--Burayı değiştir-->
         <TextBox   x:Name="pcAdiTextBox" VerticalAlignment="Center"
+                            guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"   
                             Text="{Binding Pc_adi, Mode=Default, UpdateSourceTrigger=Explicit}"
                             Margin="2,2" Grid.Column="1" Grid.Row="0" ></TextBox>
 
@@ -53,11 +55,20 @@
                                   ItemsSource="{Binding Markalar}" Grid.Row="1"
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
-        <TextBox x:Name="pcModelTextBox" VerticalAlignment="Center" Text="{Binding Model,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="2" ></TextBox>
-        <TextBox x:Name="pcStokNoTextBox" VerticalAlignment="Center" Text="{Binding PcStokNo,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="3" ></TextBox>
-        <TextBox x:Name="pcParcaNoTextBox" VerticalAlignment="Center" Text="{Binding DeviceNo,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="4" ></TextBox>
-        <TextBox x:Name="pcSerialNumberTextBox" VerticalAlignment="Center" Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="5" ></TextBox>
-        <TextBox x:Name="pcEklenmeTarihiTextBox" IsEnabled="False"
+        <TextBox x:Name="pcModelTextBox"
+                 guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"
+                 VerticalAlignment="Center" Text="{Binding Model,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="2" ></TextBox>
+        <TextBox x:Name="pcStokNoTextBox" 
+                 guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"
+                 VerticalAlignment="Center" Text="{Binding PcStokNo,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="3" ></TextBox>
+        <TextBox x:Name="pcParcaNoTextBox" 
+                 guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"
+                 VerticalAlignment="Center" Text="{Binding DeviceNo,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="4" ></TextBox>
+        <TextBox x:Name="pcSerialNumberTextBox" 
+                 guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"
+                 VerticalAlignment="Center" Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}"  Margin="2,2" Grid.Column="1" Grid.Row="5" ></TextBox>
+        <TextBox x:Name="pcEklenmeTarihiTextBox"                  
+                 IsEnabled="False"
                  VerticalAlignment="Center" Text="{Binding EklenmeTarihi,UpdateSourceTrigger=Explicit,Converter={StaticResource DateTimeFormatConverter}}"
                  Margin="2,2" Grid.Column="1" Grid.Row="7" ></TextBox>
 

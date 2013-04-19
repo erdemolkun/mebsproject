@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MEBS_Envanter.GeneralObjects
+namespace Mebs_Envanter.GeneralObjects
 {
     public class Kisim : MebsBaseObject
     {

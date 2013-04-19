@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MEBS_Envanter.Repositories;
+using Mebs_Envanter.Repositories;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
     public class Marka : MebsBaseObject
     {

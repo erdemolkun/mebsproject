@@ -10,7 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MEBS_Envanter;
+using Mebs_Envanter;
 
 namespace Mebs_Envanter
 {

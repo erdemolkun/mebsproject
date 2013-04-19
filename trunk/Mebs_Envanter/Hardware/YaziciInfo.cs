@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MEBS_Envanter;
+using Mebs_Envanter;
 using System.Data;
 using Mebs_Envanter.DB;
-using MEBS_Envanter.GeneralObjects;
 using Mebs_Envanter.GeneralObjects;
 
 namespace Mebs_Envanter.Hardware
@@ -14,9 +13,11 @@ namespace Mebs_Envanter.Hardware
     {
 
         public bool PropertiesFetched = false;
-        public void Fetch() {
+        public void Fetch()
+        {
 
-            if (!PropertiesFetched) {
+            if (!PropertiesFetched)
+            {
 
                 PropertiesFetched = true;
             }
@@ -24,13 +25,15 @@ namespace Mebs_Envanter.Hardware
 
 
         public bool isEdit = false;
-        public YaziciInfo() {
+        public YaziciInfo()
+        {
 
             DeviceType = DeviceTypes.PRINTER;
         }
 
 
-        public void SetGeneralFields(DataRow rowYazici) {
+        public void SetGeneralFields(DataRow rowYazici)
+        {
 
             Yaz_id = (int)rowYazici["yazici_id"];
 
@@ -43,11 +46,11 @@ namespace Mebs_Envanter.Hardware
             int senet_id = DBValueHelpers.GetInt32(rowYazici["senet_id"].ToString(), -1);
             SenetInfo.Set_SenetInfos(false, -1, senet_id);
             YaziciModeli = rowYazici["yazici_modeli"].ToString();
-            
+
 
         }
 
-        
+
 
         private int yaz_id = -1;
 
@@ -67,7 +70,7 @@ namespace Mebs_Envanter.Hardware
         }
 
 
-        
+
 
 
         private NetworkInfo networkInfo = new NetworkInfo();

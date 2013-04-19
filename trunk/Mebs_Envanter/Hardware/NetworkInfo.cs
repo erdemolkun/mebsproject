@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using MEBS_Envanter.GeneralObjects;
+using Mebs_Envanter.GeneralObjects;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
    public class NetworkInfo : MebsBaseObject
     {
