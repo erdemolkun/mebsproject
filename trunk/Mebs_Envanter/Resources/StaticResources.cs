@@ -8,7 +8,7 @@ namespace Mebs_Envanter
     public static class StaticResources
     {
         public static String bilgisayarAramaTooltip =
-            "PC Adı , Seneti Alan Kişi,Komutanlığı ve Senedi Veren Kişi Alanlarına göre arama yapar.";//+
+            "PC Adı , Seneti Alan Kişinin İsmi,Komutanlığı,Rütbesi Alanlarına göre arama yapar.";//+
         //"\nVirgül (,) karakteri ile seçenekleri  ayırabilirsiniz (Ör : Bşçvş,Serhat)";
     }
 }

@@ -31,8 +31,7 @@ namespace Mebs_Envanter.Repositories
                         if (item.Pc_adi.ToLower().Contains(itemSplittedStr.ToLower()) ||
                             item.Senet.Alan_kisi_rutbe.ToLower().Contains(itemSplittedStr.ToLower()) ||
                             item.Senet.Alan_kisi_isim.ToLower().Contains(itemSplittedStr.ToLower()) ||
-                            item.Senet.Alan_kisi_komutanlik.Komutanlik_ismi.ToLower().Contains(itemSplittedStr.ToLower()) ||
-                            item.Senet.Veren_kisi_isim.ToLower().Contains(itemSplittedStr.ToLower()))
+                            item.Senet.Alan_kisi_komutanlik.Komutanlik_ismi.ToLower().Contains(itemSplittedStr.ToLower()))
                         {
                             if (!repNew.Computers.Contains(item))
                             {
