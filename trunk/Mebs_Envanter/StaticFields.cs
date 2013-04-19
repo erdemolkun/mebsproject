@@ -14,5 +14,7 @@ namespace MEBS_Envanter
         /// </summary>
         public static String[] rutbeler = {"","Uzm. Çvş.","Astsb. Çvş.", "Kd. Çvş.", "Üçvş.", "Kd. Üçvş.", "Bçvş.", "Kd. Bçvş." ,"Astğm.",
                                               "Tğm.","Ütğm.","Yzb.","Bnb.","Yb.","Alb.","Tuğg.","Tümg.","Korg.","Org."};
+
+
     }
 }

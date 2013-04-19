@@ -155,6 +155,7 @@
     <Compile Include="SampleWindow.xaml.cs">
       <DependentUpon>SampleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\StaticResources.cs" />
     <Compile Include="Unnecessary.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="ViewModels\OemDevicesViewModel.cs" />

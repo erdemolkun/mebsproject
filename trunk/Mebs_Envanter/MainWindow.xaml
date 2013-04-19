@@ -43,7 +43,8 @@
         <!--Menu Items-->
         <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="{x:Null}">
             <Border CornerRadius="6" Background="Snow" Margin="4,2,4,0" >
-                <Menu  Background="{x:Null}" IsMainMenu="True" TextBlock.FontSize="14" TextBlock.FontFamily="Tahoma" HorizontalAlignment="Left">
+                <Menu  Background="{x:Null}" IsMainMenu="True" TextBlock.FontSize="14" 
+                       TextBlock.FontFamily="Tahoma" HorizontalAlignment="Left">
                     <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
                     <MenuItem Header="Yazdırma Seçenekleri"
                           IsEnabled="{Binding ElementName=pcList,Path=SelectedItem,
@@ -126,12 +127,22 @@
                     <TextBlock Foreground="Brown" Text="{Binding ElementName=pcList,Path=Items.Count}"></TextBlock>
                 </StackPanel>
             </Grid>
-
-            <guihelpers2:VistaTypeTextBox x:Name="quickSearchBtn" 
+            <Grid Grid.Row="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <guihelpers2:VistaTypeTextBox x:Name="quickSearchBtn" 
                                  DisplayText="Listede Hızlı Arama"
                                  Grid.Row="2" Margin="0,1"
                                 TextChanged="quickSearchBtn_TextChanged" VerticalAlignment="Center"
-                                 HorizontalAlignment="Center" Width="160" Height="Auto"></guihelpers2:VistaTypeTextBox>
+                                Width="160" Height="Auto"></guihelpers2:VistaTypeTextBox>
+                    <Label Content="?" FontSize="16" Foreground="Bisque"
+                           
+                           ToolTip="{Binding Source={x:Static x2:StaticResources.bilgisayarAramaTooltip}}">
+
+                    </Label>
+                    
+                </StackPanel>
+               
+            </Grid>
 
             <ListBox Grid.Row="3" x:Name="pcList" MouseDoubleClick="pcList_MouseDoubleClick"
                  SelectionChanged="pcList_SelectionChanged"  

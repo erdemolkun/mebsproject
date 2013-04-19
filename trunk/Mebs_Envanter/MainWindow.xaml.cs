@@ -639,9 +639,7 @@ namespace MEBS_Envanter
             DependencyProperty.Register("Current_Computer_Info", typeof(ComputerInfo), typeof(MainWindow), new UIPropertyMetadata(null));
 
         #endregion
-
         
-
         private void Export(ComputerInfoRepository rep,int export_Format) {
             
             if (rep != null && rep.Computers.Count > 0)
