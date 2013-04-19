@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Threading;
 using Mebs_Envanter.Export;
-using MEBS_Envanter.Repositories;
+using Mebs_Envanter.Repositories;
 using System.Data;
 using System.Windows.Threading;
 

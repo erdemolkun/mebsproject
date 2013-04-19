@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Yazıcı Kaydı" Height="720"  
         MinHeight="480"
-        xmlns:x1="clr-namespace:MEBS_Envanter" x:Name="mainwin"
+        xmlns:x1="clr-namespace:Mebs_Envanter" x:Name="mainwin"
         xmlns:x2="clr-namespace:Mebs_Envanter"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"

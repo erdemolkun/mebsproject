@@ -5,7 +5,7 @@ using System.Text;
 using Xceed.Wpf.Controls;
 using System.Text.RegularExpressions;
 
-namespace MEBS_Envanter.GUIHelpers
+namespace Mebs_Envanter.GUIHelpers
 {
     public class MacMaskedTextBox : MaskedTextBox
     {

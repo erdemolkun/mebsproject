@@ -32,7 +32,8 @@ namespace Mebs_Envanter
             DependencyPropertyChangedEventArgs args)
         {
             RichTextBox rtb = (RichTextBox)obj;
-            rtb.Document = (FlowDocument)args.NewValue;
+            if (rtb != null)
+                rtb.Document = (FlowDocument)args.NewValue;
         }
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Data;
-using MEBS_Envanter.GeneralObjects;
+using Mebs_Envanter.GeneralObjects;
 using System.Windows.Documents;
 using System.IO;
 
-namespace MEBS_Envanter.Converters
+namespace Mebs_Envanter.Converters
 {
     public class StringToFlowDocumentConverter : IValueConverter
     {

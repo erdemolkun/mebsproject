@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
-using MEBS_Envanter.DB;
+using Mebs_Envanter.DB;
 
-namespace MEBS_Envanter.Repositories
+namespace Mebs_Envanter.Repositories
 {
     public class MarkaRepository
     {

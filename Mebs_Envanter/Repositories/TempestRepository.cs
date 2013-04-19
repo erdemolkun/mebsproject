@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MEBS_Envanter;
+using Mebs_Envanter;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
-using MEBS_Envanter.DB;
+using Mebs_Envanter.DB;
 using Mebs_Envanter.GeneralObjects;
 
 namespace Mebs_Envanter.Repositories

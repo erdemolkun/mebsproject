@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
     /// <summary>
     /// Interaction logic for DeviceEntryControl.xaml

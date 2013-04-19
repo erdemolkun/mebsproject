@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Globalization;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
     #region Documentation Tags
     /// <summary>
@@ -21,7 +21,7 @@ namespace MEBS_Envanter
     /// </para>
     /// </remarks>
     #endregion
-    public class TextBoxMaskBehavior
+    public  class TextBoxMaskBehavior
     {
         #region MinimumValue Property
 

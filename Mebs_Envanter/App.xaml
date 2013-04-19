@@ -1,7 +1,7 @@
 ﻿<Application x:Class="Mebs_Envanter.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:x1="clr-namespace:MEBS_Envanter"
+             xmlns:x1="clr-namespace:Mebs_Envanter"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml" DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>

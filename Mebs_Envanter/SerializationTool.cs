@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
     public class SerializationTool<T> where T : class
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-namespace MEBS_Envanter.Converters
+namespace Mebs_Envanter.Converters
 {
     public class BoolToVisibilityConverter : System.Windows.Data.IValueConverter
     {

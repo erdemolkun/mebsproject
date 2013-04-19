@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
 
     public enum DeviceTypes : int

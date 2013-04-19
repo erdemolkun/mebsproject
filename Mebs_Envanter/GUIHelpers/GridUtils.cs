@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
   public class GridUtils
   {

@@ -5,12 +5,11 @@ using System.Text;
 using Mebs_Envanter.GeneralObjects;
 using System.Data.SqlClient;
 using System.Data;
-using MEBS_Envanter.DB;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.Hardware;
 using Mebs_Envanter;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
     public class OEMDevice : MebsBaseObject
     {

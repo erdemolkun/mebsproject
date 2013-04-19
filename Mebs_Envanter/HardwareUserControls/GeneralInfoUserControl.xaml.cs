@@ -11,9 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MEBS_Envanter;
+using Mebs_Envanter;
 using Mebs_Envanter.GeneralObjects;
-using MEBS_Envanter.Repositories;
 using Mebs_Envanter.Repositories;
 
 namespace Mebs_Envanter.HardwareUserControls
@@ -55,6 +54,11 @@ namespace Mebs_Envanter.HardwareUserControls
             inf.Tempest = genelBilgilerTempestCombo.SelectedItem as Tempest;            
             String not = new TextRange(notlarRichTxtBox.Document.ContentStart, notlarRichTxtBox.Document.ContentEnd).Text;
             inf.Notlar = not;            
+        }
+
+        private void pcAdiTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            pcAdiTextBox.CaretIndex = pcAdiTextBox.Text.Length;
         }
     }
 }

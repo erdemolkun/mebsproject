@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MEBS_Envanter.GeneralObjects;
 using Mebs_Envanter.GeneralObjects;
 using System.Data.SqlClient;
 using System.Data;
-using MEBS_Envanter.DB;
 using Mebs_Envanter.DB;
-using MEBS_Envanter.Repositories;
+using Mebs_Envanter.Repositories;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
     public class SenetInfo : MebsBaseObject
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MEBS_Envanter.Converters
+namespace Mebs_Envanter.Converters
 {
     public class ListBoxElementVisibilityConverter : System.Windows.Data.IValueConverter
     {

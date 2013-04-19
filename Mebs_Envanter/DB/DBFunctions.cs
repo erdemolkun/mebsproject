@@ -9,9 +9,9 @@ using DatabaseConnection;
 using System.Windows;
 using Mebs_Envanter.Hardware;
 using Mebs_Envanter;
-using MEBS_Envanter.GeneralObjects;
+using Mebs_Envanter.GeneralObjects;
 
-namespace MEBS_Envanter.DB
+namespace Mebs_Envanter.DB
 {
     public class DBFunctions
     {

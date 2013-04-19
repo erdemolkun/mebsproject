@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Mebs_Envanter.GeneralObjects;
 
-namespace MEBS_Envanter
+namespace Mebs_Envanter
 {
     public class Monitor : OEMDevice
     {
