@@ -31,7 +31,7 @@ namespace MEBS_Envanter
         public String Alan_kisi_rutbe
         {
             get { return alan_kisi_rutbe; }
-            set { alan_kisi_rutbe = value; }
+            set { alan_kisi_rutbe = value; OnPropertyChanged("Alan_kisi_rutbe"); }
         }
 
         private String alan_kisi_isim = "";
