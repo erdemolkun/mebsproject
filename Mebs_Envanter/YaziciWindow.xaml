@@ -10,19 +10,14 @@
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
         IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
         Width="920" SizeToContent="Height"  ResizeMode="NoResize">
-    <Grid>
+    <Grid Background="{StaticResource WindowGeneralBackgroundColor}">
         <Grid.Resources>
             <Style BasedOn="{StaticResource borderStyleForComputerItems}" TargetType="{x:Type Border}">
             </Style>
         </Grid.Resources>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox">
-                <GradientStop Color="#FF7094BE" Offset="0" />
-                <GradientStop Color="#FFA8C4BF" Offset="1" />
-            </LinearGradientBrush>
-        </Grid.Background>
+
         <Grid.ColumnDefinitions>
-            
+
             <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition Width="250"></ColumnDefinition>
             <ColumnDefinition Width="*" ></ColumnDefinition>
@@ -31,7 +26,6 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition MinHeight="480" Height="*"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition MaxHeight="250"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--Loading-->
@@ -40,11 +34,12 @@
             Grid.ColumnSpan="10" Grid.RowSpan="12" Canvas.ZIndex="99">
             <animations:LoadingAnimation LoadingText="Yükleniyor.."  
                                          HorizontalAlignment="Center" VerticalAlignment="Center">
-                
+
             </animations:LoadingAnimation >
         </Grid>
 
-        <Grid Grid.Column="0" Grid.Row="1"  Margin="6,0" Grid.RowSpan="2">
+        <!--Arama Kısmı-->
+        <Grid Grid.Column="0" Grid.Row="1"  Margin="6,0,6,4" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -131,7 +126,7 @@
                     <TextBox MinWidth="120" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Width="60" x:Name="searchGridModelTxtBox"></TextBox>
 
-                    
+
                     <StackPanel Grid.ColumnSpan="2" VerticalAlignment="Bottom" Grid.RowSpan="13" Orientation="Vertical">
                         <Button MinHeight="22" Margin="2,6" x:Name="btnClearSearch"
                                 HorizontalAlignment="Center" Content="Aramayı Temizle" Click="btnClearSearch_Click"></Button>
@@ -145,7 +140,7 @@
             </Grid>
 
         </Grid>
-        
+
         <!-- Yazıcı Listesi-->
         <Grid Grid.Column="1" Margin="6,0" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -163,7 +158,7 @@
                 <StackPanel HorizontalAlignment="Center" TextBlock.FontSize="14"
                             TextBlock.Foreground="MintCream" Orientation="Horizontal">
                     <TextBlock Text="Yazıcı Sayısı : "></TextBlock>
-                    <TextBlock Text="{Binding ElementName=yaziciList,Path=Items.Count}"></TextBlock>
+                    <TextBlock Foreground="Brown" Text="{Binding ElementName=yaziciList,Path=Items.Count}"></TextBlock>
                 </StackPanel>
             </Grid>
             <ListBox x:Name="yaziciList"
@@ -177,7 +172,7 @@
             </ListBox>
 
         </Grid>
-        
+
         <Grid 
             x:Name="gridYaziciBilgileri"
             Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,12">
@@ -196,7 +191,7 @@
                         <hardwareusercontrols:SenetInfoUserControl 
                             DataContext="{Binding SenetInfo}"
                             x:Name="senetInfoControl1">
-                            
+
                         </hardwareusercontrols:SenetInfoUserControl>
                     </Border>
                 </TabItem>
@@ -210,7 +205,7 @@
                     </Border>
                 </TabItem>
             </TabControl>
-            
+
         </Grid>
 
         <!--Düzenleme Kısmı (Ekle,Sil,Düzenle)-->
@@ -238,19 +233,23 @@
 
 
         <!--Menu Items-->
-        <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="#FFE5E3E3">
-            <Menu IsMainMenu="True" TextBlock.FontSize="12" HorizontalAlignment="Left">
-                <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
-                <MenuItem Header="Yazdırma Seçenekleri"
+        <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="{x:Null}">
+            <Border CornerRadius="6" Background="Snow" Margin="4,2,4,0" >
+                <Menu Background="{x:Null}" IsMainMenu="True" TextBlock.FontSize="14"
+                      TextBlock.FontFamily="Tahoma"
+                      HorizontalAlignment="Left">
+                    <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
+                    <MenuItem Header="Yazdırma Seçenekleri"
                           IsEnabled="{Binding ElementName=yaziciList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}">
-                    <MenuItem                         
+                        <MenuItem                         
                         x:Name="printSenetPreview" Click="printSenetPreview_Click"
                         Header="Senet Önizleme"></MenuItem>
-                    <MenuItem                         
+                        <MenuItem                         
                         x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
-                </MenuItem>                                
-                <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
-            </Menu>
+                    </MenuItem>
+                    <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
+                </Menu>
+            </Border>
         </Grid>
 
     </Grid>

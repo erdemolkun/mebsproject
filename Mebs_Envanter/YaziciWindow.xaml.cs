@@ -403,7 +403,7 @@ namespace Mebs_Envanter
         {
             if (yaziciList.SelectedItem != null)
             {
-                SystemPrint printFunc = new SystemPrint(yaziciList.SelectedItem as ComputerInfo);
+                SystemPrint printFunc = new SystemPrint(yaziciList.SelectedItem as YaziciInfo);
                 printFunc.Print(true);
             }
         }
@@ -412,7 +412,7 @@ namespace Mebs_Envanter
         {
             if (yaziciList.SelectedItem != null)
             {
-                SystemPrint printFunc = new SystemPrint(yaziciList.SelectedItem as ComputerInfo);
+                SystemPrint printFunc = new SystemPrint(yaziciList.SelectedItem as YaziciInfo);
                 printFunc.Print(false);
             }
         }
