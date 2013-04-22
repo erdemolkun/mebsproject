@@ -15,6 +15,7 @@ using Mebs_Envanter;
 using Mebs_Envanter.GeneralObjects;
 using Mebs_Envanter.Repositories;
 using System.Text.RegularExpressions;
+using Mebs_Envanter.DB;
 
 namespace Mebs_Envanter.HardwareUserControls
 {
@@ -26,27 +27,23 @@ namespace Mebs_Envanter.HardwareUserControls
         public MonitorInfoUserControl()
         {
             InitializeComponent();
-           
         }
         protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
         {
-            
             base.OnRender(drawingContext);
-            
+            //IsEditable true olursa çalışır.
             TextBox TxtBox = monitorBoyutlarCombo.Template.FindName("PART_EditableTextBox", monitorBoyutlarCombo) as TextBox;
-            //TextBox txt = GetTemplateChild("PART_EditableTextBox") as TextBox;
-            //txt.PreviewTextInput += new TextCompositionEventHandler(txt_PreviewTextInput);
-            if(TxtBox!=null)
-            TxtBox.PreviewTextInput += new TextCompositionEventHandler(txt_PreviewTextInput);
+            if (TxtBox != null)
+                TxtBox.PreviewTextInput += new TextCompositionEventHandler(txt_PreviewTextInput);
         }
 
         void txt_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            String x = e.Text;
+            String previewText = e.Text;
             //Regex pattern = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
             Regex pattern = new Regex(@"^[0-9]*(?:\,[0-9]*)?$");
-            e.Handled = pattern.IsMatch(x) == false;
-            
+            e.Handled = pattern.IsMatch(previewText) == false;
+
         }
         public void SetMonitorInfo(Monitor inf)
         {
@@ -62,20 +59,44 @@ namespace Mebs_Envanter.HardwareUserControls
                 {
                     inf.MonType = (MonitorTypes)monitorTiplerCombo.SelectedItem;
                 }
-                catch (Exception) { 
-                
+                catch (Exception)
+                {
+
                 }
             }
-            if (monitorBoyutlarCombo.SelectedItem != null) {
-
+            if (monitorBoyutlarCombo.SelectedItem != null)
+            {
                 inf.MonSize = monitorBoyutlarCombo.SelectedItem as MonitorSize;
             }
+            else if (monitorBoyutlarCombo.IsEditable &&  !String.IsNullOrEmpty(monitorBoyutlarCombo.Text.Trim()))
+            {
+
+                try
+                {
+                    double size = Convert.ToDouble(monitorBoyutlarCombo.Text);
+                    if (size > 0)
+                    {
+                        int newId = DBFunctions.InsertMonitorSize(size);
+                        MonitorSize sizeNew = new MonitorSize(newId, (float)size);
+                        //(monitorBoyutlarCombo.ItemsSource as MonitorSizesRepository).Sizes.Add(sizeNew);
+                        MonitorSizesRepository.INSTANCE.Sizes.Add(sizeNew);
+                        MonitorSizesRepository.INSTANCE.Sizes.Sort(p => p.MonitorLength);
+                        inf.MonSize = sizeNew;
+                        
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
         }
-        public void Init() {
+        public void Init()
+        {
 
             // Markalar arayüze atanıyor
             MarkaRepository Marka_Repository = new MarkaRepository();
-            Marka_Repository.FillMarkalar(false);                        
+            Marka_Repository.FillMarkalar(false);
             monitorMarkalarCombo.ItemsSource = Marka_Repository.Markalar;
             MarkaRepository.INSTANCE = Marka_Repository;
 
@@ -92,6 +113,6 @@ namespace Mebs_Envanter.HardwareUserControls
             MonitorSizesRepository.INSTANCE = Size_Rep;
         }
 
-        
+
     }
 }
