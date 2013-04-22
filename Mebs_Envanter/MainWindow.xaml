@@ -24,7 +24,7 @@
         </Grid.Resources>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                <GradientStop Color="LightSlateGray" Offset="0" />
+                <GradientStop Color="#FF7094BE" Offset="0" />
                 <GradientStop Color="LightSlateGray" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
@@ -200,7 +200,7 @@
         </Grid>
 
         <!--Arama Seçenekleri-->
-        <Grid Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" Margin="4,0">
+        <Grid Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" Margin="4,0,4,4">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -211,9 +211,8 @@
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
-            <Grid Grid.Row="1" Background="#D387CEEB" >
-                <Grid Margin="4,0,0,0"    TextBlock.FontWeight="Bold" 
-                      TextBlock.FontSize="12" >
+            <Grid Grid.Row="1" Background="#D396C0D4" >
+                <Grid Margin="4,0,0,0"    TextBlock.FontWeight="Bold" TextBlock.FontSize="12" >
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>

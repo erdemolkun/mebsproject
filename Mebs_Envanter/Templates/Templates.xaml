@@ -210,7 +210,7 @@
         <Setter Property="Foreground" Value="black"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="4,6"/>
+        <!--<Setter Property="Padding" Value="0"/>-->
         <Setter Property="FontSize" Value="14" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Template">
@@ -225,7 +225,7 @@
 
                         <ContentPresenter
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                Margin="{TemplateBinding Padding}"
+                                Margin="4,6"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 RecognizesAccessKey="True" />
                     </Grid>
@@ -235,9 +235,10 @@
                             <Setter Property="Margin" Value="2 1" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="BorderThickness" Value="1"/>
                             <!--<Setter Property="Background" Value="DimGray"/>-->
-                            <Setter Property="Foreground" Value="black"/>
+                            <Setter Property="Foreground" Value="white"/>
+                            <Setter TargetName="Border" Property="Background" Value="#FF7094BE"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="#ADADAD"/>
