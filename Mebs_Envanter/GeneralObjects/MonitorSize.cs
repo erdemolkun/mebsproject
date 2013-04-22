@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Mebs_Envanter.GeneralObjects
 {
-    public class MonitorSize
+    public class MonitorSize : IComparable<MonitorSize>
     {
         public static int MON_ID_FOR_SEARCH=-2;
         public static int MON_ID_FOR_LIST=-1;
@@ -59,5 +59,11 @@ namespace Mebs_Envanter.GeneralObjects
         }
 
         // Unit will be added..        
+
+        public int CompareTo(MonitorSize other)
+        {
+            if (this.MonitorLength > other.MonitorLength) return 1;
+            else return -1;
+        }
     }
 }

@@ -72,7 +72,7 @@ namespace Mebs_Envanter.HardwareUserControls
             {
                 inf.Alan_kisi_kisim = (senetKisimCombo.SelectedItem as Kisim);
             }
-            else if (!String.IsNullOrEmpty(senetKisimCombo.Text.Trim()))
+            else if (senetBirlikCombo.IsEditable &&  !String.IsNullOrEmpty(senetKisimCombo.Text.Trim()))
             {
                 inf.Alan_kisi_kisim = new Kisim(-1, senetKisimCombo.Text.Trim());
                 inf.Alan_kisi_birlik.Kisim_Repository.Kisimlar.Add(inf.Alan_kisi_kisim);

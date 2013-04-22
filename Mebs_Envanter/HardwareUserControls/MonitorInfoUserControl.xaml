@@ -74,8 +74,7 @@
 
         
         
-        <ComboBox x:Name="monitorBoyutlarCombo" Grid.Column="1" Grid.Row="7"
-                   
+        <ComboBox x:Name="monitorBoyutlarCombo" Grid.Column="1" Grid.Row="7" IsEditable="True"
                   SelectedIndex="{Binding MonSize,Converter={StaticResource MonitorSizeComboIndexConverter},UpdateSourceTrigger=Explicit}"
                   TabIndex="7" MinWidth="80" Margin="2,2" VerticalAlignment="Center" HorizontalAlignment="Left">
             

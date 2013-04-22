@@ -414,6 +414,30 @@ namespace Mebs_Envanter.DB
             catch (Exception) { return false; }
         }
 
+        public static int InsertMonitorSize(double size)
+        {
+
+            try
+            {
+                SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+                SqlCommand cmd = new SqlCommand("insert into tbl_monitor_boyutu (monitor_boyutu) values (@monitor_boyutu)" +
+
+                " SELECT IDENT_CURRENT('dbo.tbl_monitor_boyutu')", cnn);
+
+                cmd.Parameters.AddWithValue("@monitor_boyutu", size);
+                bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+                if (res)
+                {
+                    object monsizeid = cmd.ExecuteScalar();
+                    return Convert.ToInt32(monsizeid);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return -1;
+        }
 
         private static int InsertKisim(Kisim kisim,int birlik_id) {
 
