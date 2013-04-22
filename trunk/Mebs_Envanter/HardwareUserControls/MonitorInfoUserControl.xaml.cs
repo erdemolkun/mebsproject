@@ -34,15 +34,35 @@ namespace Mebs_Envanter.HardwareUserControls
             //IsEditable true olursa çalışır.
             TextBox TxtBox = monitorBoyutlarCombo.Template.FindName("PART_EditableTextBox", monitorBoyutlarCombo) as TextBox;
             if (TxtBox != null)
+            {
+                
                 TxtBox.PreviewTextInput += new TextCompositionEventHandler(txt_PreviewTextInput);
-        }
 
+            }
+        }
+        double MAX_SIZE = 100;
         void txt_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             String previewText = e.Text;
+            TextBox txtBox = sender as TextBox;
+            bool doesOverflow = false;
+            try
+            {
+                String textBoxText = txtBox.Text;
+                textBoxText = textBoxText.Remove(txtBox.SelectionStart, txtBox.SelectionLength);
+                String newText = textBoxText.Insert(txtBox.SelectionStart, previewText);
+                double size = Convert.ToDouble(newText);
+                if (size > MAX_SIZE)
+                {
+                    doesOverflow = true;
+                }
+            }
+            catch (Exception) { 
+            
+            }
             //Regex pattern = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
             Regex pattern = new Regex(@"^[0-9]*(?:\,[0-9]*)?$");
-            e.Handled = pattern.IsMatch(previewText) == false;
+            e.Handled = (pattern.IsMatch(previewText) && !doesOverflow) == false;
 
         }
         public void SetMonitorInfo(Monitor inf)
