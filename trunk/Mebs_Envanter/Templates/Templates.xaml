@@ -449,14 +449,16 @@
                     <Border Name="Border" Background="#42A09F9C" BorderBrush="SkyBlue" 
                                             BorderThickness="1" CornerRadius="8">
                         <ScrollViewer Margin="0" Focusable="false" HorizontalContentAlignment="Stretch" >
-                            <StackPanel HorizontalAlignment="Stretch" Margin="2,0" IsItemsHost="True"  />
+                            <StackPanel Orientation="Vertical"
+                                       HorizontalAlignment="Stretch" 
+                                       Margin="2,0" IsItemsHost="True"  />
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                                            <Setter TargetName="Border" Property="Background" Value="Transparent" />
-                                            <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
-                                        </Trigger>
+                            <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
+                        </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
                         </Trigger>
