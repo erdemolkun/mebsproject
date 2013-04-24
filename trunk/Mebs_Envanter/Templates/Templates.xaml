@@ -53,7 +53,7 @@
     </ControlTemplate>
 
 
-   
+
 
 
     <!--CommboBox Style-->
@@ -204,28 +204,34 @@
         </Setter>
     </Style>
     <!--x:Key="MetroButton"-->
-    <Style TargetType="{x:Type Button}">
+    <Style TargetType="{x:Type Button}" >
         <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
         <Setter Property="Background" Value="#ffEEEEEE"/>
         <Setter Property="Foreground" Value="black"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <!--<Setter Property="Padding" Value="0"/>-->
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="BorderThickness" Value="2" />
+        <!--<Setter Property="FontSize" Value="13" />-->
+        <Setter Property="FontFamily" Value="Tahoma" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#FF4F3A2F"></SolidColorBrush>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Border
-                                x:Name="Border"
+                                x:Name="Border" CornerRadius="3"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" />
 
                         <ContentPresenter
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                Margin="4,6"
+                                Margin="6,6"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 RecognizesAccessKey="True" />
                     </Grid>
@@ -435,24 +441,22 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-        <Setter Property="MinWidth" Value="90"/>
-        <Setter Property="MinHeight" Value="80"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBox">
-                    <Border Name="Border" Background="Transparent" BorderBrush="Transparent" 
-                                            BorderThickness="2" CornerRadius="4">
+                    <Border Name="Border" Background="#42A09F9C" BorderBrush="SkyBlue" 
+                                            BorderThickness="1" CornerRadius="8">
                         <ScrollViewer Margin="0" Focusable="false" HorizontalContentAlignment="Stretch" >
                             <StackPanel HorizontalAlignment="Stretch" Margin="2,0" IsItemsHost="True"  />
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <!--<Trigger Property="IsEnabled" Value="false">
+                        <Trigger Property="IsEnabled" Value="false">
                                             <Setter TargetName="Border" Property="Background" Value="Transparent" />
                                             <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
-                                        </Trigger>-->
+                                        </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
                         </Trigger>

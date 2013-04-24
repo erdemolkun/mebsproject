@@ -46,4 +46,8 @@
     <converters:MonitorSizeComboIndexConverter x:Key="MonitorSizeComboIndexConverter">
         
     </converters:MonitorSizeComboIndexConverter>
+
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter">
+        
+    </converters:NullToVisibilityConverter>
 </ResourceDictionary>
