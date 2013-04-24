@@ -1,15 +1,15 @@
 ﻿<allvisuals:MebsWindow x:Class="Mebs_Envanter.YaziciWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Yazıcı Kaydı" Height="720"  
-        MinHeight="480"
+        Title="Yazıcı Kaydı"  
+        MinHeight="480" MaxHeight="720"
         xmlns:x1="clr-namespace:Mebs_Envanter" x:Name="mainwin"
         xmlns:x2="clr-namespace:Mebs_Envanter"
         xmlns:hardware="clr-namespace:Mebs_Envanter.Hardware"
         xmlns:allvisuals="clr-namespace:Mebs_Envanter.AllVisuals"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
-        xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
+        xmlns:animations="clr-namespace:Mebs_Envanter.Animations"        
         IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
         Width="920" SizeToContent="Height"  ResizeMode="NoResize">
     <Grid Background="{StaticResource WindowGeneralBackgroundColor}">
@@ -38,7 +38,8 @@
                            Foreground="White" Text="Cihaz tipini seçiniz >>">
                     </TextBlock>
                 </Grid>
-                <ComboBox x:Name="individualDevicesCombo" SelectedIndex="0" Margin="6,6"
+                <ComboBox SelectionChanged="individualDevicesCombo_SelectionChanged"
+                            x:Name="individualDevicesCombo" SelectedIndex="0" Margin="6,6"
                           ItemsSource="{Binding Source={x:Static hardware:IndividualDevice.Devices}}">
                 </ComboBox>
             </StackPanel>
@@ -195,11 +196,8 @@
             <TabControl>
                 <TabItem Header="Genel Bilgiler">
                     <Border>
-                        <hardwareusercontrols:YaziciUserControl 
-                            
-                            x:Name="yaziciUserControl1">
-
-                        </hardwareusercontrols:YaziciUserControl>
+                        <hardwareusercontrols:GeneralInfoIndividualDeviceUserControl x:Name="yaziciUserControl1">
+                        </hardwareusercontrols:GeneralInfoIndividualDeviceUserControl>
                     </Border>
                 </TabItem>
                 <TabItem Header="Senet Bilgileri">

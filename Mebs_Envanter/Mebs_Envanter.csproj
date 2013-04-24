@@ -125,6 +125,9 @@
     <Compile Include="EnvanterDataViewModel.cs" />
     <Compile Include="GeneralObjects\SenetInfo.cs" />
     <Compile Include="GeneralObjects\Tempest.cs" />
+    <Compile Include="HardwareUserControls\GeneralInfoIndividualDeviceUserControl.xaml.cs">
+      <DependentUpon>GeneralInfoIndividualDeviceUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HardwareUserControls\YaziciUserControl.xaml.cs">
       <DependentUpon>YaziciUserControl.xaml</DependentUpon>
     </Compile>
@@ -195,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HardwareUserControls\DeviceEntryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HardwareUserControls\GeneralInfoIndividualDeviceUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

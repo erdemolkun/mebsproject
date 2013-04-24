@@ -89,7 +89,7 @@ namespace Mebs_Envanter
             monitorUserControl1.SetMonitorInfo(computerInfo.MonitorInfo);
             senetInfoUserControl1.SetSenetInfo(computerInfo.Senet);
 
-            yaziciUserControl1.SetYaziciInfo(computerInfo.YaziciInfo);
+            //yaziciUserControl1.SetYaziciInfo(computerInfo.YaziciInfo);
 
             // OEM Parçaların Bilgileri            
             oemDeviceUserControl1.SetOemDevicesInfo(computerInfo);
@@ -102,8 +102,8 @@ namespace Mebs_Envanter
                 computerInfo.MonitorInfo.Id = tempC.MonitorInfo.Id;
                 computerInfo.MonitorInfo.Mon_id = tempC.MonitorInfo.Mon_id;
 
-                computerInfo.YaziciInfo.Id = tempC.YaziciInfo.Id;
-                computerInfo.YaziciInfo.Yaz_id = tempC.YaziciInfo.Yaz_id;
+                //computerInfo.YaziciInfo.Id = tempC.YaziciInfo.Id;
+                //computerInfo.YaziciInfo.Yaz_id = tempC.YaziciInfo.Yaz_id;
 
                 computerInfo.Senet.Id = tempC.Senet.Id;
                 foreach (OEMDevice item in tempC.GetOemDevices())
@@ -120,7 +120,7 @@ namespace Mebs_Envanter
             generalInfoUserControl1.Init();
             senetInfoUserControl1.Init();
             networkUserControl1.Init();
-            yaziciUserControl1.Init();
+           // yaziciUserControl1.Init();
         }
 
         public void SetDataContext(object context)

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Mebs_Envanter
 {
-    public enum ExtraDeviceTypes
+    public static class ExtraDeviceTypes
     {
-        PRINTER = 1,
-        PROJECTOR = 2,
-        SCANNER = 3
+        public static int PRINTER = 1;
+        public static int PROJECTOR = 2;
+        public static int  SCANNER = 4;
     }
     public class StaticFields
     {
