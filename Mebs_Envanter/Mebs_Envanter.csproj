@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AllVisuals\MebsWindow.cs" />
     <Compile Include="Animations\LoadingAnimation.xaml.cs">
       <DependentUpon>LoadingAnimation.xaml</DependentUpon>
     </Compile>
@@ -89,7 +90,7 @@
     <Compile Include="Converters\NotBoolToVisibilityConverter.cs" />
     <Compile Include="Converters\KomutanlikComboIndexConverter.cs" />
     <Compile Include="Converters\MonitorTypesConverter.cs" />
-    <Compile Include="ExportComputersWindow.xaml.cs">
+    <Compile Include="AllVisuals\ExportComputersWindow.xaml.cs">
       <DependentUpon>ExportComputersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Export\CSV\CSVOps.cs" />
@@ -150,12 +151,12 @@
     <Compile Include="HardwareUserControls\SenetInfoUserControl.xaml.cs">
       <DependentUpon>SenetInfoUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InfoWindow.xaml.cs">
+    <Compile Include="AllVisuals\InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="PrintOperations\RoundedRectangle.cs" />
     <Compile Include="PrintOperations\SystemPrint.cs" />
-    <Compile Include="SampleWindow.xaml.cs">
+    <Compile Include="AllVisuals\SampleWindow.xaml.cs">
       <DependentUpon>SampleWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\StaticResources.cs" />
@@ -184,7 +185,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ExportComputersWindow.xaml">
+    <Page Include="AllVisuals\ExportComputersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,7 +221,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InfoWindow.xaml">
+    <Page Include="AllVisuals\InfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -269,7 +270,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SampleWindow.xaml">
+    <Page Include="AllVisuals\SampleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -20,20 +20,28 @@ using Mebs_Envanter;
 using System.ComponentModel;
 using Mebs_Envanter.GeneralObjects;
 using Mebs_Envanter.PrintOperations;
+using Mebs_Envanter.AllVisuals;
 
 namespace Mebs_Envanter
 {
     /// <summary>
     /// Interaction logic for YaziciWindow.xaml
     /// </summary>
-    public partial class YaziciWindow : Window
+    public partial class YaziciWindow : MebsWindow
     {
         public YaziciWindow()
         {
             InitializeComponent();
-            InitItems();
 
-            Current_YaziciInfo = new YaziciInfo();            
+            OnDbInitialized += new DBProviderInitializedHandler(YaziciWindow_OnDbInitialized);
+
+           
+        }
+
+        void YaziciWindow_OnDbInitialized()
+        {
+            InitItems();
+            Current_YaziciInfo = new YaziciInfo();
             yaziciList.DataContext = new YaziciInfoRepository();
             RefreshPrinterList(null, true);
             SetContextForSearchFields();
@@ -83,7 +91,7 @@ namespace Mebs_Envanter
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Arrow;
+            Mouse.OverrideCursor = null;
             IsBusy = false;
             YaziciDbWorkInfo addInfo = e.Result as YaziciDbWorkInfo;
             if (addInfo == null)
@@ -290,15 +298,7 @@ namespace Mebs_Envanter
             RefreshPrinterList(null, true);
         }
 
-        public bool IsBusy
-        {
-            get { return (bool)GetValue(IsBusyProperty); }
-            set { SetValue(IsBusyProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for IsBusy.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsBusyProperty =
-            DependencyProperty.Register("IsBusy", typeof(bool), typeof(YaziciWindow), new UIPropertyMetadata(false));
+       
 
         private void btnClearSearch_Click(object sender, RoutedEventArgs e)
         {

@@ -41,7 +41,7 @@
 
     <!--General ListBoxItem Template-->
     <ControlTemplate TargetType="ListBoxItem" x:Key="generalListBoxItemTemplate">
-        <Grid HorizontalAlignment="Stretch" Name="mainGrid" >
+        <Grid HorizontalAlignment="Stretch" Name="mainGrid" Cursor="Hand" >
             <Border Name="ItemBorder" CornerRadius="4" Margin="4,2" Background="Transparent" BorderBrush="Wheat" BorderThickness="1">
                 <ContentPresenter  VerticalAlignment="Center" HorizontalAlignment="Stretch" />
             </Border>

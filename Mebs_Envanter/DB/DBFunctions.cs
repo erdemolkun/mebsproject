@@ -14,16 +14,17 @@ using Mebs_Envanter.GeneralObjects;
 namespace Mebs_Envanter.DB
 {
     public class DBFunctions
-    {
-        
+    {        
         static DBFunctions()
         {
-            prepareStoredProcedures();
-            
+            prepareStoredProcedures();            
         }
 
         public static SqlConnection proviceConnection()
         {
+            if (GlobalDataAccess.Get_Fresh_SQL_Connection() != null)
+                return GlobalDataAccess.Get_Fresh_SQL_Connection();
+
             String currentDir = Directory.GetCurrentDirectory();
             String dbName = "mebsenvanter.mdf";
 

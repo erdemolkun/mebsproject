@@ -54,8 +54,6 @@
 
 
 
-
-
     <!--CommboBox Style-->
     <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -467,9 +465,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
-
 
 
 </ResourceDictionary>
