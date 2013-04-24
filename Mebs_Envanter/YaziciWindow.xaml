@@ -5,6 +5,7 @@
         MinHeight="480"
         xmlns:x1="clr-namespace:Mebs_Envanter" x:Name="mainwin"
         xmlns:x2="clr-namespace:Mebs_Envanter"
+        xmlns:hardware="clr-namespace:Mebs_Envanter.Hardware"
         xmlns:allvisuals="clr-namespace:Mebs_Envanter.AllVisuals"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
@@ -23,12 +24,28 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition MinHeight="480" Height="*"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
 
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="12">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal"  
+                        TextBlock.FontSize="16" TextBlock.FontWeight="Bold" TextBlock.FontFamily="Tahoma">
+                <Grid VerticalAlignment="Center"  Background="#FFCE904F">
+                    <TextBlock    Margin="6"
+                           Foreground="White" Text="Cihaz tipini seçiniz >>">
+                    </TextBlock>
+                </Grid>
+                <ComboBox x:Name="individualDevicesCombo" SelectedIndex="0" Margin="6,6"
+                          ItemsSource="{Binding Source={x:Static hardware:IndividualDevice.Devices}}">
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
         <!--Loading-->
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1"
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="1"
             Visibility="{Binding IsBusy,ElementName=mainwin,Converter={StaticResource BoolToVisibilityConverter}}"  
              Canvas.ZIndex="99">
             <animations:LoadingAnimation LoadingText="Yükleniyor.."  
@@ -38,12 +55,12 @@
         </Grid>
 
         <!--Arama Kısmı-->
-        <Grid Grid.Column="0" Grid.Row="1"  Margin="6,0,6,4" Grid.RowSpan="2">
+        <Grid Grid.Column="0" Grid.Row="2"  Margin="6,0,6,4" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Margin="0,12" Height="60" Background="SkyBlue" CornerRadius="0">
+            <Border Margin="0,6" Height="60" Background="SkyBlue" CornerRadius="0">
                 <TextBlock Text="Yazıcı Arama Seçenekleri" Foreground="MintCream"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
@@ -141,13 +158,13 @@
         </Grid>
 
         <!-- Yazıcı Listesi-->
-        <Grid Grid.Column="1" Margin="6,0" Grid.Row="1">
+        <Grid Grid.Column="1" Margin="6,0" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="24"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Margin="0,12" Height="60" Background="SkyBlue" CornerRadius="0">
+            <Border Margin="0,6" Height="60" Background="SkyBlue" CornerRadius="0">
                 <TextBlock Text="Yazıcılar" Foreground="MintCream"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
@@ -174,7 +191,7 @@
 
         <Grid 
             x:Name="gridYaziciBilgileri"
-            Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,12">
+            Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" Margin="0,12">
             <TabControl>
                 <TabItem Header="Genel Bilgiler">
                     <Border>
@@ -208,7 +225,7 @@
         </Grid>
 
         <!--Düzenleme Kısmı (Ekle,Sil,Düzenle)-->
-        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" >
+        <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>

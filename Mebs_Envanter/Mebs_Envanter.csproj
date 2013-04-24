@@ -128,6 +128,7 @@
     <Compile Include="HardwareUserControls\YaziciUserControl.xaml.cs">
       <DependentUpon>YaziciUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Hardware\IndividualDevice.cs" />
     <Compile Include="Hardware\YaziciInfo.cs" />
     <Compile Include="LoggerMebs.cs" />
     <Compile Include="PrintOperations\GridPrinter.cs" />
