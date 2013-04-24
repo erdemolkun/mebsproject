@@ -13,13 +13,13 @@
         <mebs:ComputerInfo x:Key="computerSample"></mebs:ComputerInfo>
     </UserControl.Resources>
     <Grid>
-        <TabControl x:Name="pcEnvanterTabControl">
+        <TabControl Background="Transparent" x:Name="pcEnvanterTabControl">
             <TabControl.Resources>
                 <Style BasedOn="{StaticResource borderStyleForComputerItems}" TargetType="{x:Type Border}">
                 </Style>
             </TabControl.Resources>
 
-            <TabItem Header="Genel Bilgiler" x:Name="generalInfoTab" >
+            <TabItem  Header="Genel Bilgiler" x:Name="generalInfoTab" >
                 <Border>
                     <hardwareusercontrols:GeneralInfoUserControl x:Name="generalInfoUserControl1">
                     </hardwareusercontrols:GeneralInfoUserControl>
@@ -42,13 +42,13 @@
                 </Border>
             </TabItem>
 
-            <TabItem Header="Yazıcı" x:Name="yaziciTab" Visibility="Collapsed">
+            <!--<TabItem Header="Yazıcı" x:Name="yaziciTab" Visibility="Collapsed">
                 <Border >
                     <hardwareusercontrols:YaziciUserControl x:Name="yaziciUserControl1" DataContext="{Binding YaziciInfo}">
 
                     </hardwareusercontrols:YaziciUserControl>
                 </Border>
-            </TabItem>
+            </TabItem>-->
             
             <TabItem Header="Senet" x:Name="senetTab" >
                 <Border >

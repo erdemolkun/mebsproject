@@ -35,7 +35,11 @@
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition MaxHeight="250" Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-
+        
+        <Grid Grid.RowSpan="12" Grid.ColumnSpan="12">
+            <Image Panel.ZIndex="2" Source="/Mebs_Envanter;component/Resources/Muhabere_ön.png" Opacity="0.1"></Image>
+        </Grid>
+        
         <!--Menu Items-->
         <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="{x:Null}">
             <Border CornerRadius="6" Background="Snow" Margin="4,2,4,0" >
@@ -210,7 +214,7 @@
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
-            <Grid Grid.Row="1" Background="#D396C0D4" >
+            <Grid Grid.Row="1" Background="#A396C0D4" >
                 <Grid Margin="4,0,0,0"    TextBlock.FontWeight="Bold" TextBlock.FontSize="12" >
 
                     <Grid.ColumnDefinitions>

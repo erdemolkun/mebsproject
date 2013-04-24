@@ -219,12 +219,12 @@ namespace Mebs_Envanter
                     Set_MonitorInfo(mon);
                     MonitorInfo = mon;
                 }
-                else if (item is YaziciInfo)
+                /*else if (item is YaziciInfo)
                 {
                     YaziciInfo infYazi = item as YaziciInfo;
                     Set_YaziciInfo(infYazi);
                     YaziciInfo = infYazi;
-                }
+                }*/
                 else
                 {
                     OemDevicesVModel.AssignOemDevice(item);
@@ -304,13 +304,13 @@ namespace Mebs_Envanter
             set { monitorInfo = value; OnPropertyChanged("MonitorInfo"); }
         }
 
-        private YaziciInfo yaziciInfo = new YaziciInfo();
+        //private YaziciInfo yaziciInfo = new YaziciInfo();
 
-        public YaziciInfo YaziciInfo
-        {
-            get { return yaziciInfo; }
-            set { yaziciInfo = value; OnPropertyChanged("YaziciInfo"); }
-        }
+        //public YaziciInfo YaziciInfo
+        //{
+        //    get { return yaziciInfo; }
+        //    set { yaziciInfo = value; OnPropertyChanged("YaziciInfo"); }
+        //}
 
 
         private string pc_adi="";

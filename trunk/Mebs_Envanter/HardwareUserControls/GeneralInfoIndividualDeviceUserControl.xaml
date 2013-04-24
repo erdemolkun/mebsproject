@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Mebs_Envanter.HardwareUserControls.GeneralInfoIndividualDeviceUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid TextBlock.FontWeight="Bold" Margin="2,0">
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                <Setter Property="FontSize" Value="12"></Setter>
+
+                <Setter Property="MaxHeight" Value="20"></Setter>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="1" Grid.Column="0"  Text="Modeli"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="0"  Text="Tempest Seviyesi"></TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="0"  Text="Seri No"></TextBlock>
+        <TextBox Grid.Row="1" Text="{Binding YaziciModeli,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"
+                                 VerticalAlignment="Center" x:Name="yaziciModeliTextBox" MinWidth="80"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Marka"></TextBlock>
+        <ComboBox x:Name="markalarCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
+                                   SelectedIndex="{Binding Marka,
+                                   Converter ={StaticResource MarkaComboIndexConverter},UpdateSourceTrigger=Explicit}"
+                                   ItemsSource="{Binding Markalar}" 
+                                  HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
+
+        <ComboBox x:Name="tempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
+                                  SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
+                                  ItemsSource="{Binding TempestSeviyeler}" Grid.Row="2"
+                                  HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
+
+        <TextBox Grid.Row="3" Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"
+                                 VerticalAlignment="Center" x:Name="serialTextBox" MinWidth="80"></TextBox>
+
+    </Grid>
+</UserControl>

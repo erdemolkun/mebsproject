@@ -23,7 +23,7 @@ namespace Mebs_Envanter.Converters
                     if (infoTempest.Id == item.Id) { return index; }
 
                 }
-                return -1;// throw new NotImplementedException();
+                return -1;
             }
             else
             {

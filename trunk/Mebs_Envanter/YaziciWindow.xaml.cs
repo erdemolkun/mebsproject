@@ -32,10 +32,7 @@ namespace Mebs_Envanter
         public YaziciWindow()
         {
             InitializeComponent();
-
-            OnDbInitialized += new DBProviderInitializedHandler(YaziciWindow_OnDbInitialized);
-
-           
+            OnDbInitialized += new DBProviderInitializedHandler(YaziciWindow_OnDbInitialized);           
         }
 
         void YaziciWindow_OnDbInitialized()
@@ -55,7 +52,6 @@ namespace Mebs_Envanter
         }
         private bool AddOrEditYaziciFunction(bool isEdit)
         {
-
             try
             {
                 YaziciInfo infYazici = new YaziciInfo();
@@ -252,7 +248,6 @@ namespace Mebs_Envanter
 
         private void yaziciList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             ListBox list = sender as ListBox;
             YaziciInfo infYazici = null;
             if (list.SelectedItem != null)
@@ -297,9 +292,7 @@ namespace Mebs_Envanter
         {
             RefreshPrinterList(null, true);
         }
-
        
-
         private void btnClearSearch_Click(object sender, RoutedEventArgs e)
         {
             searchGridAglarCombo.SelectedIndex = -1;
@@ -415,6 +408,21 @@ namespace Mebs_Envanter
                 SystemPrint printFunc = new SystemPrint(yaziciList.SelectedItem as YaziciInfo);
                 printFunc.Print(false);
             }
+        }
+
+        public IndividualDevice SelectedIndividual
+        {
+            get { return (IndividualDevice)GetValue(SelectedIndividualProperty); }
+            set { SetValue(SelectedIndividualProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedIndividual.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedIndividualProperty =
+            DependencyProperty.Register("SelectedIndividual", typeof(IndividualDevice), typeof(YaziciWindow), new UIPropertyMetadata(null));
+
+        private void individualDevicesCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedIndividual = (sender as ComboBox).SelectedItem as IndividualDevice;
         }
     }
 }

@@ -333,10 +333,10 @@ namespace Mebs_Envanter.DB
                 {
                     InsertOrUpdateMonitor(deviceOem as Monitor, isEdit);
                 }
-                else if (deviceOem.DeviceType == DeviceTypes.PRINTER)
-                {
-                    InsertOrUpdateYazici(deviceOem as YaziciInfo, isEdit);
-                }
+                //else if (deviceOem.DeviceType == DeviceTypes.PRINTER)
+                //{
+                //    InsertOrUpdateYazici(deviceOem as YaziciInfo, isEdit);
+                //}
                 return true;
             }
             catch (Exception)
