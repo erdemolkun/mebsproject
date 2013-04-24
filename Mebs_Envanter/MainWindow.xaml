@@ -24,8 +24,8 @@
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"></ColumnDefinition>
-            <ColumnDefinition Width="270"></ColumnDefinition>
+            <ColumnDefinition Width="290"></ColumnDefinition>
+            <ColumnDefinition Width="275"></ColumnDefinition>
             <ColumnDefinition Width="*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -151,15 +151,14 @@
                  SelectionChanged="pcList_SelectionChanged"  
                  ItemsSource="{Binding Computers}"                  
                  IsSynchronizedWithCurrentItem="True"
-                 Style="{StaticResource generalListBoxStyle}"
-                 
-                 ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"                     
-                 MinHeight="120"  Background="Transparent">
+                 Style="{StaticResource generalListBoxStyle}"                 
+                 ItemTemplate="{StaticResource computerInfoListboxDataTemplate}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource generalListBoxItemStyle}">
                        
                     </Style>
                 </ListBox.ItemContainerStyle>
+               
             </ListBox>
 
             <Grid Grid.Row="3" Visibility="{Binding ElementName=pcList,Path=Items.Count, 
