@@ -48,11 +48,12 @@
         
         <Grid Grid.Row="2" Margin="3,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="48"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" 
+            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" 
                         VerticalAlignment="Center" TextBlock.FontSize="15">                
                 <CheckBox x:Name="generalInfoChkbx" Content="Genel Bilgiler" Margin="2" IsChecked="True"></CheckBox>
                 <CheckBox x:Name="oemsChkbx" Content="Donanım Bilgileri" Margin="2"  IsChecked="True"></CheckBox>
@@ -60,8 +61,11 @@
                 <CheckBox x:Name="senetInfoChkbx" Content="Senet Bilgileri" Margin="2" IsChecked="True"></CheckBox>
                 <CheckBox x:Name="networkInfoChkbx" Content="Ağ Bilgileri" Margin="2" IsChecked="True"></CheckBox>                
             </StackPanel>
-            <Button Grid.Row="1" VerticalAlignment="Bottom" Width="160" x:Name="exportBtn" 
-                    Content="Dışarıya Aktar" Margin="0,6" Click="exportBtn_Click"></Button>
+            <TextBlock Foreground="Red" FontFamily="Tahoma" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
+                *Dışarıya Aktarmak İstediğiniz Bölümleri Seçiniz
+            </TextBlock>
+            <Button Grid.Row="2" VerticalAlignment="Bottom" Width="160" x:Name="exportBtn" 
+                    Content="Dışarıya Aktar" Margin="0,12" Click="exportBtn_Click"></Button>
         </Grid>
     </Grid>
 </Window>

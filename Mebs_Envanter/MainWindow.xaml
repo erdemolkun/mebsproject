@@ -22,10 +22,10 @@
             <SolidColorBrush x:Key="headerColor1" Color="SkyBlue"></SolidColorBrush>
 
         </Grid.Resources>
-       
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"></ColumnDefinition>
-            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition Width="270"></ColumnDefinition>
             <ColumnDefinition Width="*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -38,7 +38,7 @@
         <!--Menu Items-->
         <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="{x:Null}">
             <Border CornerRadius="6" Background="Snow" Margin="4,2,4,0" >
-               
+
                 <Grid HorizontalAlignment="Stretch">
                     <Menu  Background="{x:Null}" IsMainMenu="True" TextBlock.FontSize="14" 
                        TextBlock.FontFamily="Tahoma" HorizontalAlignment="Left">
@@ -53,7 +53,7 @@
                         x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
                         </MenuItem>
 
-                        
+
                         <MenuItem Header="Barcode Deneme" Visibility="Collapsed" Click="MenuItem_Click"></MenuItem>
                         <MenuItem Header="Dışarı Aktar" >
 
@@ -82,7 +82,7 @@
                         <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
                     </Menu>
                 </Grid>
-                
+
             </Border>
         </Grid>
 
@@ -132,7 +132,7 @@
             </Grid>
             <Grid Grid.Row="2">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <guihelpers2:VistaTypeTextBox x:Name="quickSearchBtn" 
+                    <guihelpers2:VistaTypeTextBox x:Name="quickSearchBtn" 
                                  DisplayText="Listede Hızlı Arama"
                                  Grid.Row="2" Margin="0,1"
                                 TextChanged="quickSearchBtn_TextChanged" VerticalAlignment="Center"
@@ -142,9 +142,9 @@
                            ToolTip="{Binding Source={x:Static x2:StaticResources.bilgisayarAramaTooltip}}">
 
                     </Label>
-                    
+
                 </StackPanel>
-               
+
             </Grid>
 
             <ListBox Grid.Row="3" x:Name="pcList" MouseDoubleClick="pcList_MouseDoubleClick"
@@ -152,10 +152,14 @@
                  ItemsSource="{Binding Computers}"                  
                  IsSynchronizedWithCurrentItem="True"
                  Style="{StaticResource generalListBoxStyle}"
-                 ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
-                 ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"
-                     
+                 
+                 ItemTemplate="{StaticResource computerInfoListboxDataTemplate}"                     
                  MinHeight="120"  Background="Transparent">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource generalListBoxItemStyle}">
+                       
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
 
             <Grid Grid.Row="3" Visibility="{Binding ElementName=pcList,Path=Items.Count, 

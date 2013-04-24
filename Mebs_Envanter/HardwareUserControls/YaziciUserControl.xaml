@@ -26,7 +26,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="0"  Text="Yazıcı Modeli"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0"  Text="Modeli"></TextBlock>
         <TextBlock Grid.Row="2" Grid.Column="0"  Text="Tempest Seviyesi"></TextBlock>
         <TextBlock Grid.Row="3" Grid.Column="0"  Text="Seri No"></TextBlock>
         <TextBox Grid.Row="1" Text="{Binding YaziciModeli,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"

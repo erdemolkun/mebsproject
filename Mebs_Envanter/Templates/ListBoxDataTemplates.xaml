@@ -1,106 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-
-    <ControlTemplate TargetType="ListBoxItem" x:Key="generalListBoxItemTemplate">
-        <Grid HorizontalAlignment="Stretch" Background="Transparent" Name="mainGrid">
-            <Border Name="ItemBorder" CornerRadius="0" Margin="6,3" Background="Transparent" BorderBrush="Wheat" BorderThickness="1" >
-                <ContentPresenter   Margin="3" HorizontalAlignment="Stretch" />
-            </Border>
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsSelected" Value="True">
-                <Setter TargetName="ItemBorder" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="LightBlue">
-
-                        </SolidColorBrush>
-                    </Setter.Value>
-                </Setter>
-                <Setter TargetName="ItemBorder" Property="Margin" Value="0,3" />
-                <Setter TargetName="ItemBorder" Property="BorderBrush" Value="transparent" />
-                <!--<Setter TargetName="mainGrid" Property="Grid.BitmapEffect">
-                    <Setter.Value>
-                        <OuterGlowBitmapEffect GlowSize="12" GlowColor="Chocolate" />
-                    </Setter.Value>
-                </Setter>-->
-            </Trigger>
-
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver"  Value="True"></Condition>
-                    <Condition Property="IsSelected"  Value="False"></Condition>
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter TargetName="ItemBorder" Property="Background" Value="mintcream" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-    <Style x:Key="generalListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
-        <Setter Property="Background" Value="#ffD4A4A4" />
-        <Setter Property="Template" Value="{StaticResource generalListBoxItemTemplate}" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        <Setter Property="Cursor" Value="Arrow" />
-        <Setter Property="Padding" Value="0,0,0,0" />
-        <Setter Property="ClipToBounds" Value="True" />
-        <!--<Style.Triggers>            
-            <Trigger Property="Selector.IsSelected" Value="True">
-                <Setter Property="Template" Value="{StaticResource generalListBoxItemTemplate}" />
-            </Trigger>
-        </Style.Triggers>-->
-    </Style>
-
-
-
-
-    <DataTemplate x:Key="yaziciInfoListboxDataTemplate">
-        <Grid Margin="2" Name="mainGrid">
-
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" Name="pcAdiGrid" TextBlock.FontFamily="Tahoma" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock  Text="Model : " Foreground="Brown"></TextBlock>
-                    <TextBlock Name="pcAdiTxtBlock" Margin="0,0,2,0" Text="{Binding YaziciModeli}" />
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1" Name="seriNoGrid" TextBlock.FontFamily="Tahoma" Visibility="Collapsed" Margin="0,2">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock  Text="Seri No : " Foreground="Brown"></TextBlock>
-                    <TextBlock Name="seriNoTxtBlock" Margin="0,0,2,0" Text="{Binding SerialNumber}" />
-                </StackPanel>
-            </Grid>
-            <Grid MinHeight="20" Grid.Row="2" Name="alanKisiGrid" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Alan Kişi : " Foreground="Brown"></TextBlock>
-                    <TextBlock Name="textBlock3" TextWrapping="Wrap" Margin="0,0,2,0" 
-                               Text="{Binding SenetInfo.Alan_kisi_rutbe,Mode=OneWay,UpdateSourceTrigger=Explicit}" />
-                    <TextBlock Name="textBlock4" TextWrapping="Wrap" Margin="0,0,2,0" 
-                               Text="{Binding SenetInfo.Alan_kisi_isim,Mode=OneWay,UpdateSourceTrigger=Explicit}" />
-                </StackPanel>
-            </Grid>
-
-        </Grid>
-        <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource=
-                                {RelativeSource Mode=FindAncestor, AncestorType=
-                                {x:Type ListBoxItem}},Path=IsSelected,Mode=OneWay}" Value="True">
-                <Setter TargetName="pcAdiTxtBlock" Property="FontSize" Value="14"/>
-                <Setter TargetName="pcAdiTxtBlock" Property="FontWeight" Value="Bold"/>
-                <Setter TargetName="seriNoGrid" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="alanKisiGrid" Property="Visibility" Value="Visible"></Setter>
-            </DataTrigger>
-        </DataTemplate.Triggers>
-    </DataTemplate>
-
+    <!--Close Button Template-->
     <ControlTemplate x:Key="closeButonTemplate" TargetType="{x:Type Button}">
         <Border x:Name="borderTemplate" CornerRadius="4">
             <Grid>
@@ -138,8 +39,101 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <!--General ListBoxItem Template-->
+    <ControlTemplate TargetType="ListBoxItem" x:Key="generalListBoxItemTemplate">
+        <Grid HorizontalAlignment="Stretch" Name="mainGrid" >
+            <Border Name="ItemBorder" CornerRadius="4" Margin="4,2" Background="Transparent" BorderBrush="Wheat" BorderThickness="1">
+                <ContentPresenter  VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="ItemBorder" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="LightBlue">
+                        </SolidColorBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="ItemBorder" Property="Margin" Value="0,2" />
+                <Setter TargetName="ItemBorder" Property="BorderBrush" Value="gray" />
+                <!--<Setter TargetName="ItemBorder" Property="BorderThickness" Value="1" />-->
+            </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver"  Value="True"></Condition>
+                    <Condition Property="IsSelected"  Value="False"></Condition>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter TargetName="ItemBorder" Property="Background" Value="mintcream" />
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--ListBoxItem Style-->
+    <Style x:Key="generalListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Background" Value="#ffD4A4A4" />
+        <Setter Property="Template" Value="{StaticResource generalListBoxItemTemplate}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Cursor" Value="Arrow" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <!--<Style.Triggers>            
+            <Trigger Property="Selector.IsSelected" Value="True">
+                <Setter Property="Template" Value="{StaticResource generalListBoxItemTemplate}" />
+            </Trigger>
+        </Style.Triggers>-->
+    </Style>
+
+    <!--Yazıcı Info DataTemplate-->
+    <DataTemplate x:Key="yaziciInfoListboxDataTemplate">
+        <Grid Name="mainGrid" Margin="6">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Name="pcAdiGrid" TextBlock.FontFamily="Tahoma" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  Text="Model : " Foreground="Brown"></TextBlock>
+                    <TextBlock Name="pcAdiTxtBlock" Margin="0,0,2,0" Text="{Binding YaziciModeli}" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" Name="seriNoGrid" TextBlock.FontFamily="Tahoma" Visibility="Collapsed" Margin="0,2">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  Text="Seri No : " Foreground="Brown"></TextBlock>
+                    <TextBlock Name="seriNoTxtBlock" Margin="0,0,2,0" Text="{Binding SerialNumber}" />
+                </StackPanel>
+            </Grid>
+            <Grid MinHeight="20" Grid.Row="2" Name="alanKisiGrid" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Alan Kişi : " Foreground="Brown"></TextBlock>
+                    <TextBlock Name="textBlock3" TextWrapping="Wrap" Margin="0,0,2,0" 
+                               Text="{Binding SenetInfo.Alan_kisi_rutbe,Mode=OneWay,UpdateSourceTrigger=Explicit}" />
+                    <TextBlock Name="textBlock4" TextWrapping="Wrap" Margin="0,0,2,0" 
+                               Text="{Binding SenetInfo.Alan_kisi_isim,Mode=OneWay,UpdateSourceTrigger=Explicit}" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource=
+                                {RelativeSource Mode=FindAncestor, AncestorType=
+                                {x:Type ListBoxItem}},Path=IsSelected,Mode=OneWay}" Value="True">
+                <Setter TargetName="pcAdiTxtBlock" Property="FontSize" Value="14"/>
+                <Setter TargetName="pcAdiTxtBlock" Property="FontWeight" Value="Bold"/>
+                <Setter TargetName="seriNoGrid" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="alanKisiGrid" Property="Visibility" Value="Visible"></Setter>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!--Computer Info DataTemplate-->
     <DataTemplate x:Key="computerInfoListboxDataTemplate">
-        <Grid Margin="2" Name="mainGrid">
+        <Grid   Name="mainGrid" Background="Transparent" Margin="6">
             <Grid.Triggers>
                 <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                     <BeginStoryboard>
@@ -166,6 +160,12 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Sil" Command="{Binding Commands.Delete}"></MenuItem>
+                </ContextMenu>
+            </Grid.ContextMenu>
 
             <Button x:Name="CLOSE_BUTTON" Visibility="Collapsed"
                     HorizontalAlignment="Right" Margin="2,0" Width="12" Height="12" Grid.Column="1"
