@@ -10,7 +10,7 @@ namespace Mebs_Envanter.GeneralObjects
     {
         public override string ToString()
         {
-            return Ag_adi;
+            return Ag_adi.ToUpper();
         }
 
         public BagliAg(String _bagliag_adi,

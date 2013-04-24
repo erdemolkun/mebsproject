@@ -75,6 +75,7 @@
     <Style x:Key="generalListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Background" Value="#ffD4A4A4" />
         <Setter Property="Template" Value="{StaticResource generalListBoxItemTemplate}" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />

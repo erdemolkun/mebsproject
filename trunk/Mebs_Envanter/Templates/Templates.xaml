@@ -4,6 +4,7 @@
         <ResourceDictionary Source="../Resources/Colors.xaml"></ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
 
+    <!--ComboBoxToggleButton-->
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -48,11 +49,10 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <!--ComboBoxTextBox-->
     <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
         <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
     </ControlTemplate>
-
-
 
     <!--CommboBox Style-->
     <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox">
@@ -127,7 +127,7 @@
         </Style.Triggers>
     </Style>
 
-
+    <!--Border For Computer Tabs-->
     <Style TargetType="{x:Type Border}" x:Key="borderStyleForComputerItems">
         <Setter Property="Background">
             <Setter.Value>
@@ -143,11 +143,10 @@
         <Setter Property="BorderBrush" Value="LightBlue"></Setter>
     </Style>
 
+    
     <ControlTemplate x:Key="SampleControlTemplate">
         <Grid>
-            <Rectangle 
-                Fill="Gray" 
-                Stroke="Gray" RadiusX="12" RadiusY="12" Opacity="0.4">
+            <Rectangle Fill="Gray" Stroke="Gray" RadiusX="12" RadiusY="12" Opacity="0.4">
             </Rectangle>
             <!--sasd HorizontalNormalBorderBrush FF232323-->
             <Border x:Name="border1" Margin="5"                  
@@ -172,23 +171,20 @@
         </Grid>
     </ControlTemplate>
 
-    <!--<Style x:Key="ButtonFocusVisual">
+    <!--ButtonFocusVisual-->
+    <Style x:Key="ButtonFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Border>
-                        <Rectangle 
-            Margin="2"
-            StrokeThickness="1"
-            Stroke="#60000000"
-            StrokeDashArray="1 2"/>
+                        <Rectangle Margin="2" StrokeThickness="1" Stroke="#60000000" StrokeDashArray="1 2"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>-->
+    </Style>
 
-    <Style
+    <!--<Style
         x:Key="ButtonFocusVisual">
         <Setter
             Property="Control.Template">
@@ -200,9 +196,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-    <!--x:Key="MetroButton"-->
-    <Style TargetType="{x:Type Button}" >
+    </Style>-->
+    
+    
+    <!--Metro Button Style-->
+    <Style TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
         <Setter Property="Background" Value="#ffEEEEEE"/>
         <Setter Property="Foreground" Value="black"/>
@@ -253,7 +251,6 @@
         </Setter>
     </Style>
 
-
     <!--TextBox Style-->
     <Style TargetType="TextBox">
         <Style.Triggers>
@@ -271,121 +268,7 @@
         </Style.Triggers>
     </Style>
 
-    <!-- Fill Brushes -->
-
-    <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#FFF" Offset="0.0"/>
-                <GradientStop Color="#CCC" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="HorizontalNormalBrush" StartPoint="0,0" EndPoint="1,0">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#FFF" Offset="0.0"/>
-                <GradientStop Color="#CCC" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="LightBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#FFF" Offset="0.0"/>
-                <GradientStop Color="#EEE" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="HorizontalLightBrush" StartPoint="0,0" EndPoint="1,0">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#FFF" Offset="0.0"/>
-                <GradientStop Color="#EEE" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="DarkBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#FFF" Offset="0.0"/>
-                <GradientStop Color="#AAA" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="PressedBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#BBB" Offset="0.0"/>
-                <GradientStop Color="#EEE" Offset="0.1"/>
-                <GradientStop Color="#EEE" Offset="0.9"/>
-                <GradientStop Color="#FFF" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
-
-    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
-
-    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF" />
-
-    <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#DDD" />
-
-    <!-- Border Brushes -->
-
-    <LinearGradientBrush x:Key="NormalBorderBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#CCC" Offset="0.0"/>
-                <GradientStop Color="#444" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="HorizontalNormalBorderBrush" StartPoint="0,0" EndPoint="1,0">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#CCC" Offset="0.0"/>
-                <GradientStop Color="#444" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="DefaultedBorderBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#777" Offset="0.0"/>
-                <GradientStop Color="#000" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="PressedBorderBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#444" Offset="0.0"/>
-                <GradientStop Color="#888" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
-
-    <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
-
-    <SolidColorBrush x:Key="LightBorderBrush" Color="#AAA" />
-
-    <!-- Miscellaneous Brushes -->
-    <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
-
-    <SolidColorBrush x:Key="LightColorBrush" Color="#DDD" />
-
+    <!--Button Style-->
     <Style TargetType="Button" x:Key="btnMicrosoftStyle">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -395,17 +278,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border 
-          x:Name="Border"  
-          CornerRadius="2" 
-          BorderThickness="1"
-          Background="{StaticResource NormalBrush}"
-          BorderBrush="{StaticResource NormalBorderBrush}">
-                        <ContentPresenter 
-            Margin="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            RecognizesAccessKey="True"/>
+                    <Border x:Name="Border"  CornerRadius="2" BorderThickness="1" Background="{StaticResource NormalBrush}"
+                            BorderBrush="{StaticResource NormalBorderBrush}">
+                        <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="true">
@@ -432,7 +307,7 @@
         </Setter>
     </Style>
 
-
+    <!--ListBox Style-->
     <Style TargetType="ListBox" x:Key="generalListBoxStyle">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -446,10 +321,12 @@
                 <ControlTemplate TargetType="ListBox">
                     <Border Name="Border" Background="#42A09F9C" BorderBrush="SkyBlue" 
                                             BorderThickness="1" CornerRadius="8">
-                        <ScrollViewer Margin="0" Focusable="false" HorizontalContentAlignment="Stretch" >
-                            <StackPanel Orientation="Vertical"
+                        <ScrollViewer Focusable="false" HorizontalContentAlignment="Stretch" >
+                            <StackPanel Orientation="Vertical" Margin="3,0"
                                        HorizontalAlignment="Stretch" 
-                                       Margin="2,0" IsItemsHost="True"  />
+                                        VerticalAlignment="Stretch"
+                                        IsItemsHost="True"  />
+                            <!--<UniformGrid IsItemsHost="True" Columns="3" />-->
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -465,6 +342,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
 </ResourceDictionary>
