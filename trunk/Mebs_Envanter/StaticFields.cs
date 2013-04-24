@@ -5,6 +5,12 @@ using System.Text;
 
 namespace Mebs_Envanter
 {
+    public enum ExtraDeviceTypes
+    {
+        PRINTER = 1,
+        PROJECTOR = 2,
+        SCANNER = 3
+    }
     public class StaticFields
     {
         /// <summary>
@@ -14,7 +20,5 @@ namespace Mebs_Envanter
         /// </summary>
         public static String[] rutbeler = {"","Uzm. Çvş.","Astsb. Çvş.", "Kd. Çvş.", "Üçvş.", "Kd. Üçvş.", "Bçvş.", "Kd. Bçvş." ,"Astğm.",
                                               "Tğm.","Ütğm.","Yzb.","Bnb.","Yb.","Alb.","Tuğg.","Tümg.","Korg.","Org."};
-
-
     }
 }

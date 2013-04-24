@@ -25,9 +25,8 @@ namespace Mebs_Envanter.DB
         //}
         public static SqlConnection Get_Fresh_SQL_Connection()
         {
-
-            SqlConnection sqlCon = new SqlConnection(connectionString);
-            
+            if (connectionString == null) return null;
+            SqlConnection sqlCon = new SqlConnection(connectionString);            
             return sqlCon;
         }
         public static void Set_Current_SQL_Connection(SqlConnection sqlcon) {

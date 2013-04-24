@@ -30,6 +30,7 @@ using Mebs_Envanter.Repositories;
 using System.Reflection;
 using ReadWriteCsv;
 using Mebs_Envanter.Export;
+using Mebs_Envanter.AllVisuals;
 
 
 namespace Mebs_Envanter
@@ -37,57 +38,28 @@ namespace Mebs_Envanter
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MebsWindow
     {
         public MainWindow()
         {
             InitializeComponent();
-
-            Thread thSqlInit = new Thread(StartSqlInit);
-            thSqlInit.IsBackground = true;
-            thSqlInit.Start();
-            IsBusy = true;
-
+            OnDbInitialized += new DBProviderInitializedHandler(MainWindow_OnDbInitialized);
             this.Title = "Bilgisayar Envanter Kaydı    " + VersionInfo.versiyonStr;
+        }
+
+        void MainWindow_OnDbInitialized()
+        {            
+            Current_Computer_Info = GetNewComputer();
+            setGUIDataContextForInitialization();
+            RefreshComputerList(null, true);
+            pcList_SelectionChanged(pcList, null);
+            pcList.Focus();
         }
 
         private ComputerInfo GetNewComputer()
         {
             return new ComputerInfo(x2 => pcDeleteBtn_Click(null, null));
-        }
-
-        private void StartSqlInit()
-        {
-            SqlConnection conSql = DBFunctions.proviceConnection();
-            Dispatcher.Invoke(DispatcherPriority.DataBind, new Action(delegate()
-            {
-                try
-                {
-                    if (conSql != null)
-                    {
-                        GlobalDataAccess.Set_Current_SQL_Connection(conSql);
-                        Current_Computer_Info = GetNewComputer();
-                        setGUIDataContextForInitialization();
-                        RefreshComputerList(null, true);
-                        pcList_SelectionChanged(pcList, null);
-                        IsBusy = false;
-                        pcList.Focus();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Bağlantı Sağlanamadı. Çıkıyorum");
-                        IsBusy = false;
-                        //Environment.Exit(0);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Hata Oluştu. Çıkıyorum");
-                    IsBusy = false;
-                    LoggerMebs.WriteToFile(ex.Message.ToString());
-                }
-            }));
-        }
+        }        
 
         private void SetContextForSearchFields()
         {
@@ -181,7 +153,7 @@ namespace Mebs_Envanter
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Arrow;
+            Mouse.OverrideCursor = null;
             IsBusy = false;
             ComputerDbWorkInfo addInfo = e.Result as ComputerDbWorkInfo;
             ComputerInfoRepository computerRep = (pcList.DataContext as ComputerInfoRepository);
@@ -612,15 +584,7 @@ namespace Mebs_Envanter
 
         ComputerInfoRepository current_In_MemoryList = null;
 
-        public bool IsBusy
-        {
-            get { return (bool)GetValue(IsBusyProperty); }
-            set { SetValue(IsBusyProperty, value); }
-        }
 
-        // Using a DependencyProperty as the backing store for IsBusy.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsBusyProperty =
-            DependencyProperty.Register("IsBusy", typeof(bool), typeof(MainWindow), new UIPropertyMetadata(false));
 
 
         public ComputerInfo Current_Computer_Info

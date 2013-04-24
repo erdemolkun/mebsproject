@@ -1,8 +1,9 @@
-﻿<Window x:Class="Mebs_Envanter.MainWindow"
+﻿<allvisuals:MebsWindow x:Class="Mebs_Envanter.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:x1="clr-namespace:Mebs_Envanter" 
         xmlns:x2="clr-namespace:Mebs_Envanter"
+        xmlns:allvisuals="clr-namespace:Mebs_Envanter.AllVisuals"
         xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
         x:Name="mainwin" Width="1000"
         MaxHeight="720" MinHeight="640"  Left="32" Top="32"
@@ -344,4 +345,4 @@
 
         </Grid>
     </Grid>
-</Window>
+</allvisuals:MebsWindow>

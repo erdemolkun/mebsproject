@@ -1,10 +1,11 @@
-﻿<Window x:Class="Mebs_Envanter.YaziciWindow"
+﻿<allvisuals:MebsWindow x:Class="Mebs_Envanter.YaziciWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Yazıcı Kaydı" Height="720"  
         MinHeight="480"
         xmlns:x1="clr-namespace:Mebs_Envanter" x:Name="mainwin"
         xmlns:x2="clr-namespace:Mebs_Envanter"
+        xmlns:allvisuals="clr-namespace:Mebs_Envanter.AllVisuals"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
@@ -15,9 +16,7 @@
             <Style BasedOn="{StaticResource borderStyleForComputerItems}" TargetType="{x:Type Border}">
             </Style>
         </Grid.Resources>
-
         <Grid.ColumnDefinitions>
-
             <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition Width="250"></ColumnDefinition>
             <ColumnDefinition Width="*" ></ColumnDefinition>
@@ -29,9 +28,9 @@
         </Grid.RowDefinitions>
 
         <!--Loading-->
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1"
             Visibility="{Binding IsBusy,ElementName=mainwin,Converter={StaticResource BoolToVisibilityConverter}}"  
-            Grid.ColumnSpan="10" Grid.RowSpan="12" Canvas.ZIndex="99">
+             Canvas.ZIndex="99">
             <animations:LoadingAnimation LoadingText="Yükleniyor.."  
                                          HorizontalAlignment="Center" VerticalAlignment="Center">
 
@@ -253,4 +252,4 @@
         </Grid>
 
     </Grid>
-</Window>
+</allvisuals:MebsWindow>
