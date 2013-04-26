@@ -230,7 +230,7 @@ namespace Mebs_Envanter.DB
         {
             try
             {
-                bool shouldBeEdit = (infoYazici.Yaz_id > 0) && isEdit;
+                bool shouldBeEdit = (infoYazici.Id_Dev > 0) && isEdit;
                 cmYaziciEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_SQL_Connection();
                 bool res = GlobalDataAccess.Open_SQL_Connection(cmYaziciEkleSilDuz.Connection);
                 if (res)
@@ -242,11 +242,11 @@ namespace Mebs_Envanter.DB
                     else
                     {
                         cmYaziciEkleSilDuz.Parameters["@type"].Value = "D";
-                        cmYaziciEkleSilDuz.Parameters["@yazici_id"].Value = infoYazici.Yaz_id;
+                        cmYaziciEkleSilDuz.Parameters["@yazici_id"].Value = infoYazici.Id_Dev;
                     }
                     cmYaziciEkleSilDuz.Parameters["@parca_id"].Value = infoYazici.Id;
                     cmYaziciEkleSilDuz.Parameters["@ip_adresi"].Value = infoYazici.NetworkInfo.IpAddress;
-                    cmYaziciEkleSilDuz.Parameters["@yazici_modeli"].Value = infoYazici.YaziciModeli;
+                    cmYaziciEkleSilDuz.Parameters["@yazici_modeli"].Value = infoYazici.Model;
                     if (infoYazici.NetworkInfo.BagliAg != null && infoYazici.NetworkInfo.BagliAg.Ag_id > 0)
                     {
                         cmYaziciEkleSilDuz.Parameters["@bagli_ag_id"].Value = infoYazici.NetworkInfo.BagliAg.Ag_id;
@@ -260,7 +260,7 @@ namespace Mebs_Envanter.DB
                     if (!shouldBeEdit)
                     {
                         int yazID = Convert.ToInt32(cmYaziciEkleSilDuz.Parameters["@temp_yazici_id"].Value);
-                        infoYazici.Yaz_id = yazID;
+                        infoYazici.Id_Dev = yazID;
                     }
                     return true;
                 }
