@@ -10,26 +10,26 @@
 
     </converters:RutbeComboIndexConverter>
     <converters:BirlikComboIndexConverter x:Key="BirlikComboIndexConverter">
-        
+
     </converters:BirlikComboIndexConverter>
 
     <converters:KomutanlikComboIndexConverter x:Key="KomutanlikComboIndexConverter"></converters:KomutanlikComboIndexConverter>
 
     <converters:KisimComboIndexConverter x:Key="KisimComboIndexConverter"></converters:KisimComboIndexConverter>
     <converters:NullValueToBoolConverter x:Key="NullValueToBoolConverter">
-        
+
     </converters:NullValueToBoolConverter>
 
     <converters:TempestComboIndexConverter x:Key="TempestComboIndexConverter"></converters:TempestComboIndexConverter>
 
     <converters:StringToFlowDocumentConverter x:Key="StringToFlowDocumentConverter">
-        
+
     </converters:StringToFlowDocumentConverter>
 
     <converters:MonitorTypesConverter x:Key="MonitorTypesConverter"></converters:MonitorTypesConverter>
 
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter">
-        
+
     </converters:BoolToVisibilityConverter>
 
     <converters:NotBoolToVisibilityConverter x:Key="NotBoolToVisibilityConverter"></converters:NotBoolToVisibilityConverter>
@@ -40,14 +40,18 @@
     <converters:DateTimeFormatConverter x:Key="DateTimeFormatConverter"></converters:DateTimeFormatConverter>
 
     <converters:ListBoxElementVisibilityConverter x:Key="ListBoxElementVisibilityConverter">
-        
+
     </converters:ListBoxElementVisibilityConverter>
 
     <converters:MonitorSizeComboIndexConverter x:Key="MonitorSizeComboIndexConverter">
-        
+
     </converters:MonitorSizeComboIndexConverter>
 
     <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter">
-        
+
     </converters:NullToVisibilityConverter>
+
+    <converters:IndividualDeviceVisibilityConverter x:Key="IndividualDeviceVisibilityConverter">
+
+    </converters:IndividualDeviceVisibilityConverter>
 </ResourceDictionary>

@@ -82,6 +82,7 @@
       <DependentUpon>ComputerUserControlVertical.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\IndividualDeviceVisibilityConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\MonitorSizeComboIndexConverter.cs" />
     <Compile Include="Converters\ListBoxElementVisibilityConverter.cs" />
