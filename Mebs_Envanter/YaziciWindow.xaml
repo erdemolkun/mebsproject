@@ -180,11 +180,11 @@
                 <StackPanel HorizontalAlignment="Center" TextBlock.FontSize="14"
                             TextBlock.Foreground="MintCream" Orientation="Horizontal">
                     <TextBlock Text="Cihaz Sayısı : "></TextBlock>
-                    <TextBlock Foreground="Brown" Text="{Binding ElementName=yaziciList,Path=Items.Count}"></TextBlock>
+                    <TextBlock Foreground="Brown" Text="{Binding ElementName=individualDevicesList,Path=Items.Count}"></TextBlock>
                 </StackPanel>
             </Grid>
-            <ListBox x:Name="yaziciList" Margin="0,4"
-                 SelectionChanged="yaziciList_SelectionChanged"      
+            <ListBox x:Name="individualDevicesList" Margin="0,4"
+                 SelectionChanged="individualDevicesList_SelectionChanged"      
                  ItemsSource="{Binding Devices}" Style="{StaticResource generalListBoxStyle}"
                  ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
                  ItemTemplate="{StaticResource yaziciInfoListboxDataTemplate}"
@@ -248,10 +248,10 @@
                 <Button Margin="4,0" VerticalAlignment="Center" x:Name="yaziciAdd"                       
                         Content="Ekle" Click="yaziciAdd_Click"></Button>
                 <Button Margin="4,0" VerticalAlignment="Center" Content="Düzenle" x:Name="yaziciEdit"
-                        IsEnabled="{Binding ElementName=yaziciList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}"
+                        IsEnabled="{Binding ElementName=individualDevicesList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}"
                         Click="yaziciEdit_Click"></Button>
                 <Button x:Name="yaziciDelete"
-                    IsEnabled="{Binding ElementName=yaziciList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}"
+                    IsEnabled="{Binding ElementName=individualDevicesList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}"
                     Margin="4,0" VerticalAlignment="Center" Content="Sil" Click="yaziciDelete_Click"></Button>
 
 
@@ -270,7 +270,7 @@
                       HorizontalAlignment="Left">
                     <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
                     <MenuItem Header="Yazdırma Seçenekleri"
-                          IsEnabled="{Binding ElementName=yaziciList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}">
+                          IsEnabled="{Binding ElementName=individualDevicesList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}">
                         <MenuItem                         
                         x:Name="printSenetPreview" Click="printSenetPreview_Click"
                         Header="Senet Önizleme"></MenuItem>

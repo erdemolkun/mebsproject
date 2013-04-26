@@ -14,13 +14,13 @@ using Mebs_Envanter.GeneralObjects;
 namespace Mebs_Envanter.DB
 {
     public class DBFunctions
-    {        
+    {
         static DBFunctions()
         {
-            prepareStoredProcedures();            
+            prepareStoredProcedures();
         }
 
-        public static SqlConnection proviceConnection()
+        public static SqlConnection ProviceSqlConnection()
         {
             if (GlobalDataAccess.Get_Fresh_SQL_Connection() != null)
                 return GlobalDataAccess.Get_Fresh_SQL_Connection();
@@ -41,14 +41,11 @@ namespace Mebs_Envanter.DB
         {
             try
             {
-                               
-                StringBuilder sb = new StringBuilder();                
+                StringBuilder sb = new StringBuilder();
                 sb.Append(error); //Add tabulation
                 sb.Append(System.Environment.NewLine);
                 sb.Append("Hata tipi : " + hataTipi); //Add tabulation
-
                 String content = sb.ToString(); // error + "\rHata tipi : " + hataTipi;            
-
                 LoggerMebs.WriteToFile(content);
             }
             catch (Exception)
@@ -83,7 +80,6 @@ namespace Mebs_Envanter.DB
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@temp_bilgisayar_id", SqlDbType.Int));
             cmBilgisayarEkleSilDuz.Parameters["@temp_bilgisayar_id"].Direction = ParameterDirection.Output;
 
-
             cmParcaEkleSilDuz = new SqlCommand("p_parca_ek_sil_duz");
             cmParcaEkleSilDuz.CommandType = CommandType.StoredProcedure;
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar, 5));
@@ -100,7 +96,6 @@ namespace Mebs_Envanter.DB
 
             cmParcaEkleSilDuz.Parameters["@temp_parca_id"].Direction = ParameterDirection.Output;
 
-
             cmMonitorEkleSilDuz = new SqlCommand("p_monitor_ek_sil_duz");
             cmMonitorEkleSilDuz.CommandType = CommandType.StoredProcedure;
             cmMonitorEkleSilDuz.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar, 5));
@@ -111,8 +106,6 @@ namespace Mebs_Envanter.DB
             cmMonitorEkleSilDuz.Parameters.Add(new SqlParameter("@temp_monitor_id", SqlDbType.Int));
             cmMonitorEkleSilDuz.Parameters.Add(new SqlParameter("@boyut_id", SqlDbType.Int));
             cmMonitorEkleSilDuz.Parameters["@temp_monitor_id"].Direction = ParameterDirection.Output;
-
-
 
             cmYaziciEkleSilDuz = new SqlCommand("p_yazici_ek_sil_duz");
             cmYaziciEkleSilDuz.CommandType = CommandType.StoredProcedure;
@@ -142,7 +135,7 @@ namespace Mebs_Envanter.DB
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_kisim_id", SqlDbType.Int));
         }
 
-        public static bool DeleteYazici(YaziciInfo infoYazici)
+        public static bool DeleteIndividualDevice(IndividualDeviceInfo infoDevice)
         {
             try
             {
@@ -151,7 +144,7 @@ namespace Mebs_Envanter.DB
                 if (res)
                 { cmParcaEkleSilDuz.Parameters["@type"].Value = "S"; }
 
-                cmParcaEkleSilDuz.Parameters["@parca_id"].Value = infoYazici.Id;
+                cmParcaEkleSilDuz.Parameters["@parca_id"].Value = infoDevice.Id;
                 cmParcaEkleSilDuz.ExecuteNonQuery();
                 return true;
             }
@@ -159,7 +152,6 @@ namespace Mebs_Envanter.DB
             {
             }
             return false;
-
         }
 
         public static bool DeletePC(ComputerInfo infoComputer)
@@ -202,11 +194,13 @@ namespace Mebs_Envanter.DB
                     }
                     cmMonitorEkleSilDuz.Parameters["@parca_id"].Value = infoMonitor.Id;
                     cmMonitorEkleSilDuz.Parameters["@monitor_tipi"].Value = infoMonitor.MonType;
-                    if (infoMonitor.MonSize != null && infoMonitor.MonSize.Id > 0) {
+                    if (infoMonitor.MonSize != null && infoMonitor.MonSize.Id > 0)
+                    {
 
                         cmMonitorEkleSilDuz.Parameters["@boyut_id"].Value = infoMonitor.MonSize.Id;
                     }
-                    else{
+                    else
+                    {
                         cmMonitorEkleSilDuz.Parameters["@boyut_id"].Value = null;
                     }
                     cmMonitorEkleSilDuz.Parameters["@stok_no"].Value = infoMonitor.StokNo;
@@ -253,7 +247,6 @@ namespace Mebs_Envanter.DB
                     }
                     if (infoYazici.SenetInfo.Id > 0)
                     {
-
                         cmYaziciEkleSilDuz.Parameters["@senet_id"].Value = infoYazici.SenetInfo.Id;
                     }
                     cmYaziciEkleSilDuz.ExecuteNonQuery();
@@ -269,7 +262,6 @@ namespace Mebs_Envanter.DB
             {
             }
             return false;
-
         }
 
         public static bool InsertOrUpdateOemDevice(OEMDevice deviceOem, int bilgisayar_id, bool isEdit)
@@ -333,10 +325,10 @@ namespace Mebs_Envanter.DB
                 {
                     InsertOrUpdateMonitor(deviceOem as Monitor, isEdit);
                 }
-                //else if (deviceOem.DeviceType == DeviceTypes.PRINTER)
-                //{
-                //    InsertOrUpdateYazici(deviceOem as YaziciInfo, isEdit);
-                //}
+                else if (deviceOem.DeviceType == DeviceTypes.PRINTER)
+                {
+                    InsertOrUpdateYazici(deviceOem as YaziciInfo, isEdit);
+                }
                 return true;
             }
             catch (Exception)
@@ -417,7 +409,6 @@ namespace Mebs_Envanter.DB
 
         public static int InsertMonitorSize(double size)
         {
-
             try
             {
                 SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
@@ -440,12 +431,12 @@ namespace Mebs_Envanter.DB
             return -1;
         }
 
-        private static int InsertKisim(Kisim kisim,int birlik_id) {
-
+        private static int InsertKisim(Kisim kisim, int birlik_id)
+        {
             try
             {
                 SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
-                SqlCommand cmd = new SqlCommand("insert into tbl_kisim (birlik_id,kisim_adi) values (@birlik_id,@kisim_adi)"+
+                SqlCommand cmd = new SqlCommand("insert into tbl_kisim (birlik_id,kisim_adi) values (@birlik_id,@kisim_adi)" +
 
                 " SELECT IDENT_CURRENT('dbo.tbl_kisim')", cnn);
 
@@ -454,12 +445,13 @@ namespace Mebs_Envanter.DB
                 bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
                 if (res)
                 {
-                    object kisimid  = cmd.ExecuteScalar();
+                    object kisimid = cmd.ExecuteScalar();
                     return Convert.ToInt32(kisimid);
                 }
             }
-            catch (Exception) { 
-                
+            catch (Exception)
+            {
+
             }
             return -1;
         }
@@ -506,7 +498,7 @@ namespace Mebs_Envanter.DB
                             else if (!String.IsNullOrEmpty(infoSenet.Alan_kisi_kisim.Kisim_adi))
                             {
                                 int newId = InsertKisim(infoSenet.Alan_kisi_kisim, infoSenet.Alan_kisi_birlik.Birlik_id);
-                               
+
                                 if (newId > 0)
                                 {
                                     cmSenetEkleDilDuz.Parameters["@alan_kisi_kisim_id"].Value = newId;
