@@ -33,13 +33,18 @@ namespace Mebs_Envanter
         {
             InitializeComponent();
             this.Title = "Bağımsız Cihaz Envanter Kaydı    " + VersionInfo.versiyonStr;
-            OnDbInitialized += new DBProviderInitializedHandler(YaziciWindow_OnDbInitialized);           
+            OnDbInitialized += new DBProviderInitializedHandler(YaziciWindow_OnDbInitialized);
+        }
+
+        private YaziciInfo GetNewDevice()
+        {
+            return new YaziciInfo();
         }
 
         void YaziciWindow_OnDbInitialized()
         {
             InitItems();
-            Current_YaziciInfo = new YaziciInfo();
+            Current_YaziciInfo = GetNewDevice();
             yaziciList.DataContext = new YaziciInfoRepository();
             RefreshPrinterList(null, true);
             SetContextForSearchFields();
@@ -55,35 +60,23 @@ namespace Mebs_Envanter
         {
             try
             {
-                YaziciInfo infYazici = new YaziciInfo();
-
+                YaziciInfo infYazici = GetNewDevice();
                 YaziciInfo currentYazici = yaziciList.SelectedItem as YaziciInfo;
+                Current_YaziciInfo = currentYazici;
 
-                if (currentYazici == null)
-                {
-                    Current_YaziciInfo = new YaziciInfo();
-                }
-                else
-                {
-                    Current_YaziciInfo = currentYazici;
-                }
-                //if (currentYazidi != null)
-                {
-                    AssignYaziciInfoByGui(Current_YaziciInfo, infYazici, isEdit);
 
-                    BackgroundWorker worker = new BackgroundWorker();
-                    worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-                    worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
-                    Mouse.OverrideCursor = Cursors.Wait;
-                    IsBusy = true;
-                    infYazici.isEdit = isEdit;
-                    worker.RunWorkerAsync(infYazici);
-                    return true;
-                }
+                AssignYaziciInfoByGui(Current_YaziciInfo, infYazici, isEdit);
+
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+                worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+                Mouse.OverrideCursor = Cursors.Wait;
+                IsBusy = true;
+                infYazici.isEdit = isEdit;
+                worker.RunWorkerAsync(infYazici);
+                return true;
             }
             catch (Exception) { return false; }
-
-
         }
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -93,13 +86,11 @@ namespace Mebs_Envanter
             YaziciDbWorkInfo addInfo = e.Result as YaziciDbWorkInfo;
             if (addInfo == null)
             {
-
-                InfoWindow.ShowMessage(this, "Hata");
+                InfoWindow.ShowMessage(this, "Hata Oluştu");
                 return;
             }
 
             YaziciInfoRepository yaziciRep = (yaziciList.DataContext as YaziciInfoRepository);
-
             if (addInfo.yazici.isEdit)
             {
                 int index = yaziciRep.Yazicilar.IndexOf(Current_YaziciInfo);
@@ -107,8 +98,7 @@ namespace Mebs_Envanter
 
                 Current_YaziciInfo = addInfo.yazici;
                 yaziciList.SelectedItem = Current_YaziciInfo;
-                gridYaziciBilgileri.DataContext = Current_YaziciInfo;
-
+                gridCihazBilgileri.DataContext = Current_YaziciInfo;
             }
             else
             {
@@ -119,9 +109,7 @@ namespace Mebs_Envanter
 
         internal class YaziciDbWorkInfo
         {
-
             public bool isSuccess = false;
-            //public bool isEdit = false;
             public YaziciInfo yazici = null;
         }
 
@@ -143,7 +131,6 @@ namespace Mebs_Envanter
 
         private void AssignYaziciInfoByGui(YaziciInfo current, YaziciInfo toAssign, bool isEdit)
         {
-
             yaziciUserControl1.SetYaziciInfo(toAssign);
             senetInfoControl1.SetSenetInfo(toAssign.SenetInfo);
             networkInfoControl1.SetNetworkInfo(toAssign.NetworkInfo);
@@ -257,14 +244,14 @@ namespace Mebs_Envanter
             }
             else
             {
-                infYazici = new YaziciInfo();
+                infYazici = GetNewDevice();
             }
             list.ScrollIntoView(infYazici);
             Current_YaziciInfo = infYazici;
-            gridYaziciBilgileri.DataContext = Current_YaziciInfo;
+            gridCihazBilgileri.DataContext = Current_YaziciInfo;
         }
 
-        private YaziciInfo Current_YaziciInfo = new YaziciInfo();
+        private YaziciInfo Current_YaziciInfo = null;
 
         private void yaziciAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -293,7 +280,7 @@ namespace Mebs_Envanter
         {
             RefreshPrinterList(null, true);
         }
-       
+
         private void btnClearSearch_Click(object sender, RoutedEventArgs e)
         {
             searchGridAglarCombo.SelectedIndex = -1;
@@ -378,7 +365,7 @@ namespace Mebs_Envanter
         {
             ComboBox combo_senet = sender as ComboBox;
             BirlikRepository birlik_rep = new BirlikRepository();
-            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik),true);
+            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik), true);
             searchGridBirliklerCombo.ItemsSource = birlik_rep.Birlikler;
             BirlikRepository.INSTANCE = birlik_rep;
         }

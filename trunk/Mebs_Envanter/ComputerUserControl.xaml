@@ -42,13 +42,7 @@
                 </Border>
             </TabItem>
 
-            <!--<TabItem Header="Yazıcı" x:Name="yaziciTab" Visibility="Collapsed">
-                <Border >
-                    <hardwareusercontrols:YaziciUserControl x:Name="yaziciUserControl1" DataContext="{Binding YaziciInfo}">
-
-                    </hardwareusercontrols:YaziciUserControl>
-                </Border>
-            </TabItem>-->
+           
             
             <TabItem Header="Senet" x:Name="senetTab" >
                 <Border >
