@@ -37,7 +37,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.RowSpan="12" Grid.ColumnSpan="12">
-            <Image Panel.ZIndex="2" Source="/Mebs_Envanter;component/Resources/Muhabere_ön.png" Opacity="0.1"></Image>
+            <Image Panel.ZIndex="2" Source="/Mebs_Envanter;component/Resources/Muhabere_ön.png" Opacity="0.05"></Image>
         </Grid>
 
         <!--Menu Items-->
@@ -214,7 +214,7 @@
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
-            <Grid Grid.Row="1" Background="#A396C0D4" >
+            <Grid Grid.Row="1" Background="#B396C0D4" >
                 <Grid Margin="4,0,0,0"    TextBlock.FontWeight="Bold" TextBlock.FontSize="12" >
 
                     <Grid.ColumnDefinitions>

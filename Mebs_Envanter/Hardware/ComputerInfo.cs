@@ -160,44 +160,6 @@ namespace Mebs_Envanter
             }
         }
 
-        internal void Set_YaziciInfo(OEMDevice devOem)
-        {
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
-            String conString = "Select * From tbl_yazici where parca_id=@parca_id";
-            SqlCommand cmd = new SqlCommand(conString, cnn);
-            cmd.Parameters.AddWithValue("@parca_id", devOem.Id);
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
-            if (res)
-            {
-                try
-                {
-                    adp.Fill(dt);
-                }
-                catch (Exception)
-                { }
-                finally
-                {
-                    cnn.Close();
-                    cnn.Dispose();
-                }
-                foreach (DataRow rowYazici in dt.Rows)
-                {
-                    String yazici_modeli = rowYazici["yazici_modeli"].ToString();
-                    int yaz_id = (int)rowYazici["yazici_id"];
-                    //int mon_type = DBValueHelpers.GetInt32(rowYazici["monitor_tipi"], -1);
-
-                    /* if (mon_type > 0)
-                     {
-                         (devOem as Monitor).MonType = (MonitorTypes)mon_type;
-                     }*/
-                    (devOem as YaziciInfo).YaziciModeli = yazici_modeli;
-                    (devOem as YaziciInfo).Yaz_id = yaz_id;
-                }
-            }
-        }
-
         public void Set_ComputerOemDevices(SqlConnection sqlCon)
         {
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
@@ -207,9 +169,7 @@ namespace Mebs_Envanter
 
         private void Set_HardwareInfos(SqlConnection sqlCon)
         {
-
             List<OEMDevice> devs = OEMDevice.GetOemDevices(sqlCon, true, Id, -1);
-
             foreach (OEMDevice item in devs)
             {
 
@@ -219,12 +179,7 @@ namespace Mebs_Envanter
                     Set_MonitorInfo(mon);
                     MonitorInfo = mon;
                 }
-                /*else if (item is YaziciInfo)
-                {
-                    YaziciInfo infYazi = item as YaziciInfo;
-                    Set_YaziciInfo(infYazi);
-                    YaziciInfo = infYazi;
-                }*/
+                
                 else
                 {
                     OemDevicesVModel.AssignOemDevice(item);
@@ -303,15 +258,6 @@ namespace Mebs_Envanter
             get { return monitorInfo; }
             set { monitorInfo = value; OnPropertyChanged("MonitorInfo"); }
         }
-
-        //private YaziciInfo yaziciInfo = new YaziciInfo();
-
-        //public YaziciInfo YaziciInfo
-        //{
-        //    get { return yaziciInfo; }
-        //    set { yaziciInfo = value; OnPropertyChanged("YaziciInfo"); }
-        //}
-
 
         private string pc_adi="";
         /// <summary>

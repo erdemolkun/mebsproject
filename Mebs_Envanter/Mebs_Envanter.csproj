@@ -129,9 +129,6 @@
     <Compile Include="HardwareUserControls\GeneralInfoIndividualDeviceUserControl.xaml.cs">
       <DependentUpon>GeneralInfoIndividualDeviceUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HardwareUserControls\YaziciUserControl.xaml.cs">
-      <DependentUpon>YaziciUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Hardware\IndividualDevice.cs" />
     <Compile Include="Hardware\YaziciInfo.cs" />
     <Compile Include="LoggerMebs.cs" />
@@ -223,10 +220,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HardwareUserControls\SenetInfoUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="HardwareUserControls\YaziciUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

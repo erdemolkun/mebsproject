@@ -87,9 +87,7 @@ namespace Mebs_Envanter
             networkUserControl1.SetNetworkInfo(computerInfo.NetworkInfo);
 
             monitorUserControl1.SetMonitorInfo(computerInfo.MonitorInfo);
-            senetInfoUserControl1.SetSenetInfo(computerInfo.Senet);
-
-            //yaziciUserControl1.SetYaziciInfo(computerInfo.YaziciInfo);
+            senetInfoUserControl1.SetSenetInfo(computerInfo.Senet);            
 
             // OEM Parçaların Bilgileri            
             oemDeviceUserControl1.SetOemDevicesInfo(computerInfo);
