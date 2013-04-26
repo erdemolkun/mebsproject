@@ -185,7 +185,7 @@
             </Grid>
             <ListBox x:Name="yaziciList" Margin="0,4"
                  SelectionChanged="yaziciList_SelectionChanged"      
-                 ItemsSource="{Binding Yazicilar}" Style="{StaticResource generalListBoxStyle}"
+                 ItemsSource="{Binding Devices}" Style="{StaticResource generalListBoxStyle}"
                  ItemContainerStyle="{StaticResource generalListBoxItemStyle}"
                  ItemTemplate="{StaticResource yaziciInfoListboxDataTemplate}"
                  Grid.Row="2" MinHeight="120" >
