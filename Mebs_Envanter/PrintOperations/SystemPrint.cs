@@ -467,7 +467,7 @@ namespace Mebs_Envanter.PrintOperations
 
 
             PointF yazici_model_Loc1 = p2.getlocation(1, 2);
-            e.Graphics.DrawString(yaziciInfo.YaziciModeli, fontSmall,
+            e.Graphics.DrawString(yaziciInfo.Model, fontSmall,
                                    Brushes.Black, yazici_model_Loc1.X, yazici_model_Loc1.Y + 10);
 
 

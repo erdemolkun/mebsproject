@@ -28,7 +28,7 @@ namespace Mebs_Envanter.HardwareUserControls
         }
         public void SetYaziciInfo(YaziciInfo inf)
         {
-            inf.YaziciModeli = yaziciModeliTextBox.Text.Trim().ToString();
+            inf.Model = yaziciModeliTextBox.Text.Trim().ToString();
             inf.Marka = markalarCombo.SelectedItem as Marka;
             inf.Tempest = tempestCombo.SelectedItem as Tempest;
             inf.SerialNumber = serialTextBox.Text.Trim().ToString();

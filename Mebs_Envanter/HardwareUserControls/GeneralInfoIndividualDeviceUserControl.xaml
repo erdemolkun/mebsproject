@@ -30,7 +30,7 @@
         <TextBlock Grid.Row="1" Grid.Column="0"  Text="Modeli"></TextBlock>
         <TextBlock Grid.Row="2" Grid.Column="0"  Text="Tempest Seviyesi"></TextBlock>
         <TextBlock Grid.Row="3" Grid.Column="0"  Text="Seri No"></TextBlock>
-        <TextBox Grid.Row="1" Text="{Binding YaziciModeli,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"
+        <TextBox Grid.Row="1" Text="{Binding Model,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"
                                  VerticalAlignment="Center" x:Name="yaziciModeliTextBox" MinWidth="80"></TextBox>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Marka"></TextBlock>

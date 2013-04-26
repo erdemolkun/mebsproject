@@ -31,20 +31,23 @@ namespace Mebs_Envanter
         }
 
 
-        private int GetCorrespondingTabItemIndex(int desiredIndex) {
+        private int GetCorrespondingTabItemIndex(int desiredIndex)
+        {
             int currentIndex = 1;
             int ienumarableIndex = 1;
             foreach (TabItem item in pcEnvanterTabControl.Items)
             {
-                if (item.Visibility == Visibility.Visible) {
-                    if (desiredIndex == currentIndex) {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    if (desiredIndex == currentIndex)
+                    {
                         return ienumarableIndex;
                     }
                     currentIndex++;
                 }
                 ienumarableIndex++;
             }
-            return -1;        
+            return -1;
         }
 
 
@@ -87,7 +90,7 @@ namespace Mebs_Envanter
             networkUserControl1.SetNetworkInfo(computerInfo.NetworkInfo);
 
             monitorUserControl1.SetMonitorInfo(computerInfo.MonitorInfo);
-            senetInfoUserControl1.SetSenetInfo(computerInfo.Senet);            
+            senetInfoUserControl1.SetSenetInfo(computerInfo.Senet);
 
             // OEM Parçaların Bilgileri            
             oemDeviceUserControl1.SetOemDevicesInfo(computerInfo);
@@ -99,9 +102,6 @@ namespace Mebs_Envanter
 
                 computerInfo.MonitorInfo.Id = tempC.MonitorInfo.Id;
                 computerInfo.MonitorInfo.Mon_id = tempC.MonitorInfo.Mon_id;
-
-                //computerInfo.YaziciInfo.Id = tempC.YaziciInfo.Id;
-                //computerInfo.YaziciInfo.Yaz_id = tempC.YaziciInfo.Yaz_id;
 
                 computerInfo.Senet.Id = tempC.Senet.Id;
                 foreach (OEMDevice item in tempC.GetOemDevices())
@@ -118,7 +118,7 @@ namespace Mebs_Envanter
             generalInfoUserControl1.Init();
             senetInfoUserControl1.Init();
             networkUserControl1.Init();
-           // yaziciUserControl1.Init();
+            // yaziciUserControl1.Init();
         }
 
         public void SetDataContext(object context)

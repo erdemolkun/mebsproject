@@ -138,7 +138,7 @@ namespace Mebs_Envanter
             if (isEdit)
             {
                 toAssign.Id = current.Id;
-                toAssign.Yaz_id = current.Yaz_id;
+                toAssign.Id_Dev = current.Id_Dev;
                 toAssign.SenetInfo.Id = current.SenetInfo.Id;
             }
         }

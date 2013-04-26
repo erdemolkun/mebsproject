@@ -43,7 +43,8 @@ namespace Mebs_Envanter
                 cmd = new SqlCommand(conString, cnn);
                 cmd.Parameters.AddWithValue("@bilgisayar_id", bilgisayar_id);
             }
-            else{
+            else
+            {
                 String conString = "Select * From tbl_parca where parca_id=@parca_id";
                 cmd = new SqlCommand(conString, cnn);
                 cmd.Parameters.AddWithValue("@parca_id", _parca_id);
@@ -88,14 +89,14 @@ namespace Mebs_Envanter
                         }
 
                         //Ortak alanlar
-                        
+
                         devOem.Id = parca_id;
                         devOem.SerialNumber = seri_no;
                         devOem.Parca_no = parca_no;
                         devOem.Marka = new Marka(markaid, "");
                         devOem.Tempest = new Tempest(tempestid, "");
                         devOem.DeviceInfo = parca_tanimi;
-                        devOem.Adet = parca_adedi;                                               
+                        devOem.Adet = parca_adedi;
                         devModels.Add(devOem);
                     }
 
@@ -113,17 +114,18 @@ namespace Mebs_Envanter
             }
 
             return devModels;
-        
+
         }
 
         public bool shouldUpdate = false;
         public OEMDevice() { }
-        public OEMDevice(DeviceTypes devType) {
+        public OEMDevice(DeviceTypes devType)
+        {
 
             DeviceType = devType;
         }
 
-        private int id=-1;
+        private int id = -1;
 
         public int Id
         {
@@ -140,20 +142,20 @@ namespace Mebs_Envanter
         }
 
 
-        private Tempest tempest=new Tempest();
+        private Tempest tempest = new Tempest();
         public Tempest Tempest
         {
             get { return tempest; }
             set { tempest = value; OnPropertyChanged("Tempest"); }
         }
 
+        private String model = "";
 
-        //private int verilenMiktar = 1;
-        //public int VerilenMiktar
-        //{
-        //    get { return verilenMiktar; }
-        //    set { verilenMiktar = value; OnPropertyChanged("VerilenMiktar"); }
-        //}
+        public String Model
+        {
+            get { return model; }
+            set { model = value; OnPropertyChanged("Model"); }
+        }
 
         private String deviceInfo;
         /// <summary>
@@ -176,7 +178,7 @@ namespace Mebs_Envanter
             set { serialNumber = value; OnPropertyChanged("SerialNumber"); }
         }
 
-        
+
         private String parca_no;
 
         public String Parca_no
@@ -191,7 +193,7 @@ namespace Mebs_Envanter
             get { return deviceType; }
             set
             {
-                deviceType = value;               
+                deviceType = value;
             }
         }
     }
