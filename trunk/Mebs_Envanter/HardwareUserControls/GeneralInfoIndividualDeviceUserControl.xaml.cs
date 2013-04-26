@@ -26,7 +26,7 @@ namespace Mebs_Envanter.HardwareUserControls
         {
             InitializeComponent();
         }
-        public void SetYaziciInfo(YaziciInfo inf)
+        public void SetGeneralInfo(IndividualDeviceInfo inf)
         {
             inf.Model = yaziciModeliTextBox.Text.Trim().ToString();
             inf.Marka = markalarCombo.SelectedItem as Marka;

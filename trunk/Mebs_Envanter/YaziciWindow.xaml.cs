@@ -36,16 +36,20 @@ namespace Mebs_Envanter
             OnDbInitialized += new DBProviderInitializedHandler(YaziciWindow_OnDbInitialized);
         }
 
-        private YaziciInfo GetNewDevice()
+        private IndividualDeviceInfo GetNewDevice()
         {
-            return new YaziciInfo();
+            if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PRINTER)
+            {
+                return new YaziciInfo();
+            }
+            return null;
         }
 
         void YaziciWindow_OnDbInitialized()
         {
             InitItems();
-            Current_YaziciInfo = GetNewDevice();
-            yaziciList.DataContext = new IndividualDeviceRepository<IndividualDeviceInfo>();
+            Current_IndividualDeviceInfo = GetNewDevice();
+            individualDevicesList.DataContext = new IndividualDeviceRepository<IndividualDeviceInfo>();
             RefreshPrinterList(null, true);
             SetContextForSearchFields();
         }
@@ -60,20 +64,19 @@ namespace Mebs_Envanter
         {
             try
             {
-                YaziciInfo infYazici = GetNewDevice();
-                YaziciInfo currentYazici = yaziciList.SelectedItem as YaziciInfo;
-                Current_YaziciInfo = currentYazici;
+                IndividualDeviceInfo infIndividualDevice = GetNewDevice();
+                IndividualDeviceInfo currentDevice = individualDevicesList.SelectedItem as IndividualDeviceInfo;
+                Current_IndividualDeviceInfo = currentDevice;
 
-
-                AssignYaziciInfoByGui(Current_YaziciInfo, infYazici, isEdit);
+                AssignIndividualDeviceInfoByGui(Current_IndividualDeviceInfo, infIndividualDevice, isEdit);
 
                 BackgroundWorker worker = new BackgroundWorker();
                 worker.DoWork += new DoWorkEventHandler(worker_DoWork);
                 worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
                 Mouse.OverrideCursor = Cursors.Wait;
                 IsBusy = true;
-                infYazici.isEdit = isEdit;
-                worker.RunWorkerAsync(infYazici);
+                infIndividualDevice.isEdit = isEdit;
+                worker.RunWorkerAsync(infIndividualDevice);
                 return true;
             }
             catch (Exception) { return false; }
@@ -83,57 +86,59 @@ namespace Mebs_Envanter
         {
             Mouse.OverrideCursor = null;
             IsBusy = false;
-            YaziciDbWorkInfo addInfo = e.Result as YaziciDbWorkInfo;
+            IndividualDeviceDbWorkInfo addInfo = e.Result as IndividualDeviceDbWorkInfo;
             if (addInfo == null)
             {
                 InfoWindow.ShowMessage(this, "Hata Oluştu");
                 return;
             }
 
-            IndividualDeviceRepository<IndividualDeviceInfo> yaziciRep = (yaziciList.DataContext as IndividualDeviceRepository<IndividualDeviceInfo>);
-            if (addInfo.yazici.isEdit)
+            IndividualDeviceRepository<IndividualDeviceInfo> yaziciRep =
+                (individualDevicesList.DataContext as IndividualDeviceRepository<IndividualDeviceInfo>);
+            if (addInfo.device.isEdit)
             {
-                int index = yaziciRep.Devices.IndexOf(Current_YaziciInfo);
-                yaziciRep.Devices[index] = addInfo.yazici;
+                int index = yaziciRep.Devices.IndexOf(Current_IndividualDeviceInfo);
+                yaziciRep.Devices[index] = addInfo.device;
 
-                Current_YaziciInfo = addInfo.yazici;
-                yaziciList.SelectedItem = Current_YaziciInfo;
-                gridCihazBilgileri.DataContext = Current_YaziciInfo;
+                Current_IndividualDeviceInfo = addInfo.device;
+                individualDevicesList.SelectedItem = Current_IndividualDeviceInfo;
+                gridCihazBilgileri.DataContext = Current_IndividualDeviceInfo;
             }
             else
             {
-                yaziciRep.Devices.Add(addInfo.yazici);
-                yaziciList.SelectedItem = addInfo.yazici;
+                yaziciRep.Devices.Add(addInfo.device);
+                individualDevicesList.SelectedItem = addInfo.device;
             }
         }
 
-        internal class YaziciDbWorkInfo
+        internal class IndividualDeviceDbWorkInfo
         {
             public bool isSuccess = false;
-            public YaziciInfo yazici = null;
+            public IndividualDeviceInfo device = null;
         }
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            YaziciInfo yaziciInfo = e.Argument as YaziciInfo;
-            bool dbres2 = DBFunctions.InsertOrUpdateSenet(-1, yaziciInfo.SenetInfo, yaziciInfo.isEdit);
-            bool dbresult = DBFunctions.InsertOrUpdateOemDevice(yaziciInfo, -1, yaziciInfo.isEdit);
-            if (dbresult)
+            IndividualDeviceInfo devInfo = e.Argument as IndividualDeviceInfo;
+            bool senetInsertUpdate = DBFunctions.InsertOrUpdateSenet(-1, devInfo.SenetInfo, devInfo.isEdit);
+            bool deviceInsertOrUpdate = DBFunctions.InsertOrUpdateOemDevice(devInfo, -1, devInfo.isEdit);
+            if (deviceInsertOrUpdate)
             {
-                //bool dbresult2 = DBFunctions.InsertOrUpdateYazici(yaziciInfo, yaziciInfo.isEdit);
-                YaziciDbWorkInfo addInfo = new YaziciDbWorkInfo();
-                addInfo.yazici = yaziciInfo;
-                addInfo.isSuccess = dbresult;
-                //e.Result = dbresult;
+                IndividualDeviceDbWorkInfo addInfo = new IndividualDeviceDbWorkInfo();
+                addInfo.device = devInfo;
+                addInfo.isSuccess = deviceInsertOrUpdate;
                 e.Result = addInfo;
             }
         }
 
-        private void AssignYaziciInfoByGui(YaziciInfo current, YaziciInfo toAssign, bool isEdit)
+        private void AssignIndividualDeviceInfoByGui(IndividualDeviceInfo current, IndividualDeviceInfo toAssign, bool isEdit)
         {
-            yaziciUserControl1.SetYaziciInfo(toAssign);
+            if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PRINTER)
+            {                
+                networkInfoControl1.SetNetworkInfo((toAssign as YaziciInfo).NetworkInfo);
+            }
+            yaziciUserControl1.SetGeneralInfo(toAssign);
             senetInfoControl1.SetSenetInfo(toAssign.SenetInfo);
-            networkInfoControl1.SetNetworkInfo(toAssign.NetworkInfo);
 
             if (isEdit)
             {
@@ -166,7 +171,6 @@ namespace Mebs_Envanter
 
         private void RefreshPrinterList(SortedList<String, object> parameterList, bool selectLast)
         {
-
             Stopwatch w = Stopwatch.StartNew();
             IndividualDeviceRepository<IndividualDeviceInfo> repositoryNew = new IndividualDeviceRepository<IndividualDeviceInfo>();
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
@@ -196,29 +200,34 @@ namespace Mebs_Envanter
                     {
                         int parca_id = DBValueHelpers.GetInt32(rowPC["parca_id"].ToString(), -1);
                         List<OEMDevice> devs = OEMDevice.GetOemDevices(cnn, false, -1, parca_id);
-                        YaziciInfo tempYazici = null;
+                        IndividualDeviceInfo tempDevice = null;
                         foreach (var item in devs)
                         {
-                            if (item is YaziciInfo)
+                            if (item is IndividualDeviceInfo)
                             {
-                                tempYazici = item as YaziciInfo;
+                                tempDevice = item as IndividualDeviceInfo;
                             }
                         }
-
-                        tempYazici.SetGeneralFields(rowPC);
-                        repositoryNew.Devices.Add(tempYazici);
+                        if (tempDevice != null)
+                        {
+                            if (tempDevice is YaziciInfo)
+                            {
+                                (tempDevice as YaziciInfo).SetGeneralFields(rowPC);
+                            }
+                            repositoryNew.Devices.Add(tempDevice);
+                        }
                     }
                     catch (Exception) { }
 
                 }
-                yaziciList.DataContext = repositoryNew;
+                individualDevicesList.DataContext = repositoryNew;
                 if (selectLast)
                 {
-                    yaziciList.SelectedIndex = repositoryNew.Devices.Count - 1;
+                    individualDevicesList.SelectedIndex = repositoryNew.Devices.Count - 1;
                 }
                 else
                 {
-                    yaziciList.SelectedIndex = -1;
+                    individualDevicesList.SelectedIndex = -1;
                 }
             }
             catch (Exception)
@@ -234,24 +243,24 @@ namespace Mebs_Envanter
             Console.WriteLine("Yazıcı listesi " + x + " milisaniye içinde yenilendi");
         }
 
-        private void yaziciList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void individualDevicesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox list = sender as ListBox;
-            YaziciInfo infYazici = null;
+            IndividualDeviceInfo infYazici = null;
             if (list.SelectedItem != null)
             {
-                infYazici = list.SelectedItem as YaziciInfo;
+                infYazici = list.SelectedItem as IndividualDeviceInfo;
             }
             else
             {
                 infYazici = GetNewDevice();
             }
             list.ScrollIntoView(infYazici);
-            Current_YaziciInfo = infYazici;
-            gridCihazBilgileri.DataContext = Current_YaziciInfo;
+            Current_IndividualDeviceInfo = infYazici;
+            gridCihazBilgileri.DataContext = Current_IndividualDeviceInfo;
         }
 
-        private YaziciInfo Current_YaziciInfo = null;
+        private IndividualDeviceInfo Current_IndividualDeviceInfo = null;
 
         private void yaziciAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -265,13 +274,13 @@ namespace Mebs_Envanter
 
         private void yaziciDelete_Click(object sender, RoutedEventArgs e)
         {
-            bool isSuccess = DBFunctions.DeleteYazici(Current_YaziciInfo);
+            bool isSuccess = DBFunctions.DeleteIndividualDevice(Current_IndividualDeviceInfo);
             if (isSuccess)
             {
-                IndividualDeviceRepository<IndividualDeviceInfo> currentInfoRep = (yaziciList.DataContext as IndividualDeviceRepository<IndividualDeviceInfo>);
+                IndividualDeviceRepository<IndividualDeviceInfo> currentInfoRep = (individualDevicesList.DataContext as IndividualDeviceRepository<IndividualDeviceInfo>);
                 if (currentInfoRep != null)
                 {
-                    currentInfoRep.Devices.Remove(Current_YaziciInfo);
+                    currentInfoRep.Devices.Remove(Current_IndividualDeviceInfo);
                 }
             }
         }
@@ -382,18 +391,18 @@ namespace Mebs_Envanter
 
         private void printSenetPreview_Click(object sender, RoutedEventArgs e)
         {
-            if (yaziciList.SelectedItem != null)
+            if (individualDevicesList.SelectedItem != null)
             {
-                SystemPrint printFunc = new SystemPrint(yaziciList.SelectedItem as YaziciInfo);
+                SystemPrint printFunc = new SystemPrint(individualDevicesList.SelectedItem);
                 printFunc.Print(true);
             }
         }
 
         private void printSenet_Click(object sender, RoutedEventArgs e)
         {
-            if (yaziciList.SelectedItem != null)
+            if (individualDevicesList.SelectedItem != null)
             {
-                SystemPrint printFunc = new SystemPrint(yaziciList.SelectedItem as YaziciInfo);
+                SystemPrint printFunc = new SystemPrint(individualDevicesList.SelectedItem);
                 printFunc.Print(false);
             }
         }

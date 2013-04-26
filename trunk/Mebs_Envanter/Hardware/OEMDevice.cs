@@ -34,6 +34,9 @@ namespace Mebs_Envanter
 
         public static List<OEMDevice> GetOemDevices(SqlConnection sqlCon, bool isForComputer, int bilgisayar_id, int _parca_id)
         {
+            if (sqlCon == null) {
+                throw new NullReferenceException("SqlConnection parameter is null");
+            }
             List<OEMDevice> devModels = new List<OEMDevice>();
             SqlConnection cnn = sqlCon;//GlobalDataAccess.Get_Fresh_SQL_Connection();
             SqlCommand cmd = null;
@@ -76,7 +79,6 @@ namespace Mebs_Envanter
                         OEMDevice devOem = null;
                         if (tip == DeviceTypes.MONITOR)
                         {
-
                             devOem = new Monitor();
                         }
                         else if (tip == DeviceTypes.PRINTER)
@@ -104,17 +106,14 @@ namespace Mebs_Envanter
                 }
                 catch (Exception)
                 {
-
+                    cnn.Close();
+                    cnn.Dispose();
                 }
                 finally
-                {
-                    //cnn.Close();
-                    //cnn.Dispose();
+                {                   
                 }
             }
-
             return devModels;
-
         }
 
         public bool shouldUpdate = false;

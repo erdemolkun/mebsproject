@@ -13,24 +13,20 @@ namespace Mebs_Envanter.AllVisuals
     public delegate void DBProviderInitializedHandler();
     public class MebsWindow : Window
     {
-
         public event DBProviderInitializedHandler OnDbInitialized;
-
 
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-
             Thread thSqlInit = new Thread(StartSqlInit);
             thSqlInit.IsBackground = true;
             thSqlInit.Start();
             IsBusy = true;
-
         }
 
         private void StartSqlInit()
-        {            
-            SqlConnection conSql = DBFunctions.proviceConnection();
+        {
+            SqlConnection conSql = DBFunctions.ProviceSqlConnection();
             Dispatcher.Invoke(DispatcherPriority.DataBind, new Action(delegate()
             {
                 try
