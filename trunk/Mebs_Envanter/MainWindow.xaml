@@ -35,11 +35,11 @@
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition MaxHeight="250" Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.RowSpan="12" Grid.ColumnSpan="12">
             <Image Panel.ZIndex="2" Source="/Mebs_Envanter;component/Resources/Muhabere_ön.png" Opacity="0.1"></Image>
         </Grid>
-        
+
         <!--Menu Items-->
         <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="{x:Null}">
             <Border CornerRadius="6" Background="Snow" Margin="4,2,4,0" >
@@ -84,7 +84,7 @@
                     </Menu>
                     <Menu Background="{x:Null}" IsMainMenu="True" TextBlock.FontSize="14" 
                        TextBlock.FontFamily="Tahoma" HorizontalAlignment="Right">
-                        <MenuItem Header="Yazıcı Ekranı" Click="MenuItem_Click_2"></MenuItem>
+                        <MenuItem Header="Bağımsız Cihaz Kayıt" Click="MenuItem_Click_2"></MenuItem>
                     </Menu>
                 </Grid>
 
@@ -95,8 +95,8 @@
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"
             Visibility="{Binding IsBusy,ElementName=mainwin,Converter={StaticResource BoolToVisibilityConverter}}"  
              Canvas.ZIndex="99">
-            <animations:LoadingAnimation LoadingText="Yükleniyor.."  HorizontalAlignment="Center" VerticalAlignment="Center">
-
+            <animations:LoadingAnimation LoadingText="Yükleniyor.."  
+                                         HorizontalAlignment="Center" VerticalAlignment="Center">
             </animations:LoadingAnimation >
         </Grid>
 
@@ -160,10 +160,10 @@
                  ItemTemplate="{StaticResource computerInfoListboxDataTemplate}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource generalListBoxItemStyle}">
-                       
+
                     </Style>
                 </ListBox.ItemContainerStyle>
-               
+
             </ListBox>
 
             <Grid Grid.Row="3" Visibility="{Binding ElementName=pcList,Path=Items.Count, 

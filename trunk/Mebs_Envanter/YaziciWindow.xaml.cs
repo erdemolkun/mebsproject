@@ -32,6 +32,7 @@ namespace Mebs_Envanter
         public YaziciWindow()
         {
             InitializeComponent();
+            this.Title = "Bağımsız Cihaz Envanter Kaydı    " + VersionInfo.versiyonStr;
             OnDbInitialized += new DBProviderInitializedHandler(YaziciWindow_OnDbInitialized);           
         }
 

@@ -8,8 +8,8 @@ namespace Mebs_Envanter
     public static class ExtraDeviceTypes
     {
         public static int PRINTER = 1;
-        public static int PROJECTOR = 2;
-        public static int  SCANNER = 4;
+        public static int SCANNER = 2;
+        public static int PROJECTOR = 4;
     }
     public class StaticFields
     {
