@@ -96,6 +96,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Name="pcAdiGrid" TextBlock.FontFamily="Tahoma" >
@@ -118,6 +119,13 @@
                     <TextBlock Name="textBlock4" TextWrapping="Wrap" Margin="0,0,2,0" 
                                Text="{Binding SenetInfo.Alan_kisi_isim,Mode=OneWay,UpdateSourceTrigger=Explicit}" />
                 </StackPanel>
+            </Grid>
+            <Grid MinHeight="20" Grid.Row="3">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Parça Tipi : " Foreground="Brown"></TextBlock>
+                    <TextBlock Text="{Binding DeviceType,Converter={StaticResource DeviceTypeToParcaIsimConverter}}"></TextBlock>
+                </StackPanel>
+                
             </Grid>
         </Grid>
         <DataTemplate.Triggers>

@@ -225,7 +225,7 @@
                     </Border>
                 </TabItem>
                 <TabItem Header="Ağ Bilgileri" Visibility="{Binding ElementName=thiswin, Path=SelectedIndividual,
-                    Converter={StaticResource IndividualDeviceVisibilityConverter},ConverterParameter=3}">
+                    Converter={StaticResource IndividualDeviceVisibilityConverter},ConverterParameter=1}">
                     <Border>
                         <hardwareusercontrols:NetworkInfoUserControl 
                             IsUsedForPrinter="True" DataContext="{Binding NetworkInfo}"

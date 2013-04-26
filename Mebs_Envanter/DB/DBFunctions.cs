@@ -220,7 +220,7 @@ namespace Mebs_Envanter.DB
 
         }
 
-        public static bool InsertOrUpdateYazici(YaziciInfo infoYazici, bool isEdit)
+        private static bool InsertOrUpdateYazici(YaziciInfo infoYazici, bool isEdit)
         {
             try
             {

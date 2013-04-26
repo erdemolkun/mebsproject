@@ -169,7 +169,7 @@ namespace Mebs_Envanter
 
         private void Set_HardwareInfos(SqlConnection sqlCon)
         {
-            List<OEMDevice> devs = OEMDevice.GetOemDevices(sqlCon, true, Id, -1);
+            List<OEMDevice> devs = OEMDevice.GetOemsDB(sqlCon, true, Id, -1);
             foreach (OEMDevice item in devs)
             {
 

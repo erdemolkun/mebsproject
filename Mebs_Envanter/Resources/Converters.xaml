@@ -54,4 +54,8 @@
     <converters:IndividualDeviceVisibilityConverter x:Key="IndividualDeviceVisibilityConverter">
 
     </converters:IndividualDeviceVisibilityConverter>
+
+    <converters:DeviceTypeToParcaIsimConverter x:Key="DeviceTypeToParcaIsimConverter">
+        
+    </converters:DeviceTypeToParcaIsimConverter>
 </ResourceDictionary>
