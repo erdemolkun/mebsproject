@@ -45,7 +45,7 @@ namespace Mebs_Envanter
         {
             InitItems();
             Current_YaziciInfo = GetNewDevice();
-            yaziciList.DataContext = new YaziciInfoRepository();
+            yaziciList.DataContext = new IndividualDeviceRepository<IndividualDeviceInfo>();
             RefreshPrinterList(null, true);
             SetContextForSearchFields();
         }
@@ -90,11 +90,11 @@ namespace Mebs_Envanter
                 return;
             }
 
-            YaziciInfoRepository yaziciRep = (yaziciList.DataContext as YaziciInfoRepository);
+            IndividualDeviceRepository<IndividualDeviceInfo> yaziciRep = (yaziciList.DataContext as IndividualDeviceRepository<IndividualDeviceInfo>);
             if (addInfo.yazici.isEdit)
             {
-                int index = yaziciRep.Yazicilar.IndexOf(Current_YaziciInfo);
-                yaziciRep.Yazicilar[index] = addInfo.yazici;
+                int index = yaziciRep.Devices.IndexOf(Current_YaziciInfo);
+                yaziciRep.Devices[index] = addInfo.yazici;
 
                 Current_YaziciInfo = addInfo.yazici;
                 yaziciList.SelectedItem = Current_YaziciInfo;
@@ -102,7 +102,7 @@ namespace Mebs_Envanter
             }
             else
             {
-                yaziciRep.Yazicilar.Add(addInfo.yazici);
+                yaziciRep.Devices.Add(addInfo.yazici);
                 yaziciList.SelectedItem = addInfo.yazici;
             }
         }
@@ -168,7 +168,7 @@ namespace Mebs_Envanter
         {
 
             Stopwatch w = Stopwatch.StartNew();
-            YaziciInfoRepository repositoryNew = new YaziciInfoRepository();
+            IndividualDeviceRepository<IndividualDeviceInfo> repositoryNew = new IndividualDeviceRepository<IndividualDeviceInfo>();
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
 
             //String commandText = "Select TOP 10 * From tbl_yazici pc order by yazici_id Desc";
@@ -206,7 +206,7 @@ namespace Mebs_Envanter
                         }
 
                         tempYazici.SetGeneralFields(rowPC);
-                        repositoryNew.Yazicilar.Add(tempYazici);
+                        repositoryNew.Devices.Add(tempYazici);
                     }
                     catch (Exception) { }
 
@@ -214,7 +214,7 @@ namespace Mebs_Envanter
                 yaziciList.DataContext = repositoryNew;
                 if (selectLast)
                 {
-                    yaziciList.SelectedIndex = repositoryNew.Yazicilar.Count - 1;
+                    yaziciList.SelectedIndex = repositoryNew.Devices.Count - 1;
                 }
                 else
                 {
@@ -268,10 +268,10 @@ namespace Mebs_Envanter
             bool isSuccess = DBFunctions.DeleteYazici(Current_YaziciInfo);
             if (isSuccess)
             {
-                YaziciInfoRepository currentInfoRep = (yaziciList.DataContext as YaziciInfoRepository);
+                IndividualDeviceRepository<IndividualDeviceInfo> currentInfoRep = (yaziciList.DataContext as IndividualDeviceRepository<IndividualDeviceInfo>);
                 if (currentInfoRep != null)
                 {
-                    currentInfoRep.Yazicilar.Remove(Current_YaziciInfo);
+                    currentInfoRep.Devices.Remove(Current_YaziciInfo);
                 }
             }
         }

@@ -134,8 +134,8 @@
     <Compile Include="Hardware\YaziciInfo.cs" />
     <Compile Include="LoggerMebs.cs" />
     <Compile Include="PrintOperations\GridPrinter.cs" />
+    <Compile Include="Repositories\IndividualDeviceRepository.cs" />
     <Compile Include="Repositories\MonitorSizesRepository.cs" />
-    <Compile Include="Repositories\YaziciInfoRepository.cs" />
     <Compile Include="Repositories\KomutanlikRepository.cs" />
     <Compile Include="Repositories\TempestRepository.cs" />
     <Compile Include="GUIHelpers\VisualHelperWPF.cs" />
