@@ -42,6 +42,14 @@ namespace Mebs_Envanter
             {
                 return new YaziciInfo();
             }
+            else if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PROJECTOR)
+            {
+                return new ProjectorInfo();
+            }
+            else if (SelectedIndividual.DeviceType == ExtraDeviceTypes.SCANNER)
+            {
+                return new ScannerInfo();
+            }
             return null;
         }
 
@@ -60,6 +68,7 @@ namespace Mebs_Envanter
             senetInfoControl1.Init();
             networkInfoControl1.Init();
         }
+
         private bool AddOrEditYaziciFunction(bool isEdit)
         {
             try
@@ -134,7 +143,7 @@ namespace Mebs_Envanter
         private void AssignIndividualDeviceInfoByGui(IndividualDeviceInfo current, IndividualDeviceInfo toAssign, bool isEdit)
         {
             if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PRINTER)
-            {                
+            {
                 networkInfoControl1.SetNetworkInfo((toAssign as YaziciInfo).NetworkInfo);
             }
             yaziciUserControl1.SetGeneralInfo(toAssign);
@@ -199,7 +208,7 @@ namespace Mebs_Envanter
                     try
                     {
                         int parca_id = DBValueHelpers.GetInt32(rowPC["parca_id"].ToString(), -1);
-                        List<OEMDevice> devs = OEMDevice.GetOemDevices(cnn, false, -1, parca_id);
+                        List<OEMDevice> devs = OEMDevice.GetOemsDB(cnn, false, -1, parca_id);
                         IndividualDeviceInfo tempDevice = null;
                         foreach (var item in devs)
                         {
@@ -212,7 +221,7 @@ namespace Mebs_Envanter
                         {
                             if (tempDevice is YaziciInfo)
                             {
-                                (tempDevice as YaziciInfo).SetGeneralFields(rowPC);
+                                (tempDevice as YaziciInfo).SetGeneralFieldsYazici(rowPC);
                             }
                             repositoryNew.Devices.Add(tempDevice);
                         }
@@ -309,6 +318,7 @@ namespace Mebs_Envanter
         {
             RefreshPrinterList(GetParameterListForSearch(), false);
         }
+
         private SortedList<String, object> GetParameterListForSearch()
         {
             //parca_no
@@ -328,7 +338,7 @@ namespace Mebs_Envanter
                     list.Add("@birlik_id", (searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id);
                 }
             }
-            if (searchGridAglarCombo.SelectedItem != null)
+            if (searchGridAglarCombo.IsEnabled && searchGridAglarCombo.SelectedItem != null)
             {
                 if ((searchGridAglarCombo.SelectedItem as BagliAg).Ag_id > 0)
                 {

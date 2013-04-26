@@ -17,9 +17,19 @@ namespace Mebs_Envanter.Hardware
             }
         }
 
+        public IndividualDeviceInfo()
+        {
+
+        }
+        public IndividualDeviceInfo(DeviceTypes type)
+            : base(type)
+        {
+
+        }
+
+
 
         private int id_Dev = -1;
-
         public int Id_Dev
         {
             get { return id_Dev; }

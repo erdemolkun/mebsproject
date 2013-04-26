@@ -16,7 +16,7 @@ namespace Mebs_Envanter.Hardware
             DeviceType = DeviceTypes.PRINTER;
         }
 
-        public void SetGeneralFields(DataRow rowYazici)
+        public void SetGeneralFieldsYazici(DataRow rowYazici)
         {
 
             Id_Dev = (int)rowYazici["yazici_id"];
@@ -25,7 +25,6 @@ namespace Mebs_Envanter.Hardware
             NetworkInfo.BagliAg = new BagliAg("", bagli_ag_id);
 
             NetworkInfo.IpAddress = rowYazici["ip_adresi"].ToString();
-
 
             int senet_id = DBValueHelpers.GetInt32(rowYazici["senet_id"].ToString(), -1);
             SenetInfo.Set_SenetInfos(false, -1, senet_id);

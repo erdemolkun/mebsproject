@@ -7,7 +7,7 @@ namespace Mebs_Envanter
 {
     class DeviceTypeNameHelper
     {
-        public static String GET_MON_NAME(MonitorTypes monType)
+        public static String GET_MON_TYPE_NAME(MonitorTypes monType)
         {
             try
             {
@@ -33,6 +33,8 @@ namespace Mebs_Envanter
                 if (devType == DeviceTypes.KEYBOARD_MOUSE) { return "Klavye/Mouse"; }
                 if (devType == DeviceTypes.MONITOR) { return "Monitor"; }
                 if (devType == DeviceTypes.PRINTER) { return "Yazıcı"; }
+                if (devType == DeviceTypes.SCANNER) { return "Tarayıcı"; }
+                if (devType == DeviceTypes.PROJECTOR) { return "Projektör"; }
             }
             catch (Exception) { }
             return "N/A";

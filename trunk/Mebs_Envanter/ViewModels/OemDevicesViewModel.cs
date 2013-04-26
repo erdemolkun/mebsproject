@@ -24,20 +24,16 @@ namespace Mebs_Envanter
         private ObservableCollection<OemDeviceViewModel> oemDevicesAll = new ObservableCollection<OemDeviceViewModel>();
         public ObservableCollection<OemDeviceViewModel> OemDevicesAll
         {
-            get {
-                
-                oemDevicesAll = new ObservableCollection<OemDeviceViewModel>
-    (OemDevices.Union(OemDevicesExtra).ToList());
-                               
+            get
+            {
+                oemDevicesAll = new ObservableCollection<OemDeviceViewModel>(OemDevices.Union(OemDevicesExtra).ToList());
                 return oemDevicesAll;
-
             }
         }
 
-
         public OemDevicesViewModel()
         {
-            Init();            
+            Init();
         }
 
         public void Init()
@@ -53,8 +49,8 @@ namespace Mebs_Envanter
             OemDevicesExtra.Add(new OemDeviceViewModel(new OEMDevice(DeviceTypes.KEYBOARD_MOUSE)));
         }
 
-        public void AssignOemDevice(OEMDevice dev) {
-
+        public void AssignOemDevice(OEMDevice dev)
+        {
             foreach (var item in OemDevices)
             {
                 if (item.DevOem.DeviceType == dev.DeviceType) { item.DevOem = dev; return; }
@@ -62,7 +58,7 @@ namespace Mebs_Envanter
             foreach (var item in OemDevicesExtra)
             {
                 if (item.DevOem.DeviceType == dev.DeviceType) { item.DevOem = dev; return; }
-            }  
+            }
         }
     }
 }

@@ -32,9 +32,10 @@ namespace Mebs_Envanter
             }
         }
 
-        public static List<OEMDevice> GetOemDevices(SqlConnection sqlCon, bool isForComputer, int bilgisayar_id, int _parca_id)
+        public static List<OEMDevice> GetOemsDB(SqlConnection sqlCon, bool isForComputer, int bilgisayar_id, int _parca_id)
         {
-            if (sqlCon == null) {
+            if (sqlCon == null)
+            {
                 throw new NullReferenceException("SqlConnection parameter is null");
             }
             List<OEMDevice> devModels = new List<OEMDevice>();
@@ -85,6 +86,14 @@ namespace Mebs_Envanter
                         {
                             devOem = new YaziciInfo();
                         }
+                        else if (tip == DeviceTypes.PROJECTOR)
+                        {
+                            devOem = new ProjectorInfo();
+                        }
+                        else if (tip == DeviceTypes.SCANNER)
+                        {
+                            devOem = new ScannerInfo();
+                        }
                         else
                         {
                             devOem = new OEMDevice(tip);
@@ -110,7 +119,7 @@ namespace Mebs_Envanter
                     cnn.Dispose();
                 }
                 finally
-                {                   
+                {
                 }
             }
             return devModels;
@@ -120,7 +129,6 @@ namespace Mebs_Envanter
         public OEMDevice() { }
         public OEMDevice(DeviceTypes devType)
         {
-
             DeviceType = devType;
         }
 

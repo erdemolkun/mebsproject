@@ -82,6 +82,7 @@
       <DependentUpon>ComputerUserControlVertical.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\DeviceTypeToParcaIsimConverter.cs" />
     <Compile Include="Converters\IndividualDeviceVisibilityConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\MonitorSizeComboIndexConverter.cs" />
@@ -130,6 +131,8 @@
     </Compile>
     <Compile Include="Hardware\IndividualDevice.cs" />
     <Compile Include="Hardware\IndividualDeviceInfo.cs" />
+    <Compile Include="Hardware\ProjectorInfo.cs" />
+    <Compile Include="Hardware\ScannerInfo.cs" />
     <Compile Include="Hardware\YaziciInfo.cs" />
     <Compile Include="Helpers\LoggerMebs.cs" />
     <Compile Include="PrintOperations\GridPrinter.cs" />
