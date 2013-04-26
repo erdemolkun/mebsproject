@@ -123,7 +123,6 @@
     <Compile Include="HardwareUserControls\DeviceEntryControl.xaml.cs">
       <DependentUpon>DeviceEntryControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EnvanterDataViewModel.cs" />
     <Compile Include="GeneralObjects\SenetInfo.cs" />
     <Compile Include="GeneralObjects\Tempest.cs" />
     <Compile Include="HardwareUserControls\GeneralInfoIndividualDeviceUserControl.xaml.cs">
@@ -132,7 +131,7 @@
     <Compile Include="Hardware\IndividualDevice.cs" />
     <Compile Include="Hardware\IndividualDeviceInfo.cs" />
     <Compile Include="Hardware\YaziciInfo.cs" />
-    <Compile Include="LoggerMebs.cs" />
+    <Compile Include="Helpers\LoggerMebs.cs" />
     <Compile Include="PrintOperations\GridPrinter.cs" />
     <Compile Include="Repositories\IndividualDeviceRepository.cs" />
     <Compile Include="Repositories\MonitorSizesRepository.cs" />
@@ -163,11 +162,11 @@
       <DependentUpon>SampleWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\StaticResources.cs" />
-    <Compile Include="Unnecessary.cs" />
-    <Compile Include="VersionInfo.cs" />
+    <Compile Include="Helpers\Unnecessary.cs" />
+    <Compile Include="Helpers\VersionInfo.cs" />
     <Compile Include="ViewModels\OemDevicesViewModel.cs" />
     <Compile Include="ViewModels\OemDeviceViewModel.cs" />
-    <Compile Include="SerializationTool.cs" />
+    <Compile Include="Helpers\SerializationTool.cs" />
     <Compile Include="StaticFields.cs" />
     <Compile Include="YaziciWindow.xaml.cs">
       <DependentUpon>YaziciWindow.xaml</DependentUpon>
@@ -241,8 +240,8 @@
     <Compile Include="Converters\MarkaComboIndexConverter.cs" />
     <Compile Include="DB\DBFunctions.cs" />
     <Compile Include="DB\GlobalDataAccess.cs" />
-    <Compile Include="EmptyClass.cs" />
-    <Compile Include="Enums.cs" />
+    <Compile Include="Helpers\EmptyClass.cs" />
+    <Compile Include="Hardware\Enums.cs" />
     <Compile Include="GeneralObjects\BagliAg.cs" />
     <Compile Include="Repositories\BagliAgRepository.cs" />
     <Compile Include="GeneralObjects\Birlik.cs" />
