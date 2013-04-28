@@ -20,8 +20,8 @@ namespace Mebs_Envanter
         {
             String str = "";
             str = Pc_adi;
-            if (Marka!=null && Marka.MarkaID > 0)
-            {                
+            if (Marka != null && Marka.MarkaID > 0)
+            {
                 str += " , Marka : " + Marka.MarkaName;
             }
             return str;
@@ -34,7 +34,6 @@ namespace Mebs_Envanter
             get { return commands; }
             set { commands = value; }
         }
-
 
         public void Fetch()
         {
@@ -64,8 +63,10 @@ namespace Mebs_Envanter
             }
         }
 
-        public ComputerInfo(Action<object> methodToExecuteOnDelete):this() {
-            
+        public ComputerInfo(Action<object> methodToExecuteOnDelete)
+            : this()
+        {
+
             Commands.AddCommand("Delete", methodToExecuteOnDelete);
         }
 
@@ -112,8 +113,9 @@ namespace Mebs_Envanter
             {
                 EklenmeTarihi = (DateTime)rowPC["kayit_ekleme_tarihi"];
             }
-            catch (Exception) { 
-            
+            catch (Exception)
+            {
+
             }
 
         }
@@ -169,7 +171,7 @@ namespace Mebs_Envanter
 
         private void Set_HardwareInfos(SqlConnection sqlCon)
         {
-            List<OEMDevice> devs = OEMDevice.GetOemsDB(sqlCon, true, Id, -1);
+            List<OEMDevice> devs = OEMDevice.GetOemDevicesDB(sqlCon, true, Id, -1);
             foreach (OEMDevice item in devs)
             {
 
@@ -179,13 +181,13 @@ namespace Mebs_Envanter
                     Set_MonitorInfo(mon);
                     MonitorInfo = mon;
                 }
-                
+
                 else
                 {
                     OemDevicesVModel.AssignOemDevice(item);
                 }
             }
-            
+
         }
 
         internal OEMDevice Get_OemDevice(DeviceTypes devType)
@@ -259,14 +261,15 @@ namespace Mebs_Envanter
             set { monitorInfo = value; OnPropertyChanged("MonitorInfo"); }
         }
 
-        private string pc_adi="";
+        private string pc_adi = "";
         /// <summary>
         /// Bilgisayar Adı
         /// </summary>
         public string Pc_adi
         {
             get { return pc_adi; }
-            set {
+            set
+            {
                 pc_adi = value;
                 OnPropertyChanged("Pc_adi");
             }
@@ -359,8 +362,8 @@ namespace Mebs_Envanter
         }
 
 
-        private DateTime ? eklenmeTarihi=null;
-        public DateTime ? EklenmeTarihi
+        private DateTime? eklenmeTarihi = null;
+        public DateTime? EklenmeTarihi
         {
             get { return eklenmeTarihi; }
             set { eklenmeTarihi = value; OnPropertyChanged("EklenmeTarihi"); }

@@ -135,7 +135,6 @@ namespace Mebs_Envanter
                 Alan_kisi_rutbe = alan_kisi_rutbe;
                 Veren_kisi_isim = veren_kisi_isim;
 
-
                 int alanKisiKomutanlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_komutanlik_id"], -1);
                 int alanKisiBirlikId = DBValueHelpers.GetInt32(rowParca["alan_kisi_birlik_id"], -1);
                 int alanKisiKisimId = DBValueHelpers.GetInt32(rowParca["alan_kisi_kisim_id"], -1);

@@ -32,14 +32,14 @@ namespace Mebs_Envanter
             }
         }
 
-        public static List<OEMDevice> GetOemsDB(SqlConnection sqlCon, bool isForComputer, int bilgisayar_id, int _parca_id)
+        public static List<OEMDevice> GetOemDevicesDB(SqlConnection sqlConnection, bool isForComputer, int bilgisayar_id, int _parca_id)
         {
-            if (sqlCon == null)
-            {
+            if (sqlConnection == null)
+            {                
                 throw new NullReferenceException("SqlConnection parameter is null");
             }
             List<OEMDevice> devModels = new List<OEMDevice>();
-            SqlConnection cnn = sqlCon;//GlobalDataAccess.Get_Fresh_SQL_Connection();
+            SqlConnection cnn = sqlConnection;//GlobalDataAccess.Get_Fresh_SQL_Connection();
             SqlCommand cmd = null;
             if (isForComputer)
             {
@@ -77,6 +77,8 @@ namespace Mebs_Envanter
                         int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
                         int parca_adedi = DBValueHelpers.GetInt32(rowParca["parca_adedi"], 1);
 
+                        String model =DBValueHelpers.GetString(rowParca["model"],"");                        
+
                         OEMDevice devOem = null;
                         if (tip == DeviceTypes.MONITOR)
                         {
@@ -108,6 +110,7 @@ namespace Mebs_Envanter
                         devOem.Tempest = new Tempest(tempestid, "");
                         devOem.DeviceInfo = parca_tanimi;
                         devOem.Adet = parca_adedi;
+                        devOem.Model = model;
                         devModels.Add(devOem);
                     }
 

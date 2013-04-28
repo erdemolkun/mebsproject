@@ -16,5 +16,16 @@ namespace Mebs_Envanter.DB
                 return Convert.ToInt32(s);
             }           
         }
+        public static String GetString(object s, String defaultValue)
+        {
+            if (s == null || String.IsNullOrEmpty(s.ToString()))
+            {
+                return defaultValue;
+            }
+            else
+            {
+                return s.ToString();
+            }
+        }
     }
 }
