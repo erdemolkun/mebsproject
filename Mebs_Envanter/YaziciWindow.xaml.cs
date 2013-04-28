@@ -75,7 +75,8 @@ namespace Mebs_Envanter
             {
                 IndividualDeviceInfo infIndividualDevice = GetNewDevice();
                 IndividualDeviceInfo currentDevice = individualDevicesList.SelectedItem as IndividualDeviceInfo;
-                Current_IndividualDeviceInfo = currentDevice;
+                if(currentDevice!=null)
+                    Current_IndividualDeviceInfo = currentDevice;
 
                 AssignIndividualDeviceInfoByGui(Current_IndividualDeviceInfo, infIndividualDevice, isEdit);
 
@@ -208,7 +209,7 @@ namespace Mebs_Envanter
                     try
                     {
                         int parca_id = DBValueHelpers.GetInt32(rowPC["parca_id"].ToString(), -1);
-                        List<OEMDevice> devs = OEMDevice.GetOemsDB(cnn, false, -1, parca_id);
+                        List<OEMDevice> devs = OEMDevice.GetOemDevicesDB(cnn, false, -1, parca_id);
                         IndividualDeviceInfo tempDevice = null;
                         foreach (var item in devs)
                         {
@@ -227,7 +228,6 @@ namespace Mebs_Envanter
                         }
                     }
                     catch (Exception) { }
-
                 }
                 individualDevicesList.DataContext = repositoryNew;
                 if (selectLast)
@@ -266,6 +266,16 @@ namespace Mebs_Envanter
             }
             list.ScrollIntoView(infYazici);
             Current_IndividualDeviceInfo = infYazici;
+
+            foreach (var item in list.SelectedItems)
+            {
+                IndividualDeviceInfo devItem = item as IndividualDeviceInfo;
+                if (devItem != null)
+                {
+                    devItem.Fetch();
+                }
+            }
+
             gridCihazBilgileri.DataContext = Current_IndividualDeviceInfo;
         }
 
@@ -369,7 +379,7 @@ namespace Mebs_Envanter
             String pcModel = searchGridModelTxtBox.Text.Trim().ToString();
             if (!String.IsNullOrEmpty(pcModel))
             {
-                list.Add("@yazici_modeli", pcModel);
+                list.Add("@model", pcModel);
             }
 
             String serial = searchGridSerialNumberTxtBox.Text.Trim().ToString();

@@ -89,6 +89,7 @@ namespace Mebs_Envanter.DB
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@seri_no", SqlDbType.NVarChar, 50));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@parca_tanimi", SqlDbType.NVarChar, 50));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@parca_no", SqlDbType.NVarChar, 50));
+            cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@model", SqlDbType.NVarChar, 50));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@tempest_id", SqlDbType.Int));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@parca_tipi", SqlDbType.SmallInt));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@parca_adedi", SqlDbType.SmallInt));
@@ -112,8 +113,7 @@ namespace Mebs_Envanter.DB
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar, 5));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@parca_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@yazici_id", SqlDbType.Int));
-            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@senet_id", SqlDbType.Int));
-            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@yazici_modeli", SqlDbType.NVarChar, 50));
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@senet_id", SqlDbType.Int));            
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@ip_adresi", SqlDbType.NVarChar, 50));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@bagli_ag_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@temp_yazici_id", SqlDbType.Int));
@@ -239,8 +239,7 @@ namespace Mebs_Envanter.DB
                         cmYaziciEkleSilDuz.Parameters["@yazici_id"].Value = infoYazici.Id_Dev;
                     }
                     cmYaziciEkleSilDuz.Parameters["@parca_id"].Value = infoYazici.Id;
-                    cmYaziciEkleSilDuz.Parameters["@ip_adresi"].Value = infoYazici.NetworkInfo.IpAddress;
-                    cmYaziciEkleSilDuz.Parameters["@yazici_modeli"].Value = infoYazici.Model;
+                    cmYaziciEkleSilDuz.Parameters["@ip_adresi"].Value = infoYazici.NetworkInfo.IpAddress;                    
                     if (infoYazici.NetworkInfo.BagliAg != null && infoYazici.NetworkInfo.BagliAg.Ag_id > 0)
                     {
                         cmYaziciEkleSilDuz.Parameters["@bagli_ag_id"].Value = infoYazici.NetworkInfo.BagliAg.Ag_id;
@@ -305,6 +304,7 @@ namespace Mebs_Envanter.DB
                     cmParcaEkleSilDuz.Parameters["@parca_no"].Value = deviceOem.Parca_no;
                     cmParcaEkleSilDuz.Parameters["@parca_adedi"].Value = deviceOem.Adet;
                     cmParcaEkleSilDuz.Parameters["@parca_tanimi"].Value = deviceOem.DeviceInfo;
+                    cmParcaEkleSilDuz.Parameters["@model"].Value = deviceOem.Model;
                     if (bilgisayar_id > 0)
                     {
                         cmParcaEkleSilDuz.Parameters["@bilgisayar_id"].Value = bilgisayar_id;

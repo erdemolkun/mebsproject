@@ -9,10 +9,11 @@ namespace Mebs_Envanter.Hardware
     {
         public bool isEdit = false;
         public bool PropertiesFetched = false;
-        public void Fetch()
+        public virtual void Fetch()
         {
             if (!PropertiesFetched)
             {
+                SenetInfo.Set_SenetInfos(false, -1, SenetInfo.Id);
                 PropertiesFetched = true;
             }
         }
@@ -21,13 +22,11 @@ namespace Mebs_Envanter.Hardware
         {
 
         }
-        public IndividualDeviceInfo(DeviceTypes type)
-            : base(type)
-        {
+        //public IndividualDeviceInfo(DeviceTypes type)
+        //    : base(type)
+        //{
 
-        }
-
-
+        //}
 
         private int id_Dev = -1;
         public int Id_Dev
