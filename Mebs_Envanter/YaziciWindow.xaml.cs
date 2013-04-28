@@ -130,7 +130,7 @@ namespace Mebs_Envanter
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             IndividualDeviceInfo devInfo = e.Argument as IndividualDeviceInfo;
-            bool senetInsertUpdate = DBFunctions.InsertOrUpdateSenet(-1, devInfo.SenetInfo, devInfo.isEdit);
+            bool senetInsertUpdate = DBFunctions.InsertOrUpdateSenet(devInfo.SenetInfo, devInfo.isEdit);
             bool deviceInsertOrUpdate = DBFunctions.InsertOrUpdateOemDevice(devInfo, -1, devInfo.isEdit);
             if (deviceInsertOrUpdate)
             {

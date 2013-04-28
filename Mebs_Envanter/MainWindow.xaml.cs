@@ -48,7 +48,7 @@ namespace Mebs_Envanter
         }
 
         void MainWindow_OnDbInitialized()
-        {            
+        {
             Current_Computer_Info = GetNewComputer();
             setGUIDataContextForInitialization();
             RefreshComputerList(null, true);
@@ -59,7 +59,7 @@ namespace Mebs_Envanter
         private ComputerInfo GetNewComputer()
         {
             return new ComputerInfo(x2 => pcDeleteBtn_Click(null, null));
-        }        
+        }
 
         private void SetContextForSearchFields()
         {
@@ -431,44 +431,9 @@ namespace Mebs_Envanter
             try
             {
                 Stopwatch w = Stopwatch.StartNew();
-                ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
-                SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
-
-                //String commandText = "Select TOP 1 * From tbl_bilgisayar pc order by bilgisayar_id Desc";
-                String commandText = "pc_genel_arama";
-                SqlCommand cmd = new SqlCommand(commandText, cnn);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                if (parameterList != null)
-                {
-                    foreach (var item in parameterList)
-                    {
-                        cmd.Parameters.AddWithValue(item.Key, item.Value);
-                    }
-                }
-
-                SqlDataAdapter adp = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-
-                bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+                ComputerInfoRepository repositoryNew = GetComputerRepository(parameterList);                
                 try
-                {
-                    adp.Fill(dt);
-                    //adp.Fill(0, 2, dt);
-                    //dataGridSample.ItemsSource = dt.DefaultView;
-                    foreach (DataRow rowPC in dt.Rows)
-                    {
-                        ComputerInfo tempComputer = GetNewComputer();
-                        try
-                        {
-                            tempComputer.SetGeneralFields(rowPC);
-                            //tempComputer.Fetch();
-                            //tempComputer.Set_ComputerOemDevices(cnn);
-                            //tempComputer.Senet.Set_SenetInfos(true,tempComputer.Id,-1);
-                        }
-                        catch (Exception) { }
-                        repositoryNew.Computers.Add(tempComputer);
-                    }
+                {                    
                     pcList.DataContext = repositoryNew;
                     current_In_MemoryList = repositoryNew;
                     quickSearchBtn.ClearText();
@@ -476,12 +441,7 @@ namespace Mebs_Envanter
                 }
                 catch (Exception)
                 {
-                }
-                finally
-                {
-                    cnn.Close();
-                    cnn.Dispose();
-                }
+                }                
                 long x = w.ElapsedMilliseconds;
                 Console.WriteLine("Bilgisayar listesi " + x + " milisaniye içinde yenilendi");
             }
@@ -489,6 +449,52 @@ namespace Mebs_Envanter
             {
                 LoggerMebs.WriteToFile("\nRefreshComputerList Hatası : \n" + ex.Message);
             }
+        }
+
+        private ComputerInfoRepository GetComputerRepository(SortedList<String, object> parameterList)
+        {
+            ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
+            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+
+            //String commandText = "Select TOP 1 * From tbl_bilgisayar pc order by bilgisayar_id Desc";
+            String commandText = "pc_genel_arama";
+            SqlCommand cmd = new SqlCommand(commandText, cnn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            if (parameterList != null)
+            {
+                foreach (var item in parameterList)
+                {
+                    cmd.Parameters.AddWithValue(item.Key, item.Value);
+                }
+            }
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            try
+            {
+                adp.Fill(dt);                
+                foreach (DataRow rowPC in dt.Rows)
+                {
+                    ComputerInfo tempComputer = GetNewComputer();
+                    try
+                    {
+                        tempComputer.SetGeneralFields(rowPC);
+                    }
+                    catch (Exception) { }
+                    repositoryNew.Computers.Add(tempComputer);
+                }                
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                cnn.Close();
+                cnn.Dispose();
+            }
+            return repositoryNew;
+            
         }
 
         private void btnClearSearch_Click(object sender, RoutedEventArgs e)
