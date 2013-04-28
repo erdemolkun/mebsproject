@@ -88,25 +88,18 @@ namespace Mebs_Envanter
             }
         }
 
-        internal void Set_SenetInfos(bool isInComputer, int bilgisayar_id, int senet_id)
+        internal void Set_SenetInfos(int senet_id)
         {
+            //tochange
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
 
             SqlCommand cmd = null;
 
-            if (isInComputer)
-            {
-                String conString = "Select * From tbl_senet where bilgisayar_id=@bilgisayar_id";
-                cmd = new SqlCommand(conString, cnn);
-                cmd.Parameters.AddWithValue("@bilgisayar_id", bilgisayar_id);
-            }
-            else
-            {
 
-                String conString = "Select * From tbl_senet where senet_id=@senet_id";
-                cmd = new SqlCommand(conString, cnn);
-                cmd.Parameters.AddWithValue("@senet_id", senet_id);
-            }
+            String conString = "Select * From tbl_senet where senet_id=@senet_id";
+            cmd = new SqlCommand(conString, cnn);
+            cmd.Parameters.AddWithValue("@senet_id", senet_id);
+
 
 
             SqlDataAdapter adp = new SqlDataAdapter(cmd);

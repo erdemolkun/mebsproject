@@ -39,8 +39,9 @@ namespace Mebs_Envanter
         {
             if (!PropertiesFetched)
             {
+                //tochange
                 Set_ComputerOemDevices(null);
-                Senet.Set_SenetInfos(true, Id, -1);
+                Senet.Set_SenetInfos(Senet.Id);
                 PropertiesFetched = true;
             }
         }
@@ -74,20 +75,7 @@ namespace Mebs_Envanter
         public void SetGeneralFields(DataRow rowPC)
         {
             Id = (int)rowPC["bilgisayar_id"];
-            //if (!String.IsNullOrEmpty(rowPC["marka_id"].ToString()))
-            //{
-            //    markaid = (int)rowPC["marka_id"];
-            //}
-            //try
-            //{
-            //    bool x = String.IsNullOrEmpty(rowPC["marka_id"].ToString());
-            //    int deneme = -1;
-            //    Int32.TryParse(rowPC["marka_id"].ToString(), out deneme);
-            //    //markaid = (int)rowPC["marka_id"]; if (markaid < 0)markaid = -1;
-            //}
-            //catch (Exception)
-            //{
-            //}
+            
             int markaid = DBValueHelpers.GetInt32(rowPC["marka_id"].ToString(), -1);
             Marka = new Marka(markaid, "");
 
@@ -100,7 +88,9 @@ namespace Mebs_Envanter
             int tempest_id = DBValueHelpers.GetInt32(rowPC["tempest_id"].ToString(), -1);
 
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
-
+            
+            //tochange add senet_id
+            Senet.Id = DBValueHelpers.GetInt32(rowPC["senet_id"], -1);
 
             Pc_adi = rowPC["pc_adi"].ToString();
             PcStokNo = rowPC["pc_stok_no"].ToString();
@@ -109,23 +99,26 @@ namespace Mebs_Envanter
             DeviceNo = rowPC["parca_no"].ToString();
             Notlar = rowPC["notlar"].ToString();
             Tempest = new Tempest(tempest_id, "");
+            
             try
             {
                 EklenmeTarihi = (DateTime)rowPC["kayit_ekleme_tarihi"];
             }
             catch (Exception)
             {
-
             }
-
         }
 
         internal void Set_MonitorInfo(OEMDevice devOem)
         {
+            if (devOem==null || !(devOem is OEMDevice)) return;
+
+            Monitor devMonitor = devOem as Monitor;
+
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             String conString = "Select * From tbl_monitor where parca_id=@parca_id";
             SqlCommand cmd = new SqlCommand(conString, cnn);
-            cmd.Parameters.AddWithValue("@parca_id", devOem.Id);
+            cmd.Parameters.AddWithValue("@parca_id", devMonitor.Id);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
@@ -153,11 +146,11 @@ namespace Mebs_Envanter
 
                     if (mon_type > 0)
                     {
-                        (devOem as Monitor).MonType = (MonitorTypes)mon_type;
+                        devMonitor.MonType = (MonitorTypes)mon_type;
                     }
-                    (devOem as Monitor).StokNo = stok_no;
-                    (devOem as Monitor).Mon_id = mon_id;
-                    (devOem as Monitor).MonSize = new MonitorSize(boyut_id, 0);
+                    devMonitor.StokNo = stok_no;
+                    devMonitor.Mon_id = mon_id;
+                    devMonitor.MonSize = new MonitorSize(boyut_id, 0);
                 }
             }
         }
