@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Mebs_Envanter.Hardware
 {
-    public class ProjectorInfo:IndividualDeviceInfo
+    public class ProjectionInfo:IndividualDeviceInfo
     {
-        public ProjectorInfo() {
+        public ProjectionInfo() {
 
-            DeviceType = DeviceTypes.PROJECTOR;
+            DeviceType = DeviceTypes.PROJECTION;
         }
     }
 }

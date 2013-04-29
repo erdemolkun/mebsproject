@@ -131,7 +131,7 @@
     </Compile>
     <Compile Include="Hardware\IndividualDevice.cs" />
     <Compile Include="Hardware\IndividualDeviceInfo.cs" />
-    <Compile Include="Hardware\ProjectorInfo.cs" />
+    <Compile Include="Hardware\ProjectionInfo.cs" />
     <Compile Include="Hardware\ScannerInfo.cs" />
     <Compile Include="Hardware\YaziciInfo.cs" />
     <Compile Include="Helpers\LoggerMebs.cs" />

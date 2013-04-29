@@ -21,7 +21,6 @@
     <Grid Background="{StaticResource WindowGeneralBackgroundColor}">
         <Grid.Resources>
             <SolidColorBrush x:Key="headerColor1" Color="SkyBlue"></SolidColorBrush>
-
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
@@ -31,7 +30,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition MinHeight="540" Height="*"></RowDefinition>
+            <RowDefinition MinHeight="480" Height="*"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition MaxHeight="250" Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>

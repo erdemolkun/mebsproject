@@ -34,7 +34,7 @@ namespace Mebs_Envanter
                 if (devType == DeviceTypes.MONITOR) { return "Monitor"; }
                 if (devType == DeviceTypes.PRINTER) { return "Yazıcı"; }
                 if (devType == DeviceTypes.SCANNER) { return "Tarayıcı"; }
-                if (devType == DeviceTypes.PROJECTOR) { return "Projektör"; }
+                if (devType == DeviceTypes.PROJECTION) { return "Projeksiyon"; }
             }
             catch (Exception) { }
             return "N/A";

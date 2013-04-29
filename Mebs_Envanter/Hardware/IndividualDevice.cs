@@ -13,24 +13,13 @@ namespace Mebs_Envanter.Hardware
             Devices = new List<IndividualDevice>();
             Devices.Add(new IndividualDevice(ExtraDeviceTypes.PRINTER));
             Devices.Add(new IndividualDevice(ExtraDeviceTypes.SCANNER));
-            Devices.Add(new IndividualDevice(ExtraDeviceTypes.PROJECTOR));
+            Devices.Add(new IndividualDevice(ExtraDeviceTypes.PROJECTION));
         }
 
         public override string ToString()
         {
-            if (DeviceType == ExtraDeviceTypes.PRINTER)
-            {
-                return "Yazıcı";
-            }
-            else if (DeviceType == ExtraDeviceTypes.PROJECTOR)
-            {
-                return "Projektör";
-            }
-            else if (DeviceType == ExtraDeviceTypes.SCANNER)
-            {
-                return "Tarayıcı";
-            }
-            return "";
+
+            return DeviceTypeNameHelper.GET_DEV_NAME((DeviceTypes)ExtraDeviceTypes.ConvertToDeviceType(DeviceType));
 
         }
         public int DeviceType;

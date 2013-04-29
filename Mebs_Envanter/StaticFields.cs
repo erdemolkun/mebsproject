@@ -9,7 +9,23 @@ namespace Mebs_Envanter
     {
         public static int PRINTER = 1;
         public static int SCANNER = 2;
-        public static int PROJECTOR = 4;
+        public static int PROJECTION = 4;
+
+        public static int ConvertToDeviceType(int extraDeviceType) {
+
+            if (extraDeviceType == PRINTER) {
+                return (int)DeviceTypes.PRINTER;
+            }
+            if (extraDeviceType == SCANNER)
+            {
+                return (int)DeviceTypes.SCANNER;
+            }
+            if (extraDeviceType == PROJECTION)
+            {
+                return (int)DeviceTypes.PROJECTION;
+            }
+            return -1;
+        }
     }
     public class StaticFields
     {

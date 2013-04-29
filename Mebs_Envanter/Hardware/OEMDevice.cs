@@ -88,9 +88,9 @@ namespace Mebs_Envanter
                         {
                             devOem = new YaziciInfo();
                         }
-                        else if (tip == DeviceTypes.PROJECTOR)
+                        else if (tip == DeviceTypes.PROJECTION)
                         {
-                            devOem = new ProjectorInfo();
+                            devOem = new ProjectionInfo();
                         }
                         else if (tip == DeviceTypes.SCANNER)
                         {
