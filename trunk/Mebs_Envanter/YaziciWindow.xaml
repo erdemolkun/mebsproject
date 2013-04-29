@@ -144,7 +144,7 @@
                     <TextBox Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" 
                              HorizontalAlignment="Center" MinWidth="120" x:Name="searchGridSerialNumberTxtBox"></TextBox>
 
-                    <TextBlock Text="Yazici Modeli" Grid.Row="7" VerticalAlignment="Center" />
+                    <TextBlock Text="Model" Grid.Row="7" VerticalAlignment="Center" />
                     <TextBox MinWidth="120" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Width="60" x:Name="searchGridModelTxtBox"></TextBox>
 

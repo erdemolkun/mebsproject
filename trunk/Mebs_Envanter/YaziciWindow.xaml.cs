@@ -42,9 +42,9 @@ namespace Mebs_Envanter
             {
                 return new YaziciInfo();
             }
-            else if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PROJECTOR)
+            else if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PROJECTION)
             {
-                return new ProjectorInfo();
+                return new ProjectionInfo();
             }
             else if (SelectedIndividual.DeviceType == ExtraDeviceTypes.SCANNER)
             {
@@ -186,10 +186,13 @@ namespace Mebs_Envanter
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
 
             //String commandText = "Select TOP 10 * From tbl_yazici pc order by yazici_id Desc";
-            String commandText = "p_yazici_arama";
+            //String commandText = "p_yazici_arama";
+            String commandText = "p_bagimsiz_cihaz_arama";
             SqlCommand cmd = new SqlCommand(commandText, cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
+
+            cmd.Parameters.AddWithValue("@parca_tipi",ExtraDeviceTypes.ConvertToDeviceType(SelectedIndividual.DeviceType));
             if (parameterList != null)
             {
                 foreach (var item in parameterList)
@@ -208,7 +211,8 @@ namespace Mebs_Envanter
                 {
                     try
                     {
-                        int parca_id = DBValueHelpers.GetInt32(rowPC["parca_id"].ToString(), -1);
+                        //int parca_id = DBValueHelpers.GetInt32(rowPC["parca_id"].ToString(), -1);
+                        int parca_id = DBValueHelpers.GetInt32(rowPC["base_parca_id"].ToString(), -1);
                         List<OEMDevice> devs = OEMDevice.GetOemDevicesDB(cnn, false, -1, parca_id);
                         IndividualDeviceInfo tempDevice = null;
                         foreach (var item in devs)
@@ -440,6 +444,10 @@ namespace Mebs_Envanter
         private void individualDevicesCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedIndividual = (sender as ComboBox).SelectedItem as IndividualDevice;
+            if (IsLoaded)
+            {
+                RefreshPrinterList(null, true);
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Mebs_Envanter
         MONITOR = 9,
         PRINTER=10,
         SCANNER=11,
-        PROJECTOR=12
+        PROJECTION = 12
     }
 
     public enum MonitorTypes : int
