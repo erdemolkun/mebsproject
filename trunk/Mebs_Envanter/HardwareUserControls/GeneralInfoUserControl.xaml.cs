@@ -28,11 +28,11 @@ namespace Mebs_Envanter.HardwareUserControls
         }
         public void Init() {
 
-            genelBilgilerMarkalarCombo.ItemsSource = MarkaRepository.INSTANCE.Markalar;
+            genelBilgilerMarkalarCombo.ItemsSource = MarkaRepository.INSTANCE.Collection;
 
             TempestRepository Rep_Tempest = new TempestRepository();
             Rep_Tempest.FillSeviyeler(false);
-            genelBilgilerTempestCombo.ItemsSource = Rep_Tempest.TempestSeviyeler;
+            genelBilgilerTempestCombo.ItemsSource = Rep_Tempest.Collection;
             TempestRepository.INSTANCE = Rep_Tempest;
         
         }

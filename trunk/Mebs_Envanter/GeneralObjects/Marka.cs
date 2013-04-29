@@ -46,7 +46,7 @@ namespace Mebs_Envanter
                 _markaID = value;
                 if (MarkaRepository.INSTANCE != null)
                 {
-                    foreach (Marka item in MarkaRepository.INSTANCE.Markalar)
+                    foreach (Marka item in MarkaRepository.INSTANCE.Collection)
                     {
                         if (value == item.Id)
                         {

@@ -44,17 +44,17 @@ namespace Mebs_Envanter.HardwareUserControls
             // Markalar arayüze atanıyor
             MarkaRepository Marka_Repository = new MarkaRepository();
             Marka_Repository.FillMarkalar(false);
-            markalarCombo.ItemsSource = Marka_Repository.Markalar;
+            markalarCombo.ItemsSource = Marka_Repository.Collection;
             MarkaRepository.INSTANCE = Marka_Repository;
 
             TempestRepository Rep_Tempest = new TempestRepository();
             Rep_Tempest.FillSeviyeler(false);
-            tempestCombo.ItemsSource = Rep_Tempest.TempestSeviyeler;
+            tempestCombo.ItemsSource = Rep_Tempest.Collection;
             TempestRepository.INSTANCE = Rep_Tempest;
 
             PrinterTypesRepository Rep_Types = new PrinterTypesRepository();
             Rep_Types.FillPrinterTypes(false);
-            printerTypesCombo.ItemsSource = Rep_Types.PrinterTypes;
+            printerTypesCombo.ItemsSource = Rep_Types.Collection;
             PrinterTypesRepository.INSTANCE = Rep_Types;
 
         }

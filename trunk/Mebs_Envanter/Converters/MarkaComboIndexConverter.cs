@@ -17,7 +17,7 @@ namespace Mebs_Envanter.Converters
             {
                 Marka marka = value as Marka;
                 int index = 0;
-                foreach (var item in MarkaRepository.INSTANCE.Markalar)
+                foreach (var item in MarkaRepository.INSTANCE.Collection)
                 {
                     if (marka.Id == item.Id) {
                         marka.MarkaName = item.MarkaName;

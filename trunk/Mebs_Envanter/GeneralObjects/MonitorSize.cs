@@ -36,9 +36,6 @@ namespace Mebs_Envanter.GeneralObjects
             Id = _id;
         }
 
-        
-
-
         private double monitorLength = 0;
         public double MonitorLength
         {

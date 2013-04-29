@@ -10,22 +10,22 @@ using Mebs_Envanter.GeneralObjects;
 
 namespace Mebs_Envanter.Repositories
 {
-    internal class TempestRepository : MebsBaseObject
+    internal class TempestRepository : BaseRepository<Tempest>
     {
         public static TempestRepository INSTANCE = null;
 
-        private ObservableCollection<Tempest> tempestSeviyeler = new ObservableCollection<Tempest>();
-        public ObservableCollection<Tempest> TempestSeviyeler
-        {
-            get { return tempestSeviyeler; }
-        }
+        //private ObservableCollection<Tempest> tempestSeviyeler = new ObservableCollection<Tempest>();
+        //public ObservableCollection<Tempest> TempestSeviyeler
+        //{
+        //    get { return tempestSeviyeler; }
+        //}
 
         private void ClearSeviyeler(bool isForSearch)
         {
-            TempestSeviyeler.Clear();
+            Collection.Clear();
             if (isForSearch)
-            TempestSeviyeler.Add(new Tempest(-1, "Hepsi"));
-            else TempestSeviyeler.Add(new Tempest(-1, ""));
+                Collection.Add(new Tempest(-1, "Hepsi"));
+            else Collection.Add(new Tempest(-1, ""));
         }
         public void FillSeviyeler(bool isForSearch)
         {
@@ -47,7 +47,7 @@ namespace Mebs_Envanter.Repositories
 
                     current_tempest = dr["tempest_seviyesi"].ToString();
                     current_tempest_id = (int)dr["tempest_id"];
-                    TempestSeviyeler.Add(new Tempest(current_tempest_id, current_tempest));
+                    Collection.Add(new Tempest(current_tempest_id, current_tempest));
                 }
                 dr.Close();
                 cnn.Close();

@@ -99,8 +99,8 @@ namespace Mebs_Envanter.HardwareUserControls
                         int newId = DBFunctions.InsertMonitorSize(size);
                         MonitorSize sizeNew = new MonitorSize(newId, (float)size);
                         //(monitorBoyutlarCombo.ItemsSource as MonitorSizesRepository).Sizes.Add(sizeNew);
-                        MonitorSizesRepository.INSTANCE.Sizes.Add(sizeNew);
-                        MonitorSizesRepository.INSTANCE.Sizes.Sort(p => p.MonitorLength);
+                        MonitorSizesRepository.INSTANCE.Collection.Add(sizeNew);
+                        MonitorSizesRepository.INSTANCE.Collection.Sort(p => p.MonitorLength);
                         inf.MonSize = sizeNew;
                         
                     }
@@ -117,19 +117,19 @@ namespace Mebs_Envanter.HardwareUserControls
             // Markalar arayüze atanıyor
             MarkaRepository Marka_Repository = new MarkaRepository();
             Marka_Repository.FillMarkalar(false);
-            monitorMarkalarCombo.ItemsSource = Marka_Repository.Markalar;
+            monitorMarkalarCombo.ItemsSource = Marka_Repository.Collection;
             MarkaRepository.INSTANCE = Marka_Repository;
 
 
             TempestRepository Rep_Tempest = new TempestRepository();
             Rep_Tempest.FillSeviyeler(false);
-            monitorTempestCombo.ItemsSource = Rep_Tempest.TempestSeviyeler;
+            monitorTempestCombo.ItemsSource = Rep_Tempest.Collection;
             TempestRepository.INSTANCE = Rep_Tempest;
 
 
             MonitorSizesRepository Size_Rep = new MonitorSizesRepository();
             Size_Rep.FillSizes(false);
-            monitorBoyutlarCombo.ItemsSource = Size_Rep.Sizes;
+            monitorBoyutlarCombo.ItemsSource = Size_Rep.Collection;
             MonitorSizesRepository.INSTANCE = Size_Rep;
         }
 

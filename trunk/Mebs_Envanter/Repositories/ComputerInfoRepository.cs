@@ -6,15 +6,13 @@ using System.Collections.ObjectModel;
 
 namespace Mebs_Envanter.Repositories
 {
-    public class ComputerInfoRepository : MebsBaseObject
+    public class ComputerInfoRepository : BaseRepository<ComputerInfo>
     {
-        private ObservableCollection<ComputerInfo> computers = new ObservableCollection<ComputerInfo>();
-        public ObservableCollection<ComputerInfo> Computers
-        {
-            get { return computers; }
-        }
-
-
+        //private ObservableCollection<ComputerInfo> computers = new ObservableCollection<ComputerInfo>();
+        //public ObservableCollection<ComputerInfo> Computers
+        //{
+        //    get { return computers; }
+        //}
 
         internal ComputerInfoRepository getSearchRepository(String searchText)
         {
@@ -26,16 +24,16 @@ namespace Mebs_Envanter.Repositories
                 String[] splitted = { searchText }; //searchText.Split(',');
                 foreach (String itemSplittedStr in splitted)
                 {
-                    foreach (ComputerInfo item in this.Computers)
+                    foreach (ComputerInfo item in this.Collection)
                     {
                         if (item.Pc_adi.ToLower().Contains(itemSplittedStr.ToLower()) ||
                             item.Senet.Alan_kisi_rutbe.ToLower().Contains(itemSplittedStr.ToLower()) ||
                             item.Senet.Alan_kisi_isim.ToLower().Contains(itemSplittedStr.ToLower()) ||
                             item.Senet.Alan_kisi_komutanlik.Komutanlik_ismi.ToLower().Contains(itemSplittedStr.ToLower()))
                         {
-                            if (!repNew.Computers.Contains(item))
+                            if (!repNew.Collection.Contains(item))
                             {
-                                repNew.Computers.Add(item);
+                                repNew.Collection.Add(item);
                             }
                         }
                     }

@@ -9,27 +9,27 @@ using Mebs_Envanter.GeneralObjects;
 
 namespace Mebs_Envanter.Repositories
 {
-    public class BagliAgRepository
+    public class BagliAgRepository:BaseRepository<BagliAg>
     {
         public static BagliAgRepository INSTANCE = new BagliAgRepository();
         private void ClearAglar(bool isForSearch)
         {
-            BagliAglar.Clear();
+            Collection.Clear();
             if (isForSearch)
             {
-                BagliAglar.Add(new BagliAg("Hepsi", -1));
+                Collection.Add(new BagliAg("Hepsi", -1));
             }
             else
             {
-                BagliAglar.Add(new BagliAg("", -1));
+                Collection.Add(new BagliAg("", -1));
             }
         }
 
-        private ObservableCollection<BagliAg> bagliAglar = new ObservableCollection<BagliAg>();
-        public ObservableCollection<BagliAg> BagliAglar
-        {
-            get { return bagliAglar; }
-        }
+        //private ObservableCollection<BagliAg> bagliAglar = new ObservableCollection<BagliAg>();
+        //public ObservableCollection<BagliAg> BagliAglar
+        //{
+        //    get { return bagliAglar; }
+        //}
 
 
         public void Fill_Aglar(bool isForSearch)
@@ -53,7 +53,7 @@ namespace Mebs_Envanter.Repositories
                     current_bagliag_adi = dr["bagli_ag_adi"].ToString();
                     current_bagliag_id = (int)dr["bagli_ag_id"];
 
-                    BagliAglar.Add(new BagliAg(current_bagliag_adi, current_bagliag_id));
+                    Collection.Add(new BagliAg(current_bagliag_adi, current_bagliag_id));
                 }
                 dr.Close();
                 cnn.Close();

@@ -46,7 +46,7 @@ namespace Mebs_Envanter
                 _markaID = value;
                 if (PrinterTypesRepository.INSTANCE != null)
                 {
-                    foreach (PrinterType item in PrinterTypesRepository.INSTANCE.PrinterTypes)
+                    foreach (PrinterType item in PrinterTypesRepository.INSTANCE.Collection)
                     {
                         if (value == item.Id)
                         {

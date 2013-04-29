@@ -16,7 +16,7 @@ namespace Mebs_Envanter.Converters
             {
                 MonitorSize infoSize = value as MonitorSize;
                 int index = -1;
-                foreach (var item in MonitorSizesRepository.INSTANCE.Sizes)
+                foreach (var item in MonitorSizesRepository.INSTANCE.Collection)
                 {
                     index++;
                     if (infoSize.Id == item.Id) {

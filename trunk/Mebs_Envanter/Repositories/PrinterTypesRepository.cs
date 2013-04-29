@@ -8,7 +8,7 @@ using Mebs_Envanter.DB;
 
 namespace Mebs_Envanter.Repositories
 {
-    public class PrinterTypesRepository
+    public class PrinterTypesRepository:BaseRepository<PrinterType>
     {
 
         private static PrinterTypesRepository instance = null;
@@ -23,21 +23,21 @@ namespace Mebs_Envanter.Repositories
 
         public PrinterTypesRepository() { }
 
-        private ObservableCollection<PrinterType> printerTypes = new ObservableCollection<PrinterType>();
-        public ObservableCollection<PrinterType> PrinterTypes
-        {
-            get { return printerTypes; }
-        }
+        //private ObservableCollection<PrinterType> printerTypes = new ObservableCollection<PrinterType>();
+        //public ObservableCollection<PrinterType> PrinterTypes
+        //{
+        //    get { return printerTypes; }
+        //}
 
         private void ClearPrinterTypes(bool isForSearch) {
 
-            PrinterTypes.Clear();
+            Collection.Clear();
             if (isForSearch)
             {
-                PrinterTypes.Add(new PrinterType(-1, "Hepsi"));
+                Collection.Add(new PrinterType(-1, "Hepsi"));
             }
             else {
-                PrinterTypes.Add(new PrinterType(-1, ""));
+                Collection.Add(new PrinterType(-1, ""));
             }
         }
 
@@ -62,7 +62,7 @@ namespace Mebs_Envanter.Repositories
                     current_pr_type = dr["type_str"].ToString();
                     current_id = (int)dr["id"];
 
-                    printerTypes.Add(new PrinterType(current_id, current_pr_type));
+                    Collection.Add(new PrinterType(current_id, current_pr_type));
                 }
                 dr.Close();
                 cnn.Close();

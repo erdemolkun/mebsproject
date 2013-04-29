@@ -39,7 +39,7 @@ namespace Mebs_Envanter.GeneralObjects
                 _komutanlik_id = value;
                 if (KomutanlikRepository.INSTANCE != null)
                 {
-                    foreach (Komutanlik item in KomutanlikRepository.INSTANCE.Komutanliklar)
+                    foreach (Komutanlik item in KomutanlikRepository.INSTANCE.Collection)
                     {
                         if (value == item.Id)
                         {

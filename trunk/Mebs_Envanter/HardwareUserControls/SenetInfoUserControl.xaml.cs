@@ -31,16 +31,16 @@ namespace Mebs_Envanter.HardwareUserControls
         {
             KomutanlikRepository Komutanlik_Repository = new KomutanlikRepository();
             Komutanlik_Repository.FillKomutanliklar(false);
-            senetKomutanlikCombo.ItemsSource = Komutanlik_Repository.Komutanliklar;
+            senetKomutanlikCombo.ItemsSource = Komutanlik_Repository.Collection;
             KomutanlikRepository.INSTANCE = Komutanlik_Repository;
 
-            foreach (Komutanlik item in Komutanlik_Repository.Komutanliklar)
+            foreach (Komutanlik item in Komutanlik_Repository.Collection)
             {
                 BirlikRepository birlik_rep = new BirlikRepository();
                 birlik_rep.FillBirlikler(item, false);
                 item.Birlik_Repository = birlik_rep;
 
-                foreach (Birlik itemBirlik in birlik_rep.Birlikler)
+                foreach (Birlik itemBirlik in birlik_rep.Collection)
                 {
                     KisimRepository kisim_rep = new KisimRepository();
                     kisim_rep.FillKisimlar(itemBirlik);
@@ -75,7 +75,7 @@ namespace Mebs_Envanter.HardwareUserControls
             else if (senetBirlikCombo.IsEditable &&  !String.IsNullOrEmpty(senetKisimCombo.Text.Trim()))
             {
                 inf.Alan_kisi_kisim = new Kisim(-1, senetKisimCombo.Text.Trim());
-                inf.Alan_kisi_birlik.Kisim_Repository.Kisimlar.Add(inf.Alan_kisi_kisim);
+                inf.Alan_kisi_birlik.Kisim_Repository.Collection.Add(inf.Alan_kisi_kisim);
             }
         }
 
@@ -97,7 +97,7 @@ namespace Mebs_Envanter.HardwareUserControls
             if (current_Komutanlik != null && current_Komutanlik.Birlik_Repository == null)
                 current_Komutanlik.Birlik_Repository = birlik_rep;
 
-            senetBirlikCombo.ItemsSource = birlik_rep.Birlikler;
+            senetBirlikCombo.ItemsSource = birlik_rep.Collection;
             BirlikRepository.INSTANCE = birlik_rep;
         }
 
@@ -118,7 +118,7 @@ namespace Mebs_Envanter.HardwareUserControls
             if (current_Birlik != null && current_Birlik.Kisim_Repository == null)
                 current_Birlik.Kisim_Repository = kisim_rep;
 
-            senetKisimCombo.ItemsSource = kisim_rep.Kisimlar;
+            senetKisimCombo.ItemsSource = kisim_rep.Collection;
             KisimRepository.INSTANCE = kisim_rep;
         }
     }

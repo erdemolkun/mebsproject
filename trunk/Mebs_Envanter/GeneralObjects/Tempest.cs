@@ -30,7 +30,7 @@ namespace Mebs_Envanter.GeneralObjects
                 id = value;
                 if (TempestRepository.INSTANCE != null)
                 {
-                    foreach (Tempest item in TempestRepository.INSTANCE.TempestSeviyeler)
+                    foreach (Tempest item in TempestRepository.INSTANCE.Collection)
                     {
                         if (value == item.Id)
                         {

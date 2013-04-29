@@ -85,12 +85,12 @@ namespace Mebs_Envanter
                     try
                     {
                         ExportHelper exportHelper = new ExportHelper();
-                        foreach (var item in computerInfoRep.Computers)
+                        foreach (var item in computerInfoRep.Collection)
                         {
                             item.Fetch();
                         }
 
-                        DataTable table = exportHelper.GetAsDataTable(computerInfoRep.Computers, options);
+                        DataTable table = exportHelper.GetAsDataTable(computerInfoRep.Collection, options);
                         // export helper needs a dataset in case you want to save multiple worksheets
                         DataSet ds = new DataSet();
                         ds.Tables.Add(table);

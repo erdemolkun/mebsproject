@@ -140,6 +140,7 @@
     <Compile Include="Helpers\LoggerMebs.cs" />
     <Compile Include="Helpers\SearchHelper.cs" />
     <Compile Include="PrintOperations\GridPrinter.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\PrinterTypesRepository.cs" />
     <Compile Include="Repositories\IndividualDeviceRepository.cs" />
     <Compile Include="Repositories\MonitorSizesRepository.cs" />

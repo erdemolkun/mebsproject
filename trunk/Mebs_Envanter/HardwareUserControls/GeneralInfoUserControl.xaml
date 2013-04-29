@@ -52,7 +52,7 @@
                                   SelectedIndex="{Binding Marka,
                                   Converter={StaticResource MarkaComboIndexConverter},            
                                     Mode=Default, UpdateSourceTrigger=Explicit}" 
-                                  ItemsSource="{Binding Markalar}" Grid.Row="1"
+                                  ItemsSource="{Binding Collection}" Grid.Row="1"
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
         <TextBox x:Name="pcModelTextBox"

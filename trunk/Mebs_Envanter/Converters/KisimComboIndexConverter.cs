@@ -16,7 +16,7 @@ namespace Mebs_Envanter.Converters
             {
                 Kisim infoKisim = value as Kisim;
                 int index = -1;
-                foreach (var item in KisimRepository.INSTANCE.Kisimlar)
+                foreach (var item in KisimRepository.INSTANCE.Collection)
                 {
                     index++;
                     if (infoKisim.Id == item.Id) { return index; }

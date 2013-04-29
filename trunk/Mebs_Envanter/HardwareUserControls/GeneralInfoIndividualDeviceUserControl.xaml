@@ -41,7 +41,7 @@
         <ComboBox x:Name="markalarCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
                                    SelectedIndex="{Binding Marka,
                                    Converter ={StaticResource MarkaComboIndexConverter},UpdateSourceTrigger=Explicit}"
-                                   ItemsSource="{Binding Markalar}" 
+                                   ItemsSource="{Binding Collection}" 
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
         <ComboBox x:Name="tempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
@@ -63,7 +63,7 @@
                                     Margin="2,2"
                                    SelectedIndex="{Binding YaziciTipi,
                                    Converter ={StaticResource PrinterTypeComboIndexConverter},UpdateSourceTrigger=Explicit}"
-                                   ItemsSource="{Binding Markalar}" Grid.Row="4"
+                                    Grid.Row="4"
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
     </Grid>

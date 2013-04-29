@@ -16,7 +16,7 @@ namespace Mebs_Envanter.Converters
             {
                 Birlik infoBirlik = value as Birlik;
                 int index = -1;
-                foreach (var item in BirlikRepository.INSTANCE.Birlikler)
+                foreach (var item in BirlikRepository.INSTANCE.Collection)
                 {
                     index++;
                     if (infoBirlik.Id == item.Id) {

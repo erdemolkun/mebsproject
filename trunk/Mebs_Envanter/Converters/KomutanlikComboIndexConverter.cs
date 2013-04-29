@@ -16,7 +16,7 @@ namespace Mebs_Envanter.Converters
             {
                 Komutanlik infoKomutanlik = value as Komutanlik;
                 int index = -1;
-                foreach (var item in KomutanlikRepository.INSTANCE.Komutanliklar)
+                foreach (var item in KomutanlikRepository.INSTANCE.Collection)
                 {
                     index++;
                     if (infoKomutanlik.Id == item.Id)

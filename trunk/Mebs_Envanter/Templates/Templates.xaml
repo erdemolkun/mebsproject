@@ -349,7 +349,7 @@
         </Setter>
     </Style>
 
-    <!--Tooltip STyle-->
+    <!--Tooltip Style-->
     <Style TargetType="{x:Type ToolTip}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="HasDropShadow" Value="True"/>
@@ -357,7 +357,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToolTip">
                     <Border Name="Border" BorderThickness="2" 
-                            Background="{StaticResource LightBrush}"
+                            Background="{StaticResource LightBrush}" Opacity="0.9"
                             BorderBrush="{StaticResource SolidBorderBrush}"
                             Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                         <ContentPresenter Margin="4" 
@@ -375,5 +375,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
 
 </ResourceDictionary>
