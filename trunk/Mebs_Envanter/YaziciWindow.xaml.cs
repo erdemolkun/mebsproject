@@ -214,8 +214,7 @@ namespace Mebs_Envanter
                 foreach (DataRow rowPC in dt.Rows)
                 {
                     try
-                    {
-                        //int parca_id = DBValueHelpers.GetInt32(rowPC["parca_id"].ToString(), -1);
+                    {                        
                         int parca_id = DBValueHelpers.GetInt32(rowPC["base_parca_id"].ToString(), -1);
                         List<OEMDevice> devs = OEMDevice.GetOemDevicesDB(cnn, false, -1, parca_id);
                         IndividualDeviceInfo tempDevice = null;
@@ -283,7 +282,6 @@ namespace Mebs_Envanter
                     devItem.Fetch();
                 }
             }
-
             gridCihazBilgileri.DataContext = Current_IndividualDeviceInfo;
         }
 
@@ -324,11 +322,9 @@ namespace Mebs_Envanter
             searchGridBirliklerCombo.SelectedIndex = -1;
             searchGridMarkalarCombo.SelectedIndex = -1;
             searchGridModelTxtBox.Text = "";
-
-
+            searchGridYaziciTiplerCombo.SelectedIndex = -1;
             searchGridTempestCombo.SelectedIndex = -1;
             searchGridSerialNumberTxtBox.Text = "";
-
             searchGridKomutanliklarCombo.SelectedIndex = -1;
         }
 
@@ -337,35 +333,20 @@ namespace Mebs_Envanter
             RefreshPrinterList(GetParameterListForSearch(), true);
         }
 
-
         private SortedList<String, object> GetParameterListForSearch()
         {
             //parca_no
             SortedList<String, object> list = new SortedList<string, object>();
-            SearchHelper.AddToListFromCombo(searchGridKomutanliklarCombo, list, "@komutanlik_id");
-            SearchHelper.AddToListFromCombo(searchGridBirliklerCombo, list, "@birlik_id");
-            SearchHelper.AddToListFromCombo(searchGridAglarCombo, list, "@bagli_ag_id");
-            SearchHelper.AddToListFromCombo(searchGridTempestCombo, list, "@tempest_id");
-            SearchHelper.AddToListFromCombo(searchGridMarkalarCombo, list, "@marka_id");
-            SearchHelper.AddToListFromCombo(searchGridYaziciTiplerCombo, list, "@yazici_tip_id");            
+            SearchHelper.AddToListFromFrameworkElement(searchGridKomutanliklarCombo, list, "@komutanlik_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridBirliklerCombo, list, "@birlik_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridAglarCombo, list, "@bagli_ag_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridTempestCombo, list, "@tempest_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridMarkalarCombo, list, "@marka_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridYaziciTiplerCombo, list, "@yazici_tip_id");
 
-            String alan_kisi_isim = searchGridalanKisiIsimTxtBox.Text.Trim().ToString();
-            if (!String.IsNullOrEmpty(alan_kisi_isim))
-            {
-                list.Add("@alan_kisi_isim", alan_kisi_isim);
-            }
-
-            String pcModel = searchGridModelTxtBox.Text.Trim().ToString();
-            if (!String.IsNullOrEmpty(pcModel))
-            {
-                list.Add("@model", pcModel);
-            }
-
-            String serial = searchGridSerialNumberTxtBox.Text.Trim().ToString();
-            if (!String.IsNullOrEmpty(serial))
-            {
-                list.Add("@seri_no", serial);
-            }
+            SearchHelper.AddToListFromFrameworkElement(searchGridalanKisiIsimTxtBox, list, "@alan_kisi_isim");
+            SearchHelper.AddToListFromFrameworkElement(searchGridModelTxtBox, list, "@model");
+            SearchHelper.AddToListFromFrameworkElement(searchGridSerialNumberTxtBox, list, "@seri_no");            
             return list;
         }
 

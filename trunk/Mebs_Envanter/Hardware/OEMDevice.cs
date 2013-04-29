@@ -111,8 +111,7 @@ namespace Mebs_Envanter
                             devOem = new OEMDevice(tip);
                         }
 
-                        //Ortak alanlar
-                        //tochange
+                        //Ortak alanlar                        
                         devOem.SenetInfo.Id = senet_id;
                         devOem.Id = parca_id;
                         devOem.SerialNumber = seri_no;

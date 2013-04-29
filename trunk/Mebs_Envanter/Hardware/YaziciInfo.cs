@@ -25,10 +25,6 @@ namespace Mebs_Envanter.Hardware
             NetworkInfo.IpAddress = rowYazici["ip_adresi"].ToString();
             int tip_id = DBValueHelpers.GetInt32(rowYazici["tip_id"], -1);
             YaziciTipi = new PrinterType(tip_id, "");
-            //tochange
-            //int senet_id = DBValueHelpers.GetInt32(rowYazici["senet_id"].ToString(), -1);                        
-            //SenetInfo.Id = senet_id;
-            //SenetInfo.Set_SenetInfos(false, -1, senet_id);            
         }
 
         private PrinterType yaziciTipi;
