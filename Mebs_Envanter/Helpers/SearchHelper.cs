@@ -17,20 +17,40 @@ namespace Mebs_Envanter.Helpers
             return element.Visibility == Visibility.Visible && element.IsEnabled;
         }
 
-        public static void AddToListFromCombo(ComboBox combo, SortedList<String, object> list, string keyName)
+        public static void AddToListFromFrameworkElement(FrameworkElement element, SortedList<String, object> list, string keyName)
         {
-            if (IsActiveElement(combo) && combo.SelectedItem != null)
+            try
             {
-                MebsBaseDBObject mbs = combo.SelectedItem as MebsBaseDBObject;
-                if (mbs != null)
+                if (!IsActiveElement(element)) return;
+                if (element is ComboBox)
                 {
-                    if (mbs.Id > 0)
+                    ComboBox combobox = element as ComboBox;
+                    if (IsActiveElement(combobox) && combobox.SelectedItem != null)
                     {
-                        list.Add(keyName, mbs.Id);
+                        MebsBaseDBObject mbs = combobox.SelectedItem as MebsBaseDBObject;
+                        if (mbs != null)
+                        {
+                            if (mbs.Id > 0)
+                            {
+                                list.Add(keyName, mbs.Id);
+                            }
+                        }
+                    }
+                }
+                else if (element is TextBox)
+                {
+                    TextBox txtBox = element as TextBox;
+                    String text = txtBox.Text.Trim().ToString();
+                    if (!String.IsNullOrEmpty(text))
+                    {
+                        list.Add(keyName, text);
                     }
                 }
             }
-        }
+            catch (Exception)
+            {
 
+            }
+        }
     }
 }

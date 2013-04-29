@@ -331,12 +331,12 @@ namespace Mebs_Envanter
         private SortedList<String, object> GetParameterListForSearch()
         {
             SortedList<String, object> list = new SortedList<string, object>();
-            SearchHelper.AddToListFromCombo(searchGridKomutanliklarCombo, list, "@komutanlik_id");
-            SearchHelper.AddToListFromCombo(searchGridBirliklerCombo, list, "@birlik_id");
-            SearchHelper.AddToListFromCombo(searchGridAglarCombo, list, "@bagli_ag_id");
-            SearchHelper.AddToListFromCombo(searchGridTempestCombo, list, "@tempest_id");
-            SearchHelper.AddToListFromCombo(searchGridMarkalarCombo, list, "@marka_id");
-            SearchHelper.AddToListFromCombo(searchGridMonitorMarkalar, list, "@mon_marka_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridKomutanliklarCombo, list, "@komutanlik_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridBirliklerCombo, list, "@birlik_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridAglarCombo, list, "@bagli_ag_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridTempestCombo, list, "@tempest_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridMarkalarCombo, list, "@marka_id");
+            SearchHelper.AddToListFromFrameworkElement(searchGridMonitorMarkalar, list, "@mon_marka_id");
               
             if (searchGridMonitorTipler.SelectedItem != null)
             {
@@ -348,35 +348,11 @@ namespace Mebs_Envanter
                 catch (Exception) { }
             }
 
-            if (searchGridMonitorBoyutlar.SelectedItem != null)
-            {
-                try
-                {
-                    MonitorSize monSize = searchGridMonitorBoyutlar.SelectedItem as MonitorSize;
-                    if (monSize.Id > 0)
-                    {
-                        list.Add("@boyut_id", monSize.Id);
-                    }
-                }
-                catch (Exception) { }
-            }
+            SearchHelper.AddToListFromFrameworkElement(searchGridMonitorBoyutlar, list, "@boyut_id");            
+            SearchHelper.AddToListFromFrameworkElement(searchGridalanKisiIsimTxtBox, list, "@alan_kisi_isim");
+            SearchHelper.AddToListFromFrameworkElement(searchGridPcNameTxtBox, list, "@pc_adi");
+            SearchHelper.AddToListFromFrameworkElement(searchGridModelTxtBox, list, "@model"); 
 
-           
-            String alan_kisi_isim = searchGridalanKisiIsimTxtBox.Text.Trim().ToString();
-            if (!String.IsNullOrEmpty(alan_kisi_isim))
-            {
-                list.Add("@alan_kisi_isim", alan_kisi_isim);
-            }
-            String pcName = searchGridPcNameTxtBox.Text.Trim().ToString();
-            if (!String.IsNullOrEmpty(pcName))
-            {
-                list.Add("@pc_adi", pcName);
-            }
-            String pcModel = searchGridModelTxtBox.Text.Trim().ToString();
-            if (!String.IsNullOrEmpty(pcModel))
-            {
-                list.Add("@model", pcModel);
-            }
             return list;
         }
 
@@ -587,26 +563,24 @@ namespace Mebs_Envanter
             }
         }
 
-        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        private void menuItem_ExcelList_Click(object sender, RoutedEventArgs e)
         {
             Export(current_In_MemoryList, ExportOptions.EXCEL);
         }
 
-        private void MenuItem_Click_5(object sender, RoutedEventArgs e)
+        private void menuItem_ExcelSingle_Click(object sender, RoutedEventArgs e)
         {
             ComputerInfoRepository rep = new ComputerInfoRepository();
             rep.Collection.Add(pcList.SelectedItem as ComputerInfo);
             Export(rep, ExportOptions.EXCEL);
         }
 
-        private void MenuItem_Click_7(object sender, RoutedEventArgs e)
+        private void menuItem_HTMLList_Click(object sender, RoutedEventArgs e)
         {
-
-
             Export(current_In_MemoryList, ExportOptions.HTML);
         }
 
-        private void MenuItem_Click_6(object sender, RoutedEventArgs e)
+        private void menuItem_HTMLSingle_Click(object sender, RoutedEventArgs e)
         {
             ComputerInfoRepository rep = new ComputerInfoRepository();
             rep.Collection.Add(pcList.SelectedItem as ComputerInfo);
@@ -621,8 +595,7 @@ namespace Mebs_Envanter
                 currentInfoRep.Collection.Insert(0, GetNewComputer());
                 pcEnvanterControl.SetFocus(0);
                 SetSelectedItemAfterContextChange(true);
-            }
-            //RefreshComputerList(null, true);
+            }           
         }
     }
 }
