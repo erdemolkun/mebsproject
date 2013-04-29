@@ -39,10 +39,9 @@ namespace Mebs_Envanter
         public void Fetch()
         {
             if (!PropertiesFetched)
-            {
-                //tochange
+            {                
                 Set_ComputerOemDevices(null);
-                Senet.Set_SenetInfos(Senet.Id);
+                Senet.Set_SenetInfosDB();
                 PropertiesFetched = true;
             }
         }
@@ -55,8 +54,7 @@ namespace Mebs_Envanter
             Commands = new CommandMap();
             NetworkInfo = new NetworkInfo();
             MonitorInfo = new Monitor();
-            Senet = new SenetInfo();
-            //EklenmeTarihi = new DateTime(2010, 9, 12);
+            Senet = new SenetInfo();            
 
             bool designTime = System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject());
             if (designTime)
@@ -89,8 +87,7 @@ namespace Mebs_Envanter
             int tempest_id = DBValueHelpers.GetInt32(rowPC["tempest_id"].ToString(), -1);
 
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
-            
-            //tochange add senet_id
+                        
             Senet.Id = DBValueHelpers.GetInt32(rowPC["senet_id"], -1);
 
             Pc_adi = rowPC["pc_adi"].ToString();

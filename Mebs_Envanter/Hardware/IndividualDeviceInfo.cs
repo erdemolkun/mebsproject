@@ -12,9 +12,8 @@ namespace Mebs_Envanter.Hardware
         public virtual void Fetch()
         {
             if (!PropertiesFetched)
-            {
-                //SenetInfo.Set_SenetInfos(false, -1, SenetInfo.Id);
-                SenetInfo.Set_SenetInfos(SenetInfo.Id);
+            {                
+                SenetInfo.Set_SenetInfosDB();
                 PropertiesFetched = true;
             }
         }
@@ -37,13 +36,7 @@ namespace Mebs_Envanter.Hardware
         }
 
 
-        private SenetInfo senetInfo = new SenetInfo();
-
-        public SenetInfo SenetInfo
-        {
-            get { return senetInfo; }
-            set { senetInfo = value; OnPropertyChanged("SenetInfo"); }
-        }
+        
 
     }
 }

@@ -82,19 +82,16 @@ namespace Mebs_Envanter
             }
         }
 
-        internal void Set_SenetInfos(int senet_id)
+        internal void Set_SenetInfosDB()
         {
-            //tochange
+            if (Id < 0) return;
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
 
             SqlCommand cmd = null;
 
-
             String conString = "Select * From tbl_senet where senet_id=@senet_id";
             cmd = new SqlCommand(conString, cnn);
-            cmd.Parameters.AddWithValue("@senet_id", senet_id);
-
-
+            cmd.Parameters.AddWithValue("@senet_id", Id);
 
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();

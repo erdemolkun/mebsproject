@@ -75,7 +75,9 @@
       <DependentUpon>LoadingAnimationBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="Base\MebsBaseDBObject.cs" />
-    <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="Converters\PrinterTypeComboIndexConverter.cs" />
+    <Compile Include="GeneralObjects\PrinterType.cs" />
+    <Compile Include="Helpers\CollectionExtensions.cs" />
     <Compile Include="ComputerUserControl.xaml.cs">
       <DependentUpon>ComputerUserControl.xaml</DependentUpon>
     </Compile>
@@ -138,6 +140,7 @@
     <Compile Include="Helpers\LoggerMebs.cs" />
     <Compile Include="Helpers\SearchHelper.cs" />
     <Compile Include="PrintOperations\GridPrinter.cs" />
+    <Compile Include="Repositories\PrinterTypesRepository.cs" />
     <Compile Include="Repositories\IndividualDeviceRepository.cs" />
     <Compile Include="Repositories\MonitorSizesRepository.cs" />
     <Compile Include="Repositories\KomutanlikRepository.cs" />
