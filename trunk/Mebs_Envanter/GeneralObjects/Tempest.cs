@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Mebs_Envanter;
 using Mebs_Envanter.Repositories;
+using Mebs_Envanter.Base;
 
 namespace Mebs_Envanter.GeneralObjects
 {
-    public class Tempest : MebsBaseObject
+    public class Tempest : MebsBaseDBObject
     {
         public override string ToString()
         {
@@ -22,7 +23,7 @@ namespace Mebs_Envanter.GeneralObjects
         }
 
         private int id = -1;
-        public int Id
+        public override int Id
         {
             get { return id; }
             set { 

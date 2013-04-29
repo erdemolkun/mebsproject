@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid TextBlock.FontWeight="Bold" Margin="2,0">
@@ -30,8 +31,9 @@
         <TextBlock Grid.Row="1" Grid.Column="0"  Text="Modeli"></TextBlock>
         <TextBlock Grid.Row="2" Grid.Column="0"  Text="Tempest Seviyesi"></TextBlock>
         <TextBlock Grid.Row="3" Grid.Column="0"  Text="Seri No"></TextBlock>
-        <TextBox Grid.Row="1" Text="{Binding Model,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"
-                                 VerticalAlignment="Center" x:Name="yaziciModeliTextBox" MinWidth="80"></TextBox>
+        <TextBox Grid.Row="1" Text="{Binding Model,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"                                 
+                  guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"  
+                 VerticalAlignment="Center" x:Name="yaziciModeliTextBox" MinWidth="80"></TextBox>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Marka"></TextBlock>
         <ComboBox x:Name="markalarCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
@@ -45,7 +47,9 @@
                                   ItemsSource="{Binding TempestSeviyeler}" Grid.Row="2"
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
-        <TextBox Grid.Row="3" Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"
+        <TextBox Grid.Row="3" 
+                  guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"  
+                 Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"
                                  VerticalAlignment="Center" x:Name="serialTextBox" MinWidth="80"></TextBox>
 
     </Grid>

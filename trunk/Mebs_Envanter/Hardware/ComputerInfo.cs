@@ -10,17 +10,18 @@ using Mebs_Envanter.DB;
 using Mebs_Envanter;
 using System.Windows;
 using Mebs_Envanter.Hardware;
+using Mebs_Envanter.Base;
 
 namespace Mebs_Envanter
 {
-    public class ComputerInfo : MebsBaseObject
+    public class ComputerInfo : MebsBaseDBObject
     {
 
         public override string ToString()
         {
             String str = "";
             str = Pc_adi;
-            if (Marka != null && Marka.MarkaID > 0)
+            if (Marka != null && Marka.Id > 0)
             {
                 str += " , Marka : " + Marka.MarkaName;
             }
@@ -325,14 +326,7 @@ namespace Mebs_Envanter
             set { model = value; OnPropertyChanged("Model"); }
         }
 
-        private int id = -1;
-
-        public int Id
-        {
-            get { return id; }
-            set { id = value; OnPropertyChanged("Id"); }
-        }
-
+       
 
         private String deviceNo;
         /// <summary>

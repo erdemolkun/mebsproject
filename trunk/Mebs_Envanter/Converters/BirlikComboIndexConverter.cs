@@ -19,7 +19,7 @@ namespace Mebs_Envanter.Converters
                 foreach (var item in BirlikRepository.INSTANCE.Birlikler)
                 {
                     index++;
-                    if (infoBirlik.Birlik_id == item.Birlik_id) {
+                    if (infoBirlik.Id == item.Id) {
 
                         infoBirlik.Birlik_ismi = item.Birlik_ismi;
                         return index;

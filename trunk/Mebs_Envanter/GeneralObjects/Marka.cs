@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mebs_Envanter.Repositories;
+using Mebs_Envanter.Base;
 
 namespace Mebs_Envanter
 {
-    public class Marka : MebsBaseObject
+    public class Marka : MebsBaseDBObject
     {
         public override string ToString()
         {
-            if (MarkaID > 0)
+            if (Id > 0)
             {
                 return MarkaName.ToUpper().ToString();// + " ID : " + MarkaID; ;
             }
@@ -21,7 +22,7 @@ namespace Mebs_Envanter
         public Marka(int marka_id, String markaName) {
 
             this.MarkaName = markaName;
-            this.MarkaID = marka_id;
+            this.Id = marka_id;
            
         }
 
@@ -38,7 +39,7 @@ namespace Mebs_Envanter
         /// <summary>
         /// Markanın db'deki id'si
         /// </summary>
-        public int MarkaID
+        public override int Id
         {
             get { return _markaID; }
             set { 
@@ -47,7 +48,7 @@ namespace Mebs_Envanter
                 {
                     foreach (Marka item in MarkaRepository.INSTANCE.Markalar)
                     {
-                        if (value == item.MarkaID)
+                        if (value == item.Id)
                         {
                             if (value < 0) break;
                             MarkaName = item.MarkaName;
@@ -59,7 +60,8 @@ namespace Mebs_Envanter
                 
                 
                 }
-                OnPropertyChanged("MarkaID"); }
+                OnPropertyChanged("Id");
+            }
         }
 
     }

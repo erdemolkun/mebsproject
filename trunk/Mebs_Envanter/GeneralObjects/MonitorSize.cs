@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Mebs_Envanter.Base;
 
 namespace Mebs_Envanter.GeneralObjects
 {
-    public class MonitorSize : IComparable<MonitorSize>
+    public class MonitorSize  : MebsBaseDBObject  ,  IComparable<MonitorSize>
     {
         public static int MON_ID_FOR_SEARCH=-2;
         public static int MON_ID_FOR_LIST=-1;
@@ -35,13 +36,7 @@ namespace Mebs_Envanter.GeneralObjects
             Id = _id;
         }
 
-        private int id = -1;
-
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        
 
 
         private double monitorLength = 0;

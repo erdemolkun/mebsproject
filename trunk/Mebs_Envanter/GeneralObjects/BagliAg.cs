@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mebs_Envanter.Repositories;
+using Mebs_Envanter.Base;
 
 namespace Mebs_Envanter.GeneralObjects
 {
-    public class BagliAg : MebsBaseObject
+    public class BagliAg : MebsBaseDBObject
     {
         public override string ToString()
         {
@@ -18,7 +19,7 @@ namespace Mebs_Envanter.GeneralObjects
         {
 
             Ag_adi = _bagliag_adi;
-            Ag_id = _bagliag_id;
+            Id = _bagliag_id;
         }
 
 
@@ -33,7 +34,7 @@ namespace Mebs_Envanter.GeneralObjects
 
         private int ag_id;
 
-        public int Ag_id
+        public override int Id
         {
             get { return ag_id; }
             set
@@ -42,7 +43,7 @@ namespace Mebs_Envanter.GeneralObjects
                 {
                     foreach (BagliAg item in BagliAgRepository.INSTANCE.BagliAglar)
                     {
-                        if (value == item.Ag_id)
+                        if (value == item.Id)
                         {
                             if(value<0)break;
                             Ag_adi = item.Ag_adi;

@@ -18,7 +18,7 @@ namespace Mebs_Envanter.Converters
                 int index = 0;
                 foreach (var item in BagliAgRepository.INSTANCE.BagliAglar)
                 {
-                    if (infoBagliAg.Ag_id == item.Ag_id) { return index; }
+                    if (infoBagliAg.Id == item.Id) { return index; }
                     index++;
                 }
                 return 0;// throw new NotImplementedException();

@@ -17,7 +17,7 @@ namespace Mebs_Envanter
                 hasMonType = true;
                 str += "Tipi : " + MonType.ToString();
             }
-            if (Marka.MarkaID > 0)
+            if (Marka.Id > 0)
             {
                 if (hasMonType)
                 {

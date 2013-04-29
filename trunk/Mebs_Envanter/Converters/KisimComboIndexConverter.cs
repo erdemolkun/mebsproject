@@ -19,7 +19,7 @@ namespace Mebs_Envanter.Converters
                 foreach (var item in KisimRepository.INSTANCE.Kisimlar)
                 {
                     index++;
-                    if (infoKisim.Kisim_id == item.Kisim_id) { return index; }
+                    if (infoKisim.Id == item.Id) { return index; }
                     
                 }
                 return -1;// throw new NotImplementedException();

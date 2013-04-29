@@ -52,7 +52,7 @@ namespace Mebs_Envanter.Repositories
             if (res)
             {
                 ClearBirlikler(isForSearch);
-                cmd.Parameters.AddWithValue("@komutanlik_id", komutanlik.Komutanlik_id);
+                cmd.Parameters.AddWithValue("@komutanlik_id", komutanlik.Id);
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_birlik = null;
                 int current_birlik_id = -1;

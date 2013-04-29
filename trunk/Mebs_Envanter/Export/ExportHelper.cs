@@ -88,7 +88,7 @@ namespace Mebs_Envanter.Export
                     // Genel Bilgiler
                     list1.Add(compInfo.Pc_adi);// 1
                     //2
-                    if (compInfo.Marka != null && compInfo.Marka.MarkaID > 0)
+                    if (compInfo.Marka != null && compInfo.Marka.Id > 0)
                     {
                         list1.Add(compInfo.Marka.MarkaName);
                     }
@@ -127,7 +127,7 @@ namespace Mebs_Envanter.Export
                     if (compInfo.NetworkInfo != null)
                     {
                         list1.Add(compInfo.NetworkInfo.MacAddressString);
-                        if (compInfo.NetworkInfo.BagliAg != null || compInfo.NetworkInfo.BagliAg.Ag_id > 0)
+                        if (compInfo.NetworkInfo.BagliAg != null || compInfo.NetworkInfo.BagliAg.Id > 0)
                         {
                             list1.Add(compInfo.NetworkInfo.BagliAg.Ag_adi);
                         }

@@ -19,7 +19,7 @@ namespace Mebs_Envanter.Converters
                 foreach (var item in KomutanlikRepository.INSTANCE.Komutanliklar)
                 {
                     index++;
-                    if (infoKomutanlik.Komutanlik_id == item.Komutanlik_id)
+                    if (infoKomutanlik.Id == item.Id)
                     {
 
                         infoKomutanlik.Komutanlik_ismi = item.Komutanlik_ismi;
