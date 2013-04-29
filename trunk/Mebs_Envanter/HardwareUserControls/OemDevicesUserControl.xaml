@@ -52,11 +52,11 @@
                       Grid.ColumnSpan="5" HorizontalAlignment="Stretch">
 
                 <Expander.Header >
-                    <Border  HorizontalAlignment="Stretch" CornerRadius="2" Background="MintCream">
+                   
                         <TextBlock Margin="4,0" TextBlock.FontSize="12" Foreground="Brown" Text="Diğer Parçalar" 
                          
                           HorizontalAlignment="Stretch" />
-                    </Border>
+                
                 </Expander.Header>
                 <ItemsControl  x:Name="hardwareExtraItemsControl" MinHeight="32"
                                                HorizontalAlignment="Stretch" Height="Auto"
