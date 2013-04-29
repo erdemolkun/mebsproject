@@ -18,7 +18,7 @@
         Title="Bilgisayar Envanter Kaydı" WindowStartupLocation="Manual"
         IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
         SizeToContent="Height"  ResizeMode="NoResize">
-    <Grid Background="{StaticResource WindowGeneralBackgroundColor}">
+    <Grid SnapsToDevicePixels="True"  Background="{StaticResource WindowGeneralBackgroundColor}">
         <Grid.Resources>
             <SolidColorBrush x:Key="headerColor1" Color="SkyBlue"></SolidColorBrush>
         </Grid.Resources>

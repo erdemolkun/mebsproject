@@ -178,7 +178,9 @@ namespace Mebs_Envanter
             marka_rep.FillMarkalar(true);
             searchGridMarkalarCombo.ItemsSource = marka_rep.Markalar;
 
-
+            PrinterTypesRepository types_rep = new PrinterTypesRepository();
+            types_rep.FillPrinterTypes(true);
+            searchGridYaziciTiplerCombo.ItemsSource = types_rep.PrinterTypes;
         }
 
         private void RefreshPrinterList(SortedList<String, object> parameterList, bool selectLast)
@@ -344,7 +346,8 @@ namespace Mebs_Envanter
             SearchHelper.AddToListFromCombo(searchGridBirliklerCombo, list, "@birlik_id");
             SearchHelper.AddToListFromCombo(searchGridAglarCombo, list, "@bagli_ag_id");
             SearchHelper.AddToListFromCombo(searchGridTempestCombo, list, "@tempest_id");
-            SearchHelper.AddToListFromCombo(searchGridMarkalarCombo, list, "@marka_id");            
+            SearchHelper.AddToListFromCombo(searchGridMarkalarCombo, list, "@marka_id");
+            SearchHelper.AddToListFromCombo(searchGridYaziciTiplerCombo, list, "@yazici_tip_id");            
 
             String alan_kisi_isim = searchGridalanKisiIsimTxtBox.Text.Trim().ToString();
             if (!String.IsNullOrEmpty(alan_kisi_isim))

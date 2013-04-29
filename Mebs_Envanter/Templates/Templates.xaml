@@ -148,7 +148,7 @@
         <Setter Property="BorderBrush" Value="LightBlue"></Setter>
     </Style>
 
-    
+
     <ControlTemplate x:Key="SampleControlTemplate">
         <Grid>
             <Rectangle Fill="Gray" Stroke="Gray" RadiusX="12" RadiusY="12" Opacity="0.4">
@@ -202,8 +202,8 @@
             </Setter.Value>
         </Setter>
     </Style>-->
-    
-    
+
+
     <!--Metro Button Style-->
     <Style TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
@@ -342,6 +342,33 @@
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Tooltip STyle-->
+    <Style TargetType="{x:Type ToolTip}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="HasDropShadow" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Border Name="Border" BorderThickness="2" 
+                            Background="{StaticResource LightBrush}"
+                            BorderBrush="{StaticResource SolidBorderBrush}"
+                            Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <ContentPresenter Margin="4" 
+                                          TextBlock.Foreground="Brown" TextBlock.FontFamily="Tahoma"
+                                          TextBlock.FontSize="12"
+                                          HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasDropShadow" Value="true">
+                            <Setter TargetName="Border" Property="CornerRadius" Value="0"/>
+                            <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

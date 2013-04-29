@@ -89,6 +89,7 @@
                         <RowDefinition Height="32"></RowDefinition>
                         <RowDefinition Height="32"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.Resources>
@@ -153,6 +154,17 @@
                     <TextBox MinWidth="120" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Width="60" x:Name="searchGridModelTxtBox"></TextBox>
 
+
+                    <TextBlock 
+                        Visibility="{Binding ElementName=thiswin, Path=SelectedIndividual,
+                    Converter={StaticResource IndividualDeviceVisibilityConverter},ConverterParameter=1}"
+                        Text="Yazıcı Tipleri" Grid.Row="8" VerticalAlignment="Center" ></TextBlock>
+                    <ComboBox Margin="0,2"
+                        Visibility="{Binding ElementName=thiswin, Path=SelectedIndividual,
+                    Converter={StaticResource IndividualDeviceVisibilityConverter},ConverterParameter=1}"
+                        Grid.Column="1" Grid.Row="8"
+                      x:Name="searchGridYaziciTiplerCombo" VerticalAlignment="Center" 
+                              HorizontalAlignment="Center" MinWidth="60"/>
 
                     <StackPanel Grid.ColumnSpan="2" VerticalAlignment="Bottom" Grid.RowSpan="13" Orientation="Vertical">
                         <Button MinHeight="22" Margin="2,6" x:Name="btnClearSearch"
