@@ -8,10 +8,11 @@ using System.Data;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.Hardware;
 using Mebs_Envanter;
+using Mebs_Envanter.Base;
 
 namespace Mebs_Envanter
 {
-    public class OEMDevice : MebsBaseObject
+    public class OEMDevice : MebsBaseDBObject
     {
         public override string ToString()
         {
@@ -135,13 +136,7 @@ namespace Mebs_Envanter
             DeviceType = devType;
         }
 
-        private int id = -1;
-
-        public int Id
-        {
-            get { return id; }
-            set { id = value; OnPropertyChanged("Id"); }
-        }
+        
 
         private Marka marka;
 

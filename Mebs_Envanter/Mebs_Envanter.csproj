@@ -74,6 +74,7 @@
     <Compile Include="Animations\LoadingAnimationBlock.xaml.cs">
       <DependentUpon>LoadingAnimationBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Base\MebsBaseDBObject.cs" />
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="ComputerUserControl.xaml.cs">
       <DependentUpon>ComputerUserControl.xaml</DependentUpon>

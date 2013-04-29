@@ -19,7 +19,7 @@ namespace Mebs_Envanter.GeneralObjects
         public Birlik(int birlik_id, String birlik_ismi)
         {
             Birlik_ismi = birlik_ismi;
-            Birlik_id = birlik_id;
+            Id = birlik_id;
         }
 
         private String _birlik_ismi;
@@ -32,14 +32,14 @@ namespace Mebs_Envanter.GeneralObjects
 
         private int _birlik_id = -1;
 
-        public int Birlik_id
+        public int Id
         {
             get { return _birlik_id; }
             set
             {
                 _birlik_id = value;
 
-                OnPropertyChanged("Birlik_id");
+                OnPropertyChanged("Id");
             }
         }
     }

@@ -40,7 +40,7 @@ namespace Mebs_Envanter.Repositories
             if (res)
             {
                 ClearKisimlar();
-                cmd.Parameters.AddWithValue("@birlik_id", birlik.Birlik_id);
+                cmd.Parameters.AddWithValue("@birlik_id", birlik.Id);
                 
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_kisim = null;

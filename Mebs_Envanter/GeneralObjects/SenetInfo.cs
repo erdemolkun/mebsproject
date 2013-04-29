@@ -7,21 +7,15 @@ using System.Data.SqlClient;
 using System.Data;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.Repositories;
+using Mebs_Envanter.Base;
 
 namespace Mebs_Envanter
 {
-    public class SenetInfo : MebsBaseObject
+    public class SenetInfo : MebsBaseDBObject
     {
         public SenetInfo()
         {
 
-        }
-
-        private int id = -1;
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
         }
 
         private String alan_kisi_rutbe = "";
@@ -137,17 +131,17 @@ namespace Mebs_Envanter
                 String kisimName = "";
                 foreach (Komutanlik item in KomutanlikRepository.INSTANCE.Komutanliklar)
                 {
-                    if (alanKisiKomutanlikId == item.Komutanlik_id)
+                    if (alanKisiKomutanlikId == item.Id)
                     {
                         komutanlikName = item.Komutanlik_ismi;
                         foreach (Birlik itemBirlik in item.Birlik_Repository.Birlikler)
                         {
-                            if (itemBirlik.Birlik_id == alanKisiBirlikId)
+                            if (itemBirlik.Id == alanKisiBirlikId)
                             {
                                 birlikName = itemBirlik.Birlik_ismi;
                                 foreach (Kisim itemKisim in itemBirlik.Kisim_Repository.Kisimlar)
                                 {
-                                    if (itemKisim.Kisim_id == alanKisiKisimId)
+                                    if (itemKisim.Id == alanKisiKisimId)
                                     {
                                         kisimName = itemKisim.Kisim_adi;
                                         break;

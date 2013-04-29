@@ -330,7 +330,13 @@ namespace Mebs_Envanter
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            RefreshPrinterList(GetParameterListForSearch(), false);
+            RefreshPrinterList(GetParameterListForSearch(), true);
+        }
+
+
+        private bool IsActiveElement(FrameworkElement element) {
+
+            return element.Visibility == Visibility.Visible && element.IsEnabled;
         }
 
         private SortedList<String, object> GetParameterListForSearch()
@@ -340,23 +346,24 @@ namespace Mebs_Envanter
             SortedList<String, object> list = new SortedList<string, object>();
             if (searchGridKomutanliklarCombo.SelectedItem != null)
             {
-                if ((searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Komutanlik_id > 0)
+                if ((searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Id > 0)
                 {
-                    list.Add("@komutanlik_id", (searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Komutanlik_id);
+                    list.Add("@komutanlik_id", (searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Id);
                 }
             }
             if (searchGridBirliklerCombo.SelectedItem != null)
             {
-                if ((searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id > 0)
+                if ((searchGridBirliklerCombo.SelectedItem as Birlik).Id > 0)
                 {
-                    list.Add("@birlik_id", (searchGridBirliklerCombo.SelectedItem as Birlik).Birlik_id);
+                    list.Add("@birlik_id", (searchGridBirliklerCombo.SelectedItem as Birlik).Id);
                 }
             }
-            if (searchGridAglarCombo.IsEnabled && searchGridAglarCombo.SelectedItem != null)
+            if (IsActiveElement(searchGridAglarCombo)
+                && searchGridAglarCombo.SelectedItem != null)
             {
-                if ((searchGridAglarCombo.SelectedItem as BagliAg).Ag_id > 0)
+                if ((searchGridAglarCombo.SelectedItem as BagliAg).Id > 0)
                 {
-                    list.Add("@bagli_ag_id", (searchGridAglarCombo.SelectedItem as BagliAg).Ag_id);
+                    list.Add("@bagli_ag_id", (searchGridAglarCombo.SelectedItem as BagliAg).Id);
                 }
             }
             if (searchGridTempestCombo.SelectedItem != null)
@@ -368,9 +375,9 @@ namespace Mebs_Envanter
             }
             if (searchGridMarkalarCombo.SelectedItem != null)
             {
-                if ((searchGridMarkalarCombo.SelectedItem as Marka).MarkaID > 0)
+                if ((searchGridMarkalarCombo.SelectedItem as Marka).Id > 0)
                 {
-                    list.Add("@marka_id", (searchGridMarkalarCombo.SelectedItem as Marka).MarkaID);
+                    list.Add("@marka_id", (searchGridMarkalarCombo.SelectedItem as Marka).Id);
                 }
             }
 

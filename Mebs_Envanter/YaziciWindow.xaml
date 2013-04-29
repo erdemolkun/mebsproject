@@ -84,7 +84,7 @@
                         <RowDefinition Height="32"></RowDefinition>
                         <RowDefinition Height="32"></RowDefinition>
                         <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="Auto" ></RowDefinition>
                         <RowDefinition Height="32"></RowDefinition>
                         <RowDefinition Height="32"></RowDefinition>
                         <RowDefinition Height="32"></RowDefinition>
@@ -128,15 +128,20 @@
                              HorizontalAlignment="Center" MinWidth="120" x:Name="searchGridalanKisiIsimTxtBox"></TextBox>
 
 
-                    <TextBlock Text="Ağlar" Grid.Row="4" VerticalAlignment="Center" ></TextBlock>
-                    <ComboBox Grid.Column="1" Grid.Row="4"
-                      x:Name="searchGridAglarCombo" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"/>
-
+                    <TextBlock 
+                        Visibility="{Binding ElementName=thiswin, Path=SelectedIndividual,
+                    Converter={StaticResource IndividualDeviceVisibilityConverter},ConverterParameter=1}"
+                        Text="Ağlar" Grid.Row="4" VerticalAlignment="Center" ></TextBlock>
+                    <ComboBox Margin="0,2"
+                        Visibility="{Binding ElementName=thiswin, Path=SelectedIndividual,
+                    Converter={StaticResource IndividualDeviceVisibilityConverter},ConverterParameter=1}"
+                        Grid.Column="1" Grid.Row="4"
+                      x:Name="searchGridAglarCombo" VerticalAlignment="Center" 
+                              HorizontalAlignment="Center" MinWidth="60"/>
 
                     <TextBlock Text="Tempest Seviyesi" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="left"></TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="5" x:Name="searchGridTempestCombo" VerticalAlignment="Center"
                               HorizontalAlignment="Center" MinWidth="60"/>
-
 
 
                     <TextBlock Text="Seri Numarası" Grid.Row="6" 
