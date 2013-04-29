@@ -8,12 +8,13 @@
              xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
              xmlns:mebs="clr-namespace:Mebs_Envanter"
              mc:Ignorable="d"              
-             d:DesignHeight="320" d:DesignWidth="400" d:DataContext="{Binding Source={StaticResource computerSample}}">
+             d:DesignHeight="320" d:DesignWidth="400" 
+             d:DataContext="{Binding Source={StaticResource computerSample}}">
     <UserControl.Resources>
         <mebs:ComputerInfo x:Key="computerSample"></mebs:ComputerInfo>
     </UserControl.Resources>
     <Grid>
-        <TabControl Background="Transparent" x:Name="pcEnvanterTabControl">
+        <TabControl  x:Name="pcEnvanterTabControl">
             <TabControl.Resources>
                 <Style BasedOn="{StaticResource borderStyleForComputerItems}" TargetType="{x:Type Border}">
                 </Style>
@@ -36,7 +37,8 @@
 
             <TabItem Header="Monitor" x:Name="monitorTab" >
                 <Border >
-                    <hardwareusercontrols:MonitorInfoUserControl x:Name="monitorUserControl1" DataContext="{Binding MonitorInfo}">
+                    <hardwareusercontrols:MonitorInfoUserControl x:Name="monitorUserControl1" 
+                                                                 DataContext="{Binding MonitorInfo}">
 
                     </hardwareusercontrols:MonitorInfoUserControl>
                 </Border>

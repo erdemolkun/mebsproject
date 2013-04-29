@@ -41,7 +41,7 @@ namespace Mebs_Envanter.GeneralObjects
             {
                 if (BagliAgRepository.INSTANCE != null)
                 {
-                    foreach (BagliAg item in BagliAgRepository.INSTANCE.BagliAglar)
+                    foreach (BagliAg item in BagliAgRepository.INSTANCE.Collection)
                     {
                         if (value == item.Id)
                         {

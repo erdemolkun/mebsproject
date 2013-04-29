@@ -66,27 +66,27 @@ namespace Mebs_Envanter
         {
             KomutanlikRepository Rep_Komutanllik = new KomutanlikRepository();
             Rep_Komutanllik.FillKomutanliklar(true);
-            searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Komutanliklar;
+            searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Collection;
 
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
             rep_bagli_ag.Fill_Aglar(true);
-            searchGridAglarCombo.ItemsSource = rep_bagli_ag.BagliAglar;
+            searchGridAglarCombo.ItemsSource = rep_bagli_ag.Collection;
 
             TempestRepository tempest_rep = new TempestRepository();
             tempest_rep.FillSeviyeler(true);
-            searchGridTempestCombo.ItemsSource = tempest_rep.TempestSeviyeler;
+            searchGridTempestCombo.ItemsSource = tempest_rep.Collection;
 
             MarkaRepository marka_rep = new MarkaRepository();
             marka_rep.FillMarkalar(true);
-            searchGridMarkalarCombo.ItemsSource = marka_rep.Markalar;
+            searchGridMarkalarCombo.ItemsSource = marka_rep.Collection;
 
             MarkaRepository marka_rep2 = new MarkaRepository();
             marka_rep2.FillMarkalar(true);
-            searchGridMonitorMarkalar.ItemsSource = marka_rep2.Markalar;
+            searchGridMonitorMarkalar.ItemsSource = marka_rep2.Collection;
 
             MonitorSizesRepository mon_size_rep = new MonitorSizesRepository();
             mon_size_rep.FillSizes(true);
-            searchGridMonitorBoyutlar.ItemsSource = mon_size_rep.Sizes;
+            searchGridMonitorBoyutlar.ItemsSource = mon_size_rep.Collection;
         }
 
         private void ShowError(String msg)
@@ -160,14 +160,14 @@ namespace Mebs_Envanter
             ComputerInfoRepository computerRep = (pcList.DataContext as ComputerInfoRepository);
             if (addInfo.computer.IsEdit || Current_Computer_Info.Id < 0)
             {
-                int index = computerRep.Computers.IndexOf(Current_Computer_Info);
+                int index = computerRep.Collection.IndexOf(Current_Computer_Info);
                 if (index < 0)
                 {
-                    computerRep.Computers.Insert(0, addInfo.computer);
+                    computerRep.Collection.Insert(0, addInfo.computer);
                 }
                 else
                 {
-                    computerRep.Computers[index] = addInfo.computer;
+                    computerRep.Collection[index] = addInfo.computer;
                 }
                 Current_Computer_Info = addInfo.computer;
                 pcList.SelectedItem = Current_Computer_Info;
@@ -175,7 +175,7 @@ namespace Mebs_Envanter
             }
             else
             {
-                computerRep.Computers.Insert(0, addInfo.computer);
+                computerRep.Collection.Insert(0, addInfo.computer);
                 //computerRep.Computers.Add(addInfo.computer);
                 pcList.SelectedItem = addInfo.computer;
             }
@@ -235,7 +235,7 @@ namespace Mebs_Envanter
                 {
                     removed = item as ComputerInfo;
                 }
-                if (removed != null && (lstBox.DataContext as ComputerInfoRepository).Computers.Contains(removed))
+                if (removed != null && (lstBox.DataContext as ComputerInfoRepository).Collection.Contains(removed))
                 {
                     if (removed.Id < 0)
                     {
@@ -250,7 +250,7 @@ namespace Mebs_Envanter
                         }
                         else
                         {
-                            (lstBox.DataContext as ComputerInfoRepository).Computers.Remove(removed);
+                            (lstBox.DataContext as ComputerInfoRepository).Collection.Remove(removed);
                         }
                     }
                 }
@@ -310,7 +310,7 @@ namespace Mebs_Envanter
                 ComputerInfoRepository currentInfoRep = (pcList.DataContext as ComputerInfoRepository);
                 if (currentInfoRep != null)
                 {
-                    currentInfoRep.Computers.Remove(Current_Computer_Info);
+                    currentInfoRep.Collection.Remove(Current_Computer_Info);
                     SetSelectedItemAfterContextChange(true);
                 }
             }
@@ -383,7 +383,7 @@ namespace Mebs_Envanter
         private void SetSelectedItemAfterContextChange(bool selectLast)
         {
             ComputerInfoRepository repositoryNew = (pcList.DataContext as ComputerInfoRepository);
-            if (selectLast && repositoryNew.Computers.Count > 0)
+            if (selectLast && repositoryNew.Collection.Count > 0)
             {
                 pcList.SelectedIndex = 0;//repositoryNew.Computers.Count - 1;
             }
@@ -449,7 +449,7 @@ namespace Mebs_Envanter
                         tempComputer.SetGeneralFields(rowPC);
                     }
                     catch (Exception) { }
-                    repositoryNew.Computers.Add(tempComputer);
+                    repositoryNew.Collection.Add(tempComputer);
                 }                
             }
             catch (Exception)
@@ -492,7 +492,7 @@ namespace Mebs_Envanter
             ComboBox combo_senet = sender as ComboBox;
             BirlikRepository birlik_rep = new BirlikRepository();
             birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik), true);
-            searchGridBirliklerCombo.ItemsSource = birlik_rep.Birlikler;
+            searchGridBirliklerCombo.ItemsSource = birlik_rep.Collection;
             BirlikRepository.INSTANCE = birlik_rep;
         }
 
@@ -575,7 +575,7 @@ namespace Mebs_Envanter
         private void Export(ComputerInfoRepository rep, int export_Format)
         {
 
-            if (rep != null && rep.Computers.Count > 0)
+            if (rep != null && rep.Collection.Count > 0)
             {
                 ExportComputersWindow exportWindow = new ExportComputersWindow(rep, export_Format);
                 exportWindow.Owner = this;
@@ -595,7 +595,7 @@ namespace Mebs_Envanter
         private void MenuItem_Click_5(object sender, RoutedEventArgs e)
         {
             ComputerInfoRepository rep = new ComputerInfoRepository();
-            rep.Computers.Add(pcList.SelectedItem as ComputerInfo);
+            rep.Collection.Add(pcList.SelectedItem as ComputerInfo);
             Export(rep, ExportOptions.EXCEL);
         }
 
@@ -609,7 +609,7 @@ namespace Mebs_Envanter
         private void MenuItem_Click_6(object sender, RoutedEventArgs e)
         {
             ComputerInfoRepository rep = new ComputerInfoRepository();
-            rep.Computers.Add(pcList.SelectedItem as ComputerInfo);
+            rep.Collection.Add(pcList.SelectedItem as ComputerInfo);
             Export(rep, ExportOptions.HTML);
         }
 
@@ -618,7 +618,7 @@ namespace Mebs_Envanter
             ComputerInfoRepository currentInfoRep = (pcList.DataContext as ComputerInfoRepository);
             if (currentInfoRep != null)
             {
-                currentInfoRep.Computers.Insert(0, GetNewComputer());
+                currentInfoRep.Collection.Insert(0, GetNewComputer());
                 pcEnvanterControl.SetFocus(0);
                 SetSelectedItemAfterContextChange(true);
             }

@@ -109,8 +109,8 @@ namespace Mebs_Envanter
                 (individualDevicesList.DataContext as IndividualDeviceRepository<IndividualDeviceInfo>);
             if (addInfo.device.isEdit)
             {
-                int index = yaziciRep.Devices.IndexOf(Current_IndividualDeviceInfo);
-                yaziciRep.Devices[index] = addInfo.device;
+                int index = yaziciRep.Collection.IndexOf(Current_IndividualDeviceInfo);
+                yaziciRep.Collection[index] = addInfo.device;
 
                 Current_IndividualDeviceInfo = addInfo.device;
                 individualDevicesList.SelectedItem = Current_IndividualDeviceInfo;
@@ -118,7 +118,7 @@ namespace Mebs_Envanter
             }
             else
             {
-                yaziciRep.Devices.Add(addInfo.device);
+                yaziciRep.Collection.Add(addInfo.device);
                 individualDevicesList.SelectedItem = addInfo.device;
             }
         }
@@ -164,23 +164,23 @@ namespace Mebs_Envanter
         {
             KomutanlikRepository Rep_Komutanllik = new KomutanlikRepository();
             Rep_Komutanllik.FillKomutanliklar(true);
-            searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Komutanliklar;
+            searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Collection;
 
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
             rep_bagli_ag.Fill_Aglar(true);
-            searchGridAglarCombo.ItemsSource = rep_bagli_ag.BagliAglar;
+            searchGridAglarCombo.ItemsSource = rep_bagli_ag.Collection;
 
             TempestRepository tempest_rep = new TempestRepository();
             tempest_rep.FillSeviyeler(true);
-            searchGridTempestCombo.ItemsSource = tempest_rep.TempestSeviyeler;
+            searchGridTempestCombo.ItemsSource = tempest_rep.Collection;
 
             MarkaRepository marka_rep = new MarkaRepository();
             marka_rep.FillMarkalar(true);
-            searchGridMarkalarCombo.ItemsSource = marka_rep.Markalar;
+            searchGridMarkalarCombo.ItemsSource = marka_rep.Collection;
 
             PrinterTypesRepository types_rep = new PrinterTypesRepository();
             types_rep.FillPrinterTypes(true);
-            searchGridYaziciTiplerCombo.ItemsSource = types_rep.PrinterTypes;
+            searchGridYaziciTiplerCombo.ItemsSource = types_rep.Collection;
         }
 
         private void RefreshPrinterList(SortedList<String, object> parameterList, bool selectLast)
@@ -232,7 +232,7 @@ namespace Mebs_Envanter
                             {
                                 (tempDevice as YaziciInfo).SetGeneralFieldsYazici(rowPC);
                             }
-                            repositoryNew.Devices.Add(tempDevice);
+                            repositoryNew.Collection.Add(tempDevice);
                         }
                     }
                     catch (Exception) { }
@@ -240,7 +240,7 @@ namespace Mebs_Envanter
                 individualDevicesList.DataContext = repositoryNew;
                 if (selectLast)
                 {
-                    individualDevicesList.SelectedIndex = repositoryNew.Devices.Count - 1;
+                    individualDevicesList.SelectedIndex = repositoryNew.Collection.Count - 1;
                 }
                 else
                 {
@@ -307,7 +307,7 @@ namespace Mebs_Envanter
                 IndividualDeviceRepository<IndividualDeviceInfo> currentInfoRep = (individualDevicesList.DataContext as IndividualDeviceRepository<IndividualDeviceInfo>);
                 if (currentInfoRep != null)
                 {
-                    currentInfoRep.Devices.Remove(Current_IndividualDeviceInfo);
+                    currentInfoRep.Collection.Remove(Current_IndividualDeviceInfo);
                 }
             }
         }
@@ -374,7 +374,7 @@ namespace Mebs_Envanter
             ComboBox combo_senet = sender as ComboBox;
             BirlikRepository birlik_rep = new BirlikRepository();
             birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik), true);
-            searchGridBirliklerCombo.ItemsSource = birlik_rep.Birlikler;
+            searchGridBirliklerCombo.ItemsSource = birlik_rep.Collection;
             BirlikRepository.INSTANCE = birlik_rep;
         }
 

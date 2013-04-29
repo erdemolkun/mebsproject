@@ -9,26 +9,19 @@ using Mebs_Envanter.GeneralObjects;
 
 namespace Mebs_Envanter.Repositories
 {
-    public class BirlikRepository : MebsBaseObject
+    public class BirlikRepository : BaseRepository<Birlik>
     {
 
         public static BirlikRepository INSTANCE = null;
 
-        private ObservableCollection<Birlik> birlikler = new ObservableCollection<Birlik>();
-        public ObservableCollection<Birlik> Birlikler
-        {
-            get { return birlikler; }
-        }
-
-
         private void ClearBirlikler(bool isForSearch) { 
-            Birlikler.Clear();
+            Collection.Clear();
             if (isForSearch)
             {
-                Birlikler.Add(new Birlik(-1, "Hepsi"));
+                Collection.Add(new Birlik(-1, "Hepsi"));
             }
             else{
-                Birlikler.Add(new Birlik(-1, ""));
+                Collection.Add(new Birlik(-1, ""));
             }
         }
 
@@ -62,7 +55,7 @@ namespace Mebs_Envanter.Repositories
                     current_birlik = dr["birlik_adi"].ToString();
                     current_birlik_id = (int)dr["birlik_id"];
 
-                    birlikler.Add(new Birlik(current_birlik_id, current_birlik));
+                    Collection.Add(new Birlik(current_birlik_id, current_birlik));
                 }
                 dr.Close();
                 cnn.Close();

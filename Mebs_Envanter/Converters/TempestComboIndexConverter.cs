@@ -17,7 +17,7 @@ namespace Mebs_Envanter.Converters
             {
                 Tempest infoTempest = value as Tempest;
                 int index = -1;
-                foreach (var item in TempestRepository.INSTANCE.TempestSeviyeler)
+                foreach (var item in TempestRepository.INSTANCE.Collection)
                 {
                     index++;
                     if (infoTempest.Id == item.Id) { return index; }

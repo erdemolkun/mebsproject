@@ -17,7 +17,7 @@ namespace Mebs_Envanter.Converters
             {
                 PrinterType type = value as PrinterType;
                 int index = 0;
-                foreach (var item in PrinterTypesRepository.INSTANCE.PrinterTypes)
+                foreach (var item in PrinterTypesRepository.INSTANCE.Collection)
                 {
                     if (type.Id == item.Id) {
                         type.TypeName = item.TypeName;

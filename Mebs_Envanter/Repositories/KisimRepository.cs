@@ -9,21 +9,21 @@ using Mebs_Envanter.GeneralObjects;
 
 namespace Mebs_Envanter.Repositories
 {
-    public class KisimRepository:MebsBaseObject
+    public class KisimRepository:BaseRepository<Kisim>
     {
 
         public static KisimRepository INSTANCE = null;
 
-        private ObservableCollection<Kisim> kisimlar = new ObservableCollection<Kisim>();
-        public ObservableCollection<Kisim> Kisimlar
-        {
-            get { return kisimlar; }
-        }
+        //private ObservableCollection<Kisim> kisimlar = new ObservableCollection<Kisim>();
+        //public ObservableCollection<Kisim> Kisimlar
+        //{
+        //    get { return kisimlar; }
+        //}
 
         private void ClearKisimlar() {
 
-            Kisimlar.Clear();
-            Kisimlar.Add(new Kisim(-1, ""));
+            Collection.Clear();
+            Collection.Add(new Kisim(-1, ""));
         }
 
         public void FillKisimlar(Birlik birlik)
@@ -51,7 +51,7 @@ namespace Mebs_Envanter.Repositories
                     current_kisim = dr["kisim_adi"].ToString();
                     current_kisim_id = (int)dr["kisim_id"];
 
-                    Kisimlar.Add(new Kisim(current_kisim_id, current_kisim));
+                    Collection.Add(new Kisim(current_kisim_id, current_kisim));
                 }
                 dr.Close();
                 cnn.Close();

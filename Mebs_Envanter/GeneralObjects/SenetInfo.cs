@@ -126,17 +126,17 @@ namespace Mebs_Envanter
                 String komutanlikName = "";
                 String birlikName = "";
                 String kisimName = "";
-                foreach (Komutanlik item in KomutanlikRepository.INSTANCE.Komutanliklar)
+                foreach (Komutanlik item in KomutanlikRepository.INSTANCE.Collection)
                 {
                     if (alanKisiKomutanlikId == item.Id)
                     {
                         komutanlikName = item.Komutanlik_ismi;
-                        foreach (Birlik itemBirlik in item.Birlik_Repository.Birlikler)
+                        foreach (Birlik itemBirlik in item.Birlik_Repository.Collection)
                         {
                             if (itemBirlik.Id == alanKisiBirlikId)
                             {
                                 birlikName = itemBirlik.Birlik_ismi;
-                                foreach (Kisim itemKisim in itemBirlik.Kisim_Repository.Kisimlar)
+                                foreach (Kisim itemKisim in itemBirlik.Kisim_Repository.Collection)
                                 {
                                     if (itemKisim.Id == alanKisiKisimId)
                                     {

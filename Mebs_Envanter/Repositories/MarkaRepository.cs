@@ -8,7 +8,7 @@ using Mebs_Envanter.DB;
 
 namespace Mebs_Envanter.Repositories
 {
-    public class MarkaRepository
+    public class MarkaRepository:BaseRepository<Marka>
     {
 
         private static MarkaRepository instance = null;
@@ -23,21 +23,21 @@ namespace Mebs_Envanter.Repositories
 
         public MarkaRepository() { }
 
-        private ObservableCollection<Marka> markalar = new ObservableCollection<Marka>();
-        public ObservableCollection<Marka> Markalar
-        {
-            get { return markalar; }
-        }
+        //private ObservableCollection<Marka> markalar = new ObservableCollection<Marka>();
+        //public ObservableCollection<Marka> Markalar
+        //{
+        //    get { return markalar; }
+        //}
 
         private void ClearMarkalar(bool isForSearch) {
 
-            Markalar.Clear();
+            Collection.Clear();
             if (isForSearch)
             {
-                Markalar.Add(new Marka(-1, "Hepsi"));
+                Collection.Add(new Marka(-1, "Hepsi"));
             }
             else {
-                Markalar.Add(new Marka(-1, ""));
+                Collection.Add(new Marka(-1, ""));
             }
         }
 
@@ -62,7 +62,7 @@ namespace Mebs_Envanter.Repositories
                     current_marka = dr["marka_ismi"].ToString();
                     current_marka_id = (int)dr["marka_id"];
 
-                    markalar.Add(new Marka(current_marka_id, current_marka));
+                    Collection.Add(new Marka(current_marka_id, current_marka));
                 }
                 dr.Close();
                 cnn.Close();

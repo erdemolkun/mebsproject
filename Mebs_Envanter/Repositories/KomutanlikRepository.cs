@@ -9,26 +9,26 @@ using Mebs_Envanter.GeneralObjects;
 
 namespace Mebs_Envanter.Repositories
 {
-    public class KomutanlikRepository : MebsBaseObject
+    public class KomutanlikRepository : BaseRepository<Komutanlik>
     {
 
         public static KomutanlikRepository INSTANCE = null;
 
-        private ObservableCollection<Komutanlik> komutanliklar = new ObservableCollection<Komutanlik>();
-        public ObservableCollection<Komutanlik> Komutanliklar
-        {
-            get { return komutanliklar; }
-        }
+        //private ObservableCollection<Komutanlik> komutanliklar = new ObservableCollection<Komutanlik>();
+        //public ObservableCollection<Komutanlik> Komutanliklar
+        //{
+        //    get { return komutanliklar; }
+        //}
 
 
         private void ClearBirlikler(bool isForSearch)
         {
-            Komutanliklar.Clear();
+            Collection.Clear();
             if (isForSearch)
             {
-                Komutanliklar.Add(new Komutanlik(-1, "Hepsi"));
+                Collection.Add(new Komutanlik(-1, "Hepsi"));
             }
-            else{Komutanliklar.Add(new Komutanlik(-1, ""));}
+            else { Collection.Add(new Komutanlik(-1, "")); }
         }
 
         public void FillKomutanliklar(bool isForSearch)
@@ -51,7 +51,7 @@ namespace Mebs_Envanter.Repositories
                     current_komutanlik = dr["komutanlik_adi"].ToString();
                     current_komutanlik_id = (int)dr["komutanlik_id"];
 
-                    komutanliklar.Add(new Komutanlik(current_komutanlik_id, current_komutanlik));
+                    Collection.Add(new Komutanlik(current_komutanlik_id, current_komutanlik));
                 }
                 dr.Close();
                 cnn.Close();

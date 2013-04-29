@@ -9,26 +9,25 @@ using Mebs_Envanter.GeneralObjects;
 
 namespace Mebs_Envanter.Repositories
 {
-    public class MonitorSizesRepository : MebsBaseObject
+    public class MonitorSizesRepository : BaseRepository<MonitorSize>
     {
-
         public static MonitorSizesRepository INSTANCE = null;
 
-        private ObservableCollection<MonitorSize> sizes = new ObservableCollection<MonitorSize>();
-        public ObservableCollection<MonitorSize> Sizes
-        {
-            get { return sizes; }
-        }
+        //private ObservableCollection<MonitorSize> sizes = new ObservableCollection<MonitorSize>();
+        //public ObservableCollection<MonitorSize> Sizes
+        //{
+        //    get { return sizes; }
+        //}
 
         private void ClearSizes(bool isForSearch)
         {
-            Sizes.Clear();
+            Collection.Clear();
             if (isForSearch)
             {
-                Sizes.Add(new MonitorSize(MonitorSize.MON_ID_FOR_SEARCH, 0));
+                Collection.Add(new MonitorSize(MonitorSize.MON_ID_FOR_SEARCH, 0));
             }
             else {
-                Sizes.Add(new MonitorSize(MonitorSize.MON_ID_FOR_LIST, 0));
+                Collection.Add(new MonitorSize(MonitorSize.MON_ID_FOR_LIST, 0));
             }
         }
 
@@ -50,7 +49,7 @@ namespace Mebs_Envanter.Repositories
                 {
                     float.TryParse(dr["monitor_boyutu"].ToString(), out current_length);
                     current_id = (int)dr["boyut_id"];
-                    Sizes.Add(new MonitorSize(current_id, current_length));
+                    Collection.Add(new MonitorSize(current_id, current_length));
                 }
                 dr.Close();
                 cnn.Close();
