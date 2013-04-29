@@ -21,6 +21,8 @@ using System.ComponentModel;
 using Mebs_Envanter.GeneralObjects;
 using Mebs_Envanter.PrintOperations;
 using Mebs_Envanter.AllVisuals;
+using Mebs_Envanter.Base;
+using Mebs_Envanter.Helpers;
 
 namespace Mebs_Envanter
 {
@@ -75,7 +77,7 @@ namespace Mebs_Envanter
             {
                 IndividualDeviceInfo infIndividualDevice = GetNewDevice();
                 IndividualDeviceInfo currentDevice = individualDevicesList.SelectedItem as IndividualDeviceInfo;
-                if(currentDevice!=null)
+                if (currentDevice != null)
                     Current_IndividualDeviceInfo = currentDevice;
 
                 AssignIndividualDeviceInfoByGui(Current_IndividualDeviceInfo, infIndividualDevice, isEdit);
@@ -192,7 +194,7 @@ namespace Mebs_Envanter
             cmd.CommandType = CommandType.StoredProcedure;
 
 
-            cmd.Parameters.AddWithValue("@parca_tipi",ExtraDeviceTypes.ConvertToDeviceType(SelectedIndividual.DeviceType));
+            cmd.Parameters.AddWithValue("@parca_tipi", ExtraDeviceTypes.ConvertToDeviceType(SelectedIndividual.DeviceType));
             if (parameterList != null)
             {
                 foreach (var item in parameterList)
@@ -334,52 +336,15 @@ namespace Mebs_Envanter
         }
 
 
-        private bool IsActiveElement(FrameworkElement element) {
-
-            return element.Visibility == Visibility.Visible && element.IsEnabled;
-        }
-
         private SortedList<String, object> GetParameterListForSearch()
         {
             //parca_no
-
             SortedList<String, object> list = new SortedList<string, object>();
-            if (searchGridKomutanliklarCombo.SelectedItem != null)
-            {
-                if ((searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Id > 0)
-                {
-                    list.Add("@komutanlik_id", (searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Id);
-                }
-            }
-            if (searchGridBirliklerCombo.SelectedItem != null)
-            {
-                if ((searchGridBirliklerCombo.SelectedItem as Birlik).Id > 0)
-                {
-                    list.Add("@birlik_id", (searchGridBirliklerCombo.SelectedItem as Birlik).Id);
-                }
-            }
-            if (IsActiveElement(searchGridAglarCombo)
-                && searchGridAglarCombo.SelectedItem != null)
-            {
-                if ((searchGridAglarCombo.SelectedItem as BagliAg).Id > 0)
-                {
-                    list.Add("@bagli_ag_id", (searchGridAglarCombo.SelectedItem as BagliAg).Id);
-                }
-            }
-            if (searchGridTempestCombo.SelectedItem != null)
-            {
-                if ((searchGridTempestCombo.SelectedItem as Tempest).Id > 0)
-                {
-                    list.Add("@tempest_id", (searchGridTempestCombo.SelectedItem as Tempest).Id);
-                }
-            }
-            if (searchGridMarkalarCombo.SelectedItem != null)
-            {
-                if ((searchGridMarkalarCombo.SelectedItem as Marka).Id > 0)
-                {
-                    list.Add("@marka_id", (searchGridMarkalarCombo.SelectedItem as Marka).Id);
-                }
-            }
+            SearchHelper.AddToListFromCombo(searchGridKomutanliklarCombo, list, "@komutanlik_id");
+            SearchHelper.AddToListFromCombo(searchGridBirliklerCombo, list, "@birlik_id");
+            SearchHelper.AddToListFromCombo(searchGridAglarCombo, list, "@bagli_ag_id");
+            SearchHelper.AddToListFromCombo(searchGridTempestCombo, list, "@tempest_id");
+            SearchHelper.AddToListFromCombo(searchGridMarkalarCombo, list, "@marka_id");            
 
             String alan_kisi_isim = searchGridalanKisiIsimTxtBox.Text.Trim().ToString();
             if (!String.IsNullOrEmpty(alan_kisi_isim))

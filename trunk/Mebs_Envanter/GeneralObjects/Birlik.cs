@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Mebs_Envanter.Repositories;
 using Mebs_Envanter.DB;
+using Mebs_Envanter.Base;
 
 namespace Mebs_Envanter.GeneralObjects
 {
-    public class Birlik : MebsBaseObject
+    public class Birlik : MebsBaseDBObject
     {
         public KisimRepository Kisim_Repository = null;
 
@@ -28,19 +29,6 @@ namespace Mebs_Envanter.GeneralObjects
         {
             get { return _birlik_ismi; }
             set { _birlik_ismi = value; OnPropertyChanged("Birlik_ismi"); }
-        }
-
-        private int _birlik_id = -1;
-
-        public int Id
-        {
-            get { return _birlik_id; }
-            set
-            {
-                _birlik_id = value;
-
-                OnPropertyChanged("Id");
-            }
-        }
+        }        
     }
 }

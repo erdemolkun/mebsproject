@@ -136,6 +136,7 @@
     <Compile Include="Hardware\ScannerInfo.cs" />
     <Compile Include="Hardware\YaziciInfo.cs" />
     <Compile Include="Helpers\LoggerMebs.cs" />
+    <Compile Include="Helpers\SearchHelper.cs" />
     <Compile Include="PrintOperations\GridPrinter.cs" />
     <Compile Include="Repositories\IndividualDeviceRepository.cs" />
     <Compile Include="Repositories\MonitorSizesRepository.cs" />
