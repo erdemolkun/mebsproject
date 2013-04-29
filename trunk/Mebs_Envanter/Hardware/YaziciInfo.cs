@@ -23,11 +23,21 @@ namespace Mebs_Envanter.Hardware
             int bagli_ag_id = DBValueHelpers.GetInt32(rowYazici["bagli_ag_id"].ToString(), -1);
             NetworkInfo.BagliAg = new BagliAg("", bagli_ag_id);
             NetworkInfo.IpAddress = rowYazici["ip_adresi"].ToString();
-            int senet_id = DBValueHelpers.GetInt32(rowYazici["senet_id"].ToString(), -1);                        
-            SenetInfo.Id = senet_id;
+            int tip_id = DBValueHelpers.GetInt32(rowYazici["tip_id"], -1);
+            YaziciTipi = new PrinterType(tip_id, "");
+            //tochange
+            //int senet_id = DBValueHelpers.GetInt32(rowYazici["senet_id"].ToString(), -1);                        
+            //SenetInfo.Id = senet_id;
             //SenetInfo.Set_SenetInfos(false, -1, senet_id);            
         }
 
+        private PrinterType yaziciTipi;
+
+        public PrinterType YaziciTipi
+        {
+            get { return yaziciTipi; }
+            set { yaziciTipi = value; OnPropertyChanged("YaziciTipi"); }
+        }
 
 
         private NetworkInfo networkInfo = new NetworkInfo();

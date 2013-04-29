@@ -33,6 +33,14 @@ namespace Mebs_Envanter
             }
         }
 
+        private SenetInfo senetInfo = new SenetInfo();
+
+        public SenetInfo SenetInfo
+        {
+            get { return senetInfo; }
+            set { senetInfo = value; OnPropertyChanged("SenetInfo"); }
+        }
+
         public static List<OEMDevice> GetOemDevicesDB(SqlConnection sqlConnection, bool isForComputer, int bilgisayar_id, int _parca_id)
         {
             if (sqlConnection == null)
@@ -74,6 +82,7 @@ namespace Mebs_Envanter
                         String parca_tanimi = rowParca["parca_tanimi"].ToString();
                         String parca_no = rowParca["parca_no"].ToString();
 
+                        int senet_id = DBValueHelpers.GetInt32(rowParca["senet_id"], -1);
                         int markaid = DBValueHelpers.GetInt32(rowParca["marka_id"], -1);
                         int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
                         int parca_adedi = DBValueHelpers.GetInt32(rowParca["parca_adedi"], 1);
@@ -103,7 +112,8 @@ namespace Mebs_Envanter
                         }
 
                         //Ortak alanlar
-
+                        //tochange
+                        devOem.SenetInfo.Id = senet_id;
                         devOem.Id = parca_id;
                         devOem.SerialNumber = seri_no;
                         devOem.Parca_no = parca_no;

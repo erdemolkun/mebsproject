@@ -32,6 +32,11 @@ namespace Mebs_Envanter.HardwareUserControls
             inf.Marka = markalarCombo.SelectedItem as Marka;
             inf.Tempest = tempestCombo.SelectedItem as Tempest;
             inf.SerialNumber = serialTextBox.Text.Trim().ToString();
+
+            if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PRINTER) {
+
+                (inf as YaziciInfo).YaziciTipi = printerTypesCombo.SelectedItem as PrinterType;
+            }
         }
 
         public void Init()
@@ -46,6 +51,25 @@ namespace Mebs_Envanter.HardwareUserControls
             Rep_Tempest.FillSeviyeler(false);
             tempestCombo.ItemsSource = Rep_Tempest.TempestSeviyeler;
             TempestRepository.INSTANCE = Rep_Tempest;
+
+            PrinterTypesRepository Rep_Types = new PrinterTypesRepository();
+            Rep_Types.FillPrinterTypes(false);
+            printerTypesCombo.ItemsSource = Rep_Types.PrinterTypes;
+            PrinterTypesRepository.INSTANCE = Rep_Types;
+
         }
+
+
+
+
+        public IndividualDevice SelectedIndividual
+        {
+            get { return (IndividualDevice)GetValue(SelectedIndividualProperty); }
+            set { SetValue(SelectedIndividualProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedIndividual.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedIndividualProperty =
+            DependencyProperty.Register("SelectedIndividual", typeof(IndividualDevice), typeof(GeneralInfoIndividualDeviceUserControl), new UIPropertyMetadata(null));
     }
 }

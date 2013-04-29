@@ -56,6 +56,10 @@
     </converters:IndividualDeviceVisibilityConverter>
 
     <converters:DeviceTypeToParcaIsimConverter x:Key="DeviceTypeToParcaIsimConverter">
-        
+
     </converters:DeviceTypeToParcaIsimConverter>
+
+    <converters:PrinterTypeComboIndexConverter x:Key="PrinterTypeComboIndexConverter">
+
+    </converters:PrinterTypeComboIndexConverter>
 </ResourceDictionary>

@@ -63,8 +63,7 @@ namespace Mebs_Envanter.DB
         {
             cmBilgisayarEkleSilDuz = new SqlCommand("p_bilgisayar_ek_sil_duz");
             cmBilgisayarEkleSilDuz.CommandType = CommandType.StoredProcedure;
-
-            //tochange
+            
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@bilgisayar_id", SqlDbType.Int));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar, 5));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@marka_id", SqlDbType.Int));
@@ -82,6 +81,8 @@ namespace Mebs_Envanter.DB
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@temp_bilgisayar_id", SqlDbType.Int));            
             cmBilgisayarEkleSilDuz.Parameters["@temp_bilgisayar_id"].Direction = ParameterDirection.Output;
 
+
+            //tochange
             cmParcaEkleSilDuz = new SqlCommand("p_parca_ek_sil_duz");
             cmParcaEkleSilDuz.CommandType = CommandType.StoredProcedure;
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar, 5));
@@ -95,6 +96,7 @@ namespace Mebs_Envanter.DB
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@tempest_id", SqlDbType.Int));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@parca_tipi", SqlDbType.SmallInt));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@parca_adedi", SqlDbType.SmallInt));
+            cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@senet_id", SqlDbType.Int));
             cmParcaEkleSilDuz.Parameters.Add(new SqlParameter("@temp_parca_id", SqlDbType.Int));
 
             cmParcaEkleSilDuz.Parameters["@temp_parca_id"].Direction = ParameterDirection.Output;
@@ -110,24 +112,23 @@ namespace Mebs_Envanter.DB
             cmMonitorEkleSilDuz.Parameters.Add(new SqlParameter("@boyut_id", SqlDbType.Int));
             cmMonitorEkleSilDuz.Parameters["@temp_monitor_id"].Direction = ParameterDirection.Output;
 
+            //tochange
             cmYaziciEkleSilDuz = new SqlCommand("p_yazici_ek_sil_duz");
             cmYaziciEkleSilDuz.CommandType = CommandType.StoredProcedure;
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar, 5));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@parca_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@yazici_id", SqlDbType.Int));
-            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@senet_id", SqlDbType.Int));            
+            cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@tip_id", SqlDbType.Int));            
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@ip_adresi", SqlDbType.NVarChar, 50));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@bagli_ag_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters.Add(new SqlParameter("@temp_yazici_id", SqlDbType.Int));
             cmYaziciEkleSilDuz.Parameters["@temp_yazici_id"].Direction = ParameterDirection.Output;
-
-            //tochange
+            
             cmSenetEkleDilDuz = new SqlCommand("p_senet_ek_sil_duz");
             cmSenetEkleDilDuz.CommandType = CommandType.StoredProcedure;
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@temp_senet_id", SqlDbType.Int));
             cmSenetEkleDilDuz.Parameters["@temp_senet_id"].Direction = ParameterDirection.Output;
-            cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar, 5));
-            //cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@bilgisayar_id", SqlDbType.Int));
+            cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar, 5));            
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@senet_id", SqlDbType.Int));
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_rutbe", SqlDbType.NVarChar, 50));
             cmSenetEkleDilDuz.Parameters.Add(new SqlParameter("@alan_kisi_isim", SqlDbType.NVarChar, 50));
@@ -246,9 +247,10 @@ namespace Mebs_Envanter.DB
                     {
                         cmYaziciEkleSilDuz.Parameters["@bagli_ag_id"].Value = infoYazici.NetworkInfo.BagliAg.Id;
                     }
-                    if (infoYazici.SenetInfo.Id > 0)
+
+                    if (infoYazici.YaziciTipi!=null && infoYazici.YaziciTipi.Id > 0)
                     {
-                        cmYaziciEkleSilDuz.Parameters["@senet_id"].Value = infoYazici.SenetInfo.Id;
+                        cmYaziciEkleSilDuz.Parameters["@tip_id"].Value = infoYazici.YaziciTipi.Id;
                     }
                     cmYaziciEkleSilDuz.ExecuteNonQuery();
                     if (!shouldBeEdit)
@@ -267,6 +269,7 @@ namespace Mebs_Envanter.DB
 
         public static bool InsertOrUpdateOemDevice(OEMDevice deviceOem, int bilgisayar_id, bool isEdit)
         {
+            //tochange
             try
             {
                 bool isInDatabase = (deviceOem.Id > 0);
@@ -285,6 +288,13 @@ namespace Mebs_Envanter.DB
                     {
                         cmParcaEkleSilDuz.Parameters["@type"].Value = "E";
                     }
+
+                    //tochange
+                    if (deviceOem.SenetInfo.Id > 0)
+                    {
+                        cmParcaEkleSilDuz.Parameters["@senet_id"].Value = deviceOem.SenetInfo.Id;
+                    }
+
                     if (deviceOem.Marka != null && deviceOem.Marka.Id > 0)
                     {
                         cmParcaEkleSilDuz.Parameters["@marka_id"].Value = deviceOem.Marka.Id;
@@ -340,7 +350,7 @@ namespace Mebs_Envanter.DB
             return false;
         }
 
-        public static bool InsertOrUpdateGeneralInfo(ComputerInfo infoComputer, bool isEdit)
+        public static bool InsertOrUpdateComputerGeneralInfo(ComputerInfo infoComputer, bool isEdit)
         {
             try
             {
@@ -466,8 +476,7 @@ namespace Mebs_Envanter.DB
         }
 
         public static bool InsertOrUpdateSenet(SenetInfo infoSenet, bool isEdit)
-        {
-            //tochange
+        {            
             try
             {
                 cmSenetEkleDilDuz.Connection = GlobalDataAccess.Get_Fresh_SQL_Connection();
@@ -540,7 +549,7 @@ namespace Mebs_Envanter.DB
                 bool isOk = true;
                 bool resultSenet = DBFunctions.InsertOrUpdateSenet(freshComputerInfo.Senet, isEdit);
                 isOk |= resultSenet;
-                bool resultComputer = DBFunctions.InsertOrUpdateGeneralInfo(freshComputerInfo, isEdit);
+                bool resultComputer = DBFunctions.InsertOrUpdateComputerGeneralInfo(freshComputerInfo, isEdit);
                 if (resultComputer)
                 {
                     // Monitörü ekle

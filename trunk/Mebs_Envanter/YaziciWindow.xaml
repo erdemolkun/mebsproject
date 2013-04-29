@@ -216,7 +216,10 @@
             <TabControl Grid.Row="1">
                 <TabItem Header="Genel Bilgiler">
                     <Border>
-                        <hardwareusercontrols:GeneralInfoIndividualDeviceUserControl x:Name="yaziciUserControl1">
+                        <hardwareusercontrols:GeneralInfoIndividualDeviceUserControl 
+                            SelectedIndividual="{Binding ElementName=thiswin,Path=SelectedIndividual}"
+                            
+                            x:Name="yaziciUserControl1">
                         </hardwareusercontrols:GeneralInfoIndividualDeviceUserControl>
                     </Border>
                 </TabItem>
