@@ -31,6 +31,7 @@ using System.Reflection;
 using ReadWriteCsv;
 using Mebs_Envanter.Export;
 using Mebs_Envanter.AllVisuals;
+using Mebs_Envanter.Helpers;
 
 
 namespace Mebs_Envanter
@@ -330,41 +331,13 @@ namespace Mebs_Envanter
         private SortedList<String, object> GetParameterListForSearch()
         {
             SortedList<String, object> list = new SortedList<string, object>();
-            if (searchGridKomutanliklarCombo.SelectedItem != null)
-            {
-                if ((searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Id > 0)
-                {
-                    list.Add("@komutanlik_id", (searchGridKomutanliklarCombo.SelectedItem as Komutanlik).Id);
-                }
-            }
-            if (searchGridBirliklerCombo.SelectedItem != null)
-            {
-                if ((searchGridBirliklerCombo.SelectedItem as Birlik).Id > 0)
-                {
-                    list.Add("@birlik_id", (searchGridBirliklerCombo.SelectedItem as Birlik).Id);
-                }
-            }
-            if (searchGridAglarCombo.SelectedItem != null)
-            {
-                if ((searchGridAglarCombo.SelectedItem as BagliAg).Id > 0)
-                {
-                    list.Add("@bagli_ag_id", (searchGridAglarCombo.SelectedItem as BagliAg).Id);
-                }
-            }
-            if (searchGridTempestCombo.SelectedItem != null)
-            {
-                if ((searchGridTempestCombo.SelectedItem as Tempest).Id > 0)
-                {
-                    list.Add("@tempest_id", (searchGridTempestCombo.SelectedItem as Tempest).Id);
-                }
-            }
-            if (searchGridMarkalarCombo.SelectedItem != null)
-            {
-                if ((searchGridMarkalarCombo.SelectedItem as Marka).Id > 0)
-                {
-                    list.Add("@marka_id", (searchGridMarkalarCombo.SelectedItem as Marka).Id);
-                }
-            }
+            SearchHelper.AddToListFromCombo(searchGridKomutanliklarCombo, list, "@komutanlik_id");
+            SearchHelper.AddToListFromCombo(searchGridBirliklerCombo, list, "@birlik_id");
+            SearchHelper.AddToListFromCombo(searchGridAglarCombo, list, "@bagli_ag_id");
+            SearchHelper.AddToListFromCombo(searchGridTempestCombo, list, "@tempest_id");
+            SearchHelper.AddToListFromCombo(searchGridMarkalarCombo, list, "@marka_id");
+            SearchHelper.AddToListFromCombo(searchGridMonitorMarkalar, list, "@mon_marka_id");
+              
             if (searchGridMonitorTipler.SelectedItem != null)
             {
                 try
@@ -388,13 +361,7 @@ namespace Mebs_Envanter
                 catch (Exception) { }
             }
 
-            if (searchGridMonitorMarkalar.SelectedItem != null)
-            {
-                if ((searchGridMonitorMarkalar.SelectedItem as Marka).Id > 0)
-                {
-                    list.Add("@mon_marka_id", (searchGridMonitorMarkalar.SelectedItem as Marka).Id);
-                }
-            }
+           
             String alan_kisi_isim = searchGridalanKisiIsimTxtBox.Text.Trim().ToString();
             if (!String.IsNullOrEmpty(alan_kisi_isim))
             {
