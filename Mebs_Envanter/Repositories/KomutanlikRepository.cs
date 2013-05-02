@@ -14,14 +14,7 @@ namespace Mebs_Envanter.Repositories
 
         public static KomutanlikRepository INSTANCE = null;
 
-        //private ObservableCollection<Komutanlik> komutanliklar = new ObservableCollection<Komutanlik>();
-        //public ObservableCollection<Komutanlik> Komutanliklar
-        //{
-        //    get { return komutanliklar; }
-        //}
-
-
-        private void ClearBirlikler(bool isForSearch)
+        private void Clear(bool isForSearch)
         {
             Collection.Clear();
             if (isForSearch)
@@ -41,7 +34,7 @@ namespace Mebs_Envanter.Repositories
 
             if (res)
             {
-                ClearBirlikler(isForSearch);
+                Clear(isForSearch);
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_komutanlik = null;
                 int current_komutanlik_id = -1;

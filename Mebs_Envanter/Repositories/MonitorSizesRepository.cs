@@ -13,13 +13,7 @@ namespace Mebs_Envanter.Repositories
     {
         public static MonitorSizesRepository INSTANCE = null;
 
-        //private ObservableCollection<MonitorSize> sizes = new ObservableCollection<MonitorSize>();
-        //public ObservableCollection<MonitorSize> Sizes
-        //{
-        //    get { return sizes; }
-        //}
-
-        private void ClearSizes(bool isForSearch)
+        private void Clear(bool isForSearch)
         {
             Collection.Clear();
             if (isForSearch)
@@ -40,7 +34,7 @@ namespace Mebs_Envanter.Repositories
 
             if (res)
             {
-                ClearSizes(isForSearch);
+                Clear(isForSearch);
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 float current_length = 0;

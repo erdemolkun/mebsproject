@@ -13,7 +13,7 @@ namespace Mebs_Envanter.Hardware
         {
             if (!PropertiesFetched)
             {                
-                SenetInfo.Set_SenetInfosDB();
+                Senet.Set_SenetInfosDB();
                 PropertiesFetched = true;
             }
         }

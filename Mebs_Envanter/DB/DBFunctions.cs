@@ -286,9 +286,9 @@ namespace Mebs_Envanter.DB
                         cmParcaEkleSilDuz.Parameters["@type"].Value = "E";
                     }
                     
-                    if (deviceOem.SenetInfo.Id > 0)
+                    if (deviceOem.Senet.Id > 0)
                     {
-                        cmParcaEkleSilDuz.Parameters["@senet_id"].Value = deviceOem.SenetInfo.Id;
+                        cmParcaEkleSilDuz.Parameters["@senet_id"].Value = deviceOem.Senet.Id;
                     }
 
                     if (deviceOem.Marka != null && deviceOem.Marka.Id > 0)

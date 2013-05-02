@@ -6,15 +6,13 @@ using System.Collections.ObjectModel;
 
 namespace Mebs_Envanter.Repositories
 {
-    public class BaseRepository<T> : MebsBaseObject
+    public class BaseRepository<T>
     {
         public BaseRepository() { }
-
         private ObservableCollection<T> collection = new ObservableCollection<T>();
         public ObservableCollection<T> Collection
         {
             get { return collection; }
         }
-
     }
 }

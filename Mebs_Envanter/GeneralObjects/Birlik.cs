@@ -13,8 +13,7 @@ namespace Mebs_Envanter.GeneralObjects
         public KisimRepository Kisim_Repository = null;
 
         public override string ToString()
-        {
-            //return Birlik_ismi+" ID : "+Birlik_id;
+        {            
             return Birlik_ismi;
         }
         public Birlik(int birlik_id, String birlik_ismi)

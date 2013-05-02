@@ -115,9 +115,9 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock Text="Alan Kişi : " Foreground="Brown"></TextBlock>
                     <TextBlock Name="textBlock3" TextWrapping="Wrap" Margin="0,0,2,0" 
-                               Text="{Binding SenetInfo.Alan_kisi_rutbe,Mode=OneWay,UpdateSourceTrigger=Explicit}" />
+                               Text="{Binding Senet.Alan_kisi_rutbe,Mode=OneWay,UpdateSourceTrigger=Explicit}" />
                     <TextBlock Name="textBlock4" TextWrapping="Wrap" Margin="0,0,2,0" 
-                               Text="{Binding SenetInfo.Alan_kisi_isim,Mode=OneWay,UpdateSourceTrigger=Explicit}" />
+                               Text="{Binding Senet.Alan_kisi_isim,Mode=OneWay,UpdateSourceTrigger=Explicit}" />
                 </StackPanel>
             </Grid>
             <Grid MinHeight="20" Grid.Row="3">

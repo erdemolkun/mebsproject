@@ -12,7 +12,7 @@ using Mebs_Envanter.Base;
 
 namespace Mebs_Envanter
 {
-    public class OEMDevice : MebsBaseDBObject
+    public class OEMDevice : MebsBaseDBObject, ISenetInfo
     {
         public override string ToString()
         {
@@ -33,18 +33,19 @@ namespace Mebs_Envanter
             }
         }
 
-        private SenetInfo senetInfo = new SenetInfo();
+        private SenetInfo senet = new SenetInfo();
 
-        public SenetInfo SenetInfo
+        public SenetInfo Senet
         {
-            get { return senetInfo; }
-            set { senetInfo = value; OnPropertyChanged("SenetInfo"); }
+            get { return senet; }
+            set { senet = value; OnPropertyChanged("Senet"); }
         }
 
-        public static List<OEMDevice> GetOemDevicesDB(SqlConnection sqlConnection, bool isForComputer, int bilgisayar_id, int _parca_id)
+        public static List<OEMDevice> GetOemDevicesDB(SqlConnection sqlConnection,
+            bool isForComputer, int bilgisayar_id, int _parca_id)
         {
             if (sqlConnection == null)
-            {                
+            {
                 throw new NullReferenceException("SqlConnection parameter is null");
             }
             List<OEMDevice> devModels = new List<OEMDevice>();
@@ -87,7 +88,7 @@ namespace Mebs_Envanter
                         int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
                         int parca_adedi = DBValueHelpers.GetInt32(rowParca["parca_adedi"], 1);
 
-                        String model =DBValueHelpers.GetString(rowParca["model"],"");                        
+                        String model = DBValueHelpers.GetString(rowParca["model"], "");
 
                         OEMDevice devOem = null;
                         if (tip == DeviceTypes.MONITOR)
@@ -112,7 +113,7 @@ namespace Mebs_Envanter
                         }
 
                         //Ortak alanlar                        
-                        devOem.SenetInfo.Id = senet_id;
+                        devOem.Senet.Id = senet_id;
                         devOem.Id = parca_id;
                         devOem.SerialNumber = seri_no;
                         devOem.Parca_no = parca_no;
@@ -145,7 +146,7 @@ namespace Mebs_Envanter
             DeviceType = devType;
         }
 
-        
+
 
         private Marka marka;
 

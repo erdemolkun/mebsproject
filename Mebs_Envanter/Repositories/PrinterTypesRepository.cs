@@ -23,13 +23,8 @@ namespace Mebs_Envanter.Repositories
 
         public PrinterTypesRepository() { }
 
-        //private ObservableCollection<PrinterType> printerTypes = new ObservableCollection<PrinterType>();
-        //public ObservableCollection<PrinterType> PrinterTypes
-        //{
-        //    get { return printerTypes; }
-        //}
 
-        private void ClearPrinterTypes(bool isForSearch) {
+        private void Clear(bool isForSearch) {
 
             Collection.Clear();
             if (isForSearch)
@@ -52,7 +47,7 @@ namespace Mebs_Envanter.Repositories
             if (res)
             {
 
-                ClearPrinterTypes(isForSearch);
+                Clear(isForSearch);
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_pr_type = null;
                 int current_id = -1;

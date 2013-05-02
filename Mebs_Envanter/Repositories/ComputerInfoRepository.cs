@@ -7,17 +7,9 @@ using System.Collections.ObjectModel;
 namespace Mebs_Envanter.Repositories
 {
     public class ComputerInfoRepository : BaseRepository<ComputerInfo>
-    {
-        //private ObservableCollection<ComputerInfo> computers = new ObservableCollection<ComputerInfo>();
-        //public ObservableCollection<ComputerInfo> Computers
-        //{
-        //    get { return computers; }
-        //}
-
+    {        
         internal ComputerInfoRepository getSearchRepository(String searchText)
         {
-
-
             ComputerInfoRepository repNew = new ComputerInfoRepository();
             if (!String.IsNullOrEmpty(searchText) && searchText.Length > 0)
             {

@@ -25,13 +25,6 @@ namespace Mebs_Envanter.Repositories
             }
         }
 
-        //private ObservableCollection<BagliAg> bagliAglar = new ObservableCollection<BagliAg>();
-        //public ObservableCollection<BagliAg> BagliAglar
-        //{
-        //    get { return bagliAglar; }
-        //}
-
-
         public void Fill_Aglar(bool isForSearch)
         {
 

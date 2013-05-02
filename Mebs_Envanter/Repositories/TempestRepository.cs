@@ -14,12 +14,6 @@ namespace Mebs_Envanter.Repositories
     {
         public static TempestRepository INSTANCE = null;
 
-        //private ObservableCollection<Tempest> tempestSeviyeler = new ObservableCollection<Tempest>();
-        //public ObservableCollection<Tempest> TempestSeviyeler
-        //{
-        //    get { return tempestSeviyeler; }
-        //}
-
         private void ClearSeviyeler(bool isForSearch)
         {
             Collection.Clear();
@@ -29,7 +23,6 @@ namespace Mebs_Envanter.Repositories
         }
         public void FillSeviyeler(bool isForSearch)
         {
-
             SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
             string sqlText = "SELECT * FROM tbl_tempest";
             SqlCommand cmd = new SqlCommand(sqlText, cnn);
