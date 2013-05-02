@@ -5,8 +5,9 @@
         xmlns:x2="clr-namespace:Mebs_Envanter"
         xmlns:allvisuals="clr-namespace:Mebs_Envanter.AllVisuals"
         xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
-        x:Name="mainwin" Width="1000"
+        x:Name="mainwin" 
         MaxHeight="720" MinHeight="640"  Left="32" Top="32"
+        Width="940"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
         xmlns:xceedcontrols="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
@@ -16,24 +17,28 @@
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
         xmlns:guihelpers2="clr-namespace:Mebs_Envanter.GUIHelpers"
         Title="Bilgisayar Envanter Kaydı" WindowStartupLocation="Manual"
-        IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
-        SizeToContent="Height"  ResizeMode="NoResize">
+        IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}" ResizeMode="NoResize">
     <Grid SnapsToDevicePixels="True"  Background="{StaticResource WindowGeneralBackgroundColor}">
         <Grid.Resources>
             <SolidColorBrush x:Key="headerColor1" Color="SkyBlue"></SolidColorBrush>
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="290"></ColumnDefinition>
-            <ColumnDefinition Width="275"></ColumnDefinition>
-            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="280"></ColumnDefinition>
+            <ColumnDefinition MinWidth="250" Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1.3*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition MinHeight="480" Height="*"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition MaxHeight="250" Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <Border Grid.Row="4" Height="5" Background="MintCream" Padding="0" Margin="5,1"                
+                VerticalAlignment="Center"
+                Grid.ColumnSpan="12"></Border>
 
         <Grid Grid.RowSpan="12" Grid.ColumnSpan="12">
             <Image Panel.ZIndex="2" Source="/Mebs_Envanter;component/Resources/Muhabere_ön.png" Opacity="0.05"></Image>

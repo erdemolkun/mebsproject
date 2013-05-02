@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.IO;
+using System.Diagnostics;
 
 namespace Mebs_Envanter.Export
 {
-    internal class HTMLHelper
+    internal class HTMLHelper : FileExportHelper
     {
-
-        private static String ConvertDataTableToHtmlString(DataTable targetTable)
+        private String ConvertDataTableToHtmlString(DataTable targetTable)
         {
 
-            
+
             StringBuilder htmlBuilder = new StringBuilder();
 
 
@@ -51,11 +51,10 @@ namespace Mebs_Envanter.Export
             htmlBuilder.Append("</table>");
 
             return htmlBuilder.ToString();
-            
+
         }
 
-
-        private static string ConvertDataTableToHtml(DataSet dsInput)
+        private string ConvertDataTableToHtml(DataSet dsInput)
         {
             string htmlString = "";
 
@@ -90,20 +89,17 @@ namespace Mebs_Envanter.Export
             return htmlString;
         }
 
-
-        // Input Dataset, or the tables we want to export to excel
-        // the Filename
-        public static void ToHTML(DataSet dsInput, string filename)
+        public override void Export(DataSet dsInput, string filename)
         {
             // we get the xml headers first
             string excelTemplate = ConvertDataTableToHtml(dsInput);
 
-            
+
             // now we write the file
             try
             {
                 File.Delete(filename);
-                StreamWriter sw = new StreamWriter(filename,false,Encoding.Unicode);
+                StreamWriter sw = new StreamWriter(filename, false, Encoding.Unicode);
 
                 sw.Write(excelTemplate);
 
@@ -112,10 +108,15 @@ namespace Mebs_Envanter.Export
 
                 sw.Dispose();
                 sw = null;
+                OpenAfterSave(openAfterSave, filename);
             }
             catch (Exception)
             {
             }
         }
+
+
+
+        
     }
 }

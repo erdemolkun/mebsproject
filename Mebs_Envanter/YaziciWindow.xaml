@@ -9,7 +9,7 @@
         xmlns:allvisuals="clr-namespace:Mebs_Envanter.AllVisuals"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
-        xmlns:animations="clr-namespace:Mebs_Envanter.Animations"        
+        xmlns:animations="clr-namespace:Mebs_Envanter.Animations"                         
         IsEnabled="{Binding ElementName=thiswin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
         Width="880" SizeToContent="Height"  ResizeMode="NoResize">
     <Grid Background="{StaticResource WindowGeneralBackgroundColor}">
@@ -24,9 +24,14 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition MinHeight="480" Height="*"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-
+    
+        <Border Grid.Row="4" Height="5" Background="MintCream" Padding="0" Margin="6,1"
+                VerticalAlignment="Center"
+                Grid.ColumnSpan="12"></Border>
+        
         <Grid Grid.RowSpan="12" Grid.ColumnSpan="12">
             <Image Panel.ZIndex="2" Source="/Mebs_Envanter;component/Resources/Muhabere_ön.png" Opacity="0.05"></Image>
         </Grid>

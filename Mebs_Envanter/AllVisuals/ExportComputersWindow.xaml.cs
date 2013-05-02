@@ -25,14 +25,15 @@ namespace Mebs_Envanter
     {
         Object exportContent;
         int export_Format = ExportOptions.EXCEL;
-        public ExportComputersWindow(Object exportContent,int export_Format)
+        public ExportComputersWindow(Object exportContent, int export_Format)
         {
             InitializeComponent();
             this.exportContent = exportContent;
             this.export_Format = export_Format;
         }
 
-        private ExportOptions GetOptions() {
+        private ExportOptions GetOptions()
+        {
 
             ExportOptions ops = new ExportOptions();
             ops.ExportGeneralInfo = generalInfoChkbx.IsChecked.Value;
@@ -40,7 +41,7 @@ namespace Mebs_Envanter
             ops.ExportNetworkInfo = networkInfoChkbx.IsChecked.Value;
             ops.ExportSenetInfo = senetInfoChkbx.IsChecked.Value;
             ops.ExportOemDevicesInfo = oemsChkbx.IsChecked.Value;
-            
+
             return ops;
         }
 
@@ -53,10 +54,11 @@ namespace Mebs_Envanter
         {
             ExportOptions options = GetOptions();
             if (!options.ExportGeneralInfo && !options.ExportMonitorInfo &&
-                !options.ExportNetworkInfo && !options.ExportOemDevicesInfo && !options.ExportSenetInfo) {
+                !options.ExportNetworkInfo && !options.ExportOemDevicesInfo && !options.ExportSenetInfo)
+            {
 
-                    MessageBox.Show("En az bir öğe seçiniz !!!");
-                    return;
+                MessageBox.Show("En az bir öğe seçiniz !!!");
+                return;
             }
 
             System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
@@ -65,7 +67,8 @@ namespace Mebs_Envanter
                 sfd.FileName = "results.xls";
                 sfd.Filter = "Excel File (.xls)|*.xls";
             }
-            else {
+            else
+            {
 
                 sfd.FileName = "results.html";
                 sfd.Filter = "Excel File (.html)|*.html";
@@ -77,7 +80,6 @@ namespace Mebs_Envanter
 
             Thread th = new Thread(new ParameterizedThreadStart(delegate
             {
-
                 ComputerInfoRepository computerInfoRep = exportContent as ComputerInfoRepository;
                 if (computerInfoRep != null)
                 {
@@ -94,13 +96,14 @@ namespace Mebs_Envanter
                         // export helper needs a dataset in case you want to save multiple worksheets
                         DataSet ds = new DataSet();
                         ds.Tables.Add(table);
+                        FileExportHelper h = null;
                         if (export_Format == ExportOptions.EXCEL)
                         {
                             if (!sfd.FileName.EndsWith("xls"))
                             {
                                 sfd.FileName += ".xls";
                             }
-                            ExcelXMLExportHelper.ToFormattedExcel(ds, sfd.FileName);
+                            h = new ExcelXMLExportHelper();
                         }
                         else
                         {
@@ -108,14 +111,17 @@ namespace Mebs_Envanter
                             {
                                 sfd.FileName += ".html";
                             }
-                            HTMLHelper.ToHTML(ds, sfd.FileName);
+                            h = new HTMLHelper();
                         }
-
-
+                        if (h != null)
+                        {
+                            h.Export(ds, sfd.FileName);
+                        }
                     }
-                    catch (Exception) {
+                    catch (Exception)
+                    {
                         isSuccess = false;
-                        
+
                     }
                     Dispatcher.Invoke(DispatcherPriority.DataBind, new Action(delegate
                     {
@@ -125,12 +131,13 @@ namespace Mebs_Envanter
                         {
                             MessageBox.Show("Dosya Başarılıyla aktarıldı.");
                         }
-                        else {
+                        else
+                        {
                             MessageBox.Show("Hata Oluştu");
                         }
                         Close();
                     }));
-                    
+
                 }
 
             }));
