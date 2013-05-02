@@ -14,7 +14,7 @@ using Mebs_Envanter.Base;
 
 namespace Mebs_Envanter
 {
-    public class ComputerInfo : MebsBaseDBObject
+    public class ComputerInfo : MebsBaseDBObject, ISenetInfo
     {
 
         public override string ToString()
@@ -39,7 +39,7 @@ namespace Mebs_Envanter
         public void Fetch()
         {
             if (!PropertiesFetched)
-            {                
+            {
                 Set_ComputerOemDevices(null);
                 Senet.Set_SenetInfosDB();
                 PropertiesFetched = true;
@@ -54,7 +54,7 @@ namespace Mebs_Envanter
             Commands = new CommandMap();
             NetworkInfo = new NetworkInfo();
             MonitorInfo = new Monitor();
-            Senet = new SenetInfo();            
+            Senet = new SenetInfo();
 
             bool designTime = System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject());
             if (designTime)
@@ -74,7 +74,7 @@ namespace Mebs_Envanter
         public void SetGeneralFields(DataRow rowPC)
         {
             Id = (int)rowPC["bilgisayar_id"];
-            
+
             int markaid = DBValueHelpers.GetInt32(rowPC["marka_id"].ToString(), -1);
             Marka = new Marka(markaid, "");
 
@@ -87,7 +87,7 @@ namespace Mebs_Envanter
             int tempest_id = DBValueHelpers.GetInt32(rowPC["tempest_id"].ToString(), -1);
 
             NetworkInfo.MacAddressString = rowPC["mac"].ToString();
-                        
+
             Senet.Id = DBValueHelpers.GetInt32(rowPC["senet_id"], -1);
 
             Pc_adi = rowPC["pc_adi"].ToString();
@@ -97,7 +97,7 @@ namespace Mebs_Envanter
             DeviceNo = rowPC["parca_no"].ToString();
             Notlar = rowPC["notlar"].ToString();
             Tempest = new Tempest(tempest_id, "");
-            
+
             try
             {
                 EklenmeTarihi = (DateTime)rowPC["kayit_ekleme_tarihi"];
@@ -109,7 +109,7 @@ namespace Mebs_Envanter
 
         internal void Set_MonitorInfo(OEMDevice devOem)
         {
-            if (devOem==null || !(devOem is OEMDevice)) return;
+            if (devOem == null || !(devOem is OEMDevice)) return;
 
             Monitor devMonitor = devOem as Monitor;
 
@@ -323,7 +323,7 @@ namespace Mebs_Envanter
             set { model = value; OnPropertyChanged("Model"); }
         }
 
-       
+
 
         private String deviceNo;
         /// <summary>

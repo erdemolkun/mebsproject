@@ -78,6 +78,7 @@
     <Compile Include="Converters\PrinterTypeComboIndexConverter.cs" />
     <Compile Include="Export\FileExportHelper.cs" />
     <Compile Include="GeneralObjects\PrinterType.cs" />
+    <Compile Include="Hardware\ISenetInfo.cs" />
     <Compile Include="Helpers\CollectionExtensions.cs" />
     <Compile Include="ComputerUserControl.xaml.cs">
       <DependentUpon>ComputerUserControl.xaml</DependentUpon>

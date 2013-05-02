@@ -13,14 +13,8 @@ namespace Mebs_Envanter.Repositories
     {
 
         public static KisimRepository INSTANCE = null;
-
-        //private ObservableCollection<Kisim> kisimlar = new ObservableCollection<Kisim>();
-        //public ObservableCollection<Kisim> Kisimlar
-        //{
-        //    get { return kisimlar; }
-        //}
-
-        private void ClearKisimlar() {
+      
+        private void Clear() {
 
             Collection.Clear();
             Collection.Add(new Kisim(-1, ""));
@@ -39,7 +33,7 @@ namespace Mebs_Envanter.Repositories
 
             if (res)
             {
-                ClearKisimlar();
+                Clear();
                 cmd.Parameters.AddWithValue("@birlik_id", birlik.Id);
                 
                 SqlDataReader dr = cmd.ExecuteReader();

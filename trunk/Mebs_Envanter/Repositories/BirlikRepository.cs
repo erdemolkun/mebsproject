@@ -11,7 +11,6 @@ namespace Mebs_Envanter.Repositories
 {
     public class BirlikRepository : BaseRepository<Birlik>
     {
-
         public static BirlikRepository INSTANCE = null;
 
         private void ClearBirlikler(bool isForSearch) { 

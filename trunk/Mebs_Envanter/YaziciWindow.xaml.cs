@@ -132,7 +132,7 @@ namespace Mebs_Envanter
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             IndividualDeviceInfo devInfo = e.Argument as IndividualDeviceInfo;
-            bool senetInsertUpdate = DBFunctions.InsertOrUpdateSenet(devInfo.SenetInfo, devInfo.isEdit);
+            bool senetInsertUpdate = DBFunctions.InsertOrUpdateSenet(devInfo.Senet, devInfo.isEdit);
             bool deviceInsertOrUpdate = DBFunctions.InsertOrUpdateOemDevice(devInfo, -1, devInfo.isEdit);
             if (deviceInsertOrUpdate)
             {
@@ -150,13 +150,13 @@ namespace Mebs_Envanter
                 networkInfoControl1.SetNetworkInfo((toAssign as YaziciInfo).NetworkInfo);
             }
             yaziciUserControl1.SetGeneralInfo(toAssign);
-            senetInfoControl1.SetSenetInfo(toAssign.SenetInfo);
+            senetInfoControl1.SetSenetInfo(toAssign.Senet);
 
             if (isEdit)
             {
                 toAssign.Id = current.Id;
                 toAssign.Id_Dev = current.Id_Dev;
-                toAssign.SenetInfo.Id = current.SenetInfo.Id;
+                toAssign.Senet.Id = current.Senet.Id;
             }
         }
 

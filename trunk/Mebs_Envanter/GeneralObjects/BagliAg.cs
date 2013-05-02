@@ -11,20 +11,25 @@ namespace Mebs_Envanter.GeneralObjects
     {
         public override string ToString()
         {
-            return Ag_adi.ToUpper();
+            if (Id > 0)
+            {
+                return Ag_adi.ToUpper();
+            }
+            else
+            {
+                return Ag_adi;
+            }
         }
 
         public BagliAg(String _bagliag_adi,
             int _bagliag_id)
         {
-
             Ag_adi = _bagliag_adi;
             Id = _bagliag_id;
         }
 
 
         private String ag_adi;
-
         public String Ag_adi
         {
             get { return ag_adi; }
@@ -32,11 +37,10 @@ namespace Mebs_Envanter.GeneralObjects
         }
 
 
-        private int ag_id;
-
+        private int id;
         public override int Id
         {
-            get { return ag_id; }
+            get { return id; }
             set
             {
                 if (BagliAgRepository.INSTANCE != null)
@@ -45,13 +49,13 @@ namespace Mebs_Envanter.GeneralObjects
                     {
                         if (value == item.Id)
                         {
-                            if(value<0)break;
+                            if (value < 0) break;
                             Ag_adi = item.Ag_adi;
                             break;
                         }
                     }
                 }
-                ag_id = value;
+                id = value;
             }
         }
     }

@@ -23,13 +23,7 @@ namespace Mebs_Envanter.Repositories
 
         public MarkaRepository() { }
 
-        //private ObservableCollection<Marka> markalar = new ObservableCollection<Marka>();
-        //public ObservableCollection<Marka> Markalar
-        //{
-        //    get { return markalar; }
-        //}
-
-        private void ClearMarkalar(bool isForSearch) {
+        private void Clear(bool isForSearch) {
 
             Collection.Clear();
             if (isForSearch)
@@ -52,7 +46,7 @@ namespace Mebs_Envanter.Repositories
             if (res)
             {
 
-                ClearMarkalar(isForSearch);
+                Clear(isForSearch);
                 SqlDataReader dr = cmd.ExecuteReader();
                 string current_marka = null;
                 int current_marka_id = -1;
