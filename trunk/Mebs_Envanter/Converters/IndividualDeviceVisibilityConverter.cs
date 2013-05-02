@@ -24,7 +24,7 @@ namespace Mebs_Envanter.Converters
             }
             else {
 
-                int result = (param & (value as IndividualDevice).DeviceType);
+                int result = (param & (value as IndividualDevice).ExtraDeviceType);
                 if (result > 0) {
                     return Visibility.Visible;
                 }

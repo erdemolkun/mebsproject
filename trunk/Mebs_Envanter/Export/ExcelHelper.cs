@@ -3,13 +3,14 @@ using System.Data;
 using System.IO;
 using System.Text;
 using System.Web;
+using Mebs_Envanter.Export;
 
 namespace Mebs_Envanter
 {
-    class ExcelXMLExportHelper
+    class ExcelXMLExportHelper : FileExportHelper
     {
         // Get a string with excel's XML headers     
-        private static string getXMLWorkbookTemplate()
+        private string getXMLWorkbookTemplate()
         {
             StringBuilder sb = new StringBuilder(818);
 
@@ -46,7 +47,7 @@ namespace Mebs_Envanter
             sb.AppendFormat(@"  <ss:Style ss:ID=""s63"">{0}", Environment.NewLine);
             sb.AppendFormat(@"   <ss:NumberFormat ss:Format=""Short Date""/>{0}", Environment.NewLine);
             sb.AppendFormat(@"  </ss:Style>{0}", Environment.NewLine);
-            
+
             sb.AppendFormat(@"  <ss:Style ss:ID=""s60"">{0}", Environment.NewLine);
             sb.AppendFormat(@"   <ss:Alignment ss:Vertical=""Bottom""/>{0}", Environment.NewLine);
 
@@ -67,7 +68,7 @@ namespace Mebs_Envanter
         }
 
         // some special characters replacement (escaping)
-        private static string replaceXmlChar(string input)
+        private string replaceXmlChar(string input)
         {
             input = input.Replace("&", "&amp");
             input = input.Replace("<", "&lt;");
@@ -80,7 +81,7 @@ namespace Mebs_Envanter
         // get the xml formatted string for an specific data cell,
         // we translate c# types to excel data types and fix the nulls
         // plus the option to give border to the cell
-        private static string getCellXml(Type type, object cellData, bool hasBorder)
+        private string getCellXml(Type type, object cellData, bool hasBorder)
         {
             object data = (cellData is DBNull) ? "" : cellData;
 
@@ -93,9 +94,10 @@ namespace Mebs_Envanter
                 {
                     return string.Format("<Cell" + border + "><Data ss:Type=\"Number\">{0}</Data></Cell>", data);//İlk Hali
                 }
-                else {
+                else
+                {
                     // Kontrol Et
-                    return string.Format("<Cell" + border + "><Data ss:Type=\"Number\">{0}</Data></Cell>", data.ToString().Replace(",","."));
+                    return string.Format("<Cell" + border + "><Data ss:Type=\"Number\">{0}</Data></Cell>", data.ToString().Replace(",", "."));
                 }
             }
 
@@ -114,9 +116,43 @@ namespace Mebs_Envanter
             return string.Format("<Cell" + border + "><Data ss:Type=\"String\">{0}</Data></Cell>", replaceXmlChar(data.ToString()));
         }
 
+
+
+        // loop the datatable and make the excel xml for the titles
+        // and the data cells
+        private string GetExcelTableXml(DataTable dt, bool hasBorder)
+        {
+            string result = "";
+
+            //write column name row
+            result = "\r\n<Row>";
+
+            foreach (DataColumn dc in dt.Columns)
+            {
+                result += string.Format("<Cell ss:StyleID=\"s62\"><Data ss:Type=\"String\">{0}</Data></Cell>", replaceXmlChar(dc.ColumnName));
+            }
+            result += "\r\n</Row>";
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                result += "\r\n<Row>";
+
+                foreach (DataColumn dc in dt.Columns)
+                {
+                    result += getCellXml(dc.DataType, dt.Rows[i][dc.ColumnName], hasBorder);
+                }
+
+                result += "</Row>";
+            }
+
+            return result;
+        }
+
+
+
         // Input Dataset, or the tables we want to export to excel
         // the Filename
-        public static void ToFormattedExcel(DataSet dsInput, string filename)
+        public override void Export(DataSet dsInput, string filename)
         {
             // we get the xml headers first
             string excelTemplate = getXMLWorkbookTemplate();
@@ -148,42 +184,13 @@ namespace Mebs_Envanter
 
                 sw.Dispose();
                 sw = null;
+
+                OpenAfterSave(openAfterSave, filename);
             }
             catch (Exception)
             {
             }
         }
-
-        // loop the datatable and make the excel xml for the titles
-        // and the data cells
-        public static string GetExcelTableXml(DataTable dt, bool hasBorder)
-        {
-            string result = "";
-
-            //write column name row
-            result = "\r\n<Row>";
-
-            foreach (DataColumn dc in dt.Columns)
-            {
-                result += string.Format("<Cell ss:StyleID=\"s62\"><Data ss:Type=\"String\">{0}</Data></Cell>", replaceXmlChar(dc.ColumnName));
-            }
-            result += "\r\n</Row>";
-
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                result += "\r\n<Row>";
-
-                foreach (DataColumn dc in dt.Columns)
-                {
-                    result += getCellXml(dc.DataType, dt.Rows[i][dc.ColumnName], hasBorder);
-                }
-
-                result += "</Row>";
-            }
-
-            return result;
-        }
-
     }
 }
 

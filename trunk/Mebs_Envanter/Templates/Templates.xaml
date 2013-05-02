@@ -361,8 +361,8 @@
                             BorderBrush="{StaticResource SolidBorderBrush}"
                             Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                         <ContentPresenter Margin="4" 
-                                          TextBlock.Foreground="Brown" TextBlock.FontFamily="Tahoma"
-                                          TextBlock.FontSize="12"
+                                          TextBlock.Foreground="Brown" TextBlock.FontFamily="Calibri"
+                                          TextBlock.FontSize="13"
                                           HorizontalAlignment="Left" VerticalAlignment="Top" />
                     </Border>
                     <ControlTemplate.Triggers>

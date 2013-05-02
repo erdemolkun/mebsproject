@@ -33,7 +33,7 @@ namespace Mebs_Envanter.HardwareUserControls
             inf.Tempest = tempestCombo.SelectedItem as Tempest;
             inf.SerialNumber = serialTextBox.Text.Trim().ToString();
 
-            if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PRINTER) {
+            if (SelectedIndividual.ExtraDeviceType == ExtraDeviceTypes.PRINTER) {
 
                 (inf as YaziciInfo).YaziciTipi = printerTypesCombo.SelectedItem as PrinterType;
             }
@@ -56,11 +56,7 @@ namespace Mebs_Envanter.HardwareUserControls
             Rep_Types.FillPrinterTypes(false);
             printerTypesCombo.ItemsSource = Rep_Types.Collection;
             PrinterTypesRepository.INSTANCE = Rep_Types;
-
         }
-
-
-
 
         public IndividualDevice SelectedIndividual
         {

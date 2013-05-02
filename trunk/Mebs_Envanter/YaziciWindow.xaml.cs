@@ -40,15 +40,15 @@ namespace Mebs_Envanter
 
         private IndividualDeviceInfo GetNewDevice()
         {
-            if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PRINTER)
+            if (SelectedIndividual.ExtraDeviceType == ExtraDeviceTypes.PRINTER)
             {
                 return new YaziciInfo();
             }
-            else if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PROJECTION)
+            else if (SelectedIndividual.ExtraDeviceType == ExtraDeviceTypes.PROJECTION)
             {
                 return new ProjectionInfo();
             }
-            else if (SelectedIndividual.DeviceType == ExtraDeviceTypes.SCANNER)
+            else if (SelectedIndividual.ExtraDeviceType == ExtraDeviceTypes.SCANNER)
             {
                 return new ScannerInfo();
             }
@@ -145,7 +145,7 @@ namespace Mebs_Envanter
 
         private void AssignIndividualDeviceInfoByGui(IndividualDeviceInfo current, IndividualDeviceInfo toAssign, bool isEdit)
         {
-            if (SelectedIndividual.DeviceType == ExtraDeviceTypes.PRINTER)
+            if (SelectedIndividual.ExtraDeviceType == ExtraDeviceTypes.PRINTER)
             {
                 networkInfoControl1.SetNetworkInfo((toAssign as YaziciInfo).NetworkInfo);
             }
@@ -196,7 +196,7 @@ namespace Mebs_Envanter
             cmd.CommandType = CommandType.StoredProcedure;
 
 
-            cmd.Parameters.AddWithValue("@parca_tipi", ExtraDeviceTypes.ConvertToDeviceType(SelectedIndividual.DeviceType));
+            cmd.Parameters.AddWithValue("@parca_tipi", ExtraDeviceTypes.ConvertToDeviceType(SelectedIndividual.ExtraDeviceType));
             if (parameterList != null)
             {
                 foreach (var item in parameterList)

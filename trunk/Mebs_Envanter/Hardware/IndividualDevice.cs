@@ -19,13 +19,13 @@ namespace Mebs_Envanter.Hardware
         public override string ToString()
         {
 
-            return DeviceTypeNameHelper.GET_DEV_NAME((DeviceTypes)ExtraDeviceTypes.ConvertToDeviceType(DeviceType));
+            return DeviceTypeNameHelper.GET_DEV_NAME((DeviceTypes)ExtraDeviceTypes.ConvertToDeviceType(ExtraDeviceType));
 
         }
-        public int DeviceType;
+        public int ExtraDeviceType;
         public IndividualDevice(int devType)
         {
-            this.DeviceType = devType;
+            this.ExtraDeviceType = devType;
         }
     }
 }
