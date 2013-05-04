@@ -51,11 +51,9 @@
                                     Margin="2,0,0,0" Grid.Row="2" 
                       Grid.ColumnSpan="5" HorizontalAlignment="Stretch">
 
-                <Expander.Header >
-                   
-                        <TextBlock Margin="4,0" TextBlock.FontSize="12" Foreground="Brown" Text="Diğer Parçalar" 
-                         
-                          HorizontalAlignment="Stretch" />
+                <Expander.Header >                   
+                        <TextBlock Margin="4,0" TextBlock.FontSize="12" Foreground="Brown" 
+                            Text="Diğer Parçalar" HorizontalAlignment="Stretch" />
                 
                 </Expander.Header>
                 <ItemsControl  x:Name="hardwareExtraItemsControl" MinHeight="32"

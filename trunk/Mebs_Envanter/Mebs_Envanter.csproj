@@ -78,6 +78,7 @@
     <Compile Include="Converters\PrinterTypeComboIndexConverter.cs" />
     <Compile Include="Export\FileExportHelper.cs" />
     <Compile Include="GeneralObjects\PrinterType.cs" />
+    <Compile Include="GUIHelpers\IPMaskedTextBox.cs" />
     <Compile Include="Hardware\ISenetInfo.cs" />
     <Compile Include="Helpers\CollectionExtensions.cs" />
     <Compile Include="ComputerUserControl.xaml.cs">
@@ -284,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AllVisuals\SampleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,18 +6,9 @@
              xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
              x:Name="thiscontrol"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="250" d:DesignWidth="270">
     <Grid TextBlock.FontWeight="Bold" Margin="2,0">
-        <Grid.Resources>
-            <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
-
-                <Setter Property="MaxHeight" Value="20"></Setter>
-                <Setter Property="Margin" Value="5"></Setter>
-            </Style>
-        </Grid.Resources>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -30,34 +21,38 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="0"  Text="Modeli"></TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="0"  Text="Tempest Seviyesi"></TextBlock>
-        <TextBlock Grid.Row="3" Grid.Column="0"  Text="Seri No"></TextBlock>
-        <TextBox Grid.Row="1" Text="{Binding Model,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"                                 
-                  guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"  
-                 VerticalAlignment="Center" x:Name="yaziciModeliTextBox" MinWidth="80"></TextBox>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="0" Grid.Column="0" Text="Marka"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="1" Grid.Column="0"  Text="Modeli"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="2" Grid.Column="0"  Text="Tempest Seviyesi"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="3" Grid.Column="0"  Text="Seri No"></TextBlock>
+        <TextBlock  Style="{StaticResource infoTextBlockStyle}"
+            Visibility="{Binding ElementName=thiscontrol, Path=SelectedIndividual,
+            Converter={StaticResource IndividualDeviceVisibilityConverter},ConverterParameter=1}"
+            Grid.Column="0" Grid.Row="4" Text="Tip"></TextBlock>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="Marka"></TextBlock>
+
         <ComboBox x:Name="markalarCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
+                                TabIndex="1"
                                    SelectedIndex="{Binding Marka,
                                    Converter ={StaticResource MarkaComboIndexConverter},UpdateSourceTrigger=Explicit}"
                                    ItemsSource="{Binding Collection}" 
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
+        <TextBox  Grid.Row="1" Text="{Binding Model,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"                                 
+                  guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"   TabIndex="2"
+                 VerticalAlignment="Center" x:Name="yaziciModeliTextBox" MinWidth="80"></TextBox>
 
         <ComboBox x:Name="tempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
+                   TabIndex="3"
                                   SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
                                   ItemsSource="{Binding TempestSeviyeler}" Grid.Row="2"
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
-        <TextBox Grid.Row="3" 
+        <TextBox Grid.Row="3"  TabIndex="4"
                   guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"  
                  Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"
                                  VerticalAlignment="Center" x:Name="serialTextBox" MinWidth="80"></TextBox>
-        
-        <TextBlock 
-            Visibility="{Binding ElementName=thiscontrol, Path=SelectedIndividual,
-                    Converter={StaticResource IndividualDeviceVisibilityConverter},ConverterParameter=1}"
-            Grid.Column="0" Grid.Row="4" Text="Tip"></TextBlock>
-        <ComboBox x:Name="printerTypesCombo" MinWidth="80" VerticalAlignment="Center" 
+
+
+        <ComboBox x:Name="printerTypesCombo" MinWidth="80" VerticalAlignment="Center"  TabIndex="5"
                                 Visibility="{Binding ElementName=thiscontrol, Path=SelectedIndividual,
                     Converter={StaticResource IndividualDeviceVisibilityConverter},ConverterParameter=1}"
                                     Margin="2,2"

@@ -8,15 +8,7 @@
              xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers">
     <Grid TextBlock.FontWeight="Bold" Margin="2,0">
         
-        <Grid.Resources>
-            <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
-                
-                <Setter Property="MaxHeight" Value="20"></Setter>
-            </Style>
-        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -29,12 +21,17 @@
         </Grid.ColumnDefinitions>
 
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="Bağlı Olduğu Ağ"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" 
+                   Grid.Column="0" Grid.Row="0" Text="Bağlı Olduğu Ağ"></TextBlock>
 
-        <TextBlock Grid.Column="0" 
+        <TextBlock Grid.Column="0" Style="{StaticResource infoTextBlockStyle}" 
                    Visibility="{Binding ElementName=me,Path=IsUsedForPrinter,Converter={StaticResource NotBoolToVisibilityConverter}}"
                    Grid.Row="1" Text="MAC"></TextBlock>
 
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" 
+            Visibility="{Binding ElementName=me,Path=IsUsedForPrinter,Converter={StaticResource BoolToVisibilityConverter}}"
+            Grid.Column="0" Grid.Row="2" Text="IP Adresi"></TextBlock>
+        
         <ComboBox VerticalAlignment="Center"                    
                             HorizontalAlignment="Left"                          
                             SelectedIndex="{Binding Path=BagliAg,
@@ -42,25 +39,19 @@
                             ItemsSource="{Binding BagliAglar}" x:Name="bagliAgCombo" 
                             MinWidth="60" Margin="2" Grid.Column="1" Grid.Row="0" ></ComboBox>
 
-        <guihelpers:MacMaskedTextBox VerticalAlignment="Center"
-                                     Visibility="{Binding ElementName=me,Path=IsUsedForPrinter,Converter={StaticResource NotBoolToVisibilityConverter}}"
-                            Mask="aa:aa:aa:aa:aa:aa" x:Name="pcMacAddressTextBox"
+        <guihelpers:MacMaskedTextBox VerticalAlignment="Center" Mask="aa:aa:aa:aa:aa:aa" x:Name="pcMacAddressTextBox"
+                            Visibility="{Binding ElementName=me,Path=IsUsedForPrinter,Converter={StaticResource NotBoolToVisibilityConverter}}"                            
                             Text="{Binding MacAddressString,UpdateSourceTrigger=Explicit}"  
                             Margin="2,2" Grid.Column="1" Grid.Row="1" ></guihelpers:MacMaskedTextBox>
 
-        <TextBlock 
-            Visibility="{Binding ElementName=me,Path=IsUsedForPrinter,Converter={StaticResource BoolToVisibilityConverter}}"
-            Grid.Column="0" Grid.Row="2" Text="IP Adresi"></TextBlock>
-        <TextBox Grid.Column="1" 
+        
+        <guihelpers:IPMaskedTextBox Grid.Column="1" 
+                                    guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"
                  Margin="2,2" x:Name="ipAddressTextBox"
                  VerticalAlignment="Center" Text="{Binding IpAddress,UpdateSourceTrigger=Explicit}"
                  Visibility="{Binding ElementName=me,Path=IsUsedForPrinter,Converter={StaticResource BoolToVisibilityConverter}}"
-                 Grid.Row="2"></TextBox>
-        <!--<xceed:MaskedTextBox Grid.Column="1" 
-                             VerticalAlignment="Center"
-                             Grid.Row="2"></xceed:MaskedTextBox>-->
-
-        <!--<TextBox Text="{Binding MacAddressString}"  ></TextBox>-->
+                 Grid.Row="2"></guihelpers:IPMaskedTextBox>
+       
 
     </Grid>
 </UserControl>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DatabaseSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <IsWindowsAuthentication>false</IsWindowsAuthentication>
+  <IsWindowsAuthentication>true</IsWindowsAuthentication>
   <UseAttachPath>false</UseAttachPath>
-  <AttachPathNode>samplePath</AttachPathNode>
+  <AttachPathNode></AttachPathNode>
   <DatabaseNode>mebsenvanter</DatabaseNode>
-  <UserId>mebs1</UserId>
-  <Password>mebs1</Password>
-  <DataSource>PCINT0026\MSSQLSERVER1</DataSource>
+  <UserId></UserId>
+  <Password></Password>
+  <DataSource>.\MSSQLSERVER2</DataSource>
   <UserInstance>false</UserInstance>
   <HasInitialCatalog>true</HasInitialCatalog>
-  <TimeOut>3</TimeOut>
+  <TimeOut>10</TimeOut>
   <PersistSecurityInfo>true</PersistSecurityInfo>
 </DatabaseSettings>

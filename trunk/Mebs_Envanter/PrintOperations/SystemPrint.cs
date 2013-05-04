@@ -14,16 +14,28 @@ namespace Mebs_Envanter.PrintOperations
 {
     internal class SystemPrint
     {
-
         #region Variables
 
+        #region Strings
         String geciciMutemetStr = "GEÇİCİ MUTEMET SENEDİ";
+        String aciklamalarStr = "AÇIKLAMALAR:";
+        String tarihStr = "tarih";
+        String imzasiStr = "İmzası";
+        String hkfStr = "HKF : 1297";
+        String hkyStr = "HKY 45-1";
+        String workNumberStr = "İş Telefonu";
+        String senetInfoStr = "Alanın ; Adı,Soyadı,Rütbesi,Sicil No. ve Görevi";
+        String markasiStr = "Markası";
+        String modeliStr = "Modeli";
+        #endregion
+
+        PointF pageSize;
 
         System.Drawing.Font fontMedium = new Font("Tahoma", 12,
                                                      FontStyle.Regular);
         System.Drawing.Font fontSmall = new Font("Tahoma", 11,
                                                  FontStyle.Regular);
-        System.Drawing.Font fontMediumPlus = new Font("Tahoma", 13,
+        System.Drawing.Font fontMediumPlus = new Font("Tahoma", 14,
                                                  FontStyle.Regular);
         private object toPrintObject = null;
 
@@ -52,9 +64,8 @@ namespace Mebs_Envanter.PrintOperations
             }
         }
 
-        void printOemDeviceProperties(GridPrinter p2, Graphics g, OEMDevice dev, int row, String isim, Font fntString11)
-        {
-            //OEMDevice dev = dev1.DevOem;
+        private void printOemDeviceProperties(GridPrinter p2, Graphics g, OEMDevice dev, int row, String isim, Font font)
+        {            
             String name = isim;
             String ozellikler = dev.ToString();
 
@@ -74,11 +85,11 @@ namespace Mebs_Envanter.PrintOperations
             PointF x4 = p2.getlocation(row, 4);
 
 
-            p2.printString(g, row, 1, fntString11, name, true, false);
-            g.DrawString(ozellikler, fntString11,
+            p2.printString(g, row, 1, font, name, true, false);
+            g.DrawString(ozellikler, font,
                                Brushes.Black, x1.X, b - 6);
 
-            g.DrawString(dev.SerialNumber, fntString11,
+            g.DrawString(dev.SerialNumber, font,
                                Brushes.Black, x0.X, c - 6);
 
 
@@ -86,31 +97,31 @@ namespace Mebs_Envanter.PrintOperations
             {
                 if (dev.DeviceInfo.Trim() == "" && dev.SerialNumber.Trim() == "" && dev.Marka.MarkaName.Trim() == "")
                 {
-                    p2.printString(g, row, 4, fntString11, "YOK", true, true);
-                    p2.printString(g, row, 3, fntString11, "", true, true);
+                    p2.printString(g, row, 4, font, "YOK", true, true);
+                    p2.printString(g, row, 3, font, "", true, true);
                 }
                 else
                 {
-                    p2.printString(g, row, 4, fntString11, dev.Adet.ToString(), true, true);
-                    p2.printString(g, row, 3, fntString11, "EA", true, true);
+                    p2.printString(g, row, 4, font, dev.Adet.ToString(), true, true);
+                    p2.printString(g, row, 3, font, "EA", true, true);
                 }
             }
             else
             {
                 if (dev.DeviceInfo.Trim() == "" && dev.SerialNumber.Trim() == "")
                 {
-                    p2.printString(g, row, 4, fntString11, "YOK", true, true);
-                    p2.printString(g, row, 3, fntString11, "", true, true);
+                    p2.printString(g, row, 4, font, "YOK", true, true);
+                    p2.printString(g, row, 3, font, "", true, true);
                 }
                 else
                 {
-                    p2.printString(g, row, 4, fntString11, dev.Adet.ToString(), true, true);
-                    p2.printString(g, row, 3, fntString11, "EA", true, true);
+                    p2.printString(g, row, 4, font, dev.Adet.ToString(), true, true);
+                    p2.printString(g, row, 3, font, "EA", true, true);
                 }
             }
         }
-      
-        void PrintAnyObject(MebsBaseObject mebsObject, Graphics g)
+
+        private void PrintAnyObject(MebsBaseObject mebsObject, Graphics g)
         {
             int outSideOffsetX = 32;
             int outSizeOffsetY = 40;
@@ -256,9 +267,9 @@ namespace Mebs_Envanter.PrintOperations
             {
                 IndividualDeviceInfo yaziciInfo = mebsObject as IndividualDeviceInfo;
                 p2.printString(g, 0, 0, fontSmall, yaziciInfo.SerialNumber, true, false);
-                p2.printString(g, 0, 1, fontSmall, "Markası", true, false);
+                p2.printString(g, 0, 1, fontSmall, markasiStr, true, false);
                 p2.printString(g, 0, 2, fontSmall, yaziciInfo.Marka.ToString(), true, false);
-                p2.printString(g, 1, 1, fontSmall, "Modeli", true, false);
+                p2.printString(g, 1, 1, fontSmall, modeliStr, true, false);
                 p2.printString(g, 1, 2, fontSmall, yaziciInfo.Model, true, false);
             }
             #endregion
@@ -282,13 +293,13 @@ namespace Mebs_Envanter.PrintOperations
             p5.PaintGrid(g);
             currentY += aciklamaHeight;
 
-                 
-            p5.printString(g, 0, 0, fontMedium, "AÇIKLAMALAR:", false, false);
+
+            p5.printString(g, 0, 0, fontMedium, aciklamalarStr, false, false);
 
             if (mebsObject is ComputerInfo)
             {
-                SizeF yaziBoyutu = g.MeasureString("AÇIKLAMALAR:", fontMedium);
-                PointF aciklama_Loc = p5.getlocation(0, 0);      
+                SizeF yaziBoyutu = g.MeasureString(aciklamalarStr, fontMedium);
+                PointF aciklama_Loc = p5.getlocation(0, 0);
                 g.DrawString((mebsObject as ComputerInfo).Notlar, fontSmall,
                                          Brushes.Black, aciklama_Loc.X + yaziBoyutu.Width, aciklama_Loc.Y);
             }
@@ -316,7 +327,7 @@ namespace Mebs_Envanter.PrintOperations
             p6.PaintGrid(g);
             currentY += adSoyadGridHeight;
 
-            p6.printString(g, 0, 0, fontMedium, "Tarih", false, false);
+            p6.printString(g, 0, 0, fontMedium, tarihStr, false, false);
 
             if (mebsObject is ComputerInfo)
             {
@@ -327,7 +338,7 @@ namespace Mebs_Envanter.PrintOperations
 
 
             PointF ad_soyad_rutbe_Loc1 = p6.getlocation(0, 1);
-            g.DrawString("Alanın ; Adı,Soyadı,Rütbesi,Sicil No. ve Görevi", fontMedium,
+            g.DrawString(senetInfoStr, fontMedium,
                                    Brushes.Black, ad_soyad_rutbe_Loc1.X, ad_soyad_rutbe_Loc1.Y);
 
             if (mebsObject is ISenetInfo)
@@ -338,17 +349,17 @@ namespace Mebs_Envanter.PrintOperations
             }
 
             PointF imza_Loc1 = p6.getlocation(0, 2);
-            g.DrawString("İmzası", fontMedium,
+            g.DrawString(imzasiStr, fontMedium,
                                    Brushes.Black, imza_Loc1.X, imza_Loc1.Y);
 
             PointF is_telefonu_Loc1 = p6.getlocation(0, 3);
-            g.DrawString("İş Telefonu", fontMedium,
+            g.DrawString(workNumberStr, fontMedium,
                                    Brushes.Black, is_telefonu_Loc1.X, is_telefonu_Loc1.Y);
 
             //alt bilgi kısmı
 
-            g.DrawString("HKF : 1297", fontSmall, Brushes.Black, new PointF(outSideOffsetX, currentY));
-            g.DrawString("HKY 45-1", fontSmall, Brushes.Black, new PointF(1000, currentY));
+            g.DrawString(hkfStr, fontSmall, Brushes.Black, new PointF(outSideOffsetX, currentY));
+            g.DrawString(hkyStr, fontSmall, Brushes.Black, new PointF(1000, currentY));
 
             #endregion
         }
@@ -362,7 +373,8 @@ namespace Mebs_Envanter.PrintOperations
             System.Windows.Forms.PrintPreviewDialog pdlg = new System.Windows.Forms.PrintPreviewDialog();
             pdlg.Document = PD;
 
-            pdlg.SetDesktopBounds(0, 0, (int)System.Windows.SystemParameters.PrimaryScreenWidth, (int)System.Windows.SystemParameters.PrimaryScreenHeight);
+            pdlg.SetDesktopBounds(0, 0, (int)System.Windows.SystemParameters.PrimaryScreenWidth,
+                (int)System.Windows.SystemParameters.PrimaryScreenHeight);
             pdlg.PrintPreviewControl.Zoom = 1.1;
 
             if (isPreview)
@@ -391,7 +403,6 @@ namespace Mebs_Envanter.PrintOperations
             }
         }
 
-        PointF pageSize;
         public float getXByPercantage(float x)
         {
             return (pageSize.X * x) / 100f;
