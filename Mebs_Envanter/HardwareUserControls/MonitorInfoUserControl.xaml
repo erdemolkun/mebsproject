@@ -4,18 +4,8 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:x1="clr-namespace:Mebs_Envanter"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
-    <Grid  TextBlock.FontWeight="Bold">
-        <Grid.Resources>
-            <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
-                
-                <Setter Property="MaxHeight" Value="20"></Setter>
-                <Setter Property="Margin" Value="5"></Setter>
-            </Style>
-            
-        </Grid.Resources>
+    <Grid TextBlock.FontWeight="Bold">
+        
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -24,72 +14,65 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="Marka"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="Tipi"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Stok No"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="Seri No"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="4" Text="Parça No"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="5" Text="Tempest Seviyesi"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="6" Text="Monitör Boyutu"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="0" Text="Marka"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="1" Text="Tipi"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="2" Text="Monitör Boyutu"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="3" Text="Seri No"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="4" Text="Parça No"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="5" Text="Stok No"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="6" Text="Tempest Seviyesi"></TextBlock>
 
-        <ComboBox x:Name="monitorMarkalarCombo" 
-                                    TabIndex="1"
-                                    MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
-                                   SelectedIndex="{Binding Marka,
-                                   Converter ={StaticResource MarkaComboIndexConverter},UpdateSourceTrigger=Explicit}"
-                                   ItemsSource="{Binding Markalar}" 
+
+        <!--Monitör Markaları-->
+        <ComboBox x:Name="monitorMarkalarCombo" TabIndex="1" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
+                                  SelectedIndex="{Binding Marka,
+                                  Converter ={StaticResource MarkaComboIndexConverter},UpdateSourceTrigger=Explicit}"                                   
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
-        <ComboBox x:Name="monitorTiplerCombo" Grid.Row="1" MinWidth="80" 
-                  TabIndex="2"
-                                VerticalAlignment="Center"  Margin="2,2"
-                                SelectedItem="{Binding MonType,UpdateSourceTrigger=Explicit,Converter={StaticResource MonitorTypesConverter}}"                                                                
-                                HorizontalAlignment="Left" Grid.Column="1">
-
+        <!--Monitör Tipleri-->
+        <ComboBox x:Name="monitorTiplerCombo" Grid.Row="1" MinWidth="80" TabIndex="2" Grid.Column="1"
+                                VerticalAlignment="Center"  Margin="2,2" HorizontalAlignment="Left"
+                                SelectedItem="{Binding MonType,UpdateSourceTrigger=Explicit,Converter={StaticResource MonitorTypesConverter}}">
             <ComboBox.ItemsSource>
-                <CompositeCollection>                    
+                <CompositeCollection>
                     <x:Static Member="sys:String.Empty" />
-                    <CollectionContainer Collection="{Binding Source={StaticResource dataMonEnum}}"></CollectionContainer>
+                    <CollectionContainer Collection="{Binding Source={StaticResource monitorTypesEnumerator}}"></CollectionContainer>
                 </CompositeCollection>
             </ComboBox.ItemsSource>
         </ComboBox>
 
-        <ComboBox x:Name="monitorTempestCombo" 
-                  TabIndex="6"
-                  MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
-                                  SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
-                                  ItemsSource="{Binding TempestSeviyeler}" Grid.Row="5"
-                                  HorizontalAlignment="Left" Grid.Column="1">
-           
-                
-                
-        </ComboBox>
-
-        
-        
-        <ComboBox x:Name="monitorBoyutlarCombo" Grid.Column="1" Grid.Row="7" IsEditable="True"
+        <!--Monitör Boyutları-->
+        <ComboBox x:Name="monitorBoyutlarCombo" Grid.Column="1" Grid.Row="2" IsEditable="True"
                   SelectedIndex="{Binding MonSize,Converter={StaticResource MonitorSizeComboIndexConverter},UpdateSourceTrigger=Explicit}"
-                  TabIndex="7" MinWidth="80" Margin="2,2" VerticalAlignment="Center" HorizontalAlignment="Left">
-            
+                  TabIndex="3" MinWidth="80" Margin="2,2" VerticalAlignment="Center" HorizontalAlignment="Left">
+
         </ComboBox>
         
-        <TextBox VerticalAlignment="Center" Text="{Binding StokNo,UpdateSourceTrigger=Explicit}" 
-                                 x:Name="monitorStokNoTextBox" 
-                                 TabIndex="3"
-                                 Margin="4,2" Grid.Column="1" Grid.Row="2" ></TextBox>
-
-        <TextBox VerticalAlignment="Center" x:Name="monitorSerialTextBox"
-                 TabIndex="4"
-                                 Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}"  
+        <!--Seri No-->
+        <TextBox VerticalAlignment="Center" x:Name="monitorSerialTextBox" TabIndex="4" Text="{Binding SerialNumber,UpdateSourceTrigger=Explicit}"  
                         Margin="4,2" Grid.Column="1" Grid.Row="3" ></TextBox>
+
+        <!--Parça No-->
         <TextBox VerticalAlignment="Center" x:Name="monitorParcaNoTextBox" TabIndex="5"
                                  Text="{Binding Parca_no,UpdateSourceTrigger=Explicit}"  Margin="4,2" Grid.Column="1" Grid.Row="4" ></TextBox>
+
+        <!--Stok No-->
+        <TextBox VerticalAlignment="Center" Text="{Binding StokNo,UpdateSourceTrigger=Explicit}"  TabIndex="6" x:Name="monitorStokNoTextBox"                                  
+                 Margin="4,2" Grid.Column="1" Grid.Row="5" ></TextBox>
+
+        <!--Tempest Seviyeleri-->
+        <ComboBox x:Name="monitorTempestCombo" TabIndex="7" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
+                                  SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
+                                  ItemsSource="{Binding TempestSeviyeler}" Grid.Row="6"
+                                  HorizontalAlignment="Left" Grid.Column="1">
+
+        </ComboBox>
+
     </Grid>
 </UserControl>

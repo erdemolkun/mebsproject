@@ -313,7 +313,7 @@
                                 <ComboBox.ItemsSource>
                                     <CompositeCollection>
                                         <sys:String>Hepsi</sys:String>
-                                        <CollectionContainer Collection="{Binding Source={StaticResource dataMonEnum}}"></CollectionContainer>
+                                        <CollectionContainer Collection="{Binding Source={StaticResource monitorTypesEnumerator}}"></CollectionContainer>
                                     </CompositeCollection>
                                 </ComboBox.ItemsSource>
                             </ComboBox>

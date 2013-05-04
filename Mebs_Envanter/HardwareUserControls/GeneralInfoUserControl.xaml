@@ -4,18 +4,9 @@
              xmlns:x1="clr-namespace:Mebs_Envanter"
              xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
              xmlns:x2="clr-namespace:Mebs_Envanter">
-    <Grid TextBlock.FontWeight="Bold" 
-          Margin="2,0" 
+    <Grid TextBlock.FontWeight="Bold" Margin="2,0" 
           TextBlock.FontFamily="CartoGothic Std.">
-        <Grid.Resources>
-            <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
-                
-                <Setter Property="MaxHeight" Value="20"></Setter>
-            </Style>
-        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -32,15 +23,15 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="PC ADI"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="Marka"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Model"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="PC Stok No"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="4" Text="Parça No"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="5" Text="Seri No"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="6" Text="Tempest Seviyesi"></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="7" Text="Eklenme Tarihi"></TextBlock>
-        <TextBlock Text="Notlar" Grid.Row="8" Grid.Column="0" ></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="0" Text="PC ADI"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="1" Text="Marka"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="2" Text="Model"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="3" Text="PC Stok No"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="4" Text="Parça No"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="5" Text="Seri No"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="6" Text="Tempest Seviyesi"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="7" Text="Eklenme Tarihi"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Text="Notlar" Grid.Row="8" Grid.Column="0" ></TextBlock>
 
         <!--Burayı değiştir-->
         <TextBox   x:Name="pcAdiTextBox" VerticalAlignment="Center"

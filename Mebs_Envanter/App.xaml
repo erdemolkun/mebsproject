@@ -11,13 +11,14 @@
                 <ResourceDictionary Source="Resources\Converters.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Templates\ListBoxDataTemplates.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Templates\Templates.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources\Styles.xaml"></ResourceDictionary>
                 
                 
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate x:Key="deviceDataTemplate">
                 <x1:DeviceEntryControl ></x1:DeviceEntryControl>
             </DataTemplate>
-            <ObjectDataProvider x:Key="dataMonEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider x:Key="monitorTypesEnumerator" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="x1:MonitorTypes"/>
                 </ObjectDataProvider.MethodParameters>
