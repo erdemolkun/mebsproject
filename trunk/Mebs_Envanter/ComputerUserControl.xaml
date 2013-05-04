@@ -9,12 +9,20 @@
              xmlns:mebs="clr-namespace:Mebs_Envanter"
              mc:Ignorable="d"              
              d:DesignHeight="320" d:DesignWidth="400" 
+             xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
              d:DataContext="{Binding Source={StaticResource computerSample}}">
     <UserControl.Resources>
         <mebs:ComputerInfo x:Key="computerSample"></mebs:ComputerInfo>
     </UserControl.Resources>
-    <Grid>
-        <TabControl  x:Name="pcEnvanterTabControl">
+    <Grid x:Name="mainGrid">
+        <Grid Panel.ZIndex="12"  
+              Visibility="{Binding IsBusy,Converter={StaticResource BoolToVisibilityConverter}}"
+              VerticalAlignment="Center" HorizontalAlignment="Center">
+            <animations:LoadingAnimation LoadingText="Yükleniyor" >
+                
+            </animations:LoadingAnimation>            
+        </Grid>
+        <TabControl  x:Name="pcEnvanterTabControl" IsEnabled="{Binding IsBusy,Converter={StaticResource NotBoolConverter}}">
             <TabControl.Resources>
                 <Style BasedOn="{StaticResource borderStyleForComputerItems}" TargetType="{x:Type Border}">
                 </Style>
