@@ -124,7 +124,8 @@ namespace Mebs_Envanter
         public void SetDataContext(object context)
         {
 
-            pcEnvanterTabControl.DataContext = context;
+            //pcEnvanterTabControl.DataContext = context;
+            mainGrid.DataContext = context;
             //networkUserControl1.DataContext = (context as ComputerInfo).NetworkInfo;
         }
     }

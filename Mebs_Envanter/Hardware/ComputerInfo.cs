@@ -11,11 +11,22 @@ using Mebs_Envanter;
 using System.Windows;
 using Mebs_Envanter.Hardware;
 using Mebs_Envanter.Base;
+using System.Threading;
+using System.ComponentModel;
 
 namespace Mebs_Envanter
 {
     public class ComputerInfo : MebsBaseDBObject, ISenetInfo
     {
+
+        private bool isBusy = false;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { isBusy = value; OnPropertyChanged("IsBusy"); }
+        }
+
 
         public override string ToString()
         {
@@ -40,11 +51,43 @@ namespace Mebs_Envanter
         {
             if (!PropertiesFetched)
             {
-                Set_ComputerOemDevices(null);
-                Senet.Set_SenetInfosDB();
+                FetchThreaded(true);                                   
+            }
+        }
+
+        private void FetchThreaded(bool isThreaded) {
+
+            if (isThreaded)
+            {
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+                worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+                worker.RunWorkerAsync();
+                IsBusy = true;
+            }
+            else {
+                fetchContent();
                 PropertiesFetched = true;
             }
         }
+
+
+        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            PropertiesFetched = true;
+            IsBusy = false;
+        }
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {            
+            fetchContent();
+        }
+        private void fetchContent() {
+
+            Set_ComputerOemDevices(null);
+            Senet.Set_SenetInfosDB();            
+        }
+
 
         public bool PropertiesFetched = false;
 
