@@ -452,6 +452,7 @@ namespace Mebs_Envanter
             searchGridTempestCombo.SelectedIndex = -1;
             searchGridMonitorMarkalar.SelectedIndex = -1;
             searchGridKomutanliklarCombo.SelectedIndex = -1;
+            searchGridMonitorBoyutlar.SelectedIndex = -1;
         }
 
         private void printSenet_Click(object sender, RoutedEventArgs e)
