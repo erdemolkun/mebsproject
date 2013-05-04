@@ -52,11 +52,11 @@
                       Grid.ColumnSpan="5" HorizontalAlignment="Stretch">
 
                 <Expander.Header >                   
-                        <TextBlock Margin="4,0" TextBlock.FontSize="12" Foreground="Brown" 
+                        <TextBlock Margin="4,0" FontWeight="Bold" TextBlock.FontSize="13" Foreground="Brown" 
                             Text="Diğer Parçalar" HorizontalAlignment="Stretch" />
                 
                 </Expander.Header>
-                <ItemsControl  x:Name="hardwareExtraItemsControl" MinHeight="32"
+                <ItemsControl  x:Name="hardwareExtraItemsControl" MinHeight="32" 
                                                HorizontalAlignment="Stretch" Height="Auto"
                                                ItemsSource="{Binding OemDevicesExtra}"
                                                ItemTemplate="{StaticResource deviceDataTemplate}">

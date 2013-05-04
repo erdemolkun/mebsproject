@@ -7,7 +7,7 @@
         xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
         x:Name="mainwin" 
         MaxHeight="720" MinHeight="640"  Left="32" Top="32"
-        Width="940"
+        SizeToContent="WidthAndHeight"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
         xmlns:xceedcontrols="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
@@ -15,7 +15,7 @@
         xmlns:converters="clr-namespace:Mebs_Envanter.Converters"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
-        xmlns:guihelpers2="clr-namespace:Mebs_Envanter.GUIHelpers"
+        xmlns:guihelpers2="clr-namespace:Mebs_Envanter.GUIHelpers"                       
         Title="Bilgisayar Envanter Kaydı" WindowStartupLocation="Manual"
         IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}" ResizeMode="NoResize">
     <Grid SnapsToDevicePixels="True"  Background="{StaticResource WindowGeneralBackgroundColor}">
@@ -24,9 +24,9 @@
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"></ColumnDefinition>
-            <ColumnDefinition MinWidth="250" Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="1.3*" ></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition MinWidth="250" Width="280"  MaxWidth="300"></ColumnDefinition>
+            <ColumnDefinition MinWidth="280" Width="1.3*" MaxWidth="360"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -35,7 +35,7 @@
             <RowDefinition MaxHeight="250" Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-
+       
         <Border Grid.Row="4" Height="5" Background="MintCream" Padding="0" Margin="5,1"                
                 VerticalAlignment="Center"
                 Grid.ColumnSpan="12"></Border>
@@ -203,147 +203,180 @@
                     Name="addNewPcBtn"  Click="addNewPcBtn_Click" />
         </Grid>
 
-        <!--Arama Seçenekleri-->
-        <Grid Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" Margin="4,0,4,4">
+        <Grid Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" >
+            
+            <Expander  ExpandDirection="Left" ToolTip="PC Arama Seçenekleri" ToolTipService.InitialShowDelay="40">
+                <!--Header-->
+                <Expander.Header>
+                    <Border CornerRadius="4" Background="SkyBlue">
+                        <TextBlock  Padding="4,0"
+                               Text="PC Arama Seçenekleri" FontSize="14" FontWeight="Bold"
+                               RenderTransformOrigin="0.5,0.5" >
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                         <Trigger Property ="IsMouseOver" Value="True">
+                                                <Setter Property= "Foreground" Value="Brown"/>                                              
+                                            </Trigger>
+                                    </Style.Triggers>
+                                  </Style>
+                        </TextBlock.Style>
+                        <FrameworkElement.LayoutTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>                    
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform X="0" Y="0"/>
+                </TransformGroup>
+                        </FrameworkElement.LayoutTransform>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Border Margin="0,6" Height="42"  Background="{StaticResource headerColor1}" CornerRadius="0">
-                <TextBlock Text="PC Arama Seçenekleri" Foreground="MintCream"
+                        </TextBlock>
+                    </Border>
+                </Expander.Header>
+
+                <Grid MinWidth="270" Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" Margin="4,0,4,4">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border Margin="0,6" Height="42"  Background="{StaticResource headerColor1}" CornerRadius="0">
+                        <TextBlock Text="PC Arama Seçenekleri" Foreground="MintCream"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
-            </Border>
-            <Grid Grid.Row="1" Background="#B396C0D4" >
-                <Grid Margin="4,0,0,0"    TextBlock.FontWeight="Bold" TextBlock.FontSize="12" >
+                    </Border>
+                    <Grid Grid.Row="1" Background="#B396C0D4" >
+                        <Grid Margin="4,0,0,0"    TextBlock.FontWeight="Bold" TextBlock.FontSize="12" >
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="32"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.Resources>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                        </Style>
-                    </Grid.Resources>
-
-
-                    <TextBlock Grid.Row="0"  Text="Komutanlıklar" VerticalAlignment="Center" ></TextBlock>
-                    <ComboBox  Grid.Row="0" Grid.Column="1" x:Name="searchGridKomutanliklarCombo"                                
-                               SelectionChanged="searchGridKomutanliklarCombo_SelectionChanged"
-                      VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60">
-                        <ComboBox.ToolTip>
-                            <Binding ElementName="searchGridKomutanliklarCombo" Path="SelectedItem"></Binding>
-                        </ComboBox.ToolTip>
-                    </ComboBox>
-
-
-                    <TextBlock Grid.Row="1"  Text="Birlikler" VerticalAlignment="Center" ></TextBlock>
-                    <ComboBox  Grid.Row="1" Grid.Column="1" x:Name="searchGridBirliklerCombo"
-                      VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60">
-                        <ComboBox.ToolTip>
-                            <Binding ElementName="searchGridBirliklerCombo" Path="SelectedItem"></Binding>
-                        </ComboBox.ToolTip>
-                    </ComboBox>
-
-
-                    <TextBlock Text="Bilgisayar Markası" Grid.Row="2" VerticalAlignment="Center" ></TextBlock>
-                    <ComboBox Grid.Column="1" Grid.Row="2" x:Name="searchGridMarkalarCombo"
-                      VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"/>
-
-
-                    <TextBlock Text="Alan Kişinin İsmi" Grid.Row="3" 
-                               VerticalAlignment="Center" ></TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" 
-                             HorizontalAlignment="Center" MinWidth="120" x:Name="searchGridalanKisiIsimTxtBox"></TextBox>
-
-
-                    <TextBlock Text="Ağlar" Grid.Row="4" VerticalAlignment="Center" ></TextBlock>
-                    <ComboBox Grid.Column="1" Grid.Row="4"
-                      x:Name="searchGridAglarCombo" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"/>
-
-
-                    <TextBlock Text="Tempest Seviyesi" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="left"></TextBlock>
-                    <ComboBox Grid.Column="1" Grid.Row="5" x:Name="searchGridTempestCombo" VerticalAlignment="Center"
-                              HorizontalAlignment="Center" MinWidth="60"/>
-
-
-                    <TextBlock Text="PC ADI" Grid.Row="6" VerticalAlignment="Center" />
-                    <TextBox Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center"
-                     MinWidth="120" x:Name="searchGridPcNameTxtBox"></TextBox>
-
-
-                    <TextBlock Text="Model" Grid.Row="7" VerticalAlignment="Center" />
-                    <TextBox MinWidth="120" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
-                     Width="60" x:Name="searchGridModelTxtBox"></TextBox>
-
-                    <Expander TabIndex="9" Header="Monitor Arama Seçenekleri" Foreground="#FF8D0E0E" IsExpanded="True" 
-                                    Margin="0,0,0,0"  Grid.ColumnSpan="4" Grid.Row="8" >
-
-                        <Grid TextBlock.Foreground="Black">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="32"></RowDefinition>
                                 <RowDefinition Height="32"></RowDefinition>
                                 <RowDefinition Height="32"></RowDefinition>
+                                <RowDefinition Height="32"></RowDefinition>
+                                <RowDefinition Height="32"></RowDefinition>
+                                <RowDefinition Height="32"></RowDefinition>
+                                <RowDefinition Height="32"></RowDefinition>
+                                <RowDefinition Height="32"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </Grid.Resources>
 
-                            <TextBlock Text="Monitor Tipi" Grid.Row="0"
+
+                            <TextBlock Grid.Row="0"  Text="Komutanlıklar" VerticalAlignment="Center" ></TextBlock>
+                            <ComboBox  Grid.Row="0" Grid.Column="1" x:Name="searchGridKomutanliklarCombo"                                
+                               SelectionChanged="searchGridKomutanliklarCombo_SelectionChanged"
+                      VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60">
+                                <ComboBox.ToolTip>
+                                    <Binding ElementName="searchGridKomutanliklarCombo" Path="SelectedItem"></Binding>
+                                </ComboBox.ToolTip>
+                            </ComboBox>
+
+
+                            <TextBlock Grid.Row="1"  Text="Birlikler" VerticalAlignment="Center" ></TextBlock>
+                            <ComboBox  Grid.Row="1" Grid.Column="1" x:Name="searchGridBirliklerCombo"
+                      VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60">
+                                <ComboBox.ToolTip>
+                                    <Binding ElementName="searchGridBirliklerCombo" Path="SelectedItem"></Binding>
+                                </ComboBox.ToolTip>
+                            </ComboBox>
+
+
+                            <TextBlock Text="Bilgisayar Markası" Grid.Row="2" VerticalAlignment="Center" ></TextBlock>
+                            <ComboBox Grid.Column="1" Grid.Row="2" x:Name="searchGridMarkalarCombo"
+                      VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"/>
+
+
+                            <TextBlock Text="Alan Kişinin İsmi" Grid.Row="3" 
+                               VerticalAlignment="Center" ></TextBlock>
+                            <TextBox Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" MinWidth="120" x:Name="searchGridalanKisiIsimTxtBox"></TextBox>
+
+
+                            <TextBlock Text="Ağlar" Grid.Row="4" VerticalAlignment="Center" ></TextBlock>
+                            <ComboBox Grid.Column="1" Grid.Row="4"
+                      x:Name="searchGridAglarCombo" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"/>
+
+
+                            <TextBlock Text="Tempest Seviyesi" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="left"></TextBlock>
+                            <ComboBox Grid.Column="1" Grid.Row="5" x:Name="searchGridTempestCombo" VerticalAlignment="Center"
+                              HorizontalAlignment="Center" MinWidth="60"/>
+
+
+                            <TextBlock Text="PC ADI" Grid.Row="6" VerticalAlignment="Center" />
+                            <TextBox Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     MinWidth="120" x:Name="searchGridPcNameTxtBox"></TextBox>
+
+
+                            <TextBlock Text="Model" Grid.Row="7" VerticalAlignment="Center" />
+                            <TextBox MinWidth="120" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     Width="60" x:Name="searchGridModelTxtBox"></TextBox>
+
+                            <Expander TabIndex="9" Header="Monitor Arama Seçenekleri" Foreground="#FF8D0E0E" IsExpanded="True" 
+                                    Margin="0,0,0,0"  Grid.ColumnSpan="4" Grid.Row="8" >
+
+                                <Grid TextBlock.Foreground="Black">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"></RowDefinition>
+                                        <RowDefinition Height="32"></RowDefinition>
+                                        <RowDefinition Height="32"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="Monitor Tipi" Grid.Row="0"
                                        VerticalAlignment="Center" >
-                            </TextBlock>
-                            <ComboBox Grid.Column="1" Grid.Row="0"
+                                    </TextBlock>
+                                    <ComboBox Grid.Column="1" Grid.Row="0"
                                 x:Name="searchGridMonitorTipler"                                
                                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60">
-                                <ComboBox.ItemsSource>
-                                    <CompositeCollection>
-                                        <sys:String>Hepsi</sys:String>
-                                        <CollectionContainer Collection="{Binding Source={StaticResource monitorTypesEnumerator}}"></CollectionContainer>
-                                    </CompositeCollection>
-                                </ComboBox.ItemsSource>
-                            </ComboBox>
-                            <TextBlock  VerticalAlignment="Center" 
+                                        <ComboBox.ItemsSource>
+                                            <CompositeCollection>
+                                                <sys:String>Hepsi</sys:String>
+                                                <CollectionContainer Collection="{Binding Source={StaticResource monitorTypesEnumerator}}"></CollectionContainer>
+                                            </CompositeCollection>
+                                        </ComboBox.ItemsSource>
+                                    </ComboBox>
+                                    <TextBlock  VerticalAlignment="Center" 
                                        Text="Momitör Markası" Grid.Row="1"></TextBlock>
-                            <ComboBox Grid.Column="1" Grid.Row="1"
+                                    <ComboBox Grid.Column="1" Grid.Row="1"
                                 x:Name="searchGridMonitorMarkalar"                                
                                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"></ComboBox>
 
-                            <TextBlock  VerticalAlignment="Center" 
+                                    <TextBlock  VerticalAlignment="Center" 
                                        Text="Momitör Boyutu" Grid.Row="2"></TextBlock>
 
-                            <ComboBox Grid.Column="1" Grid.Row="2"
+                                    <ComboBox Grid.Column="1" Grid.Row="2"
                                 x:Name="searchGridMonitorBoyutlar"                                
                                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="60"></ComboBox>
 
-                        </Grid>
-                    </Expander>
-                    <StackPanel Grid.ColumnSpan="2" VerticalAlignment="Bottom" Grid.RowSpan="13" Orientation="Vertical">
-                        <Button MinHeight="22" Margin="2,6" x:Name="btnClearSearch"
+                                </Grid>
+                            </Expander>
+                            <StackPanel Grid.ColumnSpan="2" VerticalAlignment="Bottom" Grid.RowSpan="13" Orientation="Vertical">
+                                <Button MinHeight="22" Margin="2,6" x:Name="btnClearSearch"
                                 HorizontalAlignment="Center" Content="Aramayı Temizle" Click="btnClearSearch_Click"></Button>
 
-                        <Button x:Name="searchBtn" MinHeight="26" Click="searchBtn_Click" VerticalAlignment="Bottom"
+                                <Button x:Name="searchBtn" MinHeight="26" Click="searchBtn_Click" VerticalAlignment="Bottom"
                                 HorizontalAlignment="Stretch"  Grid.RowSpan="12"  Margin="6,6" 
                                 Content="Sonuçları Getir" Grid.ColumnSpan="2"></Button>
-                    </StackPanel>
+                            </StackPanel>
 
+                        </Grid>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Expander>
         </Grid>
+        <!--Arama Seçenekleri-->
+
 
         <Grid Visibility="Collapsed"  Background="#FFC4BFBF" Grid.ColumnSpan="4" Grid.Row="3">
             <dg:DataGrid x:Name="dataGridSample"></dg:DataGrid>

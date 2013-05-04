@@ -12,6 +12,8 @@
                 <ResourceDictionary Source="Templates\ListBoxDataTemplates.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Templates\Templates.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Resources\Styles.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources\dictScrollViewer.xaml"></ResourceDictionary>
+                
                 
                 
             </ResourceDictionary.MergedDictionaries>

@@ -46,7 +46,7 @@ namespace Mebs_Envanter
             get { return commands; }
             set { commands = value; }
         }
-
+        bool IsFetching = false;
         public void Fetch()
         {
             if (!PropertiesFetched)
@@ -62,7 +62,14 @@ namespace Mebs_Envanter
                 BackgroundWorker worker = new BackgroundWorker();
                 worker.DoWork += new DoWorkEventHandler(worker_DoWork);
                 worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
-                worker.RunWorkerAsync();
+                if (!IsFetching)
+                {
+                    worker.RunWorkerAsync();
+                    IsFetching = true;                    
+                }
+                else {
+                    return;
+                }
                 IsBusy = true;
             }
             else {
@@ -76,6 +83,7 @@ namespace Mebs_Envanter
         {
             PropertiesFetched = true;
             IsBusy = false;
+            IsFetching = false;
         }
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
@@ -83,7 +91,7 @@ namespace Mebs_Envanter
             fetchContent();
         }
         private void fetchContent() {
-
+            Thread.Sleep(1000);
             Set_ComputerOemDevices(null);
             Senet.Set_SenetInfosDB();            
         }
