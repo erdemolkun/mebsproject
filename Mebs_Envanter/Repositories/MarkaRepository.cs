@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using Mebs_Envanter.DB;
+using System.Data.Common;
 
 namespace Mebs_Envanter.Repositories
 {
@@ -37,17 +38,17 @@ namespace Mebs_Envanter.Repositories
 
         public void FillMarkalar(bool isForSearch)
         {
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             string sqlText = "SELECT * FROM tbl_marka";
-            SqlCommand cmd = new SqlCommand(sqlText, cnn);
+            DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn); //new SqlCommand(sqlText, cnn);
 
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
 
             if (res)
             {
 
                 Clear(isForSearch);
-                SqlDataReader dr = cmd.ExecuteReader();
+                DbDataReader dr = cmd.ExecuteReader();
                 string current_marka = null;
                 int current_marka_id = -1;
                 while (dr.Read())

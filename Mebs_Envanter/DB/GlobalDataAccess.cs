@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using System.Data.Common;
 
 namespace Mebs_Envanter.DB
 {
@@ -17,24 +18,23 @@ namespace Mebs_Envanter.DB
         }
 
 
-       
-        private static SqlConnection _sqlcon;
-        //public static SqlConnection Get_Current_SQL_Connection() {
 
-        //    return _sqlcon;                 
-        //}
-        public static SqlConnection Get_Fresh_SQL_Connection()
+        private static DbConnection _sqlcon;
+        
+        public static DbConnection Get_Fresh_Connection()
         {
             if (connectionString == null) return null;
-            SqlConnection sqlCon = new SqlConnection(connectionString);            
+            DbConnection sqlCon = new SqlConnection(connectionString);            
             return sqlCon;
         }
-        public static void Set_Current_SQL_Connection(SqlConnection sqlcon) {
-            _sqlcon = sqlcon;
-            connectionString = sqlcon.ConnectionString;
+        public static void Set_Current_SQL_Connection(DbConnection con)
+        {
+            _sqlcon = con;
+            connectionString = con.ConnectionString;
         }
 
-        public static bool Open_SQL_Connection(SqlConnection sqlcon) {
+        public static bool Open_DB_Connection(DbConnection sqlcon)
+        {
 
             if (sqlcon == null) { return false; }
             if (sqlcon.State == ConnectionState.Open) { return true; }

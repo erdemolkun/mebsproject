@@ -9,6 +9,7 @@ using Mebs_Envanter.DB;
 using Mebs_Envanter.Hardware;
 using Mebs_Envanter;
 using Mebs_Envanter.Base;
+using System.Data.Common;
 
 namespace Mebs_Envanter
 {
@@ -41,32 +42,32 @@ namespace Mebs_Envanter
             set { senet = value; OnPropertyChanged("Senet"); }
         }
 
-        public static List<OEMDevice> GetOemDevicesDB(SqlConnection sqlConnection,
+        public static List<OEMDevice> GetOemDevicesDB(DbConnection sqlConnection,
             bool isForComputer, int bilgisayar_id, int _parca_id)
         {
             if (sqlConnection == null)
             {
-                throw new NullReferenceException("SqlConnection parameter is null");
+                throw new NullReferenceException("DbConnection parameter is null");
             }
             List<OEMDevice> devModels = new List<OEMDevice>();
-            SqlConnection cnn = sqlConnection;//GlobalDataAccess.Get_Fresh_SQL_Connection();
+            DbConnection cnn = sqlConnection;//GlobalDataAccess.Get_Fresh_SQL_Connection();
             SqlCommand cmd = null;
             if (isForComputer)
             {
                 String conString = "Select * From tbl_parca where bilgisayar_id=@bilgisayar_id";
-                cmd = new SqlCommand(conString, cnn);
+                cmd = DBCommonAccess.GetCommand(conString, cnn) as SqlCommand;// new SqlCommand(conString, cnn);
                 cmd.Parameters.AddWithValue("@bilgisayar_id", bilgisayar_id);
             }
             else
             {
                 String conString = "Select * From tbl_parca where parca_id=@parca_id";
-                cmd = new SqlCommand(conString, cnn);
+                cmd = DBCommonAccess.GetCommand(conString, cnn) as SqlCommand; //new SqlCommand(conString, cnn);
                 cmd.Parameters.AddWithValue("@parca_id", _parca_id);
             }
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
 
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
             if (res)
             {
                 try

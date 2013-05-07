@@ -8,6 +8,7 @@ using System.Data;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.Repositories;
 using Mebs_Envanter.Base;
+using System.Data.Common;
 
 namespace Mebs_Envanter
 {
@@ -85,18 +86,18 @@ namespace Mebs_Envanter
         internal void Set_SenetInfosDB()
         {
             if (Id < 0) return;
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
 
             SqlCommand cmd = null;
 
             String conString = "Select * From tbl_senet where senet_id=@senet_id";
-            cmd = new SqlCommand(conString, cnn);
+            cmd = DBCommonAccess.GetCommand(conString, cnn) as SqlCommand;
             cmd.Parameters.AddWithValue("@senet_id", Id);
-
+            
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
 
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
             try
             {
                 adp.Fill(dt);

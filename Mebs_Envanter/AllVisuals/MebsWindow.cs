@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Windows.Threading;
 using Mebs_Envanter.DB;
 using System.Threading;
+using System.Data.Common;
 
 namespace Mebs_Envanter.AllVisuals
 {
@@ -26,7 +27,7 @@ namespace Mebs_Envanter.AllVisuals
 
         private void StartSqlInit()
         {
-            SqlConnection conSql = DBFunctions.ProviceSqlConnection();
+            DbConnection conSql = DBFunctions.ProviceConnection();
             Dispatcher.Invoke(DispatcherPriority.DataBind, new Action(delegate()
             {
                 try

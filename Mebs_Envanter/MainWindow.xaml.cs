@@ -32,6 +32,7 @@ using ReadWriteCsv;
 using Mebs_Envanter.Export;
 using Mebs_Envanter.AllVisuals;
 using Mebs_Envanter.Helpers;
+using System.Data.Common;
 
 
 namespace Mebs_Envanter
@@ -304,7 +305,7 @@ namespace Mebs_Envanter
         {
             if (InfoWindow.AskQuestion("Silmek istediğinize emin misiniz?", "Dikkat !!!") != MessageBoxResult.Yes) { return; }
 
-            bool isSuccess = DBFunctions.DeletePC(Current_Computer_Info);
+            bool isSuccess = DBFunctions.DeleteComputerInfo(Current_Computer_Info);
             if (isSuccess)
             {
                 ComputerInfoRepository currentInfoRep = (pcList.DataContext as ComputerInfoRepository);
@@ -397,13 +398,14 @@ namespace Mebs_Envanter
         private ComputerInfoRepository GetComputerRepository(SortedList<String, object> parameterList)
         {
             ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
 
             //String commandText = "Select TOP 1 * From tbl_bilgisayar pc order by bilgisayar_id Desc";
             String commandText = "pc_genel_arama";
-            SqlCommand cmd = new SqlCommand(commandText, cnn);
+            SqlCommand cmd = DBCommonAccess.GetCommand(commandText, cnn) as SqlCommand;// new SqlCommand(commandText, cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-
+            
+            
             if (parameterList != null)
             {
                 foreach (var item in parameterList)
@@ -413,7 +415,7 @@ namespace Mebs_Envanter
             }
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
             try
             {
                 adp.Fill(dt);                

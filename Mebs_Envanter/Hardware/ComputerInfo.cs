@@ -13,6 +13,7 @@ using Mebs_Envanter.Hardware;
 using Mebs_Envanter.Base;
 using System.Threading;
 using System.ComponentModel;
+using System.Data.Common;
 
 namespace Mebs_Envanter
 {
@@ -164,13 +165,13 @@ namespace Mebs_Envanter
 
             Monitor devMonitor = devOem as Monitor;
 
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             String conString = "Select * From tbl_monitor where parca_id=@parca_id";
-            SqlCommand cmd = new SqlCommand(conString, cnn);
+            SqlCommand cmd = DBCommonAccess.GetCommand(conString, cnn) as SqlCommand;// new SqlCommand(conString, cnn);
             cmd.Parameters.AddWithValue("@parca_id", devMonitor.Id);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
             if (res)
             {
                 try
@@ -206,14 +207,14 @@ namespace Mebs_Envanter
 
         public void Set_ComputerOemDevices(SqlConnection sqlCon)
         {
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             Set_HardwareInfos(cnn);
         }
 
 
-        private void Set_HardwareInfos(SqlConnection sqlCon)
+        private void Set_HardwareInfos(DbConnection con)
         {
-            List<OEMDevice> devs = OEMDevice.GetOemDevicesDB(sqlCon, true, Id, -1);
+            List<OEMDevice> devs = OEMDevice.GetOemDevicesDB(con, true, Id, -1);
             foreach (OEMDevice item in devs)
             {
 
