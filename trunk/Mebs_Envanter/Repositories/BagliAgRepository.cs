@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.GeneralObjects;
+using System.Data.Common;
 
 namespace Mebs_Envanter.Repositories
 {
@@ -28,16 +29,16 @@ namespace Mebs_Envanter.Repositories
         public void Fill_Aglar(bool isForSearch)
         {
 
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             string sqlText = "SELECT * FROM tbl_bagli_ag";
-            SqlCommand cmd = new SqlCommand(sqlText, cnn);
+            DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn);//new SqlCommand(sqlText, cnn);
 
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
 
             if (res)
             {
                 ClearAglar(isForSearch);
-                SqlDataReader dr = cmd.ExecuteReader();
+                DbDataReader dr = cmd.ExecuteReader();
                 string current_bagliag_adi = null;
                 int current_bagliag_id = -1;
                 while (dr.Read())

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Mebs_Envanter.Hardware
 {
+    /// <summary>
+    /// Yazıcı , Projeksiyon , Tarayıcı gibi bilgisayara bağımlı olmayan cihazların alt sınıfı.
+    /// </summary>
     public class IndividualDeviceInfo : OEMDevice
     {
         public bool isEdit = false;
@@ -34,9 +37,6 @@ namespace Mebs_Envanter.Hardware
             get { return id_Dev; }
             set { id_Dev = value; OnPropertyChanged("Id_Dev"); }
         }
-
-
-        
 
     }
 }

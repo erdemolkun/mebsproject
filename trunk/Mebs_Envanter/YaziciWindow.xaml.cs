@@ -23,6 +23,7 @@ using Mebs_Envanter.PrintOperations;
 using Mebs_Envanter.AllVisuals;
 using Mebs_Envanter.Base;
 using Mebs_Envanter.Helpers;
+using System.Data.Common;
 
 namespace Mebs_Envanter
 {
@@ -187,15 +188,15 @@ namespace Mebs_Envanter
         {
             Stopwatch w = Stopwatch.StartNew();
             IndividualDeviceRepository<IndividualDeviceInfo> repositoryNew = new IndividualDeviceRepository<IndividualDeviceInfo>();
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
 
             //String commandText = "Select TOP 10 * From tbl_yazici pc order by yazici_id Desc";
             //String commandText = "p_yazici_arama";
             String commandText = "p_bagimsiz_cihaz_arama";
-            SqlCommand cmd = new SqlCommand(commandText, cnn);
+            SqlCommand cmd = DBCommonAccess.GetCommand(commandText, cnn) as SqlCommand;
             cmd.CommandType = CommandType.StoredProcedure;
 
-
+           
             cmd.Parameters.AddWithValue("@parca_tipi", ExtraDeviceTypes.ConvertToDeviceType(SelectedIndividual.ExtraDeviceType));
             if (parameterList != null)
             {
@@ -207,7 +208,7 @@ namespace Mebs_Envanter
 
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
             try
             {
                 adp.Fill(dt);

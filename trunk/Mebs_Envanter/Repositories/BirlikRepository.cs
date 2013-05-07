@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.GeneralObjects;
+using System.Data.Common;
 
 namespace Mebs_Envanter.Repositories
 {
@@ -35,11 +36,11 @@ namespace Mebs_Envanter.Repositories
             if (komutanlik.Birlik_Repository != null)
                 return;
 
-            SqlConnection cnn = GlobalDataAccess.Get_Fresh_SQL_Connection();
+            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             string sqlText = "SELECT * FROM tbl_birlik where komutanlik_id=@komutanlik_id";
-            SqlCommand cmd = new SqlCommand(sqlText, cnn);
+            SqlCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn) as SqlCommand;
 
-            bool res = GlobalDataAccess.Open_SQL_Connection(cnn);
+            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
 
             if (res)
             {

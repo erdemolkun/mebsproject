@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Base\MebsBaseDBObject.cs" />
     <Compile Include="Converters\PrinterTypeComboIndexConverter.cs" />
+    <Compile Include="DB\DBCommonAccess.cs" />
     <Compile Include="Export\FileExportHelper.cs" />
     <Compile Include="GeneralObjects\PrinterType.cs" />
     <Compile Include="GUIHelpers\IPMaskedTextBox.cs" />
