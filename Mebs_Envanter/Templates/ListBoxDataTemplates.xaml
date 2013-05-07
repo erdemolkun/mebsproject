@@ -65,7 +65,16 @@
                     <Condition Property="IsSelected"  Value="False"></Condition>
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="ItemBorder" Property="Background" Value="mintcream" />
+                    <Setter TargetName="ItemBorder" Property="Background" >
+                        <Setter.Value>
+                            <!--<SolidColorBrush Color="mintcream">
+                            </SolidColorBrush>-->
+                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1" >
+                                <GradientStop Color="mintcream" Offset="0" />
+                                <GradientStop Color="#FFC4D8E8" Offset="1" />
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
                 </MultiTrigger.Setters>
             </MultiTrigger>
         </ControlTemplate.Triggers>
