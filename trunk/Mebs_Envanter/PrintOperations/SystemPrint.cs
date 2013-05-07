@@ -255,6 +255,7 @@ namespace Mebs_Envanter.PrintOperations
                 OemDeviceViewModel x = new OemDeviceViewModel(computerInfo.MonitorInfo);
                 printOemDeviceProperties(p2, g, x.DevOem, row, "Monitör", fontSmall);
 
+                p2.printString(g, 0, 0, fontSmall, computerInfo.SerialNumber, true, false);
                 p2.printString(g, 0, 1, fontSmall, "Bilgisayar", true, false);
                 p2.printString(g, 0, 2, fontSmall, computerInfo.ToString(), true, false);
                 p2.printString(g, 0, 3, fontSmall, "EA", true, true);

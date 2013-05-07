@@ -118,7 +118,7 @@ namespace Mebs_Envanter
             }
             else
             {
-                yaziciRep.Collection.Add(addInfo.device);
+                yaziciRep.Collection.Insert(0, addInfo.device);
                 individualDevicesList.SelectedItem = addInfo.device;
             }
         }
@@ -237,14 +237,7 @@ namespace Mebs_Envanter
                     catch (Exception) { }
                 }
                 individualDevicesList.DataContext = repositoryNew;
-                if (selectLast)
-                {
-                    individualDevicesList.SelectedIndex = repositoryNew.Collection.Count - 1;
-                }
-                else
-                {
-                    individualDevicesList.SelectedIndex = -1;
-                }
+                SetSelectedItemAfterContextChange(selectLast);
             }
             catch (Exception)
             {
@@ -257,6 +250,19 @@ namespace Mebs_Envanter
 
             long x = w.ElapsedMilliseconds;
             Console.WriteLine("Yazıcı listesi " + x + " milisaniye içinde yenilendi");
+        }
+
+        private void SetSelectedItemAfterContextChange(bool selectLast)
+        {
+            IndividualDeviceRepository<IndividualDeviceInfo> repositoryNew = (individualDevicesList.DataContext as IndividualDeviceRepository<IndividualDeviceInfo>);
+            if (selectLast && repositoryNew.Collection.Count > 0)
+            {
+                individualDevicesList.SelectedIndex = 0;//repositoryNew.Computers.Count - 1;
+            }
+            else
+            {
+                individualDevicesList.SelectedIndex = -1;
+            }
         }
 
         private void individualDevicesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -299,6 +305,7 @@ namespace Mebs_Envanter
 
         private void yaziciDelete_Click(object sender, RoutedEventArgs e)
         {
+            if (InfoWindow.AskQuestion("Silmek istediğinize emin misiniz?", "Dikkat !!!") != MessageBoxResult.Yes) { return; }
             bool isSuccess = DBFunctions.DeleteIndividualDevice(Current_IndividualDeviceInfo);
             if (isSuccess)
             {
@@ -306,6 +313,7 @@ namespace Mebs_Envanter
                 if (currentInfoRep != null)
                 {
                     currentInfoRep.Collection.Remove(Current_IndividualDeviceInfo);
+                    SetSelectedItemAfterContextChange(true);
                 }
             }
         }

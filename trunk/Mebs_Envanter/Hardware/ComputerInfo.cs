@@ -91,7 +91,7 @@ namespace Mebs_Envanter
             fetchContent();
         }
         private void fetchContent() {
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             Set_ComputerOemDevices(null);
             Senet.Set_SenetInfosDB();            
         }
