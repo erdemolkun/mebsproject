@@ -208,7 +208,7 @@ namespace Mebs_Envanter
 
             DbDataAdapter adp = DBCommonAccess.GetAdapter(cmd); 
             DataTable dt = new DataTable();
-            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
+            bool res = DBCommonAccess.Open_DB_Connection(cnn);
             try
             {
                 adp.Fill(dt);

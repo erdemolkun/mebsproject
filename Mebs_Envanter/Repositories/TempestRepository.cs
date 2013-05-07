@@ -27,7 +27,7 @@ namespace Mebs_Envanter.Repositories
             string commandText = "SELECT * FROM tbl_tempest";
             DbCommand cmd = DBCommonAccess.GetCommand(commandText, cnn); //new SqlCommand(sqlText, cnn);
 
-            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
+            bool res = DBCommonAccess.Open_DB_Connection(cnn);
 
             if (res)
             {
