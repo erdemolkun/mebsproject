@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.GeneralObjects;
 using System.Data.Common;
@@ -26,7 +25,7 @@ namespace Mebs_Envanter.Repositories
             }
         }
 
-        public void Fill_Aglar(bool isForSearch)
+        public void Fetch_Aglar(bool isForSearch)
         {
 
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();

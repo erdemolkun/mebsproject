@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.GeneralObjects;
 using System.Data.Common;
@@ -25,7 +24,7 @@ namespace Mebs_Envanter.Repositories
             }
         }
 
-        public void FillBirlikler(Komutanlik komutanlik, bool isForSearch)
+        public void Fetch_Birlikler(Komutanlik komutanlik, bool isForSearch)
         {
             
             if (komutanlik == null)

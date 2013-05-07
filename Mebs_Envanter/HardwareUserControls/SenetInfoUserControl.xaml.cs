@@ -30,20 +30,20 @@ namespace Mebs_Envanter.HardwareUserControls
         public void Init()
         {
             KomutanlikRepository Komutanlik_Repository = new KomutanlikRepository();
-            Komutanlik_Repository.FillKomutanliklar(false);
+            Komutanlik_Repository.Fetch_Komutanliklar(false);
             senetKomutanlikCombo.ItemsSource = Komutanlik_Repository.Collection;
             KomutanlikRepository.INSTANCE = Komutanlik_Repository;
 
             foreach (Komutanlik item in Komutanlik_Repository.Collection)
             {
                 BirlikRepository birlik_rep = new BirlikRepository();
-                birlik_rep.FillBirlikler(item, false);
+                birlik_rep.Fetch_Birlikler(item, false);
                 item.Birlik_Repository = birlik_rep;
 
                 foreach (Birlik itemBirlik in birlik_rep.Collection)
                 {
                     KisimRepository kisim_rep = new KisimRepository();
-                    kisim_rep.FillKisimlar(itemBirlik);
+                    kisim_rep.Fetch_Kisimlar(itemBirlik);
                     itemBirlik.Kisim_Repository = kisim_rep;
                 }
             }
@@ -91,7 +91,7 @@ namespace Mebs_Envanter.HardwareUserControls
             else
             {
                 birlik_rep = new BirlikRepository();
-                birlik_rep.FillBirlikler(current_Komutanlik, false);
+                birlik_rep.Fetch_Birlikler(current_Komutanlik, false);
             }
 
             if (current_Komutanlik != null && current_Komutanlik.Birlik_Repository == null)
@@ -113,7 +113,7 @@ namespace Mebs_Envanter.HardwareUserControls
             }
             else
             {
-                kisim_rep.FillKisimlar(current_Birlik);
+                kisim_rep.Fetch_Kisimlar(current_Birlik);
             }
             if (current_Birlik != null && current_Birlik.Kisim_Repository == null)
                 current_Birlik.Kisim_Repository = kisim_rep;

@@ -116,19 +116,19 @@ namespace Mebs_Envanter.HardwareUserControls
 
             // Markalar arayüze atanıyor
             MarkaRepository Marka_Repository = new MarkaRepository();
-            Marka_Repository.FillMarkalar(false);
+            Marka_Repository.Fetch_Markalar(false);
             monitorMarkalarCombo.ItemsSource = Marka_Repository.Collection;
             MarkaRepository.INSTANCE = Marka_Repository;
 
 
             TempestRepository Rep_Tempest = new TempestRepository();
-            Rep_Tempest.FillSeviyeler(false);
+            Rep_Tempest.Fetch_Seviyeler(false);
             monitorTempestCombo.ItemsSource = Rep_Tempest.Collection;
             TempestRepository.INSTANCE = Rep_Tempest;
 
 
             MonitorSizesRepository Size_Rep = new MonitorSizesRepository();
-            Size_Rep.FillSizes(false);
+            Size_Rep.Fetch_Sizes(false);
             monitorBoyutlarCombo.ItemsSource = Size_Rep.Collection;
             MonitorSizesRepository.INSTANCE = Size_Rep;
         }

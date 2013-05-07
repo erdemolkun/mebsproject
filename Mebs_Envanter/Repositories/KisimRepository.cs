@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.GeneralObjects;
 using System.Data.Common;
@@ -21,7 +20,7 @@ namespace Mebs_Envanter.Repositories
             Collection.Add(new Kisim(-1, ""));
         }
 
-        public void FillKisimlar(Birlik birlik)
+        public void Fetch_Kisimlar(Birlik birlik)
         {
             if (birlik == null) return ;
             if (birlik.Kisim_Repository != null)

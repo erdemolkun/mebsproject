@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using Mebs_Envanter.DB;
-using System.Data.SqlClient;
 using Mebs_Envanter.GeneralObjects;
 using System.Data;
 using System.Threading;
@@ -66,27 +65,27 @@ namespace Mebs_Envanter
         private void SetContextForSearchFields()
         {
             KomutanlikRepository Rep_Komutanllik = new KomutanlikRepository();
-            Rep_Komutanllik.FillKomutanliklar(true);
+            Rep_Komutanllik.Fetch_Komutanliklar(true);
             searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Collection;
 
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
-            rep_bagli_ag.Fill_Aglar(true);
+            rep_bagli_ag.Fetch_Aglar(true);
             searchGridAglarCombo.ItemsSource = rep_bagli_ag.Collection;
 
             TempestRepository tempest_rep = new TempestRepository();
-            tempest_rep.FillSeviyeler(true);
+            tempest_rep.Fetch_Seviyeler(true);
             searchGridTempestCombo.ItemsSource = tempest_rep.Collection;
 
             MarkaRepository marka_rep = new MarkaRepository();
-            marka_rep.FillMarkalar(true);
+            marka_rep.Fetch_Markalar(true);
             searchGridMarkalarCombo.ItemsSource = marka_rep.Collection;
 
             MarkaRepository marka_rep2 = new MarkaRepository();
-            marka_rep2.FillMarkalar(true);
+            marka_rep2.Fetch_Markalar(true);
             searchGridMonitorMarkalar.ItemsSource = marka_rep2.Collection;
 
             MonitorSizesRepository mon_size_rep = new MonitorSizesRepository();
-            mon_size_rep.FillSizes(true);
+            mon_size_rep.Fetch_Sizes(true);
             searchGridMonitorBoyutlar.ItemsSource = mon_size_rep.Collection;
         }
 
@@ -469,7 +468,7 @@ namespace Mebs_Envanter
         {
             ComboBox combo_senet = sender as ComboBox;
             BirlikRepository birlik_rep = new BirlikRepository();
-            birlik_rep.FillBirlikler((combo_senet.SelectedItem as Komutanlik), true);
+            birlik_rep.Fetch_Birlikler((combo_senet.SelectedItem as Komutanlik), true);
             searchGridBirliklerCombo.ItemsSource = birlik_rep.Collection;
             BirlikRepository.INSTANCE = birlik_rep;
         }
