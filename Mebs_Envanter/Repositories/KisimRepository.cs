@@ -28,16 +28,15 @@ namespace Mebs_Envanter.Repositories
                 return ;
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection(); 
             string sqlText = "SELECT * FROM tbl_kisim where birlik_id=@birlik_id";
-            SqlCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn) as SqlCommand; //new SqlCommand(sqlText, cnn);
+            DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn); 
 
             bool res = GlobalDataAccess.Open_DB_Connection(cnn);
 
             if (res)
             {
                 Clear();
-                cmd.Parameters.AddWithValue("@birlik_id", birlik.Id);
-                
-                SqlDataReader dr = cmd.ExecuteReader();
+                DBCommonAccess.AddParameterWithValue(cmd,"@birlik_id", birlik.Id);                              
+                DbDataReader dr = cmd.ExecuteReader();
                 string current_kisim = null;
                 int current_kisim_id = -1;
                 while (dr.Read())

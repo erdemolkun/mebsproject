@@ -19,23 +19,23 @@ namespace Mebs_Envanter.AllVisuals
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            Thread thSqlInit = new Thread(StartSqlInit);
-            thSqlInit.IsBackground = true;
-            thSqlInit.Start();
+            Thread thDbInit = new Thread(StartDbInit);
+            thDbInit.IsBackground = true;
+            thDbInit.Start();
             IsBusy = true;
         }
 
-        private void StartSqlInit()
+        private void StartDbInit()
         {
-            DbConnection conSql = DBFunctions.ProviceConnection();
+            DbConnection con = DBFunctions.ProviceConnection();
             Dispatcher.Invoke(DispatcherPriority.DataBind, new Action(delegate()
             {
                 try
                 {
-                    if (conSql != null)
+                    if (con != null)
                     {
                         IsBusy = false;
-                        GlobalDataAccess.Set_Current_SQL_Connection(conSql);
+                        GlobalDataAccess.Set_Current_Db_Connection(con);
                         if (OnDbInitialized != null)
                         {
                             OnDbInitialized();

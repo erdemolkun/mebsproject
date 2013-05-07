@@ -19,10 +19,20 @@ namespace Mebs_Envanter.DB
         static DBFunctions()
         {
             prepareStoredProcedures();
-        }
 
+        }
+        private void DbCommandOlustur(string Query)
+        {
+            DbProviderFactory x = DbProviderFactories.GetFactory("System.Data.SqlClient");
+            DbCommand cmd = x.CreateCommand();
+            cmd.Connection = GlobalDataAccess.Get_Fresh_Connection();
+            cmd.CommandText = Query;
+        }
         public static DbConnection ProviceConnection()
         {
+
+            //DbConnectionStringBuilder aa = x.CreateConnectionStringBuilder();                
+
             // Bağlantı metni zaten oluşturulduysa tekrar bağlantı kontrolü yapma
             if (GlobalDataAccess.Get_Fresh_Connection() != null)
                 return GlobalDataAccess.Get_Fresh_Connection();
@@ -82,7 +92,7 @@ namespace Mebs_Envanter.DB
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@senet_id", SqlDbType.Int));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@temp_bilgisayar_id", SqlDbType.Int));
             cmBilgisayarEkleSilDuz.Parameters["@temp_bilgisayar_id"].Direction = ParameterDirection.Output;
-        
+
 
             cmParcaEkleSilDuz = new SqlCommand("p_parca_ek_sil_duz");
             cmParcaEkleSilDuz.CommandType = CommandType.StoredProcedure;
@@ -282,7 +292,7 @@ namespace Mebs_Envanter.DB
         }
 
         public static bool InsertOrUpdateOemDevice(OEMDevice deviceOem, int bilgisayar_id, bool isEdit)
-        {            
+        {
             try
             {
                 bool isInDatabase = (deviceOem.Id > 0);
@@ -442,12 +452,12 @@ namespace Mebs_Envanter.DB
         {
             try
             {
-                SqlConnection cnn = GlobalDataAccess.Get_Fresh_Connection() as SqlConnection;
-                SqlCommand cmd = new SqlCommand("insert into tbl_monitor_boyutu (monitor_boyutu) values (@monitor_boyutu)" +
-
-                " SELECT IDENT_CURRENT('dbo.tbl_monitor_boyutu')", cnn);
-
-                cmd.Parameters.AddWithValue("@monitor_boyutu", size);
+                DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
+                String cmdText = "insert into tbl_monitor_boyutu (monitor_boyutu) values (@monitor_boyutu)" +
+                " SELECT IDENT_CURRENT('dbo.tbl_monitor_boyutu')";
+                DbCommand cmd = DBCommonAccess.GetCommand(cmdText, cnn);
+                
+                DBCommonAccess.AddParameterWithValue(cmd, "@monitor_boyutu", size);
                 bool res = GlobalDataAccess.Open_DB_Connection(cnn);
                 if (res)
                 {
@@ -466,13 +476,13 @@ namespace Mebs_Envanter.DB
         {
             try
             {
-                SqlConnection cnn = GlobalDataAccess.Get_Fresh_Connection() as SqlConnection;
-                SqlCommand cmd = new SqlCommand("insert into tbl_kisim (birlik_id,kisim_adi) values (@birlik_id,@kisim_adi)" +
+                DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
+                String cmdText = "insert into tbl_kisim (birlik_id,kisim_adi) values (@birlik_id,@kisim_adi)" +
+                " SELECT IDENT_CURRENT('dbo.tbl_kisim')";
+                DbCommand cmd = DBCommonAccess.GetCommand(cmdText, cnn);
 
-                " SELECT IDENT_CURRENT('dbo.tbl_kisim')", cnn);
-
-                cmd.Parameters.AddWithValue("@birlik_id", birlik_id);
-                cmd.Parameters.AddWithValue("@kisim_adi", kisim.Kisim_adi);
+                DBCommonAccess.AddParameterWithValue(cmd, "@birlik_id", birlik_id);
+                DBCommonAccess.AddParameterWithValue(cmd, "@kisim_adi", kisim.Kisim_adi);                
                 bool res = GlobalDataAccess.Open_DB_Connection(cnn);
                 if (res)
                 {
@@ -595,14 +605,14 @@ namespace Mebs_Envanter.DB
         {
             IDataReader dr = null;
             try
-            {                
+            {
                 DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
-                IDbCommand cmd = DBCommonAccess.GetCommand(command, cnn);        
+                IDbCommand cmd = DBCommonAccess.GetCommand(command, cnn);
                 bool res = GlobalDataAccess.Open_DB_Connection(cnn);
 
                 dr = cmd.ExecuteReader();
                 object obj = null;
-                
+
                 if (dr.Read())
                 {
                     obj = dr[itemName];

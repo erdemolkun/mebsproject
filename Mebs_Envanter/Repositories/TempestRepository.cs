@@ -25,8 +25,8 @@ namespace Mebs_Envanter.Repositories
         public void FillSeviyeler(bool isForSearch)
         {
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
-            string sqlText = "SELECT * FROM tbl_tempest";
-            DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn); //new SqlCommand(sqlText, cnn);
+            string commandText = "SELECT * FROM tbl_tempest";
+            DbCommand cmd = DBCommonAccess.GetCommand(commandText, cnn); //new SqlCommand(sqlText, cnn);
 
             bool res = GlobalDataAccess.Open_DB_Connection(cnn);
 

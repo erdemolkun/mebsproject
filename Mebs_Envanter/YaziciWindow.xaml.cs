@@ -193,20 +193,21 @@ namespace Mebs_Envanter
             //String commandText = "Select TOP 10 * From tbl_yazici pc order by yazici_id Desc";
             //String commandText = "p_yazici_arama";
             String commandText = "p_bagimsiz_cihaz_arama";
-            SqlCommand cmd = DBCommonAccess.GetCommand(commandText, cnn) as SqlCommand;
+            
+            DbCommand cmd = DBCommonAccess.GetCommand(commandText, cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-           
-            cmd.Parameters.AddWithValue("@parca_tipi", ExtraDeviceTypes.ConvertToDeviceType(SelectedIndividual.ExtraDeviceType));
+            DBCommonAccess.AddParameterWithValue(cmd, "@parca_tipi", ExtraDeviceTypes.ConvertToDeviceType(SelectedIndividual.ExtraDeviceType));
+            
             if (parameterList != null)
             {
                 foreach (var item in parameterList)
                 {
-                    cmd.Parameters.AddWithValue(item.Key, item.Value);
+                    DBCommonAccess.AddParameterWithValue(cmd, item.Key, item.Value);                    
                 }
             }
 
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DbDataAdapter adp = DBCommonAccess.GetAdapter(cmd); 
             DataTable dt = new DataTable();
             bool res = GlobalDataAccess.Open_DB_Connection(cnn);
             try

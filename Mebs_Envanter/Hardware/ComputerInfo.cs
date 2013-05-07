@@ -167,15 +167,17 @@ namespace Mebs_Envanter
 
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             String conString = "Select * From tbl_monitor where parca_id=@parca_id";
-            SqlCommand cmd = DBCommonAccess.GetCommand(conString, cnn) as SqlCommand;// new SqlCommand(conString, cnn);
-            cmd.Parameters.AddWithValue("@parca_id", devMonitor.Id);
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DbCommand cmd = DBCommonAccess.GetCommand(conString, cnn);
+           
+            DBCommonAccess.AddParameterWithValue(cmd, "@parca_id", devMonitor.Id);
+
+            DbDataAdapter adp = DBCommonAccess.GetAdapter(cmd);
             DataTable dt = new DataTable();
             bool res = GlobalDataAccess.Open_DB_Connection(cnn);
             if (res)
             {
                 try
-                {
+                {                    
                     adp.Fill(dt);
                 }
                 catch (Exception)
@@ -205,7 +207,7 @@ namespace Mebs_Envanter
             }
         }
 
-        public void Set_ComputerOemDevices(SqlConnection sqlCon)
+        public void Set_ComputerOemDevices(DbConnection sqlCon)
         {
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             Set_HardwareInfos(cnn);

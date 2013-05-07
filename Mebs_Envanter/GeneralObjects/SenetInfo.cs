@@ -88,13 +88,13 @@ namespace Mebs_Envanter
             if (Id < 0) return;
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
 
-            SqlCommand cmd = null;
+            DbCommand cmd = null;
 
             String conString = "Select * From tbl_senet where senet_id=@senet_id";
-            cmd = DBCommonAccess.GetCommand(conString, cnn) as SqlCommand;
-            cmd.Parameters.AddWithValue("@senet_id", Id);
-            
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            cmd = DBCommonAccess.GetCommand(conString, cnn);            
+            DBCommonAccess.AddParameterWithValue(cmd, "@senet_id", Id);
+
+            DbDataAdapter adp = DBCommonAccess.GetAdapter(cmd); //new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
 
             bool res = GlobalDataAccess.Open_DB_Connection(cnn);
