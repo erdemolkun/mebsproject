@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mebs_Envanter.GeneralObjects;
-using System.Data.SqlClient;
 using System.Data;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.Repositories;
@@ -86,30 +85,11 @@ namespace Mebs_Envanter
         internal void Set_SenetInfosDB()
         {
             if (Id < 0) return;
-            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
-
-            DbCommand cmd = null;
 
             String conString = "Select * From tbl_senet where senet_id=@senet_id";
-            cmd = DBCommonAccess.GetCommand(conString, cnn);            
-            DBCommonAccess.AddParameterWithValue(cmd, "@senet_id", Id);
-
-            DbDataAdapter adp = DBCommonAccess.GetAdapter(cmd); //new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-
-            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
-            try
-            {
-                adp.Fill(dt);
-            }
-            catch (Exception)
-            {
-            }
-            finally
-            {
-                cnn.Close();
-                cnn.Dispose();
-            }
+            List<KeyValuePair<string, object>> parametersList = new List<KeyValuePair<string, object>>();
+            parametersList.Add(new KeyValuePair<string, object>("@senet_id", Id));
+            DataTable dt = DBFunctions.FillTable(conString, parametersList);
             foreach (DataRow rowParca in dt.Rows)
             {
                 String alan_kisi_rutbe = rowParca["alan_kisi_rutbe"].ToString();

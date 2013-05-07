@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.SqlClient;
 using System.Data;
 using System.IO;
 using DatabaseConnection;
@@ -11,6 +10,7 @@ using Mebs_Envanter.Hardware;
 using Mebs_Envanter;
 using Mebs_Envanter.GeneralObjects;
 using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace Mebs_Envanter.DB
 {
@@ -19,20 +19,10 @@ namespace Mebs_Envanter.DB
         static DBFunctions()
         {
             prepareStoredProcedures();
-
         }
-        private void DbCommandOlustur(string Query)
-        {
-            DbProviderFactory x = DbProviderFactories.GetFactory("System.Data.SqlClient");
-            DbCommand cmd = x.CreateCommand();
-            cmd.Connection = GlobalDataAccess.Get_Fresh_Connection();
-            cmd.CommandText = Query;
-        }
+        
         public static DbConnection ProviceConnection()
-        {
-
-            //DbConnectionStringBuilder aa = x.CreateConnectionStringBuilder();                
-
+        {                            
             // Bağlantı metni zaten oluşturulduysa tekrar bağlantı kontrolü yapma
             if (GlobalDataAccess.Get_Fresh_Connection() != null)
                 return GlobalDataAccess.Get_Fresh_Connection();
@@ -482,7 +472,8 @@ namespace Mebs_Envanter.DB
                 DbCommand cmd = DBCommonAccess.GetCommand(cmdText, cnn);
 
                 DBCommonAccess.AddParameterWithValue(cmd, "@birlik_id", birlik_id);
-                DBCommonAccess.AddParameterWithValue(cmd, "@kisim_adi", kisim.Kisim_adi);                
+                DBCommonAccess.AddParameterWithValue(cmd, "@kisim_adi", kisim.Kisim_adi);
+                
                 bool res = GlobalDataAccess.Open_DB_Connection(cnn);
                 if (res)
                 {
@@ -631,6 +622,39 @@ namespace Mebs_Envanter.DB
                 if (dr != null)
                     dr.Close();
             }
+        }
+
+        public static DataTable FillTable(String commandText, IEnumerable<KeyValuePair<String, object>> values)
+        {
+
+            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
+
+            DbCommand cmd = null;
+
+            String conString = commandText;
+            cmd = DBCommonAccess.GetCommand(conString, cnn);
+            foreach (var item in values)
+            {
+                DBCommonAccess.AddParameterWithValue(cmd, item.Key, item.Value);
+            }
+
+            DbDataAdapter adp = DBCommonAccess.GetAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
+            try
+            {
+                adp.Fill(dt);
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                cnn.Close();
+                cnn.Dispose();
+            }
+            return dt;
         }
     }
 }

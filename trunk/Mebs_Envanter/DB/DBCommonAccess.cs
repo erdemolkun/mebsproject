@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using System.Data.SqlClient;
 using System.Data.Common;
 
 namespace Mebs_Envanter.DB
@@ -12,6 +11,17 @@ namespace Mebs_Envanter.DB
     {
         static String providerString = "System.Data.SqlClient";
         static DbProviderFactory dbProvider;
+
+        public static DbProviderFactory GetProvider() {
+            return dbProvider;
+        }
+
+        public static DbConnection GetConnection(String conString){
+            DbConnection con = dbProvider.CreateConnection();
+            con.ConnectionString = conString;
+            return con;
+        }
+
         static DBCommonAccess(){
             dbProvider = DbProviderFactories.GetFactory(providerString);
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using System.Data.SqlClient;
 using System.Windows.Threading;
 using Mebs_Envanter.DB;
 using System.Threading;

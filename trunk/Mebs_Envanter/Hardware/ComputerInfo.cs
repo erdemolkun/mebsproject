@@ -5,7 +5,6 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Data;
 using Mebs_Envanter.GeneralObjects;
-using System.Data.SqlClient;
 using Mebs_Envanter.DB;
 using Mebs_Envanter;
 using System.Windows;
@@ -52,11 +51,12 @@ namespace Mebs_Envanter
         {
             if (!PropertiesFetched)
             {
-                FetchThreaded(true);                                   
+                FetchThreaded(true);
             }
         }
 
-        private void FetchThreaded(bool isThreaded) {
+        private void FetchThreaded(bool isThreaded)
+        {
 
             if (isThreaded)
             {
@@ -66,14 +66,16 @@ namespace Mebs_Envanter
                 if (!IsFetching)
                 {
                     worker.RunWorkerAsync();
-                    IsFetching = true;                    
+                    IsFetching = true;
                 }
-                else {
+                else
+                {
                     return;
                 }
                 IsBusy = true;
             }
-            else {
+            else
+            {
                 fetchContent();
                 PropertiesFetched = true;
             }
@@ -88,13 +90,14 @@ namespace Mebs_Envanter
         }
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
-        {            
+        {
             fetchContent();
         }
-        private void fetchContent() {
+        private void fetchContent()
+        {
             //Thread.Sleep(1000);
             Set_ComputerOemDevices(null);
-            Senet.Set_SenetInfosDB();            
+            Senet.Set_SenetInfosDB();
         }
 
 
@@ -165,58 +168,41 @@ namespace Mebs_Envanter
 
             Monitor devMonitor = devOem as Monitor;
 
-            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
+
             String conString = "Select * From tbl_monitor where parca_id=@parca_id";
-            DbCommand cmd = DBCommonAccess.GetCommand(conString, cnn);
-           
-            DBCommonAccess.AddParameterWithValue(cmd, "@parca_id", devMonitor.Id);
 
-            DbDataAdapter adp = DBCommonAccess.GetAdapter(cmd);
-            DataTable dt = new DataTable();
-            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
-            if (res)
+            List<KeyValuePair<string, object>> parameterList = new List<KeyValuePair<string, object>>();
+            parameterList.Add(new KeyValuePair<string, object>("@parca_id", devMonitor.Id));
+            DataTable dt = DBFunctions.FillTable(conString, parameterList);
+            foreach (DataRow rowMonitor in dt.Rows)
             {
-                try
-                {                    
-                    adp.Fill(dt);
-                }
-                catch (Exception)
-                { }
-                finally
+                String stok_no = rowMonitor["stok_no"].ToString();
+
+                int boyut_id = DBValueHelpers.GetInt32(rowMonitor["boyut_id"], -1);
+
+                int mon_id = (int)rowMonitor["monitor_id"];
+                int mon_type = DBValueHelpers.GetInt32(rowMonitor["monitor_tipi"], -1);
+
+                if (mon_type > 0)
                 {
-                    cnn.Close();
-                    cnn.Dispose();
+                    devMonitor.MonType = (MonitorTypes)mon_type;
                 }
-                foreach (DataRow rowMonitor in dt.Rows)
-                {
-                    String stok_no = rowMonitor["stok_no"].ToString();
-
-                    int boyut_id = DBValueHelpers.GetInt32(rowMonitor["boyut_id"], -1);
-
-                    int mon_id = (int)rowMonitor["monitor_id"];
-                    int mon_type = DBValueHelpers.GetInt32(rowMonitor["monitor_tipi"], -1);
-
-                    if (mon_type > 0)
-                    {
-                        devMonitor.MonType = (MonitorTypes)mon_type;
-                    }
-                    devMonitor.StokNo = stok_no;
-                    devMonitor.Mon_id = mon_id;
-                    devMonitor.MonSize = new MonitorSize(boyut_id, 0);
-                }
+                devMonitor.StokNo = stok_no;
+                devMonitor.Mon_id = mon_id;
+                devMonitor.MonSize = new MonitorSize(boyut_id, 0);
             }
+
         }
 
         public void Set_ComputerOemDevices(DbConnection sqlCon)
         {
-            DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
-            Set_HardwareInfos(cnn);
+            Set_HardwareInfos();
         }
 
 
-        private void Set_HardwareInfos(DbConnection con)
+        private void Set_HardwareInfos()
         {
-            List<OEMDevice> devs = OEMDevice.GetOemDevicesDB(con, true, Id, -1);
+            List<OEMDevice> devs = OEMDevice.GetOemDevicesDB(true, Id, -1);
             foreach (OEMDevice item in devs)
             {
 

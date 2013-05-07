@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Mebs_Envanter;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.GeneralObjects;
 using System.Data.Common;
@@ -22,7 +21,7 @@ namespace Mebs_Envanter.Repositories
                 Collection.Add(new Tempest(-1, "Hepsi"));
             else Collection.Add(new Tempest(-1, ""));
         }
-        public void FillSeviyeler(bool isForSearch)
+        public void Fetch_Seviyeler(bool isForSearch)
         {
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             string commandText = "SELECT * FROM tbl_tempest";

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mebs_Envanter.GeneralObjects;
-using System.Data.SqlClient;
 using System.Data;
 using Mebs_Envanter.DB;
 using Mebs_Envanter.Hardware;
@@ -42,101 +41,85 @@ namespace Mebs_Envanter
             set { senet = value; OnPropertyChanged("Senet"); }
         }
 
-        public static List<OEMDevice> GetOemDevicesDB(DbConnection connection,
-            bool isForComputer, int bilgisayar_id, int _parca_id)
+        public static List<OEMDevice> GetOemDevicesDB(bool isForComputer, int bilgisayar_id, int _parca_id)
         {
-            if (connection == null)
-            {
-                throw new NullReferenceException("DbConnection parameter is null");
-            }
             List<OEMDevice> devModels = new List<OEMDevice>();
-            DbConnection cnn = connection;
-            DbCommand cmd = null;
+            List<KeyValuePair<string, object>> parametersList = new List<KeyValuePair<string, object>>();
+
+            String conString = null;
             if (isForComputer)
             {
-                String conString = "Select * From tbl_parca where bilgisayar_id=@bilgisayar_id";
-                cmd = DBCommonAccess.GetCommand(conString, cnn);                
-                DBCommonAccess.AddParameterWithValue(cmd,"@bilgisayar_id", bilgisayar_id);
+                conString = "Select * From tbl_parca where bilgisayar_id=@bilgisayar_id";
+                parametersList.Add(new KeyValuePair<string, object>("@bilgisayar_id", bilgisayar_id));
             }
             else
             {
-                String conString = "Select * From tbl_parca where parca_id=@parca_id";
-                cmd = DBCommonAccess.GetCommand(conString, cnn);                
-                DBCommonAccess.AddParameterWithValue(cmd, "@parca_id", _parca_id);
+                conString = "Select * From tbl_parca where parca_id=@parca_id";
+                parametersList.Add(new KeyValuePair<string, object>("@parca_id", _parca_id));
             }
-            DbDataAdapter adp = DBCommonAccess.GetAdapter(cmd);
-            DataTable dt = new DataTable();
+            DataTable dt = DBFunctions.FillTable(conString, parametersList);
 
-            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
-            if (res)
+            try
             {
-                try
+                #region Fill Hardware Properties
+
+                foreach (DataRow rowParca in dt.Rows)
                 {
-                    adp.Fill(dt);
-                    #region Fill Hardware Properties
+                    int parcaTipi = DBValueHelpers.GetInt32(rowParca["parca_tipi"], (int)DeviceTypes.NONE);
+                    DeviceTypes tip = (DeviceTypes)parcaTipi;
+                    int parca_id = (int)rowParca["parca_id"];
+                    String seri_no = rowParca["seri_no"].ToString();
+                    String parca_tanimi = rowParca["parca_tanimi"].ToString();
+                    String parca_no = rowParca["parca_no"].ToString();
 
-                    foreach (DataRow rowParca in dt.Rows)
+                    int senet_id = DBValueHelpers.GetInt32(rowParca["senet_id"], -1);
+                    int markaid = DBValueHelpers.GetInt32(rowParca["marka_id"], -1);
+                    int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
+                    int parca_adedi = DBValueHelpers.GetInt32(rowParca["parca_adedi"], 1);
+
+                    String model = DBValueHelpers.GetString(rowParca["model"], "");
+
+                    OEMDevice devOem = null;
+                    if (tip == DeviceTypes.MONITOR)
                     {
-                        int parcaTipi = DBValueHelpers.GetInt32(rowParca["parca_tipi"], (int)DeviceTypes.NONE);
-                        DeviceTypes tip = (DeviceTypes)parcaTipi;
-                        int parca_id = (int)rowParca["parca_id"];
-                        String seri_no = rowParca["seri_no"].ToString();
-                        String parca_tanimi = rowParca["parca_tanimi"].ToString();
-                        String parca_no = rowParca["parca_no"].ToString();
-
-                        int senet_id = DBValueHelpers.GetInt32(rowParca["senet_id"], -1);
-                        int markaid = DBValueHelpers.GetInt32(rowParca["marka_id"], -1);
-                        int tempestid = DBValueHelpers.GetInt32(rowParca["tempest_id"], -1);
-                        int parca_adedi = DBValueHelpers.GetInt32(rowParca["parca_adedi"], 1);
-
-                        String model = DBValueHelpers.GetString(rowParca["model"], "");
-
-                        OEMDevice devOem = null;
-                        if (tip == DeviceTypes.MONITOR)
-                        {
-                            devOem = new Monitor();
-                        }
-                        else if (tip == DeviceTypes.PRINTER)
-                        {
-                            devOem = new YaziciInfo();
-                        }
-                        else if (tip == DeviceTypes.PROJECTION)
-                        {
-                            devOem = new ProjectionInfo();
-                        }
-                        else if (tip == DeviceTypes.SCANNER)
-                        {
-                            devOem = new ScannerInfo();
-                        }
-                        else
-                        {
-                            devOem = new OEMDevice(tip);
-                        }
-
-                        //Ortak alanlar                        
-                        devOem.Senet.Id = senet_id;
-                        devOem.Id = parca_id;
-                        devOem.SerialNumber = seri_no;
-                        devOem.Parca_no = parca_no;
-                        devOem.Marka = new Marka(markaid, "");
-                        devOem.Tempest = new Tempest(tempestid, "");
-                        devOem.DeviceInfo = parca_tanimi;
-                        devOem.Adet = parca_adedi;
-                        devOem.Model = model;
-                        devModels.Add(devOem);
+                        devOem = new Monitor();
+                    }
+                    else if (tip == DeviceTypes.PRINTER)
+                    {
+                        devOem = new YaziciInfo();
+                    }
+                    else if (tip == DeviceTypes.PROJECTION)
+                    {
+                        devOem = new ProjectionInfo();
+                    }
+                    else if (tip == DeviceTypes.SCANNER)
+                    {
+                        devOem = new ScannerInfo();
+                    }
+                    else
+                    {
+                        devOem = new OEMDevice(tip);
                     }
 
-                    #endregion
+                    //Ortak alanlar                        
+                    devOem.Senet.Id = senet_id;
+                    devOem.Id = parca_id;
+                    devOem.SerialNumber = seri_no;
+                    devOem.Parca_no = parca_no;
+                    devOem.Marka = new Marka(markaid, "");
+                    devOem.Tempest = new Tempest(tempestid, "");
+                    devOem.DeviceInfo = parca_tanimi;
+                    devOem.Adet = parca_adedi;
+                    devOem.Model = model;
+                    devModels.Add(devOem);
                 }
-                catch (Exception)
-                {
-                    cnn.Close();
-                    cnn.Dispose();
-                }
-                finally
-                {
-                }
+
+                #endregion
             }
+            catch (Exception)
+            {
+            }
+            
             return devModels;
         }
 
