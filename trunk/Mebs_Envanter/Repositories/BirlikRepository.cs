@@ -37,16 +37,15 @@ namespace Mebs_Envanter.Repositories
                 return;
 
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
-            string sqlText = "SELECT * FROM tbl_birlik where komutanlik_id=@komutanlik_id";
-            SqlCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn) as SqlCommand;
-
+            string sqlText = "SELECT * FROM tbl_birlik where komutanlik_id=@komutanlik_id";            
+            DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn);
             bool res = GlobalDataAccess.Open_DB_Connection(cnn);
 
             if (res)
             {
                 ClearBirlikler(isForSearch);
-                cmd.Parameters.AddWithValue("@komutanlik_id", komutanlik.Id);
-                SqlDataReader dr = cmd.ExecuteReader();
+                DBCommonAccess.AddParameterWithValue(cmd, "@komutanlik_id", komutanlik.Id);                
+                DbDataReader dr = cmd.ExecuteReader();
                 string current_birlik = null;
                 int current_birlik_id = -1;
                 while (dr.Read())

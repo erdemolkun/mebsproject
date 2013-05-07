@@ -27,18 +27,18 @@ namespace Mebs_Envanter.DB
             DbConnection sqlCon = new SqlConnection(connectionString);            
             return sqlCon;
         }
-        public static void Set_Current_SQL_Connection(DbConnection con)
+        public static void Set_Current_Db_Connection(DbConnection con)
         {
             _sqlcon = con;
             connectionString = con.ConnectionString;
         }
 
-        public static bool Open_DB_Connection(DbConnection sqlcon)
+        public static bool Open_DB_Connection(DbConnection con)
         {
 
-            if (sqlcon == null) { return false; }
-            if (sqlcon.State == ConnectionState.Open) { return true; }
-            try { sqlcon.Open(); return true; }
+            if (con == null) { return false; }
+            if (con.State == ConnectionState.Open) { return true; }
+            try { con.Open(); return true; }
             catch (Exception) { return false; }        
         }
 

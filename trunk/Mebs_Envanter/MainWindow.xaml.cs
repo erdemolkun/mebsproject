@@ -402,18 +402,17 @@ namespace Mebs_Envanter
 
             //String commandText = "Select TOP 1 * From tbl_bilgisayar pc order by bilgisayar_id Desc";
             String commandText = "pc_genel_arama";
-            SqlCommand cmd = DBCommonAccess.GetCommand(commandText, cnn) as SqlCommand;// new SqlCommand(commandText, cnn);
+            DbCommand cmd = DBCommonAccess.GetCommand(commandText, cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            
-            
+                        
             if (parameterList != null)
             {
                 foreach (var item in parameterList)
-                {
-                    cmd.Parameters.AddWithValue(item.Key, item.Value);
+                {                 
+                    DBCommonAccess.AddParameterWithValue(cmd, item.Key, item.Value);
                 }
             }
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DbDataAdapter adp = DBCommonAccess.GetAdapter(cmd); 
             DataTable dt = new DataTable();
             bool res = GlobalDataAccess.Open_DB_Connection(cnn);
             try
