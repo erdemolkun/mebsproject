@@ -15,21 +15,13 @@ namespace Mebs_Envanter.DB
         public static DbConnection Get_Fresh_Connection()
         {
             if (connectionString == null) return null;
-            DbConnection con = DBCommonAccess.GetConnection(connectionString); //new SqlConnection(connectionString);            
+            DbConnection con = DBCommonAccess.GetConnection(connectionString);       
             return con;
         }
         public static void Set_Current_Db_Connection(DbConnection con)
         {
             current_con = con;
             connectionString = con.ConnectionString;
-        }
-
-        public static bool Open_DB_Connection(DbConnection con)
-        {
-            if (con == null) { return false; }
-            if (con.State == ConnectionState.Open) { return true; }
-            try { con.Open(); return true; }
-            catch (Exception) { return false; }        
         }
     }
 }

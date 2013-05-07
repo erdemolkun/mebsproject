@@ -27,9 +27,9 @@ namespace Mebs_Envanter.Repositories
                 return ;
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection(); 
             string sqlText = "SELECT * FROM tbl_kisim where birlik_id=@birlik_id";
-            DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn); 
+            DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn);
 
-            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
+            bool res = DBCommonAccess.Open_DB_Connection(cnn);
 
             if (res)
             {

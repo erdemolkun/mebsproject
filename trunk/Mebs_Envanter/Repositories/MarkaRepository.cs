@@ -41,7 +41,7 @@ namespace Mebs_Envanter.Repositories
             string sqlText = "SELECT * FROM tbl_marka";
             DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn); //new SqlCommand(sqlText, cnn);
 
-            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
+            bool res = DBCommonAccess.Open_DB_Connection(cnn);
 
             if (res)
             {

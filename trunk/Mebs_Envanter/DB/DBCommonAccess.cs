@@ -49,8 +49,7 @@ namespace Mebs_Envanter.DB
         }
         public static DbCommand GetCommand(String commandText,DbConnection connection) {
 
-            //return new SqlCommand(commandText, connection as SqlConnection);
-            
+            //return new SqlCommand(commandText, connection as SqlConnection);            
             DbCommand cmd = dbProvider.CreateCommand();
             cmd.Connection = connection;
             cmd.CommandText = commandText;
@@ -61,8 +60,15 @@ namespace Mebs_Envanter.DB
         public static DbDataAdapter GetAdapter(DbCommand cmd) {
             DbDataAdapter adapter= dbProvider.CreateDataAdapter();
             adapter.SelectCommand = cmd;
-            return adapter;
-            
+            return adapter;            
+        }
+
+        public static bool Open_DB_Connection(DbConnection con)
+        {
+            if (con == null) { return false; }
+            if (con.State == ConnectionState.Open) { return true; }
+            try { con.Open(); return true; }
+            catch (Exception) { return false; }
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Mebs_Envanter.Repositories
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             string sqlText = "SELECT * FROM tbl_birlik where komutanlik_id=@komutanlik_id";            
             DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn);
-            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
+            bool res = DBCommonAccess.Open_DB_Connection(cnn);
 
             if (res)
             {

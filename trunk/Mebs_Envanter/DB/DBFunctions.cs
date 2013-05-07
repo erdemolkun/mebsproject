@@ -148,7 +148,7 @@ namespace Mebs_Envanter.DB
             try
             {
                 cmParcaEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_Connection();
-                bool res = GlobalDataAccess.Open_DB_Connection(cmParcaEkleSilDuz.Connection);
+                bool res = DBCommonAccess.Open_DB_Connection(cmParcaEkleSilDuz.Connection);
                 if (res)
                 { cmParcaEkleSilDuz.Parameters["@type"].Value = "S"; }
 
@@ -172,7 +172,7 @@ namespace Mebs_Envanter.DB
             try
             {
                 cmBilgisayarEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_Connection();
-                bool res = GlobalDataAccess.Open_DB_Connection(cmBilgisayarEkleSilDuz.Connection);
+                bool res = DBCommonAccess.Open_DB_Connection(cmBilgisayarEkleSilDuz.Connection);
                 if (res)
                 { cmBilgisayarEkleSilDuz.Parameters["@type"].Value = "S"; }
 
@@ -198,7 +198,7 @@ namespace Mebs_Envanter.DB
             {
                 bool shouldBeEdit = (infoMonitor.Mon_id > 0) && isEdit;
                 cmMonitorEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_Connection();
-                bool res = GlobalDataAccess.Open_DB_Connection(cmMonitorEkleSilDuz.Connection);
+                bool res = DBCommonAccess.Open_DB_Connection(cmMonitorEkleSilDuz.Connection);
                 if (res)
                 {
                     if (!shouldBeEdit)
@@ -243,7 +243,7 @@ namespace Mebs_Envanter.DB
             {
                 bool shouldBeEdit = (infoYazici.Id_Dev > 0) && isEdit;
                 cmYaziciEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_Connection();
-                bool res = GlobalDataAccess.Open_DB_Connection(cmYaziciEkleSilDuz.Connection);
+                bool res = DBCommonAccess.Open_DB_Connection(cmYaziciEkleSilDuz.Connection);
                 if (res)
                 {
                     if (!shouldBeEdit)
@@ -288,7 +288,7 @@ namespace Mebs_Envanter.DB
                 bool isInDatabase = (deviceOem.Id > 0);
                 bool shouldBeEdit = isInDatabase && isEdit;
                 cmParcaEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_Connection();
-                bool res = GlobalDataAccess.Open_DB_Connection(cmParcaEkleSilDuz.Connection);
+                bool res = DBCommonAccess.Open_DB_Connection(cmParcaEkleSilDuz.Connection);
                 if (res)
                 {
                     if (shouldBeEdit)
@@ -366,7 +366,7 @@ namespace Mebs_Envanter.DB
             try
             {
                 cmBilgisayarEkleSilDuz.Connection = GlobalDataAccess.Get_Fresh_Connection();
-                bool res = GlobalDataAccess.Open_DB_Connection(cmBilgisayarEkleSilDuz.Connection);
+                bool res = DBCommonAccess.Open_DB_Connection(cmBilgisayarEkleSilDuz.Connection);
                 if (res)
                 {
                     if (!isEdit)
@@ -448,7 +448,7 @@ namespace Mebs_Envanter.DB
                 DbCommand cmd = DBCommonAccess.GetCommand(cmdText, cnn);
                 
                 DBCommonAccess.AddParameterWithValue(cmd, "@monitor_boyutu", size);
-                bool res = GlobalDataAccess.Open_DB_Connection(cnn);
+                bool res = DBCommonAccess.Open_DB_Connection(cnn);
                 if (res)
                 {
                     object monsizeid = cmd.ExecuteScalar();
@@ -473,8 +473,8 @@ namespace Mebs_Envanter.DB
 
                 DBCommonAccess.AddParameterWithValue(cmd, "@birlik_id", birlik_id);
                 DBCommonAccess.AddParameterWithValue(cmd, "@kisim_adi", kisim.Kisim_adi);
-                
-                bool res = GlobalDataAccess.Open_DB_Connection(cnn);
+
+                bool res = DBCommonAccess.Open_DB_Connection(cnn);
                 if (res)
                 {
                     object kisimid = cmd.ExecuteScalar();
@@ -493,7 +493,7 @@ namespace Mebs_Envanter.DB
             try
             {
                 cmSenetEkleDilDuz.Connection = GlobalDataAccess.Get_Fresh_Connection();
-                bool res = GlobalDataAccess.Open_DB_Connection(cmSenetEkleDilDuz.Connection);
+                bool res = DBCommonAccess.Open_DB_Connection(cmSenetEkleDilDuz.Connection);
                 if (res)
                 {
                     if (!isEdit)
@@ -599,7 +599,7 @@ namespace Mebs_Envanter.DB
             {
                 DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
                 IDbCommand cmd = DBCommonAccess.GetCommand(command, cnn);
-                bool res = GlobalDataAccess.Open_DB_Connection(cnn);
+                bool res = DBCommonAccess.Open_DB_Connection(cnn);
 
                 dr = cmd.ExecuteReader();
                 object obj = null;
@@ -641,7 +641,7 @@ namespace Mebs_Envanter.DB
             DbDataAdapter adp = DBCommonAccess.GetAdapter(cmd);
             DataTable dt = new DataTable();
 
-            bool res = GlobalDataAccess.Open_DB_Connection(cnn);
+            bool res = DBCommonAccess.Open_DB_Connection(cnn);
             try
             {
                 adp.Fill(dt);
