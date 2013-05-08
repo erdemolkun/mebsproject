@@ -188,9 +188,7 @@ namespace Mebs_Envanter
             Stopwatch w = Stopwatch.StartNew();
             IndividualDeviceRepository<IndividualDeviceInfo> repositoryNew = new IndividualDeviceRepository<IndividualDeviceInfo>();
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
-
-            //String commandText = "Select TOP 10 * From tbl_yazici pc order by yazici_id Desc";
-            //String commandText = "p_yazici_arama";
+              
             String commandText = "p_bagimsiz_cihaz_arama";
             
             DbCommand cmd = DBCommonAccess.GetCommand(commandText, cnn);
@@ -343,8 +341,7 @@ namespace Mebs_Envanter
         }
 
         private SortedList<String, object> GetParameterListForSearch()
-        {
-            //parca_no
+        {            
             SortedList<String, object> list = new SortedList<string, object>();
             SearchHelper.AddToListFromFrameworkElement(searchGridKomutanliklarCombo, list, "@komutanlik_id");
             SearchHelper.AddToListFromFrameworkElement(searchGridBirliklerCombo, list, "@birlik_id");

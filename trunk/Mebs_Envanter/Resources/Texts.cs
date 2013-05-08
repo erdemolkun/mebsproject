@@ -9,6 +9,11 @@ namespace Mebs_Envanter.Resources
     {
         public static Texts INSTANCE = new Texts();
 
+        public void ChangeLanguage() {
+
+            
+        }
+
         private String deleteStr = "Sil";
         public String DeleteStr
         {
@@ -94,7 +99,16 @@ namespace Mebs_Envanter.Resources
         public String ParcaNoStr
         {
             get { return parcaNoStr; }
-            set { parcaNoStr = value; }
+            set { parcaNoStr = value; OnPropertyChanged("ParcaNoStr"); }
+        }
+
+
+        private String monitorStr = "Monitör";
+
+        public String MonitorStr
+        {
+            get { return monitorStr; }
+            set { monitorStr = value; OnPropertyChanged("MonitorStr"); }
         }
     }
 }

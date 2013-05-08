@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using Mebs_Envanter.Hardware;
 using System.Windows.Forms;
+using Mebs_Envanter.Resources;
 
 
 namespace Mebs_Envanter.PrintOperations
@@ -201,7 +202,7 @@ namespace Mebs_Envanter.PrintOperations
             p3.PaintGrid(g);
 
             PointF seri_no_Loc = p3.getlocation(0, 0);
-            p3.printString(g, 0, 0, fontMedium, "Seri Numarası", true, true);
+            p3.printString(g, 0, 0, fontMedium, Texts.INSTANCE.SerialNumberStr, true, true);
             p3.printString(g, 0, 1, fontMedium, "İSİM VEYA EVSAFI", true, true);
             p3.printString(g, 0, 2, fontMedium, "Birimi", true, true);
             p3.printString(g, 0, 3, fontMedium, "Verilen Miktar", true, true);
@@ -253,7 +254,7 @@ namespace Mebs_Envanter.PrintOperations
                     row++;
                 }
                 OemDeviceViewModel x = new OemDeviceViewModel(computerInfo.MonitorInfo);
-                printOemDeviceProperties(p2, g, x.DevOem, row, "Monitör", fontSmall);
+                printOemDeviceProperties(p2, g, x.DevOem, row, Texts.INSTANCE.MonitorStr, fontSmall);
 
                 p2.printString(g, 0, 0, fontSmall, computerInfo.SerialNumber, true, false);
                 p2.printString(g, 0, 1, fontSmall, "Bilgisayar", true, false);
