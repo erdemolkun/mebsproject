@@ -7,6 +7,7 @@
         xmlns:x2="clr-namespace:Mebs_Envanter"
         xmlns:hardware="clr-namespace:Mebs_Envanter.Hardware"
         xmlns:allvisuals="clr-namespace:Mebs_Envanter.AllVisuals"
+                       xmlns:resources="clr-namespace:Mebs_Envanter.Resources"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"                         
@@ -278,7 +279,9 @@
                         Click="yaziciEdit_Click"></Button>
                 <Button x:Name="yaziciDelete"
                     IsEnabled="{Binding ElementName=individualDevicesList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}"
-                    Margin="4,0" VerticalAlignment="Center" Content="Sil" Click="yaziciDelete_Click"></Button>
+                    Margin="4,0" VerticalAlignment="Center"
+                        Content="{Binding Path=DeleteStr,Source={x:Static resources:Texts.INSTANCE}}"
+                        Click="yaziciDelete_Click"></Button>
 
 
             </StackPanel>
@@ -295,16 +298,19 @@
                 <Menu Background="{x:Null}" IsMainMenu="True" TextBlock.FontSize="14"
                       TextBlock.FontFamily="Tahoma"
                       HorizontalAlignment="Left">
-                    <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
-                    <MenuItem Header="Yazdırma Seçenekleri"
+                    <MenuItem Header="{Binding Path=ExitStr,Source={x:Static resources:Texts.INSTANCE}}"
+                              Click="MenuItem_Click_1"></MenuItem>
+                    <MenuItem Header="{Binding Path=PrintOptionsStr,Source={x:Static resources:Texts.INSTANCE}}"
                           IsEnabled="{Binding ElementName=individualDevicesList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}">
                         <MenuItem                         
                         x:Name="printSenetPreview" Click="printSenetPreview_Click"
-                        Header="Senet Önizleme"></MenuItem>
+                        Header="{Binding Path=NotePreviewStr,Source={x:Static resources:Texts.INSTANCE}}"></MenuItem>
                         <MenuItem                         
-                        x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
+                        x:Name="printSenet"  Click="printSenet_Click" 
+                            Header="{Binding Path=NotePrintStr,Source={x:Static resources:Texts.INSTANCE}}"></MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
+                    <MenuItem Header="{Binding Path=AboutStr,Source={x:Static resources:Texts.INSTANCE}}"
+                              Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
                 </Menu>
             </Border>
         </Grid>

@@ -7,7 +7,7 @@
         xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
         x:Name="mainwin" 
         MaxHeight="720" MinHeight="640"  Left="32" Top="32"
-        SizeToContent="WidthAndHeight"
+        SizeToContent="WidthAndHeight" 
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
         xmlns:xceedcontrols="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
@@ -15,7 +15,8 @@
         xmlns:converters="clr-namespace:Mebs_Envanter.Converters"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
-        xmlns:guihelpers2="clr-namespace:Mebs_Envanter.GUIHelpers"                       
+        xmlns:guihelpers2="clr-namespace:Mebs_Envanter.GUIHelpers"   
+        xmlns:resources="clr-namespace:Mebs_Envanter.Resources"
         Title="Bilgisayar Envanter Kaydı" WindowStartupLocation="Manual"
         IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}" ResizeMode="NoResize">
     <Grid SnapsToDevicePixels="True"  Background="{StaticResource WindowGeneralBackgroundColor}">
@@ -50,19 +51,20 @@
                 <Grid HorizontalAlignment="Stretch">
                     <Menu  Background="{x:Null}" IsMainMenu="True" TextBlock.FontSize="14" 
                        TextBlock.FontFamily="Tahoma" HorizontalAlignment="Left">
-                        <MenuItem Header="Çıkış" Click="MenuItem_Click_1"></MenuItem>
-                        <MenuItem Header="Yazdırma Seçenekleri"
+                        <MenuItem 
+                                  Header="{Binding Path=ExitStr,Source={x:Static resources:Texts.INSTANCE}}"
+                                  Click="MenuItem_Click_1"></MenuItem>
+                        <MenuItem Header="{Binding Path=PrintOptionsStr,Source={x:Static resources:Texts.INSTANCE}}"
                           IsEnabled="{Binding ElementName=pcList,Path=SelectedItem,
                         Converter={StaticResource NullValueToBoolConverter}}">
                             <MenuItem                         
                         x:Name="printSenetPreview" Click="printSenetPreview_Click"
-                        Header="Senet Önizleme"></MenuItem>
+                        Header="{Binding Path=NotePreviewStr,Source={x:Static resources:Texts.INSTANCE}}"></MenuItem>
                             <MenuItem                         
-                        x:Name="printSenet"  Click="printSenet_Click" Header="Senet Bastır"></MenuItem>
+                        x:Name="printSenet"  Click="printSenet_Click" 
+                                Header="{Binding Path=NotePrintStr,Source={x:Static resources:Texts.INSTANCE}}"></MenuItem>
                         </MenuItem>
-
-
-                        <MenuItem Header="Barcode Deneme" Visibility="Collapsed" Click="MenuItem_Click"></MenuItem>
+                        
                         <MenuItem Header="Dışarı Aktar" >
 
                             <MenuItem Header="Seçili Bilgisayarı Aktar" 
@@ -81,7 +83,8 @@
                                 <MenuItem Header="HTML" Click="menuItem_HTMLList_Click"></MenuItem>
                             </MenuItem>
                         </MenuItem>
-                        <MenuItem Header="Hakkında" Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
+                        <MenuItem Header="{Binding Path=AboutStr,Source={x:Static resources:Texts.INSTANCE}}"
+                                  Name="hakkindaMenuItem" Click="hakkindaMenuItem_Click"></MenuItem>
                     </Menu>
                     <Menu Background="{x:Null}" IsMainMenu="True" TextBlock.FontSize="14" 
                        TextBlock.FontFamily="Tahoma" HorizontalAlignment="Right" Margin="2,0">
@@ -192,7 +195,8 @@
                         Click="pcEditBtn_Click"></Button>
                 <Button 
                     IsEnabled="{Binding ElementName=pcList,Path=SelectedItem,Converter={StaticResource NullValueToBoolConverter}}"
-                    Margin="4,0" VerticalAlignment="Center" Content="Sil" Click="pcDeleteBtn_Click"></Button>
+                    Margin="4,0" VerticalAlignment="Center" 
+                    Content="{Binding Path=DeleteStr,Source={x:Static resources:Texts.INSTANCE}}" Click="pcDeleteBtn_Click"></Button>
 
 
             </StackPanel>
