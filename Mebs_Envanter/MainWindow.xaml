@@ -319,8 +319,11 @@
                      MinWidth="120" x:Name="searchGridPcNameTxtBox"></TextBox>
 
 
-                            <TextBlock Text="Model" Grid.Row="7" VerticalAlignment="Center" />
-                            <TextBox MinWidth="120" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            <TextBlock 
+                                Text="{Binding Path=ModelStr,Source={x:Static resources:Texts.INSTANCE}}" 
+                                Grid.Row="7" VerticalAlignment="Center" />
+                            <TextBox MinWidth="120" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"
                      Width="60" x:Name="searchGridModelTxtBox"></TextBox>
 
                             <Expander TabIndex="9" Header="Monitor Arama Seçenekleri" Foreground="#FF8D0E0E" IsExpanded="True" 

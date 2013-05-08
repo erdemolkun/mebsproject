@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
+             xmlns:resources="clr-namespace:Mebs_Envanter.Resources"
              x:Name="thiscontrol"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="270">
@@ -21,10 +22,13 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="0" Grid.Column="0" Text="Marka"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="0" Grid.Column="0"
+                   Text="{Binding Path=MarkaStr,Source={x:Static resources:Texts.INSTANCE}}"></TextBlock>
         <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="1" Grid.Column="0"  Text="Modeli"></TextBlock>
-        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="2" Grid.Column="0"  Text="Tempest Seviyesi"></TextBlock>
-        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="3" Grid.Column="0"  Text="Seri No"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="2" Grid.Column="0" 
+                   Text="{Binding Path=TempestLevelStr,Source={x:Static resources:Texts.INSTANCE}}"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Row="3" Grid.Column="0"  
+                   Text="{Binding Path=SerialNumberStr,Source={x:Static resources:Texts.INSTANCE}}"></TextBlock>
         <TextBlock  Style="{StaticResource infoTextBlockStyle}"
             Visibility="{Binding ElementName=thiscontrol, Path=SelectedIndividual,
             Converter={StaticResource IndividualDeviceVisibilityConverter},ConverterParameter=1}"
