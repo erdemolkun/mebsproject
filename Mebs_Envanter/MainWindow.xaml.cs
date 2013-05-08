@@ -32,6 +32,7 @@ using Mebs_Envanter.Export;
 using Mebs_Envanter.AllVisuals;
 using Mebs_Envanter.Helpers;
 using System.Data.Common;
+using Mebs_Envanter.Resources;
 
 
 namespace Mebs_Envanter
@@ -577,7 +578,7 @@ namespace Mebs_Envanter
         }
 
         private void menuItem_HTMLList_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             Export(current_In_MemoryList, ExportOptions.HTML);
         }
 

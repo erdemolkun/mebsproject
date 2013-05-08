@@ -7,6 +7,7 @@
              xmlns:converters="clr-namespace:Mebs_Envanter.Converters"
              xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
              xmlns:mebs="clr-namespace:Mebs_Envanter"
+             xmlns:resources="clr-namespace:Mebs_Envanter.Resources"
              mc:Ignorable="d"              
              d:DesignHeight="320" d:DesignWidth="400" 
              xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
@@ -43,7 +44,7 @@
                 </Border>
             </TabItem>
 
-            <TabItem Header="Monitor" x:Name="monitorTab" >
+            <TabItem Header="{Binding Path=MonitorStr,Source={x:Static resources:Texts.INSTANCE}}" x:Name="monitorTab" >
                 <Border >
                     <hardwareusercontrols:MonitorInfoUserControl x:Name="monitorUserControl1" 
                                                                  DataContext="{Binding MonitorInfo}">
