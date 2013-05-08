@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using Mebs_Envanter;
+using Mebs_Envanter.Resources;
 
 namespace Mebs_Envanter.Export
 {
@@ -20,12 +21,12 @@ namespace Mebs_Envanter.Export
             {
                 // Genel Bilgiler
                 addColumnToDatatable(ref dt, "Bilgisayar Adı", "System.String", ""); //1
-                addColumnToDatatable(ref dt, "Marka", "System.String", "");//2
-                addColumnToDatatable(ref dt, "Model", "System.String", "");//3
+                addColumnToDatatable(ref dt, Texts.INSTANCE.MarkaStr, "System.String", "");//2
+                addColumnToDatatable(ref dt, Texts.INSTANCE.ModelStr, "System.String", "");//3
                 addColumnToDatatable(ref dt, "Stok No", "System.String", "");//4
-                addColumnToDatatable(ref dt, "Parça No", "System.String", "");//5
-                addColumnToDatatable(ref dt, "Tempest Seviyesi", "System.String", "");//6
-                addColumnToDatatable(ref dt, "Seri Numarası", "System.String", "");//7
+                addColumnToDatatable(ref dt, Texts.INSTANCE.ParcaNoStr, "System.String", "");//5
+                addColumnToDatatable(ref dt, Texts.INSTANCE.TempestLevelStr, "System.String", "");//6
+                addColumnToDatatable(ref dt, Texts.INSTANCE.SerialNumberStr, "System.String", "");//7
                 addColumnToDatatable(ref dt, "Eklenme Tarihi", "System.DateTime", DateTime.Now);//8
                 // Genel Bilgiler
             }
@@ -70,7 +71,7 @@ namespace Mebs_Envanter.Export
                 {
                     foreach (var oemDeviceModel in compInfo.OemDevicesVModel.OemDevicesAll)
                     {
-                        addColumnToDatatable(ref dt, oemDeviceModel.ParcaTipiIsmi + " Seri Numarası", "System.String", "");
+                        addColumnToDatatable(ref dt, oemDeviceModel.ParcaTipiIsmi + " " + Texts.INSTANCE.SerialNumberStr, "System.String", "");
                         addColumnToDatatable(ref dt, oemDeviceModel.ParcaTipiIsmi + " Parça Bilgisi", "System.String", "");
                     }
                     break;

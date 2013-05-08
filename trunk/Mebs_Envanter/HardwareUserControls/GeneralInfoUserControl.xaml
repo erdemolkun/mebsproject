@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:x1="clr-namespace:Mebs_Envanter"
              xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
+             xmlns:resources="clr-namespace:Mebs_Envanter.Resources"
              xmlns:x2="clr-namespace:Mebs_Envanter">
     <Grid TextBlock.FontWeight="Bold" Margin="2,0" 
           TextBlock.FontFamily="CartoGothic Std.">
@@ -24,12 +25,19 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="0" Text="PC ADI"></TextBlock>
-        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="1" Text="Marka"></TextBlock>
-        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="2" Text="Model"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="1" 
+                   Text="{Binding Path=MarkaStr,Source={x:Static resources:Texts.INSTANCE}}">
+            
+        </TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="2" 
+                   Text="{Binding Path=ModelStr,Source={x:Static resources:Texts.INSTANCE}}"></TextBlock>
         <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="3" Text="PC Stok No"></TextBlock>
-        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="4" Text="Parça No"></TextBlock>
-        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="5" Text="Seri No"></TextBlock>
-        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="6" Text="Tempest Seviyesi"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="4" 
+                   Text="{Binding Path=ParcaNoStr,Source={x:Static resources:Texts.INSTANCE}}"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="5" 
+                   Text="{Binding Path=SerialNumberStr,Source={x:Static resources:Texts.INSTANCE}}"></TextBlock>
+        <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="6" 
+                   Text="{Binding Path=TempestLevelStr,Source={x:Static resources:Texts.INSTANCE}}"></TextBlock>
         <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="7" Text="Eklenme Tarihi"></TextBlock>
         <TextBlock Style="{StaticResource infoTextBlockStyle}" Text="Notlar" Grid.Row="8" Grid.Column="0" ></TextBlock>
 

@@ -53,5 +53,48 @@ namespace Mebs_Envanter.Resources
             get { return printOptionsStr; }
             set { printOptionsStr = value; OnPropertyChanged("PrintOptionsStr"); }
         }
+
+        private String markaStr = "Marka";
+
+        public String MarkaStr
+        {
+            get { return markaStr; }
+            set { markaStr = value; OnPropertyChanged("MarkaStr"); }
+        }
+
+        private String tempestLevelStr = "Tempest Seviyesi";
+
+        public String TempestLevelStr
+        {
+            get { return tempestLevelStr; }
+            set { tempestLevelStr = value; OnPropertyChanged("TempestLevelStr"); }
+        }
+
+
+        private String serialNumberStr = "Seri No";
+
+        public String SerialNumberStr
+        {
+            get { return serialNumberStr; }
+            set { serialNumberStr = value; OnPropertyChanged("SerialNumberStr"); }
+        }
+
+
+        private String modelStr = "Model";
+
+        public String ModelStr
+        {
+            get { return modelStr; }
+            set { modelStr = value; OnPropertyChanged("ModelStr"); }
+        }
+
+
+        private String parcaNoStr = "Parça No";
+
+        public String ParcaNoStr
+        {
+            get { return parcaNoStr; }
+            set { parcaNoStr = value; }
+        }
     }
 }
