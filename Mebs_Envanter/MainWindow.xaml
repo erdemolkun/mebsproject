@@ -22,9 +22,7 @@
     <Grid 
         IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
         SnapsToDevicePixels="True"  Background="{StaticResource WindowGeneralBackgroundColor}">
-        <Grid.Resources>
-            <SolidColorBrush x:Key="headerColor1" Color="SkyBlue"></SolidColorBrush>
-        </Grid.Resources>
+       
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -113,7 +111,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Border  Margin="0,6" Height="42" Background="{StaticResource headerColor1}" CornerRadius="0">
-                <TextBlock Text="Düzenleme Bölümü" Foreground="Brown"
+                <TextBlock Text="Düzenleme Bölümü" Foreground="{StaticResource headerContentColor1}"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
@@ -129,7 +127,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Border  Margin="0,6" Height="42"  Background="{StaticResource headerColor1}" CornerRadius="0">
-                <TextBlock Text="Bilgisayarlar" Foreground="Brown"
+                <TextBlock Text="Bilgisayarlar" Foreground="{StaticResource headerContentColor1}"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
@@ -246,7 +244,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Border Margin="0,6" Height="42"  Background="{StaticResource headerColor1}" CornerRadius="0">
-                        <TextBlock Text="PC Arama Seçenekleri" Foreground="Brown"
+                        <TextBlock Text="PC Arama Seçenekleri" Foreground="{StaticResource headerContentColor1}"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
                     </Border>

@@ -3,40 +3,43 @@
 
 
     <ControlTemplate x:Key="template1" TargetType="{x:Type Window}">
-        <Grid x:Name="gridTemplateMain">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="16"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="6"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+        <Grid>
 
-            <ContentControl  Template="{StaticResource SampleControlTemplate}" Grid.ColumnSpan="3" Grid.RowSpan="3">
+            <ContentControl  Template="{StaticResource BackGroundTemplateGray}" Grid.ColumnSpan="3" Grid.RowSpan="3">
             </ContentControl>
-            <Border TextBlock.Foreground="MintCream"
-                    Grid.Column="1" Margin="2,8"  CornerRadius="8" Background="#DD5E90AE">
-                <Grid  x:Name="PART_GRIDHEADER" Background="Transparent">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid >
-                        <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"
+            <Grid x:Name="gridTemplateMain" Margin="0,12,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="16"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="6"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                
+                <Border TextBlock.Foreground="MintCream"
+                    Grid.Column="1" Margin="0,8,0,2"  CornerRadius="8,8,0,0" Background="#FF5E90AE">
+                    <Grid  x:Name="PART_GRIDHEADER" Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid >
+                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"
                                 Text="{TemplateBinding Title}" FontWeight="Bold"></TextBlock>
-                    </Grid>
-                    <StackPanel DataContext="{TemplateBinding DataContext}" 
+                        </Grid>
+                        <StackPanel DataContext="{TemplateBinding DataContext}" 
                         Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
 
-                        <!--<x1:BusyIndicator  Margin="2,0" Grid.Column="1"
+                            <!--<x1:BusyIndicator  Margin="2,0" Grid.Column="1"
                          Visibility="{Binding Path=IsBusy,Converter={StaticResource BoolToVisibilityConverter}}"
                          Width="20" Height="20">
                         </x1:BusyIndicator>-->
 
-                        <!--<Button x:Name="PART_MAXRESTORE" Margin="2,0" Width="28" Height="22"
+                            <!--<Button x:Name="PART_MAXRESTORE" Margin="2,0" Width="28" Height="22"
                             Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter},Path=CanResize}"
                             HorizontalAlignment="Center"
                             Style="{StaticResource PatientOverviewStatusButtonStyle}"
@@ -44,21 +47,25 @@
                             <Image  x:Name="MaximizeRestoreImage" 
                                 Source="icons/genelIkon/Maximize.png" Stretch="None" />
                         </Button>-->
-                        <Button x:Name="PART_CLOSE_BTN" Content="X" Width="32" Height="32" 
+                            <Button x:Name="PART_CLOSE_BTN" Content="X" Width="30" Height="30" 
                                 VerticalAlignment="Center" Margin="2,0"/>
 
-                    </StackPanel>
-                </Grid>
-            </Border>
+                        </StackPanel>
+                    </Grid>
+                </Border>
 
-            <Grid  Grid.Column="1" Grid.Row="1">
-                <ContentPresenter   
+                <Grid  Grid.Column="1" Grid.Row="1">
+                    <ContentPresenter   
                             Content="{TemplateBinding Content}"                             
                             ContentTemplate="{TemplateBinding ContentTemplate}"
                             VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
+                </Grid>
             </Grid>
+
+
         </Grid>
+        
         <!--<ControlTemplate.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Maximized}"
                                      Value="False">
