@@ -9,6 +9,7 @@ using System.Drawing.Drawing2D;
 using Mebs_Envanter.Hardware;
 using System.Windows.Forms;
 using Mebs_Envanter.Resources;
+using System.Windows.Input;
 
 
 namespace Mebs_Envanter.PrintOperations
@@ -380,9 +381,14 @@ namespace Mebs_Envanter.PrintOperations
             pdlg.PrintPreviewControl.Zoom = 1.1;
 
             if (isPreview)
+            {
                 pdlg.ShowDialog();
+                Mouse.OverrideCursor = null;
+            }
             else
+            {
                 PD.Print();
+            }
         }
 
         void PD_QueryPageSettings(object sender, QueryPageSettingsEventArgs e)

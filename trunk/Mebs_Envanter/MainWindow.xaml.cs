@@ -176,8 +176,7 @@ namespace Mebs_Envanter
             }
             else
             {
-                computerRep.Collection.Insert(0, addInfo.computer);
-                //computerRep.Computers.Add(addInfo.computer);
+                computerRep.Collection.Insert(0, addInfo.computer);                
                 pcList.SelectedItem = addInfo.computer;
             }
         }
@@ -399,8 +398,7 @@ namespace Mebs_Envanter
         {
             ComputerInfoRepository repositoryNew = new ComputerInfoRepository();
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
-
-            //String commandText = "Select TOP 1 * From tbl_bilgisayar pc order by bilgisayar_id Desc";
+            
             String commandText = "pc_genel_arama";
             DbCommand cmd = DBCommonAccess.GetCommand(commandText, cnn);
             cmd.CommandType = CommandType.StoredProcedure;
