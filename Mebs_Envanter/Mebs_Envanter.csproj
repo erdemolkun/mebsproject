@@ -178,6 +178,7 @@
     <Compile Include="Helpers\Unnecessary.cs" />
     <Compile Include="Helpers\VersionInfo.cs" />
     <Compile Include="Resources\Texts.cs" />
+    <Compile Include="AllVisuals\TemplatedWindow.cs" />
     <Compile Include="ViewModels\OemDevicesViewModel.cs" />
     <Compile Include="ViewModels\OemDeviceViewModel.cs" />
     <Compile Include="Helpers\SerializationTool.cs" />

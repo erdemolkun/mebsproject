@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Bağımsız Cihaz Kaydı"  
         MinHeight="480" MaxHeight="720"
+                       Style="{StaticResource stilWindow1}"
         xmlns:x1="clr-namespace:Mebs_Envanter" x:Name="thiswin"
         xmlns:x2="clr-namespace:Mebs_Envanter"
         xmlns:hardware="clr-namespace:Mebs_Envanter.Hardware"
@@ -11,9 +12,11 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"                         
-        IsEnabled="{Binding ElementName=thiswin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
+        
         Width="880" SizeToContent="Height"  ResizeMode="NoResize">
-    <Grid Background="{StaticResource WindowGeneralBackgroundColor}">
+    <Grid 
+        IsEnabled="{Binding ElementName=thiswin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
+        Background="{StaticResource WindowGeneralBackgroundColor}">
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="270"></ColumnDefinition>
