@@ -7,12 +7,23 @@ using System.Windows.Threading;
 using Mebs_Envanter.DB;
 using System.Threading;
 using System.Data.Common;
+using System.Windows.Media;
 
 namespace Mebs_Envanter.AllVisuals
 {
     public delegate void DBProviderInitializedHandler();
-    public class MebsWindow : Window
+    public class MebsWindow : TemplatedWindow
     {
+
+        public MebsWindow() {
+            
+            this.WindowStyle = WindowStyle.None;
+            //this.Background = Brushes.Transparent;
+            this.AllowsTransparency = true;
+            this.ShowInTaskbar = true;
+            //this.DataContext = this; 
+        }
+
         public event DBProviderInitializedHandler OnDbInitialized;
 
         protected override void OnInitialized(EventArgs e)
@@ -56,6 +67,16 @@ namespace Mebs_Envanter.AllVisuals
             }));
         }
 
+        protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch (Exception)
+            { }
+            base.OnMouseDown(e);
+        }
 
         public bool IsBusy
         {

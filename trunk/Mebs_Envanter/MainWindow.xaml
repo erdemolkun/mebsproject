@@ -5,9 +5,9 @@
         xmlns:x2="clr-namespace:Mebs_Envanter"
         xmlns:allvisuals="clr-namespace:Mebs_Envanter.AllVisuals"
         xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers"
-        x:Name="mainwin" 
+        x:Name="mainwin" Style="{StaticResource stilWindow1}"
         MaxHeight="720" MinHeight="640"  Left="32" Top="32"
-        SizeToContent="WidthAndHeight" 
+        SizeToContent="WidthAndHeight"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
         xmlns:xceedcontrols="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
@@ -16,10 +16,12 @@
         xmlns:hardwareusercontrols ="clr-namespace:Mebs_Envanter.HardwareUserControls"
         xmlns:animations="clr-namespace:Mebs_Envanter.Animations"
         xmlns:guihelpers2="clr-namespace:Mebs_Envanter.GUIHelpers"   
-        xmlns:resources="clr-namespace:Mebs_Envanter.Resources"
-        Title="Bilgisayar Envanter Kaydı" WindowStartupLocation="Manual"
-        IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}" ResizeMode="NoResize">
-    <Grid SnapsToDevicePixels="True"  Background="{StaticResource WindowGeneralBackgroundColor}">
+        xmlns:resources="clr-namespace:Mebs_Envanter.Resources" HorizontalContentAlignment="Center"
+        WindowStartupLocation="Manual"
+         ResizeMode="NoResize">
+    <Grid 
+        IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
+        SnapsToDevicePixels="True"  Background="{StaticResource WindowGeneralBackgroundColor}">
         <Grid.Resources>
             <SolidColorBrush x:Key="headerColor1" Color="SkyBlue"></SolidColorBrush>
         </Grid.Resources>
@@ -111,7 +113,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Border  Margin="0,6" Height="42" Background="{StaticResource headerColor1}" CornerRadius="0">
-                <TextBlock Text="Düzenleme Bölümü" Foreground="MintCream"
+                <TextBlock Text="Düzenleme Bölümü" Foreground="Brown"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
@@ -127,7 +129,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Border  Margin="0,6" Height="42"  Background="{StaticResource headerColor1}" CornerRadius="0">
-                <TextBlock Text="Bilgisayarlar" Foreground="MintCream"
+                <TextBlock Text="Bilgisayarlar" Foreground="Brown"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
@@ -244,7 +246,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Border Margin="0,6" Height="42"  Background="{StaticResource headerColor1}" CornerRadius="0">
-                        <TextBlock Text="PC Arama Seçenekleri" Foreground="MintCream"
+                        <TextBlock Text="PC Arama Seçenekleri" Foreground="Brown"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
                     </Border>
