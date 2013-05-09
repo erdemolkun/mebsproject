@@ -72,8 +72,8 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Margin="0,6" Height="60" Background="SkyBlue" CornerRadius="0">
-                <TextBlock Text="Cihaz Arama Seçenekleri" Foreground="MintCream"
+            <Border Margin="0,6" Height="60" Background="{StaticResource headerColor1}" CornerRadius="0">
+                <TextBlock Text="Cihaz Arama Seçenekleri" Foreground="{StaticResource headerContentColor1}"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
@@ -194,8 +194,8 @@
                 <RowDefinition Height="24"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Margin="0,6" Height="60" Background="SkyBlue" CornerRadius="0">
-                <TextBlock Text="Bağımsız Cihazlar" Foreground="MintCream"
+            <Border Margin="0,6" Height="60" Background="{StaticResource headerColor1}" CornerRadius="0">
+                <TextBlock Text="Bağımsız Cihazlar" Foreground="{StaticResource headerContentColor1}"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
@@ -226,8 +226,8 @@
                 <RowDefinition Height="Auto"></RowDefinition>                
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Margin="0,6" Height="60" Background="SkyBlue" CornerRadius="0">
-                <TextBlock Text="Düzenleme Bölümü" Foreground="MintCream"
+            <Border Margin="0,6" Height="60" Background="{StaticResource headerColor1}" CornerRadius="0">
+                <TextBlock Text="Düzenleme Bölümü" Foreground="{StaticResource headerContentColor1}"
                        VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
                        HorizontalAlignment="Center"></TextBlock>
             </Border>
