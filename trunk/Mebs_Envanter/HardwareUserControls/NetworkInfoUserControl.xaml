@@ -36,7 +36,7 @@
                             HorizontalAlignment="Left"                          
                             SelectedIndex="{Binding Path=BagliAg,
                             Converter={StaticResource BagliAgComboIndexConverter},UpdateSourceTrigger=Explicit}"                             
-                            ItemsSource="{Binding BagliAglar}" x:Name="bagliAgCombo" 
+                             x:Name="bagliAgCombo" 
                             MinWidth="60" Margin="2" Grid.Column="1" Grid.Row="0" ></ComboBox>
 
         <guihelpers:MacMaskedTextBox VerticalAlignment="Center" Mask="aa:aa:aa:aa:aa:aa" x:Name="pcMacAddressTextBox"

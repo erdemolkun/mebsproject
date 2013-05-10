@@ -38,8 +38,7 @@
         <ComboBox x:Name="markalarCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
                                 TabIndex="1"
                                    SelectedIndex="{Binding Marka,
-                                   Converter ={StaticResource MarkaComboIndexConverter},UpdateSourceTrigger=Explicit}"
-                                   ItemsSource="{Binding Collection}" 
+                                   Converter ={StaticResource MarkaComboIndexConverter},UpdateSourceTrigger=Explicit}"                                    
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
         <TextBox  Grid.Row="1" Text="{Binding Model,UpdateSourceTrigger=Explicit}" Grid.Column="1" Margin="2"                                 
                   guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"   TabIndex="2"
@@ -48,7 +47,7 @@
         <ComboBox x:Name="tempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
                    TabIndex="3"
                                   SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
-                                  ItemsSource="{Binding TempestSeviyeler}" Grid.Row="2"
+                                  Grid.Row="2"
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
         <TextBox Grid.Row="3"  TabIndex="4"
                   guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"  

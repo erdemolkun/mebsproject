@@ -74,7 +74,7 @@
         <!--Tempest Seviyeleri-->
         <ComboBox x:Name="monitorTempestCombo" TabIndex="7" MinWidth="80" VerticalAlignment="Center"  Margin="2,2"
                                   SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
-                                  ItemsSource="{Binding TempestSeviyeler}" Grid.Row="6"
+                                  Grid.Row="6"
                                   HorizontalAlignment="Left" Grid.Column="1">
 
         </ComboBox>

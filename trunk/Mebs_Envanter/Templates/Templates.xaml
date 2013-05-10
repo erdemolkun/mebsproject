@@ -146,7 +146,7 @@
             <Rectangle Stroke="#587D7D7D" RadiusX="13" RadiusY="13" StrokeThickness="4" StrokeMiterLimit="2" StrokeEndLineCap="Flat" StrokeStartLineCap="Flat" StrokeLineJoin="Miter"   Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="2" Margin="4,6,6,6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" />
             <Rectangle Stroke="#727D7D7D" RadiusX="13" RadiusY="13" StrokeThickness="3" StrokeMiterLimit="2" StrokeEndLineCap="Flat" StrokeStartLineCap="Flat" StrokeLineJoin="Miter"   Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="2" Margin="5,7,7,7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" />
             <Rectangle Stroke="#867D7D7D" RadiusX="13" RadiusY="13" StrokeThickness="2" StrokeMiterLimit="2" StrokeEndLineCap="Flat" StrokeStartLineCap="Flat" StrokeLineJoin="Miter"   Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="2" Margin="6,8,8,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" />
-            <Grid  Margin="0,9,0,9"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid Margin="3,9,3,9"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid Name="Layer1" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />
@@ -163,8 +163,8 @@
                             <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                                 <GradientBrush.GradientStops>
                                     <GradientStopCollection>
-                                        <GradientStop Color="Gray" Offset="0" />
-                                        <GradientStop Color="LightGray" Offset="1" />
+                                        <GradientStop Color="#C6DEFF" Offset="0" />
+                                        <GradientStop Color="#C6DEFF" Offset="1" />
                                     </GradientStopCollection>
                                 </GradientBrush.GradientStops>
                                 <Brush.RelativeTransform>
