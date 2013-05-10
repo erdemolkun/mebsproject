@@ -41,7 +41,7 @@
         <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="2" Text="Alan Kişi Komutanlık"></TextBlock>
         <ComboBox VerticalAlignment="Center" SelectionChanged="senetKomutanlikCombo_SelectionChanged"
                   SelectedIndex="{Binding Alan_kisi_komutanlik,Converter={StaticResource KomutanlikComboIndexConverter},UpdateSourceTrigger=Explicit}" 
-                  x:Name="senetKomutanlikCombo" ItemsSource="{Binding Komutanliklar}"
+                  x:Name="senetKomutanlikCombo" 
                   MinWidth="60" Margin="2"  Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2"/>
 
 
@@ -49,7 +49,7 @@
         <ComboBox SelectionChanged="senetBirlikCombo_SelectionChanged"
                                   VerticalAlignment="Center" 
                                   SelectedIndex="{Binding Alan_kisi_birlik,Converter={StaticResource BirlikComboIndexConverter},UpdateSourceTrigger=Explicit}" 
-                                  x:Name="senetBirlikCombo" ItemsSource="{Binding Birlikler}"
+                                  x:Name="senetBirlikCombo" 
                                   MinWidth="60" Margin="2"  Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3"/>
 
 
@@ -57,7 +57,7 @@
         <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="4" Text="Alan Kişi Kısım"></TextBlock>
         <ComboBox VerticalAlignment="Center" 
                   IsEditable="True" MaxWidth="160"
-                            ItemsSource="{Binding Kisimlar}" x:Name="senetKisimCombo"
+                             x:Name="senetKisimCombo"
                             SelectedIndex="{Binding Alan_kisi_kisim,Converter={StaticResource KisimComboIndexConverter},UpdateSourceTrigger=Explicit}" 
                             MinWidth="60" Margin="2" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4"></ComboBox>
 

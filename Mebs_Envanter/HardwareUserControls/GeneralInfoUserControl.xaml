@@ -51,7 +51,7 @@
                                   SelectedIndex="{Binding Marka,
                                   Converter={StaticResource MarkaComboIndexConverter},            
                                     Mode=Default, UpdateSourceTrigger=Explicit}" 
-                                  ItemsSource="{Binding Collection}" Grid.Row="1"
+                                   Grid.Row="1"
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
         <TextBox x:Name="pcModelTextBox"
@@ -74,7 +74,7 @@
 
         <ComboBox x:Name="genelBilgilerTempestCombo" MinWidth="80" VerticalAlignment="Center"  Margin="2,4"                                  
                                   SelectedIndex="{Binding Tempest,Converter={StaticResource TempestComboIndexConverter},UpdateSourceTrigger=Explicit}"
-                                  ItemsSource="{Binding TempestSeviyeler}" Grid.Row="6"
+                                  Grid.Row="6"
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
         <x1:BindableRichTextBox Grid.Row="8"

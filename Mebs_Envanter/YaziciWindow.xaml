@@ -261,7 +261,6 @@
                         <hardwareusercontrols:NetworkInfoUserControl 
                             IsUsedForPrinter="True" DataContext="{Binding NetworkInfo}"
                             x:Name="networkInfoControl1">
-
                         </hardwareusercontrols:NetworkInfoUserControl>
                     </Border>
                 </TabItem>
