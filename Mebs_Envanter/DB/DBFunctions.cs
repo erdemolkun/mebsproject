@@ -624,7 +624,7 @@ namespace Mebs_Envanter.DB
             }
         }
 
-        public static DataTable FillTable(String commandText, IEnumerable<KeyValuePair<String, object>> values)
+        public static DataTable FillTable(String commandText, IEnumerable<KeyValuePair<String, object>> parameters)
         {
 
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
@@ -633,7 +633,7 @@ namespace Mebs_Envanter.DB
 
             String conString = commandText;
             cmd = DBCommonAccess.GetCommand(conString, cnn);
-            foreach (var item in values)
+            foreach (var item in parameters)
             {
                 DBCommonAccess.AddParameterWithValue(cmd, item.Key, item.Value);
             }
