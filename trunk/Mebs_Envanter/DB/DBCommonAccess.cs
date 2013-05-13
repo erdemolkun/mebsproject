@@ -48,8 +48,7 @@ namespace Mebs_Envanter.DB
             command.Parameters.Add(parameter);
         }
         public static DbCommand GetCommand(String commandText,DbConnection connection) {
-
-            //return new SqlCommand(commandText, connection as SqlConnection);            
+                   
             DbCommand cmd = dbProvider.CreateCommand();
             cmd.Connection = connection;
             cmd.CommandText = commandText;

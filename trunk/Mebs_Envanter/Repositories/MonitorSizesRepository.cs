@@ -29,7 +29,7 @@ namespace Mebs_Envanter.Repositories
         {
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             string sqlText = "SELECT * FROM tbl_monitor_boyutu order by monitor_boyutu ASC";
-            DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn); //new SqlCommand(sqlText, cnn);
+            DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn);
             bool res = DBCommonAccess.Open_DB_Connection(cnn);
 
             if (res)
