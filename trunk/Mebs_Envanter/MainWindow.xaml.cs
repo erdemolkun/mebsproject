@@ -66,27 +66,27 @@ namespace Mebs_Envanter
         private void SetContextForSearchFields()
         {
             KomutanlikRepository Rep_Komutanllik = new KomutanlikRepository();
-            Rep_Komutanllik.Fetch_Komutanliklar(true);
+            Rep_Komutanllik.Fill(true);
             searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Collection;
 
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
-            rep_bagli_ag.Fetch_Aglar(true);
+            rep_bagli_ag.Fill(true);
             searchGridAglarCombo.ItemsSource = rep_bagli_ag.Collection;
 
             TempestRepository tempest_rep = new TempestRepository();
-            tempest_rep.Fetch_Seviyeler(true);
+            tempest_rep.Fill(true);
             searchGridTempestCombo.ItemsSource = tempest_rep.Collection;
 
             MarkaRepository marka_rep = new MarkaRepository();
-            marka_rep.Fetch_Markalar(true);
+            marka_rep.Fill(true);
             searchGridMarkalarCombo.ItemsSource = marka_rep.Collection;
 
             MarkaRepository marka_rep2 = new MarkaRepository();
-            marka_rep2.Fetch_Markalar(true);
+            marka_rep2.Fill(true);
             searchGridMonitorMarkalar.ItemsSource = marka_rep2.Collection;
 
             MonitorSizesRepository mon_size_rep = new MonitorSizesRepository();
-            mon_size_rep.Fetch_Sizes(true);
+            mon_size_rep.Fill(true);
             searchGridMonitorBoyutlar.ItemsSource = mon_size_rep.Collection;
         }
 

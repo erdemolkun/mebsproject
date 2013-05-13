@@ -125,7 +125,7 @@ namespace Mebs_Envanter
                     }
                     Dispatcher.Invoke(DispatcherPriority.DataBind, new Action(delegate
                     {
-                        Mouse.OverrideCursor = Cursors.Arrow;
+                        Mouse.OverrideCursor = null;
                         IsEnabled = true;
                         if (isSuccess)
                         {

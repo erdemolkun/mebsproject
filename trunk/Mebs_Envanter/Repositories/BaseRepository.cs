@@ -14,5 +14,7 @@ namespace Mebs_Envanter.Repositories
         {
             get { return collection; }
         }
+
+        public virtual void Fill(bool isForSearch) { }
     }
 }

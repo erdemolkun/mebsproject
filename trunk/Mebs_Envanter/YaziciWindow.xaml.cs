@@ -40,15 +40,15 @@ namespace Mebs_Envanter
 
         private IndividualDeviceInfo GetNewDevice()
         {
-            if (SelectedIndividual.ExtraDeviceType == ExtraDeviceTypes.PRINTER)
+            if (SelectedIndividual.ExtraDeviceType == IndividualDeviceTypes.PRINTER)
             {
                 return new YaziciInfo();
             }
-            else if (SelectedIndividual.ExtraDeviceType == ExtraDeviceTypes.PROJECTION)
+            else if (SelectedIndividual.ExtraDeviceType == IndividualDeviceTypes.PROJECTION)
             {
                 return new ProjectionInfo();
             }
-            else if (SelectedIndividual.ExtraDeviceType == ExtraDeviceTypes.SCANNER)
+            else if (SelectedIndividual.ExtraDeviceType == IndividualDeviceTypes.SCANNER)
             {
                 return new ScannerInfo();
             }
@@ -145,7 +145,7 @@ namespace Mebs_Envanter
 
         private void AssignIndividualDeviceInfoByGui(IndividualDeviceInfo current, IndividualDeviceInfo toAssign, bool isEdit)
         {
-            if (SelectedIndividual.ExtraDeviceType == ExtraDeviceTypes.PRINTER)
+            if (SelectedIndividual.ExtraDeviceType == IndividualDeviceTypes.PRINTER)
             {
                 networkInfoControl1.SetNetworkInfo((toAssign as YaziciInfo).NetworkInfo);
             }
@@ -163,23 +163,23 @@ namespace Mebs_Envanter
         private void SetContextForSearchFields()
         {
             KomutanlikRepository Rep_Komutanllik = new KomutanlikRepository();
-            Rep_Komutanllik.Fetch_Komutanliklar(true);
+            Rep_Komutanllik.Fill(true);
             searchGridKomutanliklarCombo.ItemsSource = Rep_Komutanllik.Collection;
 
             BagliAgRepository rep_bagli_ag = new BagliAgRepository();
-            rep_bagli_ag.Fetch_Aglar(true);
+            rep_bagli_ag.Fill(true);
             searchGridAglarCombo.ItemsSource = rep_bagli_ag.Collection;
 
             TempestRepository tempest_rep = new TempestRepository();
-            tempest_rep.Fetch_Seviyeler(true);
+            tempest_rep.Fill(true);
             searchGridTempestCombo.ItemsSource = tempest_rep.Collection;
 
             MarkaRepository marka_rep = new MarkaRepository();
-            marka_rep.Fetch_Markalar(true);
+            marka_rep.Fill(true);
             searchGridMarkalarCombo.ItemsSource = marka_rep.Collection;
 
             PrinterTypesRepository types_rep = new PrinterTypesRepository();
-            types_rep.Fetch_PrinterTypes(true);
+            types_rep.Fill(true);
             searchGridYaziciTiplerCombo.ItemsSource = types_rep.Collection;
         }
 
@@ -194,7 +194,7 @@ namespace Mebs_Envanter
             DbCommand cmd = DBCommonAccess.GetCommand(commandText, cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            DBCommonAccess.AddParameterWithValue(cmd, "@parca_tipi", ExtraDeviceTypes.ConvertToDeviceType(SelectedIndividual.ExtraDeviceType));
+            DBCommonAccess.AddParameterWithValue(cmd, "@parca_tipi", IndividualDeviceTypes.ConvertToDeviceType(SelectedIndividual.ExtraDeviceType));
             
             if (parameterList != null)
             {

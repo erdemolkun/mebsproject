@@ -30,7 +30,7 @@ namespace Mebs_Envanter.HardwareUserControls
         public void Init()
         {
             KomutanlikRepository Komutanlik_Repository = new KomutanlikRepository();
-            Komutanlik_Repository.Fetch_Komutanliklar(false);
+            Komutanlik_Repository.Fill(false);
             senetKomutanlikCombo.ItemsSource = Komutanlik_Repository.Collection;
             KomutanlikRepository.INSTANCE = Komutanlik_Repository;
 

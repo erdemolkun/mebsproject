@@ -31,7 +31,7 @@ namespace Mebs_Envanter.HardwareUserControls
             genelBilgilerMarkalarCombo.ItemsSource = MarkaRepository.INSTANCE.Collection;
 
             TempestRepository Rep_Tempest = new TempestRepository();
-            Rep_Tempest.Fetch_Seviyeler(false);
+            Rep_Tempest.Fill(false);
             genelBilgilerTempestCombo.ItemsSource = Rep_Tempest.Collection;
             TempestRepository.INSTANCE = Rep_Tempest;
         
