@@ -24,8 +24,8 @@ namespace Mebs_Envanter.Repositories
                 Collection.Add(new MonitorSize(MonitorSize.MON_ID_FOR_LIST, 0));
             }
         }
-
-        public void Fetch_Sizes(bool isForSearch)
+        
+        public override void Fill(bool isForSearch)
         {
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             string sqlText = "SELECT * FROM tbl_monitor_boyutu order by monitor_boyutu ASC";

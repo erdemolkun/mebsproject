@@ -33,7 +33,7 @@ namespace Mebs_Envanter.HardwareUserControls
             inf.Tempest = tempestCombo.SelectedItem as Tempest;
             inf.SerialNumber = serialTextBox.Text.Trim().ToString();
 
-            if (SelectedIndividual.ExtraDeviceType == ExtraDeviceTypes.PRINTER) {
+            if (SelectedIndividual.ExtraDeviceType == IndividualDeviceTypes.PRINTER) {
 
                 (inf as YaziciInfo).YaziciTipi = printerTypesCombo.SelectedItem as PrinterType;
             }
@@ -43,17 +43,17 @@ namespace Mebs_Envanter.HardwareUserControls
         {
             // Markalar arayüze atanıyor
             MarkaRepository Marka_Repository = new MarkaRepository();
-            Marka_Repository.Fetch_Markalar(false);
+            Marka_Repository.Fill(false);
             markalarCombo.ItemsSource = Marka_Repository.Collection;
             MarkaRepository.INSTANCE = Marka_Repository;
 
             TempestRepository Rep_Tempest = new TempestRepository();
-            Rep_Tempest.Fetch_Seviyeler(false);
+            Rep_Tempest.Fill(false);
             tempestCombo.ItemsSource = Rep_Tempest.Collection;
             TempestRepository.INSTANCE = Rep_Tempest;
 
             PrinterTypesRepository Rep_Types = new PrinterTypesRepository();
-            Rep_Types.Fetch_PrinterTypes(false);
+            Rep_Types.Fill(false);
             printerTypesCombo.ItemsSource = Rep_Types.Collection;
             PrinterTypesRepository.INSTANCE = Rep_Types;
         }

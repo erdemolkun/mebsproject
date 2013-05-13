@@ -9,7 +9,7 @@ using System.Data.Common;
 
 namespace Mebs_Envanter.Repositories
 {
-    public class BagliAgRepository:BaseRepository<BagliAg>
+    public class BagliAgRepository : BaseRepository<BagliAg>
     {
         public static BagliAgRepository INSTANCE = new BagliAgRepository();
         private void ClearAglar(bool isForSearch)
@@ -24,10 +24,8 @@ namespace Mebs_Envanter.Repositories
                 Collection.Add(new BagliAg("", -1));
             }
         }
-
-        public void Fetch_Aglar(bool isForSearch)
+        public override void Fill(bool isForSearch)
         {
-
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             string sqlText = "SELECT * FROM tbl_bagli_ag";
             DbCommand cmd = DBCommonAccess.GetCommand(sqlText, cnn);
@@ -51,9 +49,7 @@ namespace Mebs_Envanter.Repositories
                 dr.Close();
                 cnn.Close();
             }
-
         }
-
     }
 
 }

@@ -21,7 +21,9 @@ namespace Mebs_Envanter.Repositories
                 Collection.Add(new Tempest(-1, "Hepsi"));
             else Collection.Add(new Tempest(-1, ""));
         }
-        public void Fetch_Seviyeler(bool isForSearch)
+
+        
+        public override void Fill(bool isForSearch)
         {
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             string commandText = "SELECT * FROM tbl_tempest";

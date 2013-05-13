@@ -24,7 +24,8 @@ namespace Mebs_Envanter.Repositories
             else { Collection.Add(new Komutanlik(-1, "")); }
         }
 
-        public void Fetch_Komutanliklar(bool isForSearch)
+        
+        public override void Fill(bool isForSearch)
         {
             DbConnection cnn = GlobalDataAccess.Get_Fresh_Connection();
             string sqlText = "SELECT * FROM tbl_komutanlik";
