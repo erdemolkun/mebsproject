@@ -14,10 +14,8 @@ namespace Mebs_Envanter
     /// </summary>
     public partial class App : Application
     {
-
         protected override void OnStartup(StartupEventArgs e)
-        {
-            
+        {            
             base.OnStartup(e);
 
         }
@@ -28,8 +26,7 @@ namespace Mebs_Envanter
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            LoggerMebs.WriteToFile("Application_DispatcherUnhandledException\n"
-                + e.Exception.Message);
+            LoggerMebs.WriteToFile("Application_DispatcherUnhandledException\n"+ e.Exception.Message);
             e.Handled = true;
         }
     }
