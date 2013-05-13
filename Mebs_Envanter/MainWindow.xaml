@@ -23,11 +23,10 @@
         IsEnabled="{Binding ElementName=mainwin,Path=IsBusy,Converter={StaticResource NotBoolConverter}}"
         SnapsToDevicePixels="True"  Background="{StaticResource WindowGeneralBackgroundColor}">
        
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition MinWidth="250" Width="280"  MaxWidth="300"></ColumnDefinition>
-            <ColumnDefinition MinWidth="280" Width="1.3*" MaxWidth="360"></ColumnDefinition>
+            <ColumnDefinition MinWidth="280"  Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>

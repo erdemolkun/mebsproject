@@ -27,6 +27,7 @@
             <TabControl.Resources>
                 <Style BasedOn="{StaticResource borderStyleForComputerItems}" TargetType="{x:Type Border}">
                 </Style>
+                
             </TabControl.Resources>
 
             <TabItem  Header="Genel Bilgiler" x:Name="generalInfoTab" >
