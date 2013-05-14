@@ -52,28 +52,19 @@
                                   x:Name="senetBirlikCombo" 
                                   MinWidth="60" Margin="2"  Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3"/>
 
-
-
         <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="4" Text="Alan Kişi Kısım"></TextBlock>
+        
         <ComboBox VerticalAlignment="Center" 
-                  IsEditable="True" MaxWidth="160"
-                             x:Name="senetKisimCombo"
-                            SelectedIndex="{Binding Alan_kisi_kisim,Converter={StaticResource KisimComboIndexConverter},UpdateSourceTrigger=Explicit}" 
-                            MinWidth="60" Margin="2" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4"></ComboBox>
-
-
-
+                  IsEditable="True" MaxWidth="160" x:Name="senetKisimCombo"
+                  SelectedIndex="{Binding Alan_kisi_kisim,Converter={StaticResource KisimComboIndexConverter},
+                  UpdateSourceTrigger=Explicit}" 
+                  MinWidth="60" Margin="2" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4"></ComboBox>
 
         <TextBlock Style="{StaticResource infoTextBlockStyle}" Grid.Column="0" Grid.Row="5" Text="Teslim Eden Kişi"></TextBlock>
         <TextBox 
              guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"
             Text="{Binding Veren_kisi_isim,UpdateSourceTrigger=Explicit}" Grid.Column="1" Grid.Row="5" Margin="2"
                                  VerticalAlignment="Center" x:Name="senetVerenKisiTextBox"></TextBox>
-
-
-
-
-
 
 
     </Grid>
