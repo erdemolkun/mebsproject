@@ -57,7 +57,7 @@
                         <Border Grid.Row="1" Name="tabItemStyle" Background="{TemplateBinding Background}" BorderBrush="Transparent" 
                                 BorderThickness="1,1,1,0" CornerRadius="3,3,0,0" SnapsToDevicePixels="True" 
                                 Margin="0, 0, 1, 0">
-                            <ContentPresenter x:Name="ContentSite" TextBlock.Foreground="White" TextBlock.FontWeight="Bold" 
+                            <ContentPresenter x:Name="ContentSite" TextBlock.Foreground="Black" TextBlock.FontWeight="Bold" 
                                               VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" 
                                               Margin="4,3,6,3">
                             </ContentPresenter>
@@ -65,14 +65,14 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="tabItemStyle" Property="Background" Value="#ecf3f9" />
+                            <Setter TargetName="tabItemStyle" Property="Background" Value="Skyblue" />
                             <Setter TargetName="ContentSite" Property="Margin" Value="4,12,6,3" />
-                            <Setter TargetName="ContentSite" Property="TextBlock.Foreground" Value="#29458e" />
+                            <Setter TargetName="ContentSite" Property="TextBlock.Foreground" Value="white" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="False" />
-                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter TargetName="ContentSite" Property="TextBlock.Foreground" Value="Black" />
@@ -84,7 +84,7 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="tabItemStyle" Property="Background" Value="Skyblue" />
+                                <Setter TargetName="tabItemStyle" Property="Background" Value="#ecf3f9" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                       
