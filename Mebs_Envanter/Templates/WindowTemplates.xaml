@@ -42,11 +42,10 @@
                     </Grid>
                 </Border>
                 <Grid  Grid.Column="1" Grid.Row="1">
-                    <ContentPresenter   
-                            Content="{TemplateBinding Content}"                             
-                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
+                    <AdornerDecorator>
+                        <ContentPresenter/>
+                    </AdornerDecorator>
+
                 </Grid>
             </Grid>
         </Grid>        

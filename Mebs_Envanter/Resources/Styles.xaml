@@ -45,7 +45,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type TabItem}">
+    <Style TargetType="{x:Type TabItem}" >
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
