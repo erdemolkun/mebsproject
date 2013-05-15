@@ -60,6 +60,7 @@
             </TextBlock>
 
             <Button Content="Tamam" VerticalAlignment="Bottom" 
+                    Style="{StaticResource PatientOverviewStatusButtonStyle}"
                     Margin="0,6" Width="120" x:Name="okBtn" Click="okBtn_Click"
                     HorizontalAlignment="Center"></Button>
 

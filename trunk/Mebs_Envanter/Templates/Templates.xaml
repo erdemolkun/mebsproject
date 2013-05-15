@@ -249,7 +249,7 @@
             </Grid>
         </Grid>
     </ControlTemplate>
-    
+
     <ControlTemplate x:Key="SampleControlTemplate">
         <Grid>
             <!--<Rectangle Fill="Gray" Stroke="Gray" RadiusX="12" RadiusY="12" Opacity="0.4">
@@ -294,6 +294,137 @@
                     <Border>
                         <Rectangle Margin="2" StrokeThickness="1" Stroke="#60000000" StrokeDashArray="1 2"/>
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="LooklessButtonWithHover2" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="RootGrid"   Background="transparent" Cursor="Arrow" Opacity="0.7">
+                        <ContentPresenter VerticalAlignment="{TemplateBinding Property=VerticalContentAlignment}" 
+                                          HorizontalAlignment="{TemplateBinding Property=HorizontalContentAlignment}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" TargetName="RootGrid" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Opacity" Value="0.6" TargetName="RootGrid" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="1" TargetName="RootGrid" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PatientOverviewStatusButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Cursor" Value="Arrow" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="0,2,0,0" />
+        <Setter Property="FontFamily" Value="Helvetica Neue LT Std" />
+        <Setter Property="FontSize" Value="10" />
+
+
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Padding" Value="6" />
+        <Setter Property="Height" Value="24" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Rectangle x:Name="bgcolor" RadiusX="4" RadiusY="4">
+                            <Rectangle.Stroke>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientBrush.GradientStops>
+                                        <GradientStopCollection>
+                                            <GradientStop Color="#DCDCDC" Offset="0" />
+                                            <GradientStop Color="#C6C5C5" Offset="1" />
+                                        </GradientStopCollection>
+                                    </GradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Rectangle.Stroke>
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientBrush.GradientStops>
+                                        <GradientStopCollection>
+                                            <GradientStop Color="#E8E8E8" Offset="0" />
+                                            <GradientStop Color="#FFFFFF" Offset="1" />
+                                        </GradientStopCollection>
+                                    </GradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle x:Name="outer" StrokeThickness="1" RadiusX="4" RadiusY="4">
+                            <Rectangle.Stroke>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientBrush.GradientStops>
+                                        <GradientStopCollection>
+                                            <GradientStop Color="#DCDCDC" Offset="0" />
+                                            <GradientStop Color="#C6C5C5" Offset="1" />
+                                        </GradientStopCollection>
+                                    </GradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Rectangle.Stroke>
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientBrush.GradientStops>
+                                        <GradientStopCollection>
+                                            <GradientStop Color="#E8E8E8" Offset="0" />
+                                            <GradientStop Color="#FFFFFF" Offset="1" />
+                                        </GradientStopCollection>
+                                    </GradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle x:Name="inner"  RadiusX="4" RadiusY="4" StrokeThickness="1" StrokeMiterLimit="10" StrokeEndLineCap="Flat" StrokeStartLineCap="Flat" StrokeLineJoin="Miter" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="1" Margin="3,3,3,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="Auto">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientBrush.GradientStops>
+                                        <GradientStopCollection>
+                                            <GradientStop Color="#E8E8E8" Offset="0" />
+                                            <GradientStop Color="#FFFFFF" Offset="1" />
+                                        </GradientStopCollection>
+                                    </GradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle x:Name="BrightShine" Visibility="Collapsed" Margin="2" Height="Auto" RadiusX="4px" RadiusY="4px" VerticalAlignment="top">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientBrush.GradientStops>
+                                        <GradientStopCollection>
+                                            <GradientStop Color="transparent" Offset="0" />
+                                            <GradientStop Color="#909090" Offset="1" />
+                                        </GradientStopCollection>
+                                    </GradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <ContentPresenter x:Name="ContentSite" Margin="2,0,2,0" TextElement.Foreground="#5F5F5F" TextElement.FontSize="10pt" VerticalAlignment="{TemplateBinding Property=VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding Property=HorizontalContentAlignment}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Focused -->
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter TargetName="outer" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="BrightShine" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <!-- MouseOver -->
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="outer" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="bgcolor" Property="Stroke" Value="#805E5E5E" />
+                            <Setter TargetName="BrightShine" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -487,5 +618,78 @@
     </Style>
 
 
+    <ControlTemplate x:Key="closeButonTemplate" TargetType="{x:Type Button}">
+        <Border x:Name="borderTemplate" CornerRadius="2">
+            <Grid Background="Transparent">
+                <Image Margin="1">
+                    <Image.Source>
+                        <DrawingImage>
+                            <DrawingImage.Drawing>
+                                <GeometryDrawing 
+                                x:Name="X" Geometry= "m 2,18 l 16,-16 m -16,0 l 16,16">
+                                    <GeometryDrawing.Pen>
+                                        <Pen Brush="SkyBlue" Thickness="2" />
+                                    </GeometryDrawing.Pen>
+                                </GeometryDrawing>
+                            </DrawingImage.Drawing>
+                        </DrawingImage>
+                    </Image.Source>
+                </Image>
+                <Viewbox>
+                    <ContentControl Margin="20" Content="{TemplateBinding Content}"/>
+                </Viewbox>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="borderTemplate" Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="#66232323"/>
+                            <GradientStop Offset="0.5" Color="#88232323"/>
+                            <GradientStop Offset="1" Color="#66232323"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="minimizeButtonTemplate" TargetType="{x:Type Button}">
+        <Border x:Name="borderTemplate" CornerRadius="2">
+            <Grid Background="Transparent" >
+                <Image Margin="1,0,1,3" VerticalAlignment="Bottom">
+                    <Image.Source>
+                        <DrawingImage>
+                            <DrawingImage.Drawing>
+                                <GeometryDrawing  x:Name="_"  Geometry= "m 0,22 l 22,0">
+                                    <GeometryDrawing.Pen>
+                                        <Pen Brush="SkyBlue" Thickness="2" />
+                                    </GeometryDrawing.Pen>
+                                </GeometryDrawing>
+                            </DrawingImage.Drawing>
+                        </DrawingImage>
+                    </Image.Source>
+                </Image>
+                <!--<Viewbox>
+                    <ContentControl Margin="20" Content="{TemplateBinding Content}"/>
+                </Viewbox>-->
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="borderTemplate" Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="#66232323"/>
+                            <GradientStop Offset="0.5" Color="#88232323"/>
+                            <GradientStop Offset="1" Color="#66232323"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 
 </ResourceDictionary>
