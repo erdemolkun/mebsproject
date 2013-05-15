@@ -4,20 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:xceed ="clr-namespace:Xceed.Wpf.Controls;assembly=Xceed.Wpf.Controls"
+             xmlns:validations="clr-namespace:Mebs_Envanter.Validation"
              x:Name="me"
              xmlns:guihelpers="clr-namespace:Mebs_Envanter.GUIHelpers">
     <Grid TextBlock.FontWeight="Bold" Margin="2,0">
-        
-        
-        <Grid.RowDefinitions>
+        <Grid.Resources>
+            <ControlTemplate x:Key="TextBoxErrorTemplate">
+                <StackPanel>
+                    <Grid >
+                        <Image Height="18" Width="18" Margin="0,0,3,0"
+                               ToolTip="{Binding ElementName=Holder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
+                               HorizontalAlignment="Right" Source="../Resources/warning.png"/>
+                        <AdornedElementPlaceholder x:Name="Holder" />
+                        <!--<Label 
+                            IsHitTestVisible="False" Opacity="0.2"
+                            Content="{Binding ElementName=Holder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" 
+                           Foreground="Red"/>-->
+                    </Grid>
+
+                </StackPanel>
+            </ControlTemplate>
+        </Grid.Resources>
+
+            <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>                       
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            
+
         </Grid.ColumnDefinitions>
 
 
@@ -31,7 +48,7 @@
         <TextBlock Style="{StaticResource infoTextBlockStyle}" 
             Visibility="{Binding ElementName=me,Path=IsUsedForPrinter,Converter={StaticResource BoolToVisibilityConverter}}"
             Grid.Column="0" Grid.Row="2" Text="IP Adresi"></TextBlock>
-        
+
         <ComboBox VerticalAlignment="Center"                    
                             HorizontalAlignment="Left"                          
                             SelectedIndex="{Binding Path=BagliAg,
@@ -44,14 +61,23 @@
                             Text="{Binding MacAddressString,UpdateSourceTrigger=Explicit}"  
                             Margin="2,2" Grid.Column="1" Grid.Row="1" ></guihelpers:MacMaskedTextBox>
 
-        
+
         <guihelpers:IPMaskedTextBox Grid.Column="1" 
                                     guihelpers:TextBoxCaretBehaviour.SetCaretRightOnFocus="False"
-                 Margin="2,2" x:Name="ipAddressTextBox"
-                 VerticalAlignment="Center" Text="{Binding IpAddress,UpdateSourceTrigger=Explicit}"
+                 Margin="2,2" x:Name="ipAddressTextBox" 
+                 VerticalAlignment="Center" 
+                 Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}" 
                  Visibility="{Binding ElementName=me,Path=IsUsedForPrinter,Converter={StaticResource BoolToVisibilityConverter}}"
-                 Grid.Row="2"></guihelpers:IPMaskedTextBox>
-       
+                 Grid.Row="2">
+            <guihelpers:IPMaskedTextBox.Text>
+                <Binding Path="IpAddress" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validations:IPv4ValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </guihelpers:IPMaskedTextBox.Text>
+        </guihelpers:IPMaskedTextBox>
+
 
     </Grid>
 </UserControl>

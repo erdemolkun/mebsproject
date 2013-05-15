@@ -22,8 +22,14 @@ namespace Mebs_Envanter
             this.Background = Brushes.Transparent;
 
             Button closeButton = (Button)this.Template.FindName("PART_CLOSE_BTN", this);
+            Button minimizeButton = (Button)this.Template.FindName("PART_MINIMIZE_BUTTON", this);
             Button maxResButton = (Button)this.Template.FindName("PART_MAXRESTORE", this);
             FrameworkElement gridPanel = this.Template.FindName("PART_GRIDHEADER", this) as FrameworkElement;
+
+            if (minimizeButton != null) {
+
+                minimizeButton.Click += new RoutedEventHandler(minimizeButton_Click);
+            }
             if (closeButton != null)
             {
                 closeButton.Click += new RoutedEventHandler(closeButton_Click);
@@ -39,6 +45,11 @@ namespace Mebs_Envanter
             }
             
             base.OnApplyTemplate();
+        }
+
+        void minimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
 
         void gridPanel_MouseDown(object sender, MouseButtonEventArgs e)

@@ -179,6 +179,7 @@
     <Compile Include="Helpers\VersionInfo.cs" />
     <Compile Include="Resources\Texts.cs" />
     <Compile Include="AllVisuals\TemplatedWindow.cs" />
+    <Compile Include="Validation\IPv4ValidationRule.cs" />
     <Compile Include="ViewModels\OemDevicesViewModel.cs" />
     <Compile Include="ViewModels\OemDeviceViewModel.cs" />
     <Compile Include="Helpers\SerializationTool.cs" />
@@ -342,6 +343,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\warning.png" />
     <SplashScreen Include="Resources\Muhabere_ön.png" />
     <Resource Include="bin\Debug\DBSettings.xml" />
     <Content Include="bin\Debug\WPFToolkit.dll" />
