@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mebs_Envanter", "Mebs_Envanter\Mebs_Envanter.csproj", "{3C3BB318-F0ED-4DBD-B997-316F34C315BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseConnection", "..\DatabaseConnection\DatabaseConnection.csproj", "{E893FEE9-6281-42B7-B611-768E6C3CA3D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseConnection", "DatabaseConnection\DatabaseConnection.csproj", "{E893FEE9-6281-42B7-B611-768E6C3CA3D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
