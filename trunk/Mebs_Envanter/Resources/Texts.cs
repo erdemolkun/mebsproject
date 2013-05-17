@@ -110,5 +110,13 @@ namespace Mebs_Envanter.Resources
             get { return monitorStr; }
             set { monitorStr = value; OnPropertyChanged("MonitorStr"); }
         }
+
+        private String minimizeStr = "Simge Durumuna Küçült";
+
+        public String MinimizeStr
+        {
+            get { return minimizeStr; }
+            set { minimizeStr = value; OnPropertyChanged("MinimizeStr"); }
+        }
     }
 }
