@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:resources="clr-namespace:Mebs_Envanter.Resources"
+                    >
+                    
 
     <Style x:Key="{x:Type ResizeGrip}" TargetType="{x:Type ResizeGrip}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -62,7 +64,7 @@
                             <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"
                                 Text="{TemplateBinding Title}" FontWeight="Bold">
                                 <TextBlock.BitmapEffect>
-                                    <OuterGlowBitmapEffect GlowSize="2" GlowColor="LightBlue"/>                 
+                                    <OuterGlowBitmapEffect GlowSize="1" GlowColor="LightBlue"/>                 
                                 </TextBlock.BitmapEffect>
                             </TextBlock>
                         </Grid>
@@ -70,11 +72,13 @@
                                     Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
 
                             <Button 
+                                    ToolTip="{Binding Path=MinimizeStr,Source={x:Static resources:Texts.INSTANCE}}"
                                 Template="{StaticResource minimizeButtonTemplate}" 
                                 x:Name="PART_MINIMIZE_BUTTON"  Width="18" Height="18"
                                 VerticalAlignment="Center" Margin="2"/>
 
                             <Button 
+                                ToolTip="{Binding Path=ExitStr,Source={x:Static resources:Texts.INSTANCE}}"
                                 Template="{StaticResource closeButonTemplate}" 
                                 x:Name="PART_CLOSE_BTN"  Width="18" Height="18"
                                 VerticalAlignment="Center" Margin="2"/>
