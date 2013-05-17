@@ -352,12 +352,6 @@
     <Resource Include="GUIHelpers\Images\up.png" />
     <Resource Include="Resources\MyComputer.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\DatabaseConnection\DatabaseConnection.csproj">
-      <Project>{E893FEE9-6281-42B7-B611-768E6C3CA3D6}</Project>
-      <Name>DatabaseConnection</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
