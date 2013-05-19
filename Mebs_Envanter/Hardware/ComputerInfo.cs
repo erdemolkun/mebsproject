@@ -47,17 +47,16 @@ namespace Mebs_Envanter
             set { commands = value; }
         }
         bool IsFetching = false;
-        public void Fetch()
+        public void Fetch(bool FetchThread)
         {
             if (!PropertiesFetched)
             {
-                FetchThreaded(true);
+                FetchThreaded(FetchThread);
             }
         }
 
         private void FetchThreaded(bool isThreaded)
         {
-
             if (isThreaded)
             {
                 BackgroundWorker worker = new BackgroundWorker();
@@ -91,11 +90,11 @@ namespace Mebs_Envanter
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            
             fetchContent();
         }
         private void fetchContent()
-        {
-            //Thread.Sleep(1000);
+        {            
             Set_ComputerOemDevices(null);
             Senet.Set_SenetInfosDB();
         }

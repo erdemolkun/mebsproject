@@ -78,7 +78,7 @@
                                   HorizontalAlignment="Left" Grid.Column="1"></ComboBox>
 
         <x1:BindableRichTextBox Grid.Row="8"
-                     x:Name="notlarRichTxtBox" HorizontalAlignment="Left"
+                     x:Name="notlarRichTxtBox" HorizontalAlignment="Stretch"
                      Document="{Binding Notlar,Converter={StaticResource StringToFlowDocumentConverter}}"
                      Grid.Column="1" Height="80" Margin="2,4" MinWidth="120">
 
