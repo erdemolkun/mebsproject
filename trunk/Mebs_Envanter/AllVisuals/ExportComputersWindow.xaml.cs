@@ -89,7 +89,7 @@ namespace Mebs_Envanter
                         ExportHelper exportHelper = new ExportHelper();
                         foreach (var item in computerInfoRep.Collection)
                         {
-                            item.Fetch();
+                            item.Fetch(false);
                         }
 
                         DataTable table = exportHelper.GetAsDataTable(computerInfoRep.Collection, options);
@@ -142,9 +142,10 @@ namespace Mebs_Envanter
 
             }));
             th.IsBackground = true;
-            th.Start();
             IsEnabled = false;
             Mouse.OverrideCursor = Cursors.Wait;
+            th.Start();
+            
         }
 
         protected override void OnKeyDown(KeyEventArgs e)

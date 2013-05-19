@@ -276,7 +276,7 @@ namespace Mebs_Envanter
                 ComputerInfo computerItem = item as ComputerInfo;
                 if (computerItem != null)
                 {
-                    computerItem.Fetch();
+                    computerItem.Fetch(true);
                 }
             }
             pcEnvanterControl.SetDataContext(Current_Computer_Info);
