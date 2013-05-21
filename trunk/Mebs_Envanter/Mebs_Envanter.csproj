@@ -75,6 +75,10 @@
       <DependentUpon>LoadingAnimationBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="Base\MebsBaseDBObject.cs" />
+    <Compile Include="ComputerInfoUserControlBase.cs" />
+    <Compile Include="ComputerUserControlV.xaml.cs">
+      <DependentUpon>ComputerUserControlV.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\PrinterTypeComboIndexConverter.cs" />
     <Compile Include="DB\DBCommonAccess.cs" />
     <Compile Include="Export\FileExportHelper.cs" />
@@ -196,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ComputerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComputerUserControlV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

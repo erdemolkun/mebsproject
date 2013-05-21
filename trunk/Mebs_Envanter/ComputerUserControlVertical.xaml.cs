@@ -22,16 +22,16 @@ namespace Mebs_Envanter
         public ComputerUserControlVertical()
         {
             InitializeComponent();
-            monitorUserControl1.Init();
-            generalInfoUserControl1.Init();
-            senetInfoUserControl1.Init();
-            networkUserControl1.Init();
-
+            computerInfoControl.Init();            
             DataContextChanged += new DependencyPropertyChangedEventHandler(ComputerUserControlVertical_DataContextChanged);    
         }
 
         void ComputerUserControlVertical_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            if (DataContext is ComputerInfo)
+            {
+                computerInfoControl.SetDataContext(DataContext as ComputerInfo);
+            }
             Title = (DataContext as ComputerInfo).Pc_adi +" No'lu Bilgisayar Özellikleri";
         }
 

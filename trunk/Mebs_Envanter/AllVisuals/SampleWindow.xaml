@@ -28,8 +28,14 @@
             
         </xceed:DatePicker>
 
-        <ComboBox Grid.Row="2"
-                  Panel.ZIndex="100" IsEditable="True" Width="120" Height="Auto"></ComboBox>
+        <ComboBox  Grid.Row="2" VerticalContentAlignment="Center"  
+                      HorizontalContentAlignment="Center" 
+                      TextSearch.TextPath="" Width="200" Height="100" 
+                      ItemsSource="{Binding}" 
+                      IsSynchronizedWithCurrentItem="True" 
+                      IsEditable="True">
+        </ComboBox>
+        
 
     </Grid>
 </Window>
