@@ -18,18 +18,16 @@ namespace Mebs_Envanter
     /// <summary>
     /// Interaction logic for ComputerUserControl.xaml
     /// </summary>
-    public partial class ComputerUserControl : UserControl
+    public partial class ComputerUserControl : ComputerInfoUserControlBase
     {
         public ComputerUserControl()
         {
             InitializeComponent();
         }
-        public void SetFocus(int tabIndex)
+        public override void SetFocus(int tabIndex)
         {
-
             pcEnvanterTabControl.SelectedIndex = 0;
         }
-
 
         private int GetCorrespondingTabItemIndex(int desiredIndex)
         {
@@ -50,8 +48,7 @@ namespace Mebs_Envanter
             return -1;
         }
 
-
-        public void KeyEventResponder(KeyEventArgs e)
+        public override void KeyEventResponder(KeyEventArgs e)
         {
 
             if (Keyboard.IsKeyDown(Key.LeftCtrl))
@@ -79,54 +76,48 @@ namespace Mebs_Envanter
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-
             KeyEventResponder(e);
             base.OnKeyDown(e);
         }
 
-        public void Assign_ComputerInfo_By_GUI(ComputerInfo current_Computer, ComputerInfo computerInfo, bool isEdit)
+        public override void Assign_ComputerInfo_By_GUI(ComputerInfo current_Computer, ComputerInfo toUpdateComputer, bool isEdit)
         {
-            generalInfoUserControl1.SetGeneralInfo(computerInfo, current_Computer, isEdit);
-            networkUserControl1.SetNetworkInfo(computerInfo.NetworkInfo);
+            generalInfoUserControl1.SetGeneralInfo(toUpdateComputer, current_Computer, isEdit);
+            networkUserControl1.SetNetworkInfo(toUpdateComputer.NetworkInfo);
 
-            monitorUserControl1.SetMonitorInfo(computerInfo.MonitorInfo);
-            senetInfoUserControl1.SetSenetInfo(computerInfo.Senet);
+            monitorUserControl1.SetMonitorInfo(toUpdateComputer.MonitorInfo);
+            senetInfoUserControl1.SetSenetInfo(toUpdateComputer.Senet);
 
             // OEM Parçaların Bilgileri            
-            oemDeviceUserControl1.SetOemDevicesInfo(computerInfo);
+            oemDeviceUserControl1.SetOemDevicesInfo(toUpdateComputer);
 
             if (isEdit)
             {
                 ComputerInfo tempC = current_Computer;
-                computerInfo.Id = tempC.Id;
+                toUpdateComputer.Id = tempC.Id;
 
-                computerInfo.MonitorInfo.Id = tempC.MonitorInfo.Id;
-                computerInfo.MonitorInfo.Mon_id = tempC.MonitorInfo.Mon_id;
+                toUpdateComputer.MonitorInfo.Id = tempC.MonitorInfo.Id;
+                toUpdateComputer.MonitorInfo.Mon_id = tempC.MonitorInfo.Mon_id;
 
-                computerInfo.Senet.Id = tempC.Senet.Id;
+                toUpdateComputer.Senet.Id = tempC.Senet.Id;
                 foreach (OEMDevice item in tempC.GetOemDevices())
                 {
-                    computerInfo.Get_OemDevice(item.DeviceType).Id = item.Id;
+                    toUpdateComputer.Get_OemDevice(item.DeviceType).Id = item.Id;
                 }
             }
         }
 
-        public void Init()
+        public override void Init()
         {
-
             monitorUserControl1.Init();
             generalInfoUserControl1.Init();
             senetInfoUserControl1.Init();
             networkUserControl1.Init();
-            // yaziciUserControl1.Init();
         }
 
-        public void SetDataContext(object context)
+        public override void SetDataContext(object context)
         {
-
-            //pcEnvanterTabControl.DataContext = context;
             mainGrid.DataContext = context;
-            //networkUserControl1.DataContext = (context as ComputerInfo).NetworkInfo;
         }
     }
 }

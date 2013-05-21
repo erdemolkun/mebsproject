@@ -42,11 +42,16 @@ namespace Mebs_Envanter
     /// </summary>
     public partial class MainWindow : MebsWindow
     {
+
+        ComputerInfoUserControlBase current_Envanter_Control = null;
+
         public MainWindow()
         {
             InitializeComponent();
             OnDbInitialized += new DBProviderInitializedHandler(MainWindow_OnDbInitialized);
             this.Title = "Bilgisayar Envanter Kaydı    " + VersionInfo.versiyonStr;
+
+            current_Envanter_Control = computerControlScrollViewer.Content as ComputerInfoUserControlBase;
         }
 
         void MainWindow_OnDbInitialized()
@@ -56,6 +61,7 @@ namespace Mebs_Envanter
             RefreshComputerList(null, true);
             pcList_SelectionChanged(pcList, null);
             pcList.Focus();
+            
         }
 
         private ComputerInfo GetNewComputer()
@@ -100,7 +106,7 @@ namespace Mebs_Envanter
             try
             {
                 ComputerInfo freshComputerInfo = GetNewComputer();
-                pcEnvanterControl.Assign_ComputerInfo_By_GUI(Current_Computer_Info, freshComputerInfo, isEdit);
+                current_Envanter_Control.Assign_ComputerInfo_By_GUI(Current_Computer_Info, freshComputerInfo, isEdit);
 
                 object count = DBFunctions.ExecuteToFetchSingleItem("Select Count(*) as Count from tbl_bilgisayar where Pc_adi like '" +
                     freshComputerInfo.Pc_adi.Trim().ToString() + "'", "Count");
@@ -172,7 +178,7 @@ namespace Mebs_Envanter
                 }
                 Current_Computer_Info = addInfo.computer;
                 pcList.SelectedItem = Current_Computer_Info;
-                pcEnvanterControl.SetDataContext(Current_Computer_Info);
+                current_Envanter_Control.SetDataContext(Current_Computer_Info);
             }
             else
             {
@@ -199,7 +205,7 @@ namespace Mebs_Envanter
 
         private void setGUIDataContextForInitialization()
         {
-            pcEnvanterControl.Init();
+            current_Envanter_Control.Init();
             SetContextForSearchFields();
         }
 
@@ -207,7 +213,7 @@ namespace Mebs_Envanter
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            pcEnvanterControl.KeyEventResponder(e);
+            current_Envanter_Control.KeyEventResponder(e);
             if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
                 if (Keyboard.IsKeyDown(Key.P))
@@ -279,7 +285,7 @@ namespace Mebs_Envanter
                     computerItem.Fetch(true);
                 }
             }
-            pcEnvanterControl.SetDataContext(Current_Computer_Info);
+            current_Envanter_Control.SetDataContext(Current_Computer_Info);
         }
 
         private void pcAddBtn_Click(object sender, RoutedEventArgs e)
@@ -474,9 +480,9 @@ namespace Mebs_Envanter
 
         private void pcList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            /*ComputerUserControlVertical x = new ComputerUserControlVertical();
+            ComputerUserControlVertical x = new ComputerUserControlVertical();
             x.DataContext = (pcList.SelectedItem as ComputerInfo);
-            x.Show();*/
+            x.Show();
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
@@ -593,9 +599,29 @@ namespace Mebs_Envanter
             if (currentInfoRep != null)
             {
                 currentInfoRep.Collection.Insert(0, GetNewComputer());
-                pcEnvanterControl.SetFocus(0);
+                current_Envanter_Control.SetFocus(0);
                 SetSelectedItemAfterContextChange(true);
             }           
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            ComputerInfoUserControlBase x;
+            if (computerControlScrollViewer.Content is ComputerUserControl)
+            {
+
+                x = new ComputerUserControlV();
+                
+            }
+            else {
+                x = new ComputerUserControl();
+
+            }
+            x.Init();
+            x.SetDataContext(Current_Computer_Info);
+            computerControlScrollViewer.Content = x;
+            current_Envanter_Control = x;
+            
         }
     }
 }
