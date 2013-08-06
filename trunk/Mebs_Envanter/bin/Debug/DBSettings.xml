@@ -6,7 +6,7 @@
   <DatabaseNode>mebsenvanter</DatabaseNode>
   <UserId></UserId>
   <Password></Password>
-  <DataSource>.\MSSQLSERVER2</DataSource>
+  <DataSource>TMOB\SQLEXPRESS</DataSource>
   <UserInstance>false</UserInstance>
   <HasInitialCatalog>true</HasInitialCatalog>
   <TimeOut>10</TimeOut>
