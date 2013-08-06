@@ -77,7 +77,7 @@ namespace Mebs_Envanter.DB
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@pc_stok_no", SqlDbType.NVarChar, 50));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@seri_no", SqlDbType.NVarChar, 50));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@parca_no", SqlDbType.NVarChar, 50));
-            cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@kayit_ekleme_tarihi", SqlDbType.Date));
+            cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@kayit_ekleme_tarihi", SqlDbType.DateTime));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@notlar", SqlDbType.NVarChar, 200));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@senet_id", SqlDbType.Int));
             cmBilgisayarEkleSilDuz.Parameters.Add(new SqlParameter("@temp_bilgisayar_id", SqlDbType.Int));
@@ -435,7 +435,9 @@ namespace Mebs_Envanter.DB
 
                 return true;
             }
-            catch (Exception) { return false; }
+            catch (Exception) {
+                return false;
+            }
         }
 
         public static int InsertMonitorSize(double size)
